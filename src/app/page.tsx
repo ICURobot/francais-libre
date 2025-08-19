@@ -7,24 +7,17 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-    let isMounted = true
-
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!isMounted) return
       setUser(session?.user ?? null)
     })
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!isMounted) return
       setUser(session?.user ?? null)
     })
 
-    return () => {
-      isMounted = false
-      subscription.unsubscribe()
-    }
+    return () => subscription.unsubscribe()
   }, [])
 
   return (
