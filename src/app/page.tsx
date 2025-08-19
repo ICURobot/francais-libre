@@ -34,13 +34,13 @@ export default function Home() {
               </span>
             </div>
             <div className="hidden md:flex items-center space-x-6">
-              <a href="#courses" className="text-gray-700 hover:text-blue-600 transition">Courses</a>
-              <a href="#features" className="text-gray-700 hover:text-blue-600 transition">AI Features</a>
-              <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition">Pricing</a>
-              <a href="#community" className="text-gray-700 hover:text-blue-600 transition">Community</a>
+              <a href="#courses" className="text-black hover:text-blue-600 transition">Courses</a>
+              <a href="#features" className="text-black hover:text-blue-600 transition">AI Features</a>
+              <a href="#pricing" className="text-black hover:text-blue-600 transition">Pricing</a>
+              <a href="#community" className="text-black hover:text-blue-600 transition">Community</a>
               {user ? (
                 <div className="flex items-center space-x-3">
-                  <span className="text-sm text-gray-600">Welcome back!</span>
+                  <span className="text-sm text-black">Welcome back!</span>
                   <button 
                     onClick={() => supabase.auth.signOut()}
                     className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
@@ -58,7 +58,7 @@ export default function Home() {
               )}
             </div>
             <div className="md:hidden">
-              <button className="text-gray-700">
+              <button className="text-black">
                 <div className="text-xl">☰</div>
               </button>
             </div>
@@ -108,19 +108,19 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">50K+</div>
-              <div className="text-gray-600">Active Learners</div>
+              <div className="text-black">Active Learners</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-green-600 mb-2">200+</div>
-              <div className="text-gray-600">Interactive Lessons</div>
+              <div className="text-black">Interactive Lessons</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-purple-600 mb-2">95%</div>
-              <div className="text-gray-600">Success Rate</div>
+              <div className="text-black">Success Rate</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-orange-600 mb-2">24/7</div>
-              <div className="text-gray-600">AI Support</div>
+              <div className="text-black">AI Support</div>
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Complete French Learning Journey</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-black max-w-3xl mx-auto">
               Master French through our comprehensive curriculum combining grammar mastery and conversational fluency
             </p>
           </div>
@@ -146,7 +146,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900">Grammar Mastery Track</h3>
-                  <p className="text-gray-600">Complete French Grammar Foundation</p>
+                  <p className="text-black">Complete French Grammar Foundation</p>
                 </div>
               </div>
               <div className="space-y-4">
@@ -165,7 +165,7 @@ export default function Home() {
                     <div className="w-32 bg-gray-200 rounded-full h-2 mr-3">
                       <div className="bg-blue-600 h-2 rounded-full" style={{width: '75%'}}></div>
                     </div>
-                    <span className="text-sm text-gray-500">75%</span>
+                    <span className="text-sm text-black">75%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -174,7 +174,7 @@ export default function Home() {
                     <div className="w-32 bg-gray-200 rounded-full h-2 mr-3">
                       <div className="bg-blue-600 h-2 rounded-full" style={{width: '40%'}}></div>
                     </div>
-                    <span className="text-sm text-gray-500">40%</span>
+                    <span className="text-sm text-black">40%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -183,7 +183,7 @@ export default function Home() {
                     <div className="w-32 bg-gray-200 rounded-full h-2 mr-3">
                       <div className="bg-gray-300 h-2 rounded-full" style={{width: '0%'}}></div>
                     </div>
-                    <span className="text-gray-400">🔒</span>
+                    <span className="text-black">🔒</span>
                   </div>
                 </div>
               </div>
@@ -200,7 +200,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900">Conversation Practice</h3>
-                  <p className="text-gray-600">Real-world French Communication</p>
+                  <p className="text-black">Real-world French Communication</p>
                 </div>
               </div>
               <div className="space-y-4">
@@ -219,7 +219,7 @@ export default function Home() {
                     <div className="w-32 bg-gray-200 rounded-full h-2 mr-3">
                       <div className="bg-green-600 h-2 rounded-full" style={{width: '80%'}}></div>
                     </div>
-                    <span className="text-sm text-gray-500">80%</span>
+                    <span className="text-sm text-black">80%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -228,7 +228,7 @@ export default function Home() {
                     <div className="w-32 bg-gray-200 rounded-full h-2 mr-3">
                       <div className="bg-green-600 h-2 rounded-full" style={{width: '60%'}}></div>
                     </div>
-                    <span className="text-sm text-gray-500">60%</span>
+                    <span className="text-sm text-black">60%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -237,7 +237,7 @@ export default function Home() {
                     <div className="w-32 bg-gray-200 rounded-full h-2 mr-3">
                       <div className="bg-gray-300 h-2 rounded-full" style={{width: '0%'}}></div>
                     </div>
-                    <span className="text-gray-400">🔒</span>
+                    <span className="text-black">🔒</span>
                   </div>
                 </div>
               </div>
@@ -252,7 +252,7 @@ export default function Home() {
             <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
               <div className="bg-blue-50 p-4 rounded-lg mb-4">
                 <h4 className="font-semibold text-gray-900 mb-2">Grammar Lesson: Present Tense</h4>
-                <div className="text-sm text-gray-600 mb-3">Learn regular -er verb conjugations</div>
+                <div className="text-sm text-black mb-3">Learn regular -er verb conjugations</div>
                 <div className="bg-white p-3 rounded border-l-4 border-blue-600">
                   <div className="font-medium">Parler (to speak)</div>
                   <div className="text-sm mt-1">
@@ -270,16 +270,16 @@ export default function Home() {
             <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
               <div className="bg-green-50 p-4 rounded-lg mb-4">
                 <h4 className="font-semibold text-gray-900 mb-2">Dialogue: At the Restaurant</h4>
-                <div className="text-sm text-gray-600 mb-3">Order food and drinks confidently</div>
+                <div className="text-sm text-black mb-3">Order food and drinks confidently</div>
                 <div className="bg-white p-3 rounded border-l-4 border-green-600">
                   <div className="text-sm">
                     <div className="mb-2">
                       <strong>Serveur:</strong> <span className="text-green-600 font-semibold">"Bonsoir, avez-vous une réservation?"</span><br/>
-                      <em className="text-gray-500">"Good evening, do you have a reservation?"</em>
+                      <em className="text-black">"Good evening, do you have a reservation?"</em>
                     </div>
                     <div>
                       <strong>Vous:</strong> <span className="text-green-600 font-semibold">"Non, mais avez-vous une table pour deux?"</span><br/>
-                      <em className="text-gray-500">"No, but do you have a table for two?"</em>
+                      <em className="text-black">"No, but do you have a table for two?"</em>
                     </div>
                   </div>
                 </div>
@@ -292,7 +292,7 @@ export default function Home() {
             <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border-2 border-purple-200">
               <div className="bg-purple-50 p-4 rounded-lg mb-4">
                 <h4 className="font-semibold text-gray-900 mb-2">AI Conversation Partner</h4>
-                <div className="text-sm text-gray-600 mb-3">Chat with our AI tutor in French</div>
+                <div className="text-sm text-black mb-3">Chat with our AI tutor in French</div>
                 <div className="bg-white p-3 rounded border-l-4 border-purple-600">
                   <div className="flex items-center mb-2">
                     <span className="text-purple-600 mr-2">🤖</span>
@@ -300,7 +300,7 @@ export default function Home() {
                   </div>
                   <div className="text-sm">
                     <span className="text-purple-600 font-semibold">"Bonjour! Comment allez-vous aujourd'hui? Voulez-vous pratiquer la conversation?"</span><br/>
-                    <em className="text-gray-500">"Hello! How are you today? Would you like to practice conversation?"</em>
+                    <em className="text-black">"Hello! How are you today? Would you like to practice conversation?"</em>
                   </div>
                 </div>
               </div>
@@ -317,7 +317,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">AI-Powered Learning Features</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-black max-w-3xl mx-auto">
               Experience personalized French learning with cutting-edge artificial intelligence
             </p>
           </div>
@@ -329,9 +329,9 @@ export default function Home() {
                 <span className="text-2xl text-white">🛤️</span>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Personalized Learning Path</h3>
-              <p className="text-gray-600 mb-6">AI analyzes your learning style and progress to create a customized curriculum that adapts to your pace and preferences.</p>
+              <p className="text-black mb-6">AI analyzes your learning style and progress to create a customized curriculum that adapts to your pace and preferences.</p>
               <div className="bg-white p-4 rounded-lg mb-4">
-                <div className="text-sm text-gray-600 mb-2">Your AI Recommendation:</div>
+                <div className="text-sm text-black mb-2">Your AI Recommendation:</div>
                 <div className="font-medium text-blue-600">"Focus on irregular verbs this week based on your recent progress patterns"</div>
               </div>
               <span className="inline-block bg-blue-600 text-white text-xs px-3 py-1 rounded-full">Free Feature</span>
@@ -343,10 +343,10 @@ export default function Home() {
                 <span className="text-2xl text-white">🎤</span>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Advanced Speech Recognition</h3>
-              <p className="text-gray-600 mb-6">Real-time pronunciation feedback with AI-powered accent analysis helps you speak French like a native.</p>
+              <p className="text-black mb-6">Real-time pronunciation feedback with AI-powered accent analysis helps you speak French like a native.</p>
               <div className="bg-white p-4 rounded-lg mb-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-gray-600">Pronunciation Accuracy</span>
+                  <span className="text-sm text-black">Pronunciation Accuracy</span>
                   <span className="text-green-600 font-bold">92%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
@@ -362,7 +362,7 @@ export default function Home() {
                 <span className="text-2xl text-white">🤖</span>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">24/7 AI Conversation Partner</h3>
-              <p className="text-gray-600 mb-6">Practice conversations anytime with our AI tutor trained on French culture and language nuances.</p>
+              <p className="text-black mb-6">Practice conversations anytime with our AI tutor trained on French culture and language nuances.</p>
               <div className="bg-white p-4 rounded-lg mb-4">
                 <div className="flex items-center mb-2">
                   <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mr-3">
@@ -370,7 +370,7 @@ export default function Home() {
                   </div>
                   <div className="text-sm">
                     <div className="font-medium">Available Topics:</div>
-                    <div className="text-gray-600">Travel, Food, Culture, Business</div>
+                    <div className="text-black">Travel, Food, Culture, Business</div>
                   </div>
                 </div>
               </div>
@@ -385,7 +385,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Choose Your Learning Plan</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-black max-w-3xl mx-auto">
               Start with our free plan and upgrade when you're ready for AI-powered acceleration
             </p>
           </div>
@@ -396,7 +396,7 @@ export default function Home() {
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Free</h3>
                 <div className="text-4xl font-bold text-gray-900 mb-2">$0</div>
-                <div className="text-gray-600">Forever</div>
+                <div className="text-black">Forever</div>
               </div>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center">
@@ -435,7 +435,7 @@ export default function Home() {
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-2">$4.99</div>
-                <div className="text-gray-600">per month</div>
+                <div className="text-black">per month</div>
               </div>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center">
@@ -472,7 +472,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
                 <div className="text-4xl font-bold text-purple-600 mb-2">$9.99</div>
-                <div className="text-gray-600">per month</div>
+                <div className="text-black">per month</div>
               </div>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center">
