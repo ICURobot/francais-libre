@@ -11,8 +11,8 @@ const LazyCommunitySection = lazy(() => Promise.resolve({ default: CommunitySect
 
 // Analytics tracking function
 const trackEvent = (eventName: string, properties = {}) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, properties)
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', eventName, properties)
   }
 }
 

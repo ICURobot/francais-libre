@@ -100,7 +100,6 @@ export const DialogueSection = ({ dialogue, onComplete }: DialogueSectionProps) 
                   <AudioPlayer 
                     text={exchange.french}
                     showText={false}
-                    onEnd={() => handleExchangePlay(index)}
                   />
                 </div>
                 
