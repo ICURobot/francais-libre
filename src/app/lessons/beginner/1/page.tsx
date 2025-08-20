@@ -62,7 +62,7 @@ export default function Lesson1Page() {
             
             <div className="bg-white rounded-xl p-4 mt-6 border-l-4 border-blue-500">
               <p className="text-lg font-semibold text-blue-800 text-center">
-                🚀 Let's begin with natural dialogue, then understand the patterns behind the language!
+                🚀 Let&apos;s begin with natural dialogue, then understand the patterns behind the language!
               </p>
             </div>
           </div>
@@ -87,7 +87,6 @@ export default function Lesson1Page() {
         {/* Lesson Content */}
         <DialogueSection 
           dialogue={dialogue}
-          onComplete={() => console.log('Lesson completed!')}
         />
 
         {/* Grammar Section */}

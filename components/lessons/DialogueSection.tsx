@@ -7,22 +7,19 @@ import { AudioPlayer } from './AudioPlayer'
 // Define the props for the DialogueSection component.
 interface DialogueSectionProps {
   dialogue: Dialogue; // The dialogue data object for the lesson.
-  onComplete?: () => void; // Optional callback function when the section is considered complete.
 }
 
 /**
  * A component to display an interactive dialogue with audio, translations, and cultural notes.
  * It allows users to navigate through exchanges and tracks their listening progress.
  */
-export const DialogueSection = ({ dialogue, onComplete }: DialogueSectionProps) => {
+export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
   // State to track the currently focused dialogue exchange.
   const [currentExchange, setCurrentExchange] = useState(0);
   // State to toggle the visibility of English translations.
   const [showTranslations, setShowTranslations] = useState(true);
   // State to toggle the visibility of phonetic pronunciation guides.
   const [showPronunciation, setShowPronunciation] = useState(false);
-  // State to keep track of which exchanges the user has listened to.
-  const [playedExchanges, setPlayedExchanges] = useState<Set<number>>(new Set());
 
 
 
@@ -134,9 +131,7 @@ export const DialogueSection = ({ dialogue, onComplete }: DialogueSectionProps) 
               className={`w-3 h-3 rounded-full transition-transform transform hover:scale-125 ${
                 index === currentExchange 
                   ? 'bg-blue-600' 
-                  : playedExchanges.has(index)
-                    ? 'bg-green-500'
-                    : 'bg-gray-300'
+                  : 'bg-gray-300'
               }`}
             />
           ))}
