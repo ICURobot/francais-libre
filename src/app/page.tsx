@@ -336,13 +336,27 @@ const EnhancedCTA = ({
     blue: "bg-blue-600 text-white hover:bg-blue-700"
   }
 
-  const ButtonComponent = href ? Link : 'button'
-  const props = href ? { href } : { onClick, disabled }
+  if (href) {
+    return (
+      <Link 
+        href={href}
+        className={`${baseClasses} ${variants[variant]} ${className}`}
+      >
+        {children}
+        {showUrgency && (
+          <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+            Limited Time
+          </div>
+        )}
+      </Link>
+    )
+  }
 
   return (
-    <ButtonComponent 
+    <button 
       className={`${baseClasses} ${variants[variant]} ${className}`}
-      {...props}
+      onClick={onClick}
+      disabled={disabled}
     >
       {children}
       {showUrgency && (
@@ -350,7 +364,7 @@ const EnhancedCTA = ({
           Limited Time
         </div>
       )}
-    </ButtonComponent>
+    </button>
   )
 }
 
