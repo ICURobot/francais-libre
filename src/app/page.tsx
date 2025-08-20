@@ -1,6 +1,7 @@
-'use client'
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* Vercel Deployment Fix - Commit 5487d07 - All compilation errors resolved */
+'use client'
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase } from '../../lib/supabase'
