@@ -1,34 +1,10 @@
 'use client'
 
 import Link from 'next/link'
+import { getBeginnerLessons } from '../../../lib/lessons/lessonData'
 
 export default function LessonsPage() {
-  const lessons = [
-    {
-      id: 1,
-      title: "Bonjour! First Greetings",
-      description: "Learn essential French greetings and introductions",
-      level: "Beginner",
-      duration: "15 min",
-      href: "/lessons/beginner/1"
-    },
-    {
-      id: 2,
-      title: "Meeting Someone New",
-      description: "Practice introducing yourself and asking names",
-      level: "Beginner", 
-      duration: "20 min",
-      href: "/lessons/beginner/2"
-    },
-    {
-      id: 3,
-      title: "Basic Questions",
-      description: "Learn to ask and answer simple questions",
-      level: "Beginner",
-      duration: "25 min",
-      href: "/lessons/beginner/3"
-    }
-  ]
+  const lessons = getBeginnerLessons()
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-12">
@@ -46,7 +22,7 @@ export default function LessonsPage() {
           {lessons.map((lesson) => (
             <Link
               key={lesson.id}
-              href={lesson.href}
+              href={`/lessons/beginner/${lesson.order}`}
               className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 p-6 border border-gray-200"
             >
               <div className="bg-blue-100 w-16 h-16 rounded-xl flex items-center justify-center mb-4">
@@ -56,13 +32,13 @@ export default function LessonsPage() {
                 {lesson.title}
               </h3>
               <p className="text-gray-600 mb-4">
-                {lesson.description}
+                {lesson.subtitle}
               </p>
               <div className="flex items-center justify-between text-sm text-gray-500">
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
                   {lesson.level}
                 </span>
-                <span>⏱️ {lesson.duration}</span>
+                <span>⏱️ {lesson.estimated_time} min</span>
               </div>
             </Link>
           ))}
