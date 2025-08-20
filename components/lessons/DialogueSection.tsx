@@ -38,32 +38,61 @@ export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-200">
+    <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-200 mt-8 mb-7">
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 border-b pb-4">
-        <div className="flex items-center mb-4 sm:mb-0">
-          <div className="bg-blue-500 w-14 h-14 rounded-xl flex items-center justify-center mr-4 shadow-md">
-            <span className="text-3xl">🗣️</span>
+      <div className="text-center mb-8 border-b pb-6">
+        {/* Icon and Title */}
+        <div className="flex flex-col items-center mb-6">
+          <div className="relative mb-4">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl opacity-75"></div>
+              <span className="text-4xl relative z-10 drop-shadow-sm">🗣️</span>
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center shadow-md">
+              <span className="text-sm text-white">✨</span>
+            </div>
           </div>
-          <div>
-            <h3 className="text-2xl font-bold text-gray-800">{dialogue.title}</h3>
-            <p className="text-gray-600">{dialogue.context}</p>
+          
+          <div className="max-w-2xl">
+            <h3 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-3">{dialogue.title}</h3>
+            <p className="text-gray-600 text-lg leading-relaxed">{dialogue.context}</p>
           </div>
         </div>
         
-        {/* Control Toggles */}
-        <div className="flex space-x-2">
+        {/* Control Toggles - Centered */}
+        <div className="flex justify-center space-x-4">
           <button
             onClick={() => setShowTranslations(!showTranslations)}
-            className={`text-sm px-4 py-2 rounded-full border transition-colors ${showTranslations ? 'bg-blue-100 text-blue-800 border-blue-300' : 'bg-gray-100 hover:bg-gray-200'}`}
+            className={`group relative overflow-hidden px-8 py-4 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
+              showTranslations 
+                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md' 
+                : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border border-gray-200 hover:from-gray-100 hover:to-gray-200'
+            }`}
           >
-            {showTranslations ? 'Hide' : 'Show'} Translation
+            <div className="flex items-center space-x-3">
+              <span className={`transition-all duration-300 ${showTranslations ? 'text-blue-100' : 'text-gray-500'}`}>
+                {showTranslations ? '👁️' : '👁️‍🗨️'}
+              </span>
+              <span>{showTranslations ? 'Hide' : 'Show'} Translation</span>
+            </div>
+            <div className={`absolute inset-0 bg-gradient-to-r from-white to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-20 ${showTranslations ? 'opacity-10' : ''}`}></div>
           </button>
+          
           <button
             onClick={() => setShowPronunciation(!showPronunciation)}
-            className={`text-sm px-4 py-2 rounded-full border transition-colors ${showPronunciation ? 'bg-blue-100 text-blue-800 border-blue-300' : 'bg-gray-100 hover:bg-gray-200'}`}
+            className={`group relative overflow-hidden px-8 py-4 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
+              showPronunciation 
+                ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-md' 
+                : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border border-gray-200 hover:from-gray-100 hover:to-gray-200'
+            }`}
           >
-            {showPronunciation ? 'Hide' : 'Show'} Pronunciation
+            <div className="flex items-center space-x-3">
+              <span className={`transition-all duration-300 ${showPronunciation ? 'text-purple-100' : 'text-gray-500'}`}>
+                {showPronunciation ? '🔊' : '🔇'}
+              </span>
+              <span>{showPronunciation ? 'Hide' : 'Show'} Pronunciation</span>
+            </div>
+            <div className={`absolute inset-0 bg-gradient-to-r from-white to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-20 ${showPronunciation ? 'opacity-10' : ''}`}></div>
           </button>
         </div>
       </div>
@@ -113,25 +142,29 @@ export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
       </div>
 
       {/* Navigation Controls */}
-      <div className="flex items-center justify-between mt-6 pt-4 border-t">
+      <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
         <button
           onClick={prevExchange}
           disabled={currentExchange === 0}
-          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition-colors font-semibold"
+          className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-none"
         >
-          Previous
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-500 group-hover:text-gray-700 transition-colors">←</span>
+            <span>Previous</span>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-white to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-30"></div>
         </button>
         
-        <div className="flex space-x-2">
+        <div className="flex space-x-3">
           {dialogue.exchanges.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentExchange(index)}
               aria-label={`Go to exchange ${index + 1}`}
-              className={`w-3 h-3 rounded-full transition-transform transform hover:scale-125 ${
+              className={`w-4 h-4 rounded-full transition-all duration-300 transform hover:scale-125 ${
                 index === currentExchange 
-                  ? 'bg-blue-600' 
-                  : 'bg-gray-300'
+                  ? 'bg-gradient-to-r from-blue-500 to-blue-600 shadow-md' 
+                  : 'bg-gray-300 hover:bg-gray-400'
               }`}
             />
           ))}
@@ -140,9 +173,13 @@ export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
         <button
           onClick={nextExchange}
           disabled={currentExchange === dialogue.exchanges.length - 1}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors font-semibold"
+          className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-none"
         >
-          Next
+          <div className="flex items-center space-x-2">
+            <span>Next</span>
+            <span className="text-blue-100 group-hover:text-white transition-colors">→</span>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-white to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
         </button>
       </div>
 

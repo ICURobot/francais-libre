@@ -1,11 +1,19 @@
 'use client'
 
+import { useState, useCallback } from 'react'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
+import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
+import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
 import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
 import Link from 'next/link'
 import { ttsService } from '../../../../../lib/services/ttsService'
 
 export default function Lesson1Page() {
+  // State for exercise progress
+  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
+  const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set())
+  const [exerciseResults, setExerciseResults] = useState<Record<string, boolean>>({})
+
   // Get the first lesson data from lessonData.ts
   const lesson = beginnerLessons.find(l => l.id === 'beginner-1')
   
@@ -24,6 +32,22 @@ export default function Lesson1Page() {
   }
 
   const { dialogue } = lesson
+
+  // Handle exercise completion
+  const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
+    setCompletedExercises(prev => new Set([...prev, exerciseId]))
+    if (isCorrect) {
+      setCorrectAnswers(prev => new Set([...prev, exerciseId]))
+    }
+    setExerciseResults(prev => ({ ...prev, [exerciseId]: isCorrect }))
+  }, [])
+
+  // Handle reset all exercises
+  const handleResetExercises = useCallback(() => {
+    setCompletedExercises(new Set())
+    setCorrectAnswers(new Set())
+    setExerciseResults({})
+  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-8">
@@ -69,7 +93,7 @@ export default function Lesson1Page() {
         </div>
 
         {/* Learning Objectives */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-200">
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-200 transform hover:scale-[1.005] hover:shadow-xl transition-all duration-300">
           <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="text-blue-600 mr-3">🎯</span>
             Learning Objectives
@@ -89,8 +113,52 @@ export default function Lesson1Page() {
           dialogue={dialogue}
         />
 
+        {/* Grammar Transition Header */}
+        <div className="relative mb-8">
+          {/* Background with gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-blue-50 to-indigo-50 rounded-3xl transform -skew-y-1"></div>
+          
+          {/* Content */}
+          <div className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 rounded-3xl p-8 text-center shadow-2xl transform hover:scale-[1.02] transition-all duration-500">
+            {/* Decorative elements */}
+            <div className="absolute top-4 left-4 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+            <div className="absolute top-6 right-6 w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+            <div className="absolute bottom-4 left-8 w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+            
+            {/* Main content */}
+            <div className="flex flex-col items-center space-y-4">
+              {/* Icon */}
+              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
+                <span className="text-3xl">🧠</span>
+              </div>
+              
+              {/* Text */}
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  Ready to Master the Grammar?
+                </h2>
+                <p className="text-blue-100 text-lg leading-relaxed max-w-2xl">
+                  Now let&apos;s dive into the essential patterns and rules that will unlock the secrets of French structure. 
+                  Get ready to understand the building blocks of the language!
+                </p>
+              </div>
+              
+              {/* Arrow indicator */}
+              <div className="flex items-center space-x-2 text-blue-200">
+                <span className="text-sm font-medium">Scroll down to continue</span>
+                <div className="animate-bounce">
+                  <span className="text-xl">↓</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Bottom accent */}
+          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full"></div>
+        </div>
+
         {/* Grammar Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-200">
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-200 transform hover:scale-[1.005] hover:shadow-xl transition-all duration-300">
           <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="text-purple-600 mr-3">📚</span>
             {lesson.grammar.topic}
@@ -102,7 +170,7 @@ export default function Lesson1Page() {
             <h4 className="text-lg font-semibold text-gray-800 mb-3">Key Patterns:</h4>
             <ul className="space-y-2">
               {lesson.grammar.patterns.map((pattern, index) => (
-                <li key={index} className="text-gray-700 bg-gray-50 p-3 rounded-lg">
+                <li key={index} className="text-gray-700 bg-gray-50 p-3 rounded-lg transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
                   {pattern}
                 </li>
               ))}
@@ -114,7 +182,7 @@ export default function Lesson1Page() {
             <h4 className="text-lg font-semibold text-gray-800 mb-3">Examples:</h4>
             <div className="space-y-3">
               {lesson.grammar.examples.map((example, index) => (
-                <div key={index} className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                <div key={index} className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between mb-2">
                     <div className="font-semibold text-black">{example.french}</div>
                     <button
@@ -142,7 +210,7 @@ export default function Lesson1Page() {
               <h4 className="text-lg font-semibold text-gray-800 mb-3">Conjugation Table:</h4>
               <div className="grid grid-cols-3 gap-3">
                 {lesson.grammar.conjugation_table.map((conj, index) => (
-                  <div key={index} className="bg-green-50 p-3 rounded-lg text-center">
+                  <div key={index} className="bg-green-50 p-3 rounded-lg text-center transform hover:scale-[1.02] hover:shadow-md transition-all duration-300 cursor-pointer">
                     <div className="font-bold text-black">{conj.pronoun}</div>
                     <div className="text-lg text-black">{conj.form}</div>
                     <div className="text-sm text-gray-700">{conj.pronunciation}</div>
@@ -161,14 +229,14 @@ export default function Lesson1Page() {
         </div>
 
         {/* Vocabulary Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-200">
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-200 transform hover:scale-[1.005] hover:shadow-xl transition-all duration-300">
           <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="text-green-600 mr-3">📖</span>
             Vocabulary
           </h3>
           <div className="space-y-4">
             {lesson.vocabulary.map((word, index) => (
-              <div key={index} className="border-l-4 border-green-500 bg-green-50 p-4 rounded-lg">
+              <div key={index} className="border-l-4 border-green-500 bg-green-50 p-4 rounded-lg transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center space-x-2">
                     <span className="font-bold text-black text-lg">{word.word}</span>
@@ -204,44 +272,34 @@ export default function Lesson1Page() {
           </div>
         </div>
 
+        {/* Exercise Progress */}
+        <ExerciseProgress
+          totalExercises={lesson.exercises.length}
+          completedExercises={completedExercises.size}
+          correctAnswers={correctAnswers.size}
+          onReset={handleResetExercises}
+        />
+
         {/* Exercises Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-200">
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-200 transform hover:scale-[1.005] hover:shadow-xl transition-all duration-300">
           <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="text-orange-600 mr-3">✏️</span>
             Practice Exercises
           </h3>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {lesson.exercises.map((exercise, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-semibold text-gray-800">Exercise {index + 1}</span>
-                  <span className="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
-                    {exercise.type}
-                  </span>
-                </div>
-                <p className="text-gray-700 mb-3">{exercise.question}</p>
-                
-                {exercise.options && (
-                  <div className="space-y-2 mb-3">
-                    {exercise.options.map((option, optIndex) => (
-                      <div key={optIndex} className="flex items-center">
-                        <input type="radio" name={`exercise-${index}`} id={`opt-${index}-${optIndex}`} className="mr-2" />
-                        <label htmlFor={`opt-${index}-${optIndex}`} className="text-gray-700">{option}</label>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                
-                <div className="text-sm text-gray-600">
-                  <strong>Hint:</strong> {exercise.hints?.[0]}
-                </div>
-              </div>
+              <InteractiveExercise
+                key={exercise.id}
+                exercise={exercise}
+                exerciseNumber={index + 1}
+                onComplete={(isCorrect) => handleExerciseComplete(exercise.id, isCorrect)}
+              />
             ))}
           </div>
         </div>
 
         {/* Lesson Info */}
-        <div className="bg-gray-50 rounded-2xl p-6 mb-6">
+        <div className="bg-gray-50 rounded-2xl p-6 mb-8 transform hover:scale-[1.005] hover:shadow-lg transition-all duration-300">
           <div className="grid md:grid-cols-3 gap-4 text-center">
             <div>
               <div className="text-2xl font-bold text-blue-600">{lesson.estimated_time}</div>
@@ -269,7 +327,7 @@ export default function Lesson1Page() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center mt-8">
+        <div className="flex justify-between items-center mt-12">
           <Link
             href="/lessons"
             className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition"
