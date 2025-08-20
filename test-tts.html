@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test TTS Function</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Test TTS Function</h1>
+    <button onclick="testTTS()">Test French TTS</button>
+    <div id="result"></div>
+
+    <script>
+        const supabaseUrl = 'https://nkhlxtxwwxkmshjprafb.supabase.co'
+        const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5raGx4dHh3d3hrbXNoanByYWZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0NzA5ODcsImV4cCI6MjA2NzA0Njk4N30.PBaKHd6-YTOrebflSjPFlQq9aKMeJJ7lQ1edn8BilS8'
+        
+        const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey)
+
+        async function testTTS() {
+            const resultDiv = document.getElementById('result')
+            resultDiv.innerHTML = 'Testing TTS...'
+            
+            try {
+                const { data, error } = await supabase.functions.invoke('tts', {
+                    body: { 
+                        text: 'Bonjour, comment allez-vous?', 
+                        language: 'fr-FR' 
+                    }
+                })
+
+                if (error) {
+                    resultDiv.innerHTML = `Error: ${JSON.stringify(error, null, 2)}`
+                    console.error('TTS Error:', error)
+                    return
+                }
+
+                if (data && data.audioContent) {
+                    resultDiv.innerHTML = 'TTS Success! Playing audio...'
+                    
+                    // Convert base64 to audio and play
+                    const audioData = atob(data.audioContent)
+                    const arrayBuffer = new ArrayBuffer(audioData.length)
+                    const view = new Uint8Array(arrayBuffer)
+                    
+                    for (let i = 0; i < audioData.length; i++) {
+                        view[i] = audioData.charCodeAt(i)
+                    }
+
+                    const blob = new Blob([arrayBuffer], { type: 'audio/mp3' })
+                    const audioUrl = URL.createObjectURL(blob)
+                    
+                    const audio = new Audio(audioUrl)
+                    audio.play()
+                    
+                    audio.onended = () => {
+                        URL.revokeObjectURL(audioUrl)
+                    }
+                } else {
+                    resultDiv.innerHTML = 'No audio content received'
+                }
+
+            } catch (error) {
+                resultDiv.innerHTML = `Exception: ${error.message}`
+                console.error('Exception:', error)
+            }
+        }
+    </script>
+</body>
+</html>
