@@ -51,7 +51,7 @@ export class TextToSpeechService {
       pitch?: number;
       volume?: number;
       onEnd?: () => void;
-      onError?: (error: Error) => void;
+      onError?: (error: Error | SpeechSynthesisErrorEvent) => void;
     } = {}): Promise<boolean> {
       return new Promise((resolve, reject) => {
         if (!this.synthesis) {
@@ -84,8 +84,10 @@ export class TextToSpeechService {
         };
   
         utterance.onerror = (error) => {
-          options.onError?.(error);
-          reject(error);
+          // Convert SpeechSynthesisErrorEvent to Error object for consistency
+          const errorObj = new Error(error.error || 'Speech synthesis error');
+          options.onError?.(errorObj);
+          reject(errorObj);
         };
   
         this.synthesis.speak(utterance);
