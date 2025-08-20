@@ -112,7 +112,7 @@ export default function ExerciseProgress({
         <div className="text-center mt-4">
           <p className="text-gray-600">
             {completedExercises === 0 
-              ? "Ready to start practicing? Let's begin with the first exercise!" 
+              ? "Ready to start practicing? Let&apos;s begin with the first exercise!" 
               : `Great progress! ${totalExercises - completedExercises} more exercises to go.`
             }
           </p>
@@ -122,7 +122,7 @@ export default function ExerciseProgress({
       {isCompleted && (
         <div className="text-center mt-4">
           <p className="text-green-700 font-medium">
-            🎊 Congratulations! You've completed all exercises in this lesson.
+            🎊 Congratulations! You&apos;ve completed all exercises in this lesson.
           </p>
           <p className="text-gray-600 text-sm mt-1">
             Ready for the next challenge? Keep practicing to reinforce your learning!

@@ -12,7 +12,20 @@ export default function Lesson1Page() {
   // State for exercise progress
   const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
   const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set())
-  const [exerciseResults, setExerciseResults] = useState<Record<string, boolean>>({})
+
+  // Handle exercise completion
+  const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
+    setCompletedExercises(prev => new Set([...prev, exerciseId]))
+    if (isCorrect) {
+      setCorrectAnswers(prev => new Set([...prev, exerciseId]))
+    }
+  }, [])
+
+  // Handle reset all exercises
+  const handleResetExercises = useCallback(() => {
+    setCompletedExercises(new Set())
+    setCorrectAnswers(new Set())
+  }, [])
 
   // Get the first lesson data from lessonData.ts
   const lesson = beginnerLessons.find(l => l.id === 'beginner-1')
@@ -32,22 +45,6 @@ export default function Lesson1Page() {
   }
 
   const { dialogue } = lesson
-
-  // Handle exercise completion
-  const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
-    setCompletedExercises(prev => new Set([...prev, exerciseId]))
-    if (isCorrect) {
-      setCorrectAnswers(prev => new Set([...prev, exerciseId]))
-    }
-    setExerciseResults(prev => ({ ...prev, [exerciseId]: isCorrect }))
-  }, [])
-
-  // Handle reset all exercises
-  const handleResetExercises = useCallback(() => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(new Set())
-    setExerciseResults({})
-  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-8">
