@@ -24,16 +24,7 @@ export const DialogueSection = ({ dialogue, onComplete }: DialogueSectionProps) 
   // State to keep track of which exchanges the user has listened to.
   const [playedExchanges, setPlayedExchanges] = useState<Set<number>>(new Set());
 
-  // Handler for when an audio exchange is played.
-  const handleExchangePlay = (index: number) => {
-    const updatedPlayedExchanges = new Set(playedExchanges).add(index);
-    setPlayedExchanges(updatedPlayedExchanges);
-    
-    // If the user has listened to all exchanges, trigger the onComplete callback.
-    if (updatedPlayedExchanges.size >= dialogue.exchanges.length) {
-      onComplete?.();
-    }
-  };
+
 
   // Navigate to the next exchange in the dialogue.
   const nextExchange = () => {

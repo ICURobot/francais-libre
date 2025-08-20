@@ -1,5 +1,6 @@
 'use client'
 /* eslint-disable react/no-unescaped-entities */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase } from '../../lib/supabase'
@@ -10,14 +11,14 @@ const LazyPricingSection = lazy(() => Promise.resolve({ default: PricingSection 
 const LazyCommunitySection = lazy(() => Promise.resolve({ default: CommunitySection }))
 
 // Analytics tracking function
-const trackEvent = (eventName: string, properties = {}) => {
+const trackEvent = (eventName: string, properties: Record<string, unknown> = {}) => {
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', eventName, properties)
   }
 }
 
 // Enhanced Progress Bar Component with lesson-specific features
-const AnimatedProgressBar = ({ progress, color = "blue", delay = 0, showPercentage = false }) => {
+const AnimatedProgressBar = ({ progress, color = "blue", delay = 0, showPercentage = false }: { progress: number; color?: string; delay?: number; showPercentage?: boolean }) => {
   const [currentProgress, setCurrentProgress] = useState(0)
   
   useEffect(() => {
@@ -91,7 +92,7 @@ const InteractiveExample = () => {
       setCurrentExample((prev) => (prev + 1) % examples.length)
     }, 5000)
     return () => clearInterval(interval)
-  }, [])
+  }, [examples.length])
 
   return (
     <div className="bg-white p-4 rounded-xl border-l-4 border-blue-600 shadow-sm">

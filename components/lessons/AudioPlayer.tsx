@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { ttsService } from '../../lib/audio/textToSpeech'
 
 // Define the props interface for the AudioPlayer component for type safety.
@@ -30,21 +30,10 @@ export const AudioPlayer = ({
   // State to hold any potential playback errors.
   const [error, setError] = useState<string | null>(null);
 
-  // useEffect hook runs after the component mounts.
-  useEffect(() => {
-    // Check for browser support once when the component loads.
-    const supported = ttsService.isSupported();
-    setIsSupported(supported);
-    
-    // If autoPlay is enabled and the browser supports TTS, play the audio.
-    if (autoPlay && supported) {
-      playAudio();
-    }
-    // The effect depends on `autoPlay` and `text` props.
-  }, [autoPlay, text]);
+
 
   // Function to initiate audio playback.
-  const playAudio = async () => {
+  const playAudio = useCallback(async () => {
     if (!isSupported) {
       setError('Audio not supported in this browser');
       return;
@@ -69,7 +58,20 @@ export const AudioPlayer = ({
       setError('Audio playback failed');
       setIsPlaying(false);
     }
-  };
+  }, [isSupported, text, rate]);
+
+  // useEffect hook runs after the component mounts.
+  useEffect(() => {
+    // Check for browser support once when the component loads.
+    const supported = ttsService.isSupported();
+    setIsSupported(supported);
+    
+    // If autoPlay is enabled and the browser supports TTS, play the audio.
+    if (autoPlay && supported) {
+      playAudio();
+    }
+    // The effect depends on `autoPlay` and `text` props.
+  }, [autoPlay, text, playAudio]);
 
   // Function to stop audio playback.
   const stopAudio = () => {

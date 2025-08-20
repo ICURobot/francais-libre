@@ -49,15 +49,15 @@ export default function Lesson1Page() {
           
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p className="text-lg">
-              This lesson combines the best of both proven teaching methods: you'll start by listening to real French conversations (the natural immersion approach), then master the essential grammar foundation (following structured learning principles).
+              This lesson combines the best of both proven teaching methods: you&apos;ll start by listening to real French conversations (the natural immersion approach), then master the essential grammar foundation (following structured learning principles).
             </p>
             
             <p className="text-lg">
-              Greetings and introductions aren't just polite gestures in French culture—they're the gateway to every meaningful interaction. French society places enormous importance on proper etiquette, and mastering these basics will open doors everywhere from Parisian cafés to business meetings in Lyon.
+              Greetings and introductions aren&apos;t just polite gestures in French culture—they&apos;re the gateway to every meaningful interaction. French society places enormous importance on proper etiquette, and mastering these basics will open doors everywhere from Parisian cafés to business meetings in Lyon.
             </p>
             
             <p className="text-lg">
-              The verb <span className="font-bold text-blue-600">'être'</span> (to be) is absolutely fundamental—it appears in nearly every French sentence and is essential for expressing who you are, where you're from, and what you do. By the end of this lesson, you'll confidently introduce yourself and engage in your first real French conversations.
+              The verb <span className="font-bold text-blue-600">&apos;être&apos;</span> (to be) is absolutely fundamental—it appears in nearly every French sentence and is essential for expressing who you are, where you&apos;re from, and what you do. By the end of this lesson, you&apos;ll confidently introduce yourself and engage in your first real French conversations.
             </p>
             
             <div className="bg-white rounded-xl p-4 mt-6 border-l-4 border-blue-500">

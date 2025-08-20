@@ -51,7 +51,7 @@ export class TextToSpeechService {
       pitch?: number;
       volume?: number;
       onEnd?: () => void;
-      onError?: (error: any) => void;
+      onError?: (error: Error) => void;
     } = {}): Promise<boolean> {
       return new Promise((resolve, reject) => {
         if (!this.synthesis) {

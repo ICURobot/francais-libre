@@ -8,7 +8,7 @@ export default function TestPage() {
   useEffect(() => {
     async function testConnection() {
       try {
-        const { data, error } = await supabase.from('lessons').select('count')
+        const { error } = await supabase.from('lessons').select('count')
         if (error) {
           setConnection('Connected! ✅ (No lessons yet)')
         } else {
