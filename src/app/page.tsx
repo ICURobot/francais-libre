@@ -1186,31 +1186,31 @@ export default function Home() {
               <ul className="space-y-2 text-gray-400">
                 <li><Link href="/lessons/beginner" className="hover:text-white transition">Beginner Lessons</Link></li>
                 <li><Link href="/lessons" className="hover:text-white transition">All Lessons</Link></li>
-                <li><a href="#" className="hover:text-white transition">Grammar Guide</a></li>
-                <li><a href="#" className="hover:text-white transition">Vocabulary Builder</a></li>
-                <li><a href="#" className="hover:text-white transition">Pronunciation Guide</a></li>
+                <li><Link href="/grammar-guide" className="hover:text-white transition">Grammar Guide</Link></li>
+                <li><Link href="/vocabulary-builder" className="hover:text-white transition">Vocabulary Builder</Link></li>
+                <li><Link href="/pronunciation-guide" className="hover:text-white transition">Pronunciation Guide</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-bold mb-4">Community</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition">Study Groups</a></li>
-                <li><a href="#" className="hover:text-white transition">Language Exchange</a></li>
-                <li><a href="#" className="hover:text-white transition">Live Events</a></li>
-                <li><a href="#" className="hover:text-white transition">Success Stories</a></li>
-                <li><a href="#" className="hover:text-white transition">Forum</a></li>
+                <li><Link href="/community/study-groups" className="hover:text-white transition">Study Groups</Link></li>
+                <li><Link href="/community" className="hover:text-white transition">Language Exchange</Link></li>
+                <li><Link href="/community" className="hover:text-white transition">Live Events</Link></li>
+                <li><Link href="/community" className="hover:text-white transition">Success Stories</Link></li>
+                <li><Link href="/community" className="hover:text-white transition">Forum</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-bold mb-4">Support</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white transition">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition">Feedback</a></li>
+                <li><Link href="/support/help-center" className="hover:text-white transition">Help Center</Link></li>
+                <li><Link href="/support" className="hover:text-white transition">Contact Us</Link></li>
+                <li><Link href="/support" className="hover:text-white transition">Privacy Policy</Link></li>
+                <li><Link href="/support" className="hover:text-white transition">Terms of Service</Link></li>
+                <li><Link href="/support" className="hover:text-white transition">Feedback</Link></li>
               </ul>
             </div>
           </div>
