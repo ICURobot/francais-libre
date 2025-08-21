@@ -14,6 +14,20 @@ export interface TTSResponse {
 export class TTSService {
   private static instance: TTSService
   private audioCache: Map<string, string> = new Map()
+  private isMobile: boolean
+  private isIOS: boolean
+  private isAndroid: boolean
+  private browserTTS: SpeechSynthesis | null = null
+
+  constructor() {
+    // Detect device type
+    this.isMobile = this.detectMobile()
+    this.isIOS = this.detectIOS()
+    this.isAndroid = this.detectAndroid()
+    
+    // Initialize browser TTS if available
+    this.initializeBrowserTTS()
+  }
 
   static getInstance(): TTSService {
     if (!TTSService.instance) {
@@ -22,7 +36,54 @@ export class TTSService {
     return TTSService.instance
   }
 
+  private detectMobile(): boolean {
+    if (typeof window === 'undefined') return false
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  }
+
+  private detectIOS(): boolean {
+    if (typeof window === 'undefined') return false
+    return /iPad|iPhone|iPod/.test(navigator.userAgent)
+  }
+
+  private detectAndroid(): boolean {
+    if (typeof window === 'undefined') return false
+    return /Android/.test(navigator.userAgent)
+  }
+
+  private initializeBrowserTTS(): void {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      this.browserTTS = window.speechSynthesis
+      
+      // iOS requires user interaction to enable speech synthesis
+      if (this.isIOS) {
+        // Create a silent utterance to enable speech synthesis
+        const silentUtterance = new SpeechSynthesisUtterance('')
+        silentUtterance.volume = 0
+        this.browserTTS.speak(silentUtterance)
+        this.browserTTS.cancel() // Cancel immediately
+      }
+    }
+  }
+
   async speak(text: string, language: string = 'fr-FR'): Promise<void> {
+    try {
+      // On mobile devices, prefer browser TTS for better compatibility
+      if (this.isMobile) {
+        await this.speakWithBrowserTTS(text, language)
+        return
+      }
+
+      // On desktop, try Google Cloud TTS first, then fallback to browser
+      await this.speakWithGoogleTTS(text, language)
+    } catch (error) {
+      console.error('TTS service error:', error)
+      // Final fallback to browser TTS
+      await this.speakWithBrowserTTS(text, language)
+    }
+  }
+
+  private async speakWithGoogleTTS(text: string, language: string): Promise<void> {
     try {
       // Check cache first
       const cacheKey = `${text}-${language}`
@@ -37,10 +98,7 @@ export class TTSService {
       })
 
       if (error) {
-        console.error('TTS API error:', error)
-        // Fallback to browser TTS
-        this.fallbackToBrowserTTS(text, language)
-        return
+        throw new Error('Google TTS API error: ' + error.message)
       }
 
       if (data && data.audioContent) {
@@ -49,15 +107,89 @@ export class TTSService {
         // Play the audio
         this.playAudio(data.audioContent)
       } else {
-        // Fallback to browser TTS
-        this.fallbackToBrowserTTS(text, language)
+        throw new Error('No audio content received from Google TTS')
       }
 
     } catch (error) {
-      console.error('TTS service error:', error)
-      // Fallback to browser TTS
-      this.fallbackToBrowserTTS(text, language)
+      console.error('Google TTS failed, falling back to browser TTS:', error)
+      throw error // Re-throw to trigger fallback
     }
+  }
+
+    private async speakWithBrowserTTS(text: string, language: string): Promise<void> {
+    if (!this.browserTTS) {
+      console.warn('Browser TTS not available')
+      return
+    }
+
+    return new Promise((resolve, reject) => {
+      try {
+        // Stop any current speech
+        this.browserTTS!.cancel()
+
+        const utterance = new SpeechSynthesisUtterance(text)
+        
+        // Set language
+        utterance.lang = language
+        
+        // Optimize for mobile devices
+        if (this.isMobile) {
+          utterance.rate = 0.8 // Slower for clarity
+          utterance.pitch = 1.0
+          utterance.volume = 1.0
+        } else {
+          utterance.rate = 0.9
+          utterance.pitch = 1.0
+          utterance.volume = 1.0
+        }
+
+        // Try to find a French voice
+        const voices = this.browserTTS!.getVoices()
+        const frenchVoice = voices.find((voice: SpeechSynthesisVoice) => 
+          voice.lang.startsWith('fr') || voice.lang === 'fr-FR'
+        )
+        
+        if (frenchVoice) {
+          utterance.voice = frenchVoice
+        }
+
+        // Event handlers
+        utterance.onend = () => {
+          resolve()
+        }
+
+        utterance.onerror = (event) => {
+          console.error('Browser TTS error:', event)
+          reject(new Error('Browser TTS failed'))
+        }
+
+        // iOS requires user interaction, so we need to handle this carefully
+        if (this.isIOS) {
+          // On iOS, we might need to wait for voices to load
+          if (voices.length === 0) {
+            // Wait for voices to load
+            this.browserTTS!.onvoiceschanged = () => {
+              const updatedVoices = this.browserTTS!.getVoices()
+              const frenchVoice = updatedVoices.find((voice: SpeechSynthesisVoice) => 
+                voice.lang.startsWith('fr') || voice.lang === 'fr-FR'
+              )
+              if (frenchVoice) {
+                utterance.voice = frenchVoice
+              }
+              this.browserTTS!.speak(utterance)
+            }
+          } else {
+            this.browserTTS!.speak(utterance)
+          }
+        } else {
+          this.browserTTS!.speak(utterance)
+        }
+
+      } catch (error) {
+        console.error('Browser TTS setup error:', error)
+        reject(error)
+      }
+    })
   }
 
   private playAudio(base64Audio: string): void {
@@ -75,24 +207,41 @@ export class TTSService {
       const audioUrl = URL.createObjectURL(blob)
       
       const audio = new Audio(audioUrl)
-      audio.play()
+      
+      // Handle mobile audio playback
+      if (this.isMobile) {
+        // On mobile, we need to handle user interaction requirements
+        audio.play().catch(error => {
+          console.error('Mobile audio playback failed:', error)
+          // Fallback to browser TTS
+          this.speakWithBrowserTTS('', 'fr-FR')
+        })
+      } else {
+        audio.play()
+      }
       
       // Clean up URL after playing
       audio.onended = () => {
         URL.revokeObjectURL(audioUrl)
       }
+      
+      audio.onerror = () => {
+        console.error('Audio playback error, falling back to browser TTS')
+        this.speakWithBrowserTTS('', 'fr-FR')
+      }
     } catch (error) {
       console.error('Audio playback error:', error)
-      this.fallbackToBrowserTTS('', 'fr-FR')
+      this.speakWithBrowserTTS('', 'fr-FR')
     }
   }
 
-  private fallbackToBrowserTTS(text: string, language: string): void {
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(text)
-      utterance.lang = language
-      utterance.rate = 0.8
-      speechSynthesis.speak(utterance)
+  // Get device info for debugging
+  getDeviceInfo() {
+    return {
+      isMobile: this.isMobile,
+      isIOS: this.isIOS,
+      isAndroid: this.isAndroid,
+      userAgent: typeof window !== 'undefined' ? navigator.userAgent : 'Server-side'
     }
   }
 

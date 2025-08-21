@@ -4,6 +4,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { ttsService } from '../../../lib/services/ttsService'
 
 export default function PronunciationGuidePage() {
   const [activeSection, setActiveSection] = useState('basics')
@@ -172,7 +173,10 @@ export default function PronunciationGuidePage() {
                   <h4 className="font-bold text-gray-900 text-lg mb-2">{item.word}</h4>
                   <p className="text-purple-700 font-mono text-sm mb-2">{item.pronunciation}</p>
                   <p className="text-gray-600 text-sm">{item.translation}</p>
-                  <button className="mt-3 text-purple-600 hover:text-purple-700 transition-colors">
+                  <button 
+                    onClick={() => ttsService.speak(item.word, 'fr-FR')}
+                    className="mt-3 text-purple-600 hover:text-purple-700 transition-colors hover:scale-105 transform transition-transform"
+                  >
                     🔊 Listen
                   </button>
                 </div>
@@ -236,6 +240,62 @@ export default function PronunciationGuidePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* TTS Test Section */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">🔊 TTS System Test</h3>
+          <div className="text-center mb-6">
+            <p className="text-gray-600 mb-4">
+              Test the text-to-speech system on your device. This helps diagnose any audio issues.
+            </p>
+            <div className="bg-gray-50 p-4 rounded-lg mb-4">
+              <p className="text-sm text-gray-600 mb-2">Device Information:</p>
+              <p className="text-xs text-gray-500 font-mono">
+                {typeof window !== 'undefined' ? navigator.userAgent : 'Server-side rendering'}
+              </p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="space-y-3">
+              <h4 className="font-semibold text-gray-800">Test Basic TTS:</h4>
+              <button 
+                onClick={() => ttsService.speak('Bonjour, comment allez-vous?', 'fr-FR')}
+                className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                🔊 Test French Phrase
+              </button>
+              <button 
+                onClick={() => ttsService.speak('Hello, how are you?', 'en-US')}
+                className="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                🔊 Test English Phrase
+              </button>
+            </div>
+            
+            <div className="space-y-3">
+              <h4 className="font-semibold text-gray-800">Test Individual Words:</h4>
+              <button 
+                onClick={() => ttsService.speak('bonjour', 'fr-FR')}
+                className="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                🔊 "bonjour"
+              </button>
+              <button 
+                onClick={() => ttsService.speak('merci', 'fr-FR')}
+                className="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                🔊 "merci"
+              </button>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-sm text-gray-500">
+              💡 <strong>Mobile Users:</strong> If audio doesn't work, try tapping the screen first or refreshing the page.
+            </p>
           </div>
         </div>
 
