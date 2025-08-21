@@ -233,41 +233,42 @@ export default function Lesson3Page() {
         </div>
 
         {/* Vocabulary Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-200 transform hover:scale-[1.005] hover:shadow-xl transition-all duration-300">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-            <span className="text-green-600 mr-3">📖</span>
-            Vocabulary
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+          <h3 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+            📖 Vocabulary
           </h3>
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {lesson.vocabulary.map((word, index) => (
-              <div key={index} className="border-l-4 border-green-500 bg-green-50 p-4 rounded-lg transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2">
-                    <span className="font-bold text-black text-lg">{word.word}</span>
-                    <button 
-                      onClick={() => ttsService.speak(word.word)}
-                      className="text-green-600 hover:text-green-700 transition-colors p-1"
-                      title="Listen to word"
-                    >
-                      🔊
-                    </button>
-                  </div>
-                  <span className="text-sm bg-green-200 text-green-800 px-2 py-1 rounded-full">{word.category}</span>
+              <div key={index} className="bg-gradient-to-br from-yellow-50 to-orange-50 p-6 rounded-xl border border-yellow-200 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-medium">
+                    {word.category}
+                  </span>
+                  <button
+                    onClick={() => ttsService.speak(word.word, 'fr-FR')}
+                    className="text-yellow-600 hover:text-yellow-700 transition-colors"
+                    title="Listen to pronunciation"
+                  >
+                    🔊
+                  </button>
                 </div>
-                <div className="text-gray-700 mb-2">{word.translation}</div>
-                <div className="text-sm text-gray-600 mb-2">Pronunciation: {word.pronunciation}</div>
-                <div className="bg-white p-3 rounded border">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-black mb-1">{word.example_sentence}</div>
-                    <button 
-                      onClick={() => ttsService.speak(word.example_sentence)}
-                      className="text-green-600 hover:text-green-700 transition-colors p-1 ml-2"
+                
+                <h3 className="text-xl font-bold text-black mb-2">{word.word}</h3>
+                <p className="text-gray-600 mb-2">{word.translation}</p>
+                <p className="text-sm text-gray-500 font-mono mb-3">{word.pronunciation}</p>
+                
+                <div className="border-t border-yellow-200 pt-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm text-gray-700">{word.example_sentence}</p>
+                    <button
+                      onClick={() => ttsService.speak(word.example_sentence, 'fr-FR')}
+                      className="text-yellow-600 hover:text-yellow-700 transition-colors ml-2"
                       title="Listen to example sentence"
                     >
                       🔊
                     </button>
                   </div>
-                  <div className="text-sm text-gray-600 italic">{word.example_translation}</div>
+                  <p className="text-xs text-gray-500">{word.example_translation}</p>
                 </div>
               </div>
             ))}
