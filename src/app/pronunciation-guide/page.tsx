@@ -299,6 +299,18 @@ export default function PronunciationGuidePage() {
             <p className="text-sm text-gray-500 mt-2">
               📱 <strong>Mobile Users:</strong> If audio doesn't work, try tapping the screen first or refreshing the page.
             </p>
+            <div className="mt-4">
+              <button 
+                onClick={() => {
+                  console.log('🔍 Device Info:', ttsService.getDeviceInfo())
+                  console.log('🔍 Testing simple browser TTS...')
+                  ttsService.speak('Test', 'en-US')
+                }}
+                className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+              >
+                🔍 Debug TTS System
+              </button>
+            </div>
           </div>
         </div>
 
