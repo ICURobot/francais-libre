@@ -68,18 +68,18 @@ export class TTSService {
 
   async speak(text: string, language: string = 'fr-FR'): Promise<void> {
     try {
-      // On mobile devices, prefer browser TTS for better compatibility
-      if (this.isMobile) {
-        await this.speakWithBrowserTTS(text, language)
-        return
-      }
-
-      // On desktop, try Google Cloud TTS first, then fallback to browser
+      // Try Google Cloud TTS first on all devices for best quality
       await this.speakWithGoogleTTS(text, language)
     } catch (error) {
-      console.error('TTS service error:', error)
-      // Final fallback to browser TTS
-      await this.speakWithBrowserTTS(text, language)
+      console.error('Google Cloud TTS failed, falling back to browser TTS:', error)
+      // Fallback to browser TTS if Google Cloud TTS fails
+      try {
+        await this.speakWithBrowserTTS(text, language)
+      } catch (browserError) {
+        console.error('Browser TTS also failed:', browserError)
+        // At this point, we've exhausted all options
+        throw new Error('All TTS methods failed')
+      }
     }
   }
 
@@ -92,10 +92,18 @@ export class TTSService {
         return
       }
 
-      // Call Supabase Edge Function
-      const { data, error } = await supabase.functions.invoke('tts', {
-        body: { text, language }
-      })
+      // Add timeout for mobile devices to handle slower network conditions
+      const timeout = this.isMobile ? 15000 : 10000 // 15s for mobile, 10s for desktop
+      
+      // Call Supabase Edge Function with timeout
+      const { data, error } = await Promise.race([
+        supabase.functions.invoke('tts', {
+          body: { text, language }
+        }),
+        new Promise<never>((_, reject) => 
+          setTimeout(() => reject(new Error('TTS request timeout')), timeout)
+        )
+      ])
 
       if (error) {
         throw new Error('Google TTS API error: ' + error.message)
@@ -208,13 +216,30 @@ export class TTSService {
       
       const audio = new Audio(audioUrl)
       
-      // Handle mobile audio playback
+      // Handle mobile audio playback with better error handling
       if (this.isMobile) {
         // On mobile, we need to handle user interaction requirements
         audio.play().catch(error => {
           console.error('Mobile audio playback failed:', error)
-          // Fallback to browser TTS
-          this.speakWithBrowserTTS('', 'fr-FR')
+          // Try to resume audio context if available
+          if (typeof window !== 'undefined' && 'AudioContext' in window) {
+            const audioContext = new (window as typeof window & { AudioContext: typeof AudioContext }).AudioContext()
+            if (audioContext.state === 'suspended') {
+              audioContext.resume().then(() => {
+                audio.play().catch(retryError => {
+                  console.error('Mobile audio retry failed:', retryError)
+                  // Final fallback to browser TTS
+                  this.speakWithBrowserTTS('', 'fr-FR')
+                })
+              })
+            } else {
+              // Fallback to browser TTS
+              this.speakWithBrowserTTS('', 'fr-FR')
+            }
+          } else {
+            // Fallback to browser TTS
+            this.speakWithBrowserTTS('', 'fr-FR')
+          }
         })
       } else {
         audio.play()

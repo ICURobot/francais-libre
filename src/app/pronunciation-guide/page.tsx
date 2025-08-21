@@ -294,7 +294,10 @@ export default function PronunciationGuidePage() {
           
           <div className="text-center">
             <p className="text-sm text-gray-500">
-              💡 <strong>Mobile Users:</strong> If audio doesn't work, try tapping the screen first or refreshing the page.
+              💡 <strong>All Devices:</strong> Uses Google Cloud TTS for best pronunciation quality, with browser TTS as fallback.
+            </p>
+            <p className="text-sm text-gray-500 mt-2">
+              📱 <strong>Mobile Users:</strong> If audio doesn't work, try tapping the screen first or refreshing the page.
             </p>
           </div>
         </div>
