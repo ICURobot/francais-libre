@@ -171,6 +171,10 @@ async function uploadToSupabase(text: string, audioData: string, fileName: strin
     console.log(`🔗 Public URL: ${publicUrl}`)
 
     // Then store reference in database
+    if (!SUPABASE_KEY) {
+      throw new Error('SUPABASE_KEY is required')
+    }
+    
     const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/audio_pronunciations`, {
       method: 'POST',
       headers: {

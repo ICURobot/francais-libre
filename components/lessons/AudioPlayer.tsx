@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { ttsService } from '../../lib/services/ttsService'
+import { audioService } from '../../lib/services/audioService'
 
 // Define the props interface for the AudioPlayer component for type safety.
 interface AudioPlayerProps {
@@ -41,10 +41,15 @@ export const AudioPlayer = ({
     setError(null);
 
     try {
-      // Call the speak method from our ttsService.
-      await ttsService.speak(text, 'fr-FR');
-      // Set isPlaying to false when speech ends (we'll use a timeout as fallback)
-      setTimeout(() => setIsPlaying(false), 3000);
+      // Call the new audioService which will check for stored ElevenLabs audio first
+      const success = await audioService.playAudio(text, { fallbackToTTS: true });
+      if (success) {
+        // Set isPlaying to false when speech ends (we'll use a timeout as fallback)
+        setTimeout(() => setIsPlaying(false), 3000);
+      } else {
+        setError('Audio playback failed');
+        setIsPlaying(false);
+      }
     } catch (err: unknown) {
       console.error("Playback initiation failed:", err);
       setError('Audio playback failed');

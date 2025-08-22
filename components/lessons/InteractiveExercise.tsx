@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react'
 import { Exercise } from '../../lib/lessons/lessonTypes'
-import { ttsService } from '../../lib/services/ttsService'
+import { audioService } from '../../lib/services/audioService'
 
 interface InteractiveExerciseProps {
   exercise: Exercise
@@ -64,7 +64,7 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
   const handleSpeak = useCallback(async (text: string) => {
     setIsLoading(true)
     try {
-      await ttsService.speak(text)
+      await audioService.playAudio(text, { fallbackToTTS: true })
     } catch (error) {
       console.error('TTS error:', error)
     } finally {

@@ -34,6 +34,10 @@ async function testDatabase() {
   console.log('\n📊 Testing database connection...')
   
   try {
+    if (!SUPABASE_KEY) {
+      throw new Error('SUPABASE_KEY is required')
+    }
+    
     const response = await fetch(`${SUPABASE_URL}/rest/v1/audio_pronunciations?select=count`, {
       headers: {
         'Authorization': `Bearer ${SUPABASE_KEY}`,
@@ -57,6 +61,10 @@ async function testStorage() {
   console.log('\n📁 Testing storage access...')
   
   try {
+    if (!SUPABASE_KEY) {
+      throw new Error('SUPABASE_KEY is required')
+    }
+    
     const response = await fetch(`${SUPABASE_URL}/storage/v1/bucket/audio`, {
       headers: {
         'Authorization': `Bearer ${SUPABASE_KEY}`,
@@ -80,6 +88,10 @@ async function testRLS() {
   console.log('\n🔐 Testing RLS policies...')
   
   try {
+    if (!SUPABASE_KEY) {
+      throw new Error('SUPABASE_KEY is required')
+    }
+    
     // Try to insert a test record
     const response = await fetch(`${SUPABASE_URL}/rest/v1/audio_pronunciations`, {
       method: 'POST',

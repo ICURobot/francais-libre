@@ -6,7 +6,7 @@ import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
 import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
 import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { ttsService } from '../../../../../lib/services/ttsService'
+import { audioService } from '../../../../../lib/services/audioService'
 
 export default function BeginnerLesson6Page() {
   const [completedExercises, setCompletedExercises] = useState<string[]>([])
@@ -172,7 +172,7 @@ export default function BeginnerLesson6Page() {
                     {item.category}
                   </span>
                   <button 
-                    onClick={() => ttsService.speak(item.word, 'fr-FR')}
+                    onClick={() => audioService.playAudio(item.word)}
                     className="text-orange-600 hover:text-orange-700 transition-colors"
                     title="Listen to pronunciation"
                   >
