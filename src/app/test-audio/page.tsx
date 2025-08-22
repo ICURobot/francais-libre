@@ -58,7 +58,7 @@ export default function TestAudioPage() {
         results.storageInfo = storageInfo
         console.log(`Files: ${storageInfo.fileCount}, Size: ${storageInfo.totalSizeMB} MB`)
       } catch (error) {
-        results.storageInfo = { error: error }
+        results.storageInfo = { error: { message: String(error) } }
         console.log(`Storage info: ❌ ${error}`)
       }
 
@@ -69,7 +69,7 @@ export default function TestAudioPage() {
         results.usageInfo = usageInfo
         console.log(`Usage info: ✅ Available`)
       } catch (error) {
-        results.usageInfo = { error: error }
+        results.usageInfo = { error: { message: String(error) } }
         console.log(`Usage info: ❌ ${error}`)
       }
 
