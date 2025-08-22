@@ -6,7 +6,7 @@ import InteractiveExercise from '../../../../../components/lessons/InteractiveEx
 import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
 import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
 import Link from 'next/link'
-import { ttsService } from '../../../../../lib/services/ttsService'
+import { audioService } from '../../../../../lib/services/audioService'
 
 export default function Lesson1Page() {
   // State for exercise progress
@@ -183,7 +183,7 @@ export default function Lesson1Page() {
                   <div className="flex items-center justify-between mb-2">
                     <div className="font-semibold text-black">{example.french}</div>
                     <button
-                      onClick={() => ttsService.speak(example.french, 'fr-FR')}
+                      onClick={() => audioService.playAudio(example.french)}
                       className="text-blue-600 hover:text-blue-700 transition-colors p-1 ml-2"
                       title="Listen to pronunciation"
                     >
@@ -212,7 +212,7 @@ export default function Lesson1Page() {
                     <div className="text-lg text-black">{conj.form}</div>
                     <div className="text-sm text-gray-700">{conj.pronunciation}</div>
                     <button
-                      onClick={() => ttsService.speak(conj.form, 'fr-FR')}
+                      onClick={() => audioService.playAudio(conj.form)}
                       className="text-green-600 hover:text-green-700 transition-colors p-1 mt-2"
                       title="Listen to pronunciation"
                     >
@@ -237,13 +237,13 @@ export default function Lesson1Page() {
                   <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">
                     {word.category}
                   </span>
-                  <button
-                    onClick={() => ttsService.speak(word.word, 'fr-FR')}
-                    className="text-green-600 hover:text-green-700 transition-colors"
-                    title="Listen to pronunciation"
-                  >
-                    🔊
-                  </button>
+                                      <button
+                      onClick={() => audioService.playAudio(word.word)}
+                      className="text-green-600 hover:text-green-700 transition-colors"
+                      title="Listen to pronunciation"
+                    >
+                      🔊
+                    </button>
                 </div>
                 
                 <h3 className="text-xl font-bold text-black mb-2">{word.word}</h3>
@@ -254,7 +254,7 @@ export default function Lesson1Page() {
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm text-gray-700">{word.example_sentence}</p>
                     <button
-                      onClick={() => ttsService.speak(word.example_sentence, 'fr-FR')}
+                      onClick={() => audioService.playAudio(word.example_sentence)}
                       className="text-green-600 hover:text-green-700 transition-colors ml-2"
                       title="Listen to example sentence"
                     >
