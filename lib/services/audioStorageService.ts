@@ -60,7 +60,7 @@ export class AudioStorageService {
       const audioBlob = await this.base64ToBlob(request.audioData, 'audio/mpeg')
       
       // Upload to Supabase Storage
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from(this.bucketName)
         .upload(request.fileName, audioBlob, {
           contentType: 'audio/mpeg',
@@ -126,7 +126,7 @@ export class AudioStorageService {
           audioData: audioResponse.audioUrl,
           voiceId: voiceInfo.voiceId,
           voiceName: voiceInfo.voiceName,
-          category: category as any,
+          category: category as 'vocabulary' | 'dialogue' | 'pronunciation',
           lessonId: lessonId,
           fileName: audioResponse.fileName
         }
@@ -268,7 +268,7 @@ export class AudioStorageService {
   // Test the storage connection
   async testConnection(): Promise<boolean> {
     try {
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from(this.bucketName)
         .list('', { limit: 1 })
 
@@ -286,7 +286,7 @@ export class AudioStorageService {
   }
 
   // Get storage usage information
-  async getStorageInfo(): Promise<any> {
+  async getStorageInfo(): Promise<{ fileCount: number; totalSizeBytes: number; totalSizeMB: number }> {
     try {
       const { data, error } = await supabase.storage
         .from(this.bucketName)

@@ -114,7 +114,7 @@ export class AudioService {
     try {
       // Try to resume audio context if available
       if (typeof window !== 'undefined' && 'AudioContext' in window) {
-        const audioContext = new (window as any).AudioContext()
+        const audioContext = new (window as unknown as { AudioContext: typeof AudioContext }).AudioContext()
         if (audioContext.state === 'suspended') {
           console.log('🔧 Resuming suspended audio context...')
           await audioContext.resume()
@@ -178,7 +178,7 @@ export class AudioService {
   }
 
   // Select appropriate voice based on preference
-  private selectVoice(preference?: 'female' | 'male' | 'auto'): any {
+  private selectVoice(preference?: 'female' | 'male' | 'auto'): { id: string; name: string; category: string } | undefined {
     const voices = elevenLabsService.getVoices()
     
     switch (preference) {

@@ -240,7 +240,7 @@ export class ElevenLabsService {
   }
 
   // Get API usage information
-  async getUsageInfo(): Promise<any> {
+  async getUsageInfo(): Promise<{ character_count: number; character_limit: number; can_extend_character_limit: boolean; allowed_to_extend: boolean; next_character_count_reset_unix: number; voice_limit: number; professional_voice_limit: number; can_extend_voice_limit: boolean; can_use_instant_voice_cloning: boolean; can_use_professional_voice_cloning: boolean; currency: string; status: string }> {
     try {
       if (!this.apiKey) {
         throw new Error('ElevenLabs API key not configured')

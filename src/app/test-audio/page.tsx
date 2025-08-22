@@ -6,8 +6,15 @@ import { elevenLabsService } from '../../../lib/services/elevenLabsService'
 import { audioStorageService } from '../../../lib/services/audioStorageService'
 
 export default function TestAudioPage() {
-  const [testResults, setTestResults] = useState<any>({})
-  const [isLoading, setIsLoading] = useState(false)
+  const [testResults, setTestResults] = useState<{
+    elevenLabs?: boolean;
+    storage?: boolean;
+    audioService?: boolean;
+    voices?: Array<{ id: string; name: string; category: string }>;
+    storageInfo?: { fileCount: number; totalSizeMB: number } | { error: { message: string } };
+    usageInfo?: { character_count: number; character_limit: number } | { error: { message: string } };
+  }>({})
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [testText, setTestText] = useState('Bonjour Excusezmoi cette place estelle libre Mylene')
 
   const runTests = async () => {
