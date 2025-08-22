@@ -19,7 +19,15 @@ export default function TestAudioPage() {
 
   const runTests = async () => {
     setIsLoading(true)
-    const results: any = {}
+    const results: {
+      elevenLabs?: boolean;
+      storage?: boolean;
+      audioService?: boolean;
+      voices?: Array<{ id: string; name: string; category: string }>;
+      storageInfo?: { fileCount: number; totalSizeMB: number } | { error: { message: string } };
+      usageInfo?: { character_count: number; character_limit: number } | { error: { message: string } };
+      error?: unknown;
+    } = {}
 
     try {
       // Test 1: ElevenLabs Connection
