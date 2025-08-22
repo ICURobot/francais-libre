@@ -19,6 +19,13 @@ interface AudioFileInfo {
   lessonId?: string
 }
 
+interface ParsedFileInfo {
+  text: string
+  voiceId: string
+  voiceName: string
+  category: 'vocabulary' | 'dialogue' | 'pronunciation'
+}
+
 class ExistingAudioUploader {
   private audioFiles: AudioFileInfo[] = []
   private backupDir: string
@@ -43,7 +50,10 @@ class ExistingAudioUploader {
           this.audioFiles.push({
             fileName,
             filePath: join(this.backupDir, fileName),
-            ...info
+            text: info.text,
+            voiceId: info.voiceId,
+            voiceName: info.voiceName,
+            category: info.category
           })
         }
       })
@@ -56,7 +66,7 @@ class ExistingAudioUploader {
   }
 
   // Parse filename to extract text, voice, and category
-  private parseFileName(fileName: string): AudioFileInfo | null {
+  private parseFileName(fileName: string): ParsedFileInfo | null {
     try {
       // Remove .mp3 extension
       const nameWithoutExt = fileName.replace('.mp3', '')
