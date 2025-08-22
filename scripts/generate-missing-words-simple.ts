@@ -90,6 +90,10 @@ if (!existsSync(backupDir)) {
 
 async function generateAudioWithElevenLabs(text: string): Promise<{ success: boolean; audioData?: string; fileName?: string; error?: string }> {
   try {
+    if (!ELEVENLABS_API_KEY) {
+      return { success: false, error: 'ElevenLabs API key not configured' }
+    }
+
     console.log(`🎵 Generating audio for: "${text}"`)
     
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${MYLENE_VOICE_ID}`, {

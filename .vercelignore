@@ -1,3 +1,11 @@
 # Exclude Supabase Edge Functions from Vercel build
 supabase/functions/
 supabase/functions/**/*
+
+# Exclude scripts from Vercel build (they're for local development only)
+scripts/
+scripts/**/*
+
+# Exclude audio backup files (large files, not needed for deployment)
+audio-backup/
+audio-backup/**/*
