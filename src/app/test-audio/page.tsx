@@ -177,7 +177,7 @@ export default function TestAudioPage() {
               {testResults.storageInfo && (
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <h4 className="font-semibold text-gray-700 mb-2">Storage Information</h4>
-                  {testResults.storageInfo.error ? (
+                  {'error' in testResults.storageInfo ? (
                     <span className="text-red-600">❌ {testResults.storageInfo.error.message}</span>
                   ) : (
                     <div className="text-sm text-gray-600">
@@ -191,7 +191,7 @@ export default function TestAudioPage() {
               {testResults.usageInfo && (
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <h4 className="font-semibold text-gray-700 mb-2">ElevenLabs Usage</h4>
-                  {testResults.usageInfo.error ? (
+                  {'error' in testResults.usageInfo ? (
                     <span className="text-red-600">❌ {testResults.usageInfo.error.message}</span>
                   ) : (
                     <span className="text-green-600">✅ Usage info available</span>
