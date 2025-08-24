@@ -390,7 +390,7 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-1-5',
         type: 'fill_blank',
-        question: 'Respond politely: "Merci beaucoup!" - "_____ _____!"',
+        question: 'Respond politely: "Merci beaucoup!" - "_____!"',
         correct_answer: ['De rien', 'Je vous en prie'],
         explanation: '"De rien" (don\'t mention it) or "Je vous en prie" (formal: you\'re welcome) are correct responses.',
         hints: ['Think of polite ways to respond to thanks']
