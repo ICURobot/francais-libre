@@ -117,6 +117,7 @@ export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
                   <AudioPlayer 
                     text={exchange.french}
                     showText={false}
+                    speaker={exchange.speaker}
                   />
                 </div>
                 

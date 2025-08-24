@@ -183,13 +183,15 @@ export class AudioService {
     
     switch (preference) {
       case 'female':
+        // For female preference, we need to determine which female voice to use
+        // This will be handled by the calling code based on speaker
         return voices.find(v => v.category === 'female')
       case 'male':
         return voices.find(v => v.category === 'male')
       case 'auto':
       default:
-        // Default to female voice (Mylène)
-        return voices.find(v => v.category === 'female') || voices[0]
+        // Default to first female voice (Mylène)
+        return voices.find(v => v.name === 'Mylène French') || voices.find(v => v.category === 'female') || voices[0]
     }
   }
 

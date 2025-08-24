@@ -42,6 +42,12 @@ export class ElevenLabsService {
       category: 'female'
     },
     {
+      id: 'F1toM6PcP54s45kOOAyV',
+      name: 'Marie French',
+      description: 'Second female voice for Marie character',
+      category: 'female'
+    },
+    {
       id: 'qNc8cbRJLnPqGTjuVcKa',
       name: 'André',
       description: 'Narration, French, Conversational, Young, Male',
