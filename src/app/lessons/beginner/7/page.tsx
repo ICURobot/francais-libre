@@ -61,7 +61,7 @@ export default function BeginnerLesson7Page() {
           <p className="text-blue-100 text-lg leading-relaxed">
             Get ready to explore French cities with confidence! This lesson will transform you from a confused tourist 
             to a savvy navigator who can ask for directions, use public transportation, and find your way around 
-            using essential French vocabulary and expressions. You'll learn how French people give directions and 
+            using essential French vocabulary and expressions. You&apos;ll learn how French people give directions and 
             navigate their beautiful cities!
           </p>
         </div>

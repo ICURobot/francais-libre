@@ -71,7 +71,7 @@ export const AudioPlayer = ({
       setError('Audio playback failed');
       setIsPlaying(false);
     }
-  }, [isSupported, text]);
+  }, [isSupported, text, speaker]);
 
   // useEffect hook runs after the component mounts.
   useEffect(() => {
