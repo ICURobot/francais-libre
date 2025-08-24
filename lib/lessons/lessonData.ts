@@ -1971,7 +1971,7 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-4-5',
         type: 'fill_blank',
-        question: 'Complete: "Il est deux heures __ ____." (It is 2:30)',
+        question: 'Complete: "Il est deux heures _____." (It is 2:30)',
         correct_answer: ['et demie'],
         explanation: '"Et demie" means "and a half" for 30 minutes past the hour.',
         hints: ['For 30 minutes, use "et demie" (and a half)']
@@ -2488,7 +2488,7 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-5-2',
         type: 'fill_blank',
-        question: 'Complete: "J\'achète ____ pommes." (I\'m buying some apples)',
+        question: 'Complete: "J\'achète _____ pommes." (I\'m buying some apples)',
         correct_answer: ['des'],
         explanation: 'For plural indefinite quantities, use "des" (some). "Des pommes" = "some apples".',
         hints: ['For "some" + plural noun, use "des"']
@@ -2522,7 +2522,7 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-5-6',
         type: 'fill_blank',
-        question: 'Complete: "Je voudrais ___ salade verte." (I would like a green salad)',
+        question: 'Complete: "Je voudrais _____ salade verte." (I would like a green salad)',
         correct_answer: ['une'],
         explanation: '"Salade" is feminine, so use "une". "Une salade verte" = "a green salad".',
         hints: ['Salade is feminine - use the feminine indefinite article']
