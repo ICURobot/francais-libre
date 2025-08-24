@@ -119,7 +119,7 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
                       value={userAnswer}
                       onChange={(e) => setUserAnswer(e.target.value)}
                       placeholder="Type your answer..."
-                      className="mx-2 px-3 py-2 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-medium text-center min-w-[120px]"
+                      className="mx-2 px-3 py-2 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-medium text-center min-w-[120px] text-black"
                       disabled={isSubmitted}
                     />
                   )}
@@ -138,7 +138,7 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               placeholder="Type your French translation..."
-              className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-medium"
+              className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-medium text-black"
               disabled={isSubmitted}
             />
           </div>
