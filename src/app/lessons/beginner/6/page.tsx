@@ -96,31 +96,38 @@ export default function BeginnerLesson6Page() {
             {lesson.grammar.explanation}
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Key Patterns</h3>
-              <ul className="space-y-3">
-                {lesson.grammar.patterns.map((pattern, index) => (
-                  <li key={index} className="flex items-start space-x-3">
-                    <span className="text-orange-500 font-bold">•</span>
-                    <span className="text-gray-700">{pattern}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Examples</h3>
-              <div className="space-y-4">
-                {lesson.grammar.examples.map((example, index) => (
-                  <div key={index} className="bg-orange-50 p-4 rounded-lg">
-                    <p className="text-black font-semibold mb-2">{example.french}</p>
-                    <p className="text-gray-600 mb-2">{example.english}</p>
-                    <p className="text-orange-600 text-sm">
-                      Key: <span className="font-semibold">{example.highlight}</span>
-                    </p>
+          <div className="mb-6">
+            <h4 className="text-lg font-semibold text-gray-800 mb-3">Key Patterns:</h4>
+            <ul className="space-y-2">
+              {lesson.grammar.patterns.map((pattern, index) => (
+                <li key={index} className="text-gray-700 bg-gray-50 p-3 rounded-lg transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
+                  {pattern}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mb-6">
+            <h4 className="text-lg font-semibold text-gray-800 mb-3">Examples:</h4>
+            <div className="space-y-3">
+              {lesson.grammar.examples.map((example, index) => (
+                <div key={index} className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500 transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="font-semibold text-black">{example.french}</div>
+                    <button 
+                      onClick={() => audioService.playAudio(example.french)}
+                      className="text-orange-600 hover:text-orange-700 transition-colors p-1 ml-2"
+                      title="Listen to pronunciation"
+                    >
+                      🔊
+                    </button>
                   </div>
-                ))}
-              </div>
+                  <div className="text-gray-600">{example.english}</div>
+                  <div className="text-sm text-orange-700 mt-1">
+                    Key pattern: <span className="font-bold">{example.highlight}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
