@@ -192,7 +192,16 @@ export default function BeginnerLesson6Page() {
                 <p className="text-sm text-gray-500 font-mono mb-3">{item.pronunciation}</p>
                 
                 <div className="border-t border-orange-200 pt-3">
-                  <p className="text-sm text-gray-700 mb-2">{item.example_sentence}</p>
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm text-gray-700">{item.example_sentence}</p>
+                    <button 
+                      onClick={() => audioService.playAudio(item.example_sentence)}
+                      className="text-orange-600 hover:text-orange-700 transition-colors p-1 ml-2"
+                      title="Listen to example sentence"
+                    >
+                      🔊
+                    </button>
+                  </div>
                   <p className="text-xs text-gray-500">{item.example_translation}</p>
                 </div>
               </div>
