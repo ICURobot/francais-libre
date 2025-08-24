@@ -3711,7 +3711,7 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-7-2',
         type: 'fill_blank',
-        question: 'Complete: "La banque est __ ____ __ la poste." (The bank is next to the post office)',
+        question: 'Complete: "La banque est _____ la poste." (The bank is next to the post office)',
         correct_answer: ['à côté de'],
         explanation: '"À côté de" means "next to" or "beside" - important preposition for describing location.',
         hints: ['This preposition means "next to" or "beside"']
@@ -3745,10 +3745,10 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-7-6',
         type: 'fill_blank',
-        question: 'Complete: "C\'est __ dix minutes __ ____." (It\'s a 10-minute walk)',
-        correct_answer: ['à dix minutes à pied', 'à', 'pied'],
-        explanation: '"C\'est à dix minutes à pied" expresses walking distance in French.',
-        hints: ['Use "à ... minutes à pied" for walking time']
+        question: 'Complete: "C\'est _____ dix minutes à pied." (It\'s a 10-minute walk)',
+        correct_answer: ['à'],
+        explanation: '"C\'est à dix minutes à pied" expresses walking distance in French. The preposition "à" is used to indicate time/distance.',
+        hints: ['Use the preposition "à" to indicate time or distance']
       },
       {
         id: 'ex-7-7',
