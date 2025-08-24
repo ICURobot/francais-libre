@@ -242,16 +242,24 @@ export default function BeginnerLesson7Page() {
         <div className="flex justify-between items-center mb-8">
           <Link 
             href="/lessons/beginner/6" 
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center space-x-2"
+            className="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition flex items-center space-x-2"
           >
             ← Previous Lesson
           </Link>
-          <Link 
-            href="/lessons" 
-            className="text-blue-600 hover:text-blue-700 font-medium"
-          >
-            Back to Lessons
-          </Link>
+          <div className="flex space-x-4">
+            <Link 
+              href="/lessons" 
+              className="text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Back to Lessons
+            </Link>
+            <Link 
+              href="/lessons/beginner/8" 
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center space-x-2"
+            >
+              Next Lesson →
+            </Link>
+          </div>
         </div>
       </div>
     </div>
