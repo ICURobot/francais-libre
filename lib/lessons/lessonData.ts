@@ -4412,6 +4412,7 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-9-2',
         type: 'conjugation',
+        question: 'Conjugate the verb "regarder" (to watch) in all persons:',
         verb: 'regarder',
         translations: {
           'je': 'I watch',
@@ -4421,12 +4422,14 @@ export const beginnerLessons: BeginnerLesson[] = [
           'vous': 'you watch (formal/plural)',
           'ils/elles': 'they watch'
         },
+        correct_answer: ['regarde', 'regardes', 'regarde', 'regardons', 'regardez', 'regardent'],
         explanation: 'Regarder follows the regular -er verb pattern: remove -er, add endings.',
         hints: ['Remove -er from regarder', 'Add: -e, -es, -e, -ons, -ez, -ent']
       },
       {
         id: 'ex-9-3',
         type: 'conjugation',
+        question: 'Conjugate the verb "écouter" (to listen) in all persons:',
         verb: 'écouter',
         translations: {
           'je': 'I listen',
@@ -4436,12 +4439,14 @@ export const beginnerLessons: BeginnerLesson[] = [
           'vous': 'you listen (formal/plural)',
           'ils/elles': 'they listen'
         },
+        correct_answer: ['écoute', 'écoutes', 'écoute', 'écoutons', 'écoutez', 'écoutent'],
         explanation: 'Écouter follows the same -er pattern as regarder.',
         hints: ['Remove -er from écouter', 'Add: -e, -es, -e, -ons, -ez, -ent']
       },
       {
         id: 'ex-9-4',
         type: 'conjugation',
+        question: 'Conjugate the verb "danser" (to dance) in all persons:',
         verb: 'danser',
         translations: {
           'je': 'I dance',
@@ -4451,12 +4456,14 @@ export const beginnerLessons: BeginnerLesson[] = [
           'vous': 'you dance (formal/plural)',
           'ils/elles': 'they dance'
         },
+        correct_answer: ['danse', 'danses', 'danse', 'dansons', 'dansez', 'dansent'],
         explanation: 'Danser follows the regular -er verb pattern.',
         hints: ['Remove -er from danser', 'Add: -e, -es, -e, -ons, -ez, -ent']
       },
       {
         id: 'ex-9-5',
         type: 'conjugation',
+        question: 'Conjugate the verb "jouer" (to play) in all persons:',
         verb: 'jouer',
         translations: {
           'je': 'I play',
@@ -4466,12 +4473,14 @@ export const beginnerLessons: BeginnerLesson[] = [
           'vous': 'you play (formal/plural)',
           'ils/elles': 'they play'
         },
+        correct_answer: ['joue', 'joues', 'joue', 'jouons', 'jouez', 'jouent'],
         explanation: 'Jouer follows the regular -er verb pattern.',
         hints: ['Remove -er from jouer', 'Add: -e, -es, -e, -ons, -ez, -ent']
       },
       {
         id: 'ex-9-6',
         type: 'conjugation',
+        question: 'Conjugate the verb "préférer" (to prefer) in all persons:',
         verb: 'préférer',
         translations: {
           'je': 'I prefer',
@@ -4481,6 +4490,7 @@ export const beginnerLessons: BeginnerLesson[] = [
           'vous': 'you prefer (formal/plural)',
           'ils/elles': 'they prefer'
         },
+        correct_answer: ['préfère', 'préfères', 'préfère', 'préférons', 'préférez', 'préfèrent'],
         explanation: 'Préférer follows the regular -er verb pattern.',
         hints: ['Remove -er from préférer', 'Add: -e, -es, -e, -ons, -ez, -ent']
       },
@@ -4510,6 +4520,7 @@ export const beginnerLessons: BeginnerLesson[] = [
             translation: 'We don\'t play tennis'
           }
         ],
+        correct_answer: ['Je ne regarde pas la télé le soir', 'Tu ne danses pas très bien', 'Elle n\'écoute pas de la musique', 'Nous ne jouons pas au tennis'],
         explanation: 'Remember: ne before the verb, pas after. Use contractions (n\') before vowels and silent h.',
         hints: ['ne comes before the verb', 'pas comes after the verb', 'Use n\' before vowels']
       },
@@ -4534,6 +4545,7 @@ export const beginnerLessons: BeginnerLesson[] = [
             translation: 'We don\'t listen to classical music.'
           }
         ],
+        correct_answer: ['ne', 'pas', 'ne', 'pas', 'ne', 'pas'],
         explanation: 'Fill in the negation words: ne before the verb, pas after.',
         hints: ['ne goes before the verb', 'pas goes after the verb']
       },
@@ -4558,6 +4570,7 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-9-11',
         type: 'vocabulary_match',
+        question: 'Match the French words with their English meanings:',
         pairs: [
           { french: 'regarder', english: 'to watch' },
           { french: 'la musique', english: 'music' },
@@ -4565,6 +4578,7 @@ export const beginnerLessons: BeginnerLesson[] = [
           { french: 'le musée', english: 'museum' },
           { french: 'préférer', english: 'to prefer' }
         ],
+        correct_answer: ['regarder-to watch', 'la musique-music', 'nager-to swim', 'le musée-museum', 'préférer-to prefer'],
         explanation: 'Match the French words with their English meanings.',
         hints: ['Look for cognates (similar words)', 'Remember the -er ending means "to" for verbs']
       }
