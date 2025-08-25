@@ -4248,6 +4248,14 @@ export const beginnerLessons: BeginnerLesson[] = [
           english: 'He lives → He doesn\'t live',
           highlight: 'n\'...pas'
         }
+      ],
+      conjugation_table: [
+        { pronoun: 'je', form: 'regarde', pronunciation: 'zhuh ruh-GARD' },
+        { pronoun: 'tu', form: 'regardes', pronunciation: 'too ruh-GARD' },
+        { pronoun: 'il/elle', form: 'regarde', pronunciation: 'eel/ell ruh-GARD' },
+        { pronoun: 'nous', form: 'regardons', pronunciation: 'noo ruh-gar-DOHN' },
+        { pronoun: 'vous', form: 'regardez', pronunciation: 'voo ruh-gar-DAY' },
+        { pronoun: 'ils/elles', form: 'regardent', pronunciation: 'eel/ell ruh-GARD' }
       ]
     },
 

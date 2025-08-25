@@ -146,6 +146,24 @@ export default function Lesson9Page() {
                 </div>
               ))}
             </div>
+            
+            {/* Conjugation Table */}
+            {lesson.grammar.conjugation_table && (
+              <div className="mt-8">
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">Conjugation Table - Regular -er Verbs</h4>
+                <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {lesson.grammar.conjugation_table.map((conj, index) => (
+                      <div key={index} className="bg-white rounded-lg p-4 border border-purple-200 text-center hover:shadow-md transition-shadow">
+                        <div className="text-sm font-medium text-purple-600 mb-1">{conj.pronoun}</div>
+                        <div className="text-lg font-bold text-gray-900 mb-1">{conj.form}</div>
+                        <div className="text-xs text-gray-500 font-mono">{conj.pronunciation}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
