@@ -331,11 +331,16 @@ export default function Lesson8Page() {
             ← Previous Lesson
           </Link>
           
+          <div className="text-center">
+            <p className="text-gray-600">Lesson 8 of 9</p>
+            <p className="text-sm text-gray-500">Regular -er Verbs and Family</p>
+          </div>
+          
           <Link
-            href="/lessons"
+            href="/lessons/beginner/9"
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
           >
-            Back to Lessons
+            Next Lesson →
           </Link>
         </div>
       </div>

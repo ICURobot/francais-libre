@@ -43,15 +43,31 @@ export interface DialogueExchange {
   }
   
   export interface Exercise {
-    id: string;
-    type: 'multiple_choice' | 'fill_blank' | 'translation' | 'matching' | 'speaking';
-    question: string;
-    options?: string[];
-    correct_answer: string | string[];
-    explanation: string;
-    hints?: string[];
-    audio_prompt?: string;
-  }
+  id: string;
+  type: 'multiple_choice' | 'fill_blank' | 'translation' | 'matching' | 'speaking' | 'conjugation' | 'negation_transformation' | 'fill_blank_negation' | 'vocabulary_match';
+  question: string;
+  options?: string[];
+  correct_answer: string | string[];
+  explanation: string;
+  hints?: string[];
+  audio_prompt?: string;
+  verb?: string;
+  translations?: Record<string, string>;
+  exercises?: Array<{
+    positive: string;
+    negative: string;
+    translation: string;
+  }>;
+  sentences?: Array<{
+    sentence: string;
+    blanks: string[];
+    translation: string;
+  }>;
+  pairs?: Array<{
+    french: string;
+    english: string;
+  }>;
+}
   
   export interface BeginnerLesson {
     id: string;
