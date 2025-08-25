@@ -43,14 +43,14 @@ export default function BeginnerLesson6Page() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-red-100 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-red-100 py-16">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-6">
             🍽️ {lesson.title}
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
             {lesson.subtitle}
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function BeginnerLesson6Page() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
             📚 {lesson.grammar.topic}
           </h2>
-          <p className="text-gray-700 mb-8 text-lg leading-relaxed">
+          <p className="text-gray-700 mb-12 text-lg leading-relaxed">
             {lesson.grammar.explanation}
           </p>
 
@@ -222,7 +222,7 @@ export default function BeginnerLesson6Page() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
             🧪 Practice Exercises
           </h2>
-          <p className="text-gray-600 text-center mb-8">
+          <p className="text-gray-600 text-center mb-12">
             Test your restaurant French knowledge with these interactive exercises
           </p>
           
@@ -239,7 +239,7 @@ export default function BeginnerLesson6Page() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-12">
           <Link 
             href="/lessons/beginner/5" 
             className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition flex items-center space-x-2"

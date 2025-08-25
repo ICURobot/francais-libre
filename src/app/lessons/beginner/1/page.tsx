@@ -32,11 +32,11 @@ export default function Lesson1Page() {
   
   if (!lesson || !lesson.dialogue) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-8">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Lesson Not Found</h1>
-          <p className="text-xl text-gray-600">This lesson could not be loaded.</p>
-          <Link href="/lessons" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition mt-4 inline-block">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">Lesson Not Found</h1>
+          <p className="text-2xl text-gray-700 mb-8">This lesson could not be loaded.</p>
+          <Link href="/lessons" className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-[20px] hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-semibold text-lg shadow-[0_8px_32px_rgba(59,130,246,0.3)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.4)] hover:scale-105 inline-block">
             ← Back to Lessons
           </Link>
         </div>
@@ -47,20 +47,26 @@ export default function Lesson1Page() {
   const { dialogue } = lesson
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-8">
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 relative overflow-hidden">
+      {/* Soft background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-48 h-48 bg-blue-200/10 rounded-[48px] blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-indigo-200/10 rounded-[40px] blur-3xl"></div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">
             {lesson.title}
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-2xl text-gray-700">
             {lesson.subtitle}
           </p>
         </div>
 
         {/* Welcome Introduction */}
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 mb-6 border border-blue-200">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.1),0_16px_48px_rgba(0,0,0,0.1)] p-8 mb-8 border border-blue-200/50">
           <div className="text-center mb-6">
             <div className="text-4xl mb-4">🇫🇷</div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -90,9 +96,9 @@ export default function Lesson1Page() {
         </div>
 
         {/* Learning Objectives */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-200 transform hover:scale-[1.005] hover:shadow-xl transition-all duration-300">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-            <span className="text-blue-600 mr-3">🎯</span>
+        <div className="bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_16px_48px_rgba(0,0,0,0.1)] p-8 mb-8 border border-white/40 transform hover:scale-[1.02] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300">
+          <h3 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+            <span className="text-blue-600 mr-4 text-2xl">🎯</span>
             Learning Objectives
           </h3>
           <ul className="space-y-3">

@@ -30,7 +30,7 @@ export default function BeginnerLesson7Page() {
 
   if (!lesson) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-blue-600 mb-4">Lesson Not Found</h1>
           <p className="text-gray-600 mb-6">The requested lesson could not be found.</p>
@@ -43,14 +43,14 @@ export default function BeginnerLesson7Page() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden py-16">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-6">
             🗺️ {lesson.title}
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
             {lesson.subtitle}
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function BeginnerLesson7Page() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
             📚 {lesson.grammar.topic}
           </h2>
-          <p className="text-gray-700 mb-8 text-lg leading-relaxed">
+          <p className="text-gray-700 mb-12 text-lg leading-relaxed">
             {lesson.grammar.explanation}
           </p>
 
@@ -173,7 +173,7 @@ export default function BeginnerLesson7Page() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {lesson.vocabulary.map((item, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
+              <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
                     {item.category}
@@ -222,7 +222,7 @@ export default function BeginnerLesson7Page() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
             🧪 Practice Exercises
           </h2>
-          <p className="text-gray-600 text-center mb-8">
+          <p className="text-gray-600 text-center mb-12">
             Test your French navigation knowledge with these interactive exercises
           </p>
           
@@ -239,7 +239,7 @@ export default function BeginnerLesson7Page() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-12">
           <Link 
             href="/lessons/beginner/6" 
             className="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition flex items-center space-x-2"
