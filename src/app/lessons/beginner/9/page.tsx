@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
 import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
 import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
+import { AudioPlayer } from '../../../../../components/lessons/AudioPlayer'
 import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
 import Link from 'next/link'
 
@@ -147,13 +148,20 @@ export default function Lesson9Page() {
               <h4 className="text-lg font-semibold text-gray-900">Examples:</h4>
               {lesson.grammar.examples.map((example, index) => (
                 <div key={index} className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-400">
-                  <div className="font-medium text-blue-900 mb-2">{example.french}</div>
-                  <div className="text-gray-700 mb-2">{example.english}</div>
-                  {example.highlight && (
-                    <div className="text-sm text-blue-600 font-medium">
-                      Key: {example.highlight}
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="font-medium text-blue-900 mb-2">{example.french}</div>
+                      <div className="text-gray-700 mb-2">{example.english}</div>
+                      {example.highlight && (
+                        <div className="text-sm text-blue-600 font-medium">
+                          Key: {example.highlight}
+                        </div>
+                      )}
                     </div>
-                  )}
+                    <div className="ml-4">
+                      <AudioPlayer text={example.french} />
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -168,7 +176,10 @@ export default function Lesson9Page() {
                       <div key={index} className="bg-white rounded-lg p-4 border border-purple-200 text-center hover:shadow-md transition-shadow">
                         <div className="text-sm font-medium text-purple-600 mb-1">{conj.pronoun}</div>
                         <div className="text-lg font-bold text-gray-900 mb-1">{conj.form}</div>
-                        <div className="text-xs text-gray-500 font-mono">{conj.pronunciation}</div>
+                        <div className="text-xs text-gray-500 font-mono mb-2">{conj.pronunciation}</div>
+                        <div className="flex justify-center">
+                          <AudioPlayer text={conj.form} />
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -188,7 +199,10 @@ export default function Lesson9Page() {
                         <div key={formIndex} className="bg-white rounded-lg p-4 border border-green-200 text-center hover:shadow-md transition-shadow">
                           <div className="text-sm font-medium text-green-600 mb-1">{form.pronoun}</div>
                           <div className="text-lg font-bold text-gray-900 mb-1">{form.form}</div>
-                          <div className="text-xs text-gray-500 font-mono">{form.pronunciation}</div>
+                          <div className="text-xs text-gray-500 font-mono mb-2">{form.pronunciation}</div>
+                          <div className="flex justify-center">
+                            <AudioPlayer text={form.form} />
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -211,7 +225,10 @@ export default function Lesson9Page() {
               <div key={item.word} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 border border-green-200 hover:shadow-lg transition-all duration-300">
                 <div className="text-center mb-4">
                   <div className="text-2xl mb-2">🎵</div>
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">{item.word}</h4>
+                  <div className="flex items-center justify-center mb-2">
+                    <h4 className="text-lg font-bold text-gray-900 mr-3">{item.word}</h4>
+                    <AudioPlayer text={item.word} />
+                  </div>
                   <p className="text-gray-600 mb-3">{item.translation}</p>
                   {item.category && (
                     <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
@@ -222,8 +239,15 @@ export default function Lesson9Page() {
                 
                 {item.example_sentence && (
                   <div className="bg-white rounded-lg p-3 border border-green-200">
-                    <p className="text-sm text-gray-700 mb-1">{item.example_sentence}</p>
-                    <p className="text-xs text-gray-500 italic">{item.example_translation}</p>
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-700 mb-1">{item.example_sentence}</p>
+                        <p className="text-xs text-gray-500 italic">{item.example_translation}</p>
+                      </div>
+                      <div className="ml-2">
+                        <AudioPlayer text={item.example_sentence} />
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
