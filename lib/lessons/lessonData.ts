@@ -4563,7 +4563,6 @@ export const beginnerLessons: BeginnerLesson[] = [
         question: 'Tu _____ souvent au tennis le weekend ?',
         options: ['joues', 'joue', 'jouons', 'jouez'],
         correct_answer: ['joues'],
-        translation: 'Do you often play tennis on weekends?',
         explanation: 'Tu (informal you) + joues (play) + souvent (often) + au tennis (tennis) + le weekend (weekend).',
         hints: ['Tu = informal you', 'Use the -es ending with tu']
       },
