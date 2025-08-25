@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
 import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
 import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { AudioPlayer } from '../../../../../components/lessons/AudioPlayer'
+import { audioService } from '../../../../../lib/services/audioService'
 import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
 import Link from 'next/link'
 
@@ -148,7 +148,7 @@ export default function Lesson9Page() {
               <h4 className="text-lg font-semibold text-gray-900">Examples:</h4>
               {lesson.grammar.examples.map((example, index) => (
                 <div key={index} className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-400">
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="font-medium text-blue-900 mb-2">{example.french}</div>
                       <div className="text-gray-700 mb-2">{example.english}</div>
@@ -158,9 +158,13 @@ export default function Lesson9Page() {
                         </div>
                       )}
                     </div>
-                    <div className="ml-4">
-                      <AudioPlayer text={example.french} />
-                    </div>
+                    <button
+                      onClick={() => audioService.playAudio(example.french)}
+                      className="text-blue-600 hover:text-blue-700 transition-colors p-1 ml-2"
+                      title="Listen to pronunciation"
+                    >
+                      🔊
+                    </button>
                   </div>
                 </div>
               ))}
@@ -177,9 +181,13 @@ export default function Lesson9Page() {
                         <div className="text-sm font-medium text-purple-600 mb-1">{conj.pronoun}</div>
                         <div className="text-lg font-bold text-gray-900 mb-1">{conj.form}</div>
                         <div className="text-xs text-gray-500 font-mono mb-2">{conj.pronunciation}</div>
-                        <div className="flex justify-center">
-                          <AudioPlayer text={conj.form} />
-                        </div>
+                        <button
+                          onClick={() => audioService.playAudio(conj.form)}
+                          className="text-purple-600 hover:text-purple-700 transition-colors p-1 mt-2"
+                          title="Listen to pronunciation"
+                        >
+                          🔊
+                        </button>
                       </div>
                     ))}
                   </div>
@@ -200,9 +208,13 @@ export default function Lesson9Page() {
                           <div className="text-sm font-medium text-green-600 mb-1">{form.pronoun}</div>
                           <div className="text-lg font-bold text-gray-900 mb-1">{form.form}</div>
                           <div className="text-xs text-gray-500 font-mono mb-2">{form.pronunciation}</div>
-                          <div className="flex justify-center">
-                            <AudioPlayer text={form.form} />
-                          </div>
+                          <button
+                            onClick={() => audioService.playAudio(form.form)}
+                            className="text-green-600 hover:text-green-700 transition-colors p-1 mt-2"
+                            title="Listen to pronunciation"
+                          >
+                            🔊
+                          </button>
                         </div>
                       ))}
                     </div>
@@ -227,7 +239,13 @@ export default function Lesson9Page() {
                   <div className="text-2xl mb-2">🎵</div>
                   <div className="flex items-center justify-center mb-2">
                     <h4 className="text-lg font-bold text-gray-900 mr-3">{item.word}</h4>
-                    <AudioPlayer text={item.word} />
+                    <button
+                      onClick={() => audioService.playAudio(item.word)}
+                      className="text-green-600 hover:text-green-700 transition-colors"
+                      title="Listen to pronunciation"
+                    >
+                      🔊
+                    </button>
                   </div>
                   <p className="text-gray-600 mb-3">{item.translation}</p>
                   {item.category && (
@@ -244,9 +262,13 @@ export default function Lesson9Page() {
                         <p className="text-sm text-gray-700 mb-1">{item.example_sentence}</p>
                         <p className="text-xs text-gray-500 italic">{item.example_translation}</p>
                       </div>
-                      <div className="ml-2">
-                        <AudioPlayer text={item.example_sentence} />
-                      </div>
+                      <button
+                        onClick={() => audioService.playAudio(item.example_sentence)}
+                        className="text-green-600 hover:text-green-700 transition-colors ml-2"
+                        title="Listen to example sentence"
+                      >
+                        🔊
+                      </button>
                     </div>
                   </div>
                 )}
