@@ -175,6 +175,13 @@ function cleanFilename(text) {
     .substring(0, 100) // Limit length
 }
 
+// Helper function to normalize text for database storage (remove accents)
+function normalizeText(text) {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+}
+
 // Generate audio using ElevenLabs API
 async function generateAudio(text, voiceId, filename) {
   try {
@@ -289,7 +296,7 @@ async function generateAndStoreAudio(text, voiceKey, category, filename, supabas
     const voiceId = voices[voiceKey]
     const voiceName = voiceNames[voiceKey]
     
-    // Generate audio
+    // Generate audio using original text (with accents)
     const audioBuffer = await generateAudio(text, voiceId, filename)
     
     // Save local backup
@@ -300,8 +307,9 @@ async function generateAndStoreAudio(text, voiceKey, category, filename, supabas
     // Upload to Supabase
     const storagePath = await uploadToSupabase(audioBuffer, filename, supabase)
     
-    // Insert database record
-    await insertAudioRecord(text, filename, category, supabase, voiceId, voiceName)
+    // Store normalized text in database (without accents) to match Lessons 1-8
+    const normalizedText = normalizeText(text)
+    await insertAudioRecord(normalizedText, filename, category, supabase, voiceId, voiceName)
     
     console.log(`🎉 Successfully processed: ${filename}`)
     
