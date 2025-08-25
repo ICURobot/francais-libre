@@ -182,7 +182,14 @@ export default function Lesson9Page() {
                         <div className="text-lg font-bold text-gray-900 mb-1">{conj.form}</div>
                         <div className="text-xs text-gray-500 font-mono mb-2">{conj.pronunciation}</div>
                         <button
-                          onClick={() => audioService.playAudio(`${conj.pronoun} ${conj.form}`)}
+                          onClick={() => {
+                            // For il/elle and ils/elles, use just the form since audio was stored separately
+                            if (conj.pronoun.includes('/')) {
+                              audioService.playAudio(conj.form)
+                            } else {
+                              audioService.playAudio(`${conj.pronoun} ${conj.form}`)
+                            }
+                          }}
                           className="text-purple-600 hover:text-purple-700 transition-colors p-1 mt-2"
                           title="Listen to pronunciation"
                         >
@@ -209,7 +216,14 @@ export default function Lesson9Page() {
                           <div className="text-lg font-bold text-gray-900 mb-1">{form.form}</div>
                           <div className="text-xs text-gray-500 font-mono mb-2">{form.pronunciation}</div>
                           <button
-                            onClick={() => audioService.playAudio(`${form.pronoun} ${form.form}`)}
+                            onClick={() => {
+                              // For il/elle and ils/elles, use just the form since audio was stored separately
+                              if (form.pronoun.includes('/')) {
+                                audioService.playAudio(form.form)
+                              } else {
+                                audioService.playAudio(`${form.pronoun} ${form.form}`)
+                              }
+                            }}
                             className="text-green-600 hover:text-green-700 transition-colors p-1 mt-2"
                             title="Listen to pronunciation"
                           >
