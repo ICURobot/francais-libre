@@ -183,9 +183,14 @@ export default function Lesson9Page() {
                         <div className="text-xs text-gray-500 font-mono mb-2">{conj.pronunciation}</div>
                         <button
                           onClick={() => {
-                            // For il/elle and ils/elles, use just the form since audio was stored separately
-                            if (conj.pronoun.includes('/')) {
-                              audioService.playAudio(conj.form)
+                            // For il/elle and ils/elles, we need to handle them specially
+                            // since the audio was stored as separate forms
+                            if (conj.pronoun === 'il/elle') {
+                              // Use 'il' form since that's what we stored
+                              audioService.playAudio(`il ${conj.form}`)
+                            } else if (conj.pronoun === 'ils/elles') {
+                              // Use 'ils' form since that's what we stored
+                              audioService.playAudio(`ils ${conj.form}`)
                             } else {
                               audioService.playAudio(`${conj.pronoun} ${conj.form}`)
                             }
@@ -217,9 +222,14 @@ export default function Lesson9Page() {
                           <div className="text-xs text-gray-500 font-mono mb-2">{form.pronunciation}</div>
                           <button
                             onClick={() => {
-                              // For il/elle and ils/elles, use just the form since audio was stored separately
-                              if (form.pronoun.includes('/')) {
-                                audioService.playAudio(form.form)
+                              // For il/elle and ils/elles, we need to handle them specially
+                              // since the audio was stored as separate forms
+                              if (form.pronoun === 'il/elle') {
+                                // Use 'il' form since that's what we stored
+                                audioService.playAudio(`il ${form.form}`)
+                              } else if (form.pronoun === 'ils/elles') {
+                                // Use 'ils' form since that's what we stored
+                                audioService.playAudio(`ils ${form.form}`)
                               } else {
                                 audioService.playAudio(`${form.pronoun} ${form.form}`)
                               }
@@ -254,13 +264,7 @@ export default function Lesson9Page() {
                   <div className="flex items-center justify-center mb-2">
                     <h4 className="text-lg font-bold text-gray-900 mr-3">{item.word}</h4>
                     <button
-                      onClick={() => {
-                        console.log('🔍 Vocabulary word audio button clicked')
-                        console.log('📝 Text to play:', item.word)
-                        console.log('🔍 Text length:', item.word.length)
-                        console.log('🔍 Text bytes:', new TextEncoder().encode(item.word))
-                        audioService.playAudio(item.word)
-                      }}
+                      onClick={() => audioService.playAudio(item.word)}
                       className="text-green-600 hover:text-green-700 transition-colors"
                       title="Listen to pronunciation"
                     >
@@ -283,13 +287,7 @@ export default function Lesson9Page() {
                         <p className="text-xs text-gray-500 italic">{item.example_translation}</p>
                       </div>
                       <button
-                        onClick={() => {
-                          console.log('🔍 Vocabulary example audio button clicked')
-                          console.log('📝 Text to play:', item.example_sentence)
-                          console.log('🔍 Text length:', item.example_sentence.length)
-                          console.log('🔍 Text bytes:', new TextEncoder().encode(item.example_sentence))
-                          audioService.playAudio(item.example_sentence)
-                        }}
+                        onClick={() => audioService.playAudio(item.example_sentence)}
                         className="text-green-600 hover:text-green-700 transition-colors ml-2"
                         title="Listen to example sentence"
                       >
