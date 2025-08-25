@@ -322,10 +322,11 @@ export default function Lesson9Page() {
                       </div>
                       <button
                         onClick={() => {
-                          // Remove trailing punctuation and spaces, then normalize the text for database query
-                          // This matches how Lessons 1-8 and Lesson 9 store their audio (normalized text, no punctuation, no trailing spaces)
+                          // Remove trailing periods and exclamation marks, but keep question marks
+                          // Then normalize the text for database query
+                          // This matches how Lessons 1-8 and Lesson 9 store their audio
                           const cleanText = item.example_sentence
-                            .replace(/[.!?]+$/, '') // Remove trailing punctuation
+                            .replace(/[.!]+$/, '') // Remove trailing periods and exclamation marks, but keep question marks
                             .trim() // Remove trailing spaces
                           const normalizedText = cleanText
                             .normalize('NFD')
