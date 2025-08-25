@@ -169,6 +169,116 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
           </div>
         )
 
+      case 'conjugation':
+        return (
+          <div className="space-y-4">
+            <div className="bg-gray-50 rounded-lg p-4 mb-4">
+              <h5 className="font-semibold text-gray-800 mb-3">Conjugate: <span className="text-blue-600">{exercise.verb}</span></h5>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {exercise.translations && Object.entries(exercise.translations).map(([pronoun, translation]) => (
+                  <div key={pronoun} className="flex items-center justify-between p-3 bg-white rounded border">
+                    <span className="font-medium text-gray-700">{pronoun}</span>
+                    <span className="text-gray-600">{translation}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-gray-600 mb-3">This is a practice exercise. Review the conjugation patterns above.</p>
+              <button
+                onClick={() => onComplete(true)}
+                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
+              >
+                Mark as Complete
+              </button>
+            </div>
+          </div>
+        )
+
+      case 'negation_transformation':
+        return (
+          <div className="space-y-4">
+            {exercise.exercises && exercise.exercises.map((negEx, index) => (
+              <div key={index} className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+                  <div>
+                    <p className="text-sm font-medium text-blue-800 mb-1">Positive:</p>
+                    <p className="text-gray-700">{negEx.positive}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-green-800 mb-1">Negative:</p>
+                    <p className="text-gray-700 font-semibold">{negEx.negative}</p>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 italic">{negEx.translation}</p>
+              </div>
+            ))}
+            <div className="text-center">
+              <p className="text-gray-600 mb-3">Practice transforming positive to negative sentences.</p>
+              <button
+                onClick={() => onComplete(true)}
+                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
+              >
+                Mark as Complete
+              </button>
+            </div>
+          </div>
+        )
+
+      case 'fill_blank_negation':
+        return (
+          <div className="space-y-4">
+            {exercise.sentences && exercise.sentences.map((sentence, index) => (
+              <div key={index} className="bg-green-50 rounded-lg p-4 border border-green-200">
+                <p className="text-sm font-medium text-green-800 mb-1">Sentence:</p>
+                <p className="text-gray-700 mb-2">{sentence.sentence}</p>
+                <p className="text-sm text-gray-600 italic">{sentence.translation}</p>
+                <div className="mt-2 text-sm text-green-700">
+                  <strong>Answer:</strong> {sentence.blanks.join(' and ')}
+                </div>
+              </div>
+            ))}
+            <div className="text-center">
+              <p className="text-gray-600 mb-3">Practice filling in negation words.</p>
+              <button
+                onClick={() => onComplete(true)}
+                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
+              >
+                Mark as Complete
+              </button>
+            </div>
+          </div>
+        )
+
+      case 'vocabulary_match':
+        return (
+          <div className="space-y-4">
+            {exercise.pairs && exercise.pairs.map((pair, index) => (
+              <div key={index} className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="text-center">
+                    <p className="font-medium text-purple-800 mb-1">French:</p>
+                    <p className="text-lg text-gray-800">{pair.french}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-medium text-purple-800 mb-1">English:</p>
+                    <p className="text-lg text-gray-800">{pair.english}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div className="text-center">
+              <p className="text-gray-600 mb-3">Match the French words with their English meanings.</p>
+              <button
+                onClick={() => onComplete(true)}
+                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
+              >
+                Mark as Complete
+              </button>
+            </div>
+          </div>
+        )
+
       default:
         return <p className="text-gray-600">Exercise type not supported</p>
     }
@@ -180,6 +290,10 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
       case 'fill_blank': return '✏️'
       case 'translation': return '🌐'
       case 'speaking': return '🗣️'
+      case 'conjugation': return '🔤'
+      case 'negation_transformation': return '🔄'
+      case 'fill_blank_negation': return '✏️'
+      case 'vocabulary_match': return '🔗'
       default: return '❓'
     }
   }

@@ -4256,6 +4256,52 @@ export const beginnerLessons: BeginnerLesson[] = [
         { pronoun: 'nous', form: 'regardons', pronunciation: 'noo ruh-gar-DOHN' },
         { pronoun: 'vous', form: 'regardez', pronunciation: 'voo ruh-gar-DAY' },
         { pronoun: 'ils/elles', form: 'regardent', pronunciation: 'eel/ell ruh-GARD' }
+      ],
+      additional_conjugation_tables: [
+        {
+          verb: 'écouter',
+          forms: [
+            { pronoun: 'je', form: 'écoute', pronunciation: 'zhuh ay-KOOT' },
+            { pronoun: 'tu', form: 'écoutes', pronunciation: 'too ay-KOOT' },
+            { pronoun: 'il/elle', form: 'écoute', pronunciation: 'eel/ell ay-KOOT' },
+            { pronoun: 'nous', form: 'écoutons', pronunciation: 'noo ay-koo-TOHN' },
+            { pronoun: 'vous', form: 'écoutez', pronunciation: 'voo ay-koo-TAY' },
+            { pronoun: 'ils/elles', form: 'écoutent', pronunciation: 'eel/ell ay-KOOT' }
+          ]
+        },
+        {
+          verb: 'danser',
+          forms: [
+            { pronoun: 'je', form: 'danse', pronunciation: 'zhuh DAHNS' },
+            { pronoun: 'tu', form: 'danses', pronunciation: 'too DAHNS' },
+            { pronoun: 'il/elle', form: 'danse', pronunciation: 'eel/ell DAHNS' },
+            { pronoun: 'nous', form: 'dansons', pronunciation: 'noo dahn-SOHN' },
+            { pronoun: 'vous', form: 'dansez', pronunciation: 'voo dahn-SAY' },
+            { pronoun: 'ils/elles', form: 'dansent', pronunciation: 'eel/ell DAHNS' }
+          ]
+        },
+        {
+          verb: 'jouer',
+          forms: [
+            { pronoun: 'je', form: 'joue', pronunciation: 'zhuh ZHOO' },
+            { pronoun: 'tu', form: 'joues', pronunciation: 'too ZHOO' },
+            { pronoun: 'il/elle', form: 'joue', pronunciation: 'eel/ell ZHOO' },
+            { pronoun: 'nous', form: 'jouons', pronunciation: 'noo zhoo-OHN' },
+            { pronoun: 'vous', form: 'jouez', pronunciation: 'voo zhoo-AY' },
+            { pronoun: 'ils/elles', form: 'jouent', pronunciation: 'eel/ell ZHOO' }
+          ]
+        },
+        {
+          verb: 'préférer',
+          forms: [
+            { pronoun: 'je', form: 'préfère', pronunciation: 'zhuh pray-FAIR' },
+            { pronoun: 'tu', form: 'préfères', pronunciation: 'too pray-FAIR' },
+            { pronoun: 'il/elle', form: 'préfère', pronunciation: 'eel/ell pray-FAIR' },
+            { pronoun: 'nous', form: 'préférons', pronunciation: 'noo pray-fay-ROHN' },
+            { pronoun: 'vous', form: 'préférez', pronunciation: 'voo pray-fay-RAY' },
+            { pronoun: 'ils/elles', form: 'préfèrent', pronunciation: 'eel/ell pray-FAIR' }
+          ]
+        }
       ]
     },
 

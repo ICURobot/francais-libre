@@ -18,20 +18,28 @@ export interface DialogueExchange {
   }
   
   export interface GrammarRule {
-    topic: string;
-    explanation: string;
-    examples: {
-      french: string;
-      english: string;
-      highlight?: string;
-    }[];
-    patterns: string[];
-    conjugation_table?: {
+  topic: string;
+  explanation: string;
+  examples: {
+    french: string;
+    english: string;
+    highlight?: string;
+  }[];
+  patterns: string[];
+  conjugation_table?: {
+    pronoun: string;
+    form: string;
+    pronunciation?: string;
+  }[];
+  additional_conjugation_tables?: {
+    verb: string;
+    forms: {
       pronoun: string;
       form: string;
-      pronunciation?: string;
+      pronunciation: string;
     }[];
-  }
+  }[];
+}
   
   export interface VocabularyItem {
     word: string;

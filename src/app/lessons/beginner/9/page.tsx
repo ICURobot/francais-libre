@@ -9,6 +9,17 @@ import Link from 'next/link'
 
 
 export default function Lesson9Page() {
+  // Helper function to get English translations for verbs
+  const getEnglishTranslation = (verb: string): string => {
+    const translations: Record<string, string> = {
+      'écouter': 'listen',
+      'danser': 'dance',
+      'jouer': 'play',
+      'préférer': 'prefer'
+    }
+    return translations[verb] || verb
+  }
+
   // State for exercise progress
   const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
   const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set())
@@ -147,7 +158,7 @@ export default function Lesson9Page() {
               ))}
             </div>
             
-            {/* Conjugation Table */}
+            {/* Conjugation Tables */}
             {lesson.grammar.conjugation_table && (
               <div className="mt-8">
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">Conjugation Table - Regular -er Verbs</h4>
@@ -162,6 +173,27 @@ export default function Lesson9Page() {
                     ))}
                   </div>
                 </div>
+              </div>
+            )}
+            
+            {/* Additional Conjugation Tables */}
+            {lesson.grammar.additional_conjugation_tables && (
+              <div className="mt-8 space-y-6">
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">More -er Verb Conjugations</h4>
+                {lesson.grammar.additional_conjugation_tables.map((verbTable, index) => (
+                  <div key={index} className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-200">
+                    <h5 className="text-lg font-bold text-gray-900 mb-4 text-center">"{verbTable.verb}" (to {getEnglishTranslation(verbTable.verb)})</h5>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {verbTable.forms.map((form, formIndex) => (
+                        <div key={formIndex} className="bg-white rounded-lg p-4 border border-green-200 text-center hover:shadow-md transition-shadow">
+                          <div className="text-sm font-medium text-green-600 mb-1">{form.pronoun}</div>
+                          <div className="text-lg font-bold text-gray-900 mb-1">{form.form}</div>
+                          <div className="text-xs text-gray-500 font-mono">{form.pronunciation}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
