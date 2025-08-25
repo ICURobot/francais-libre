@@ -287,7 +287,14 @@ export default function Lesson9Page() {
                         <p className="text-xs text-gray-500 italic">{item.example_translation}</p>
                       </div>
                       <button
-                        onClick={() => audioService.playAudio(item.example_sentence)}
+                        onClick={() => {
+                          console.log('🔍 Vocabulary example audio button clicked')
+                          console.log('📝 Text to play:', item.example_sentence)
+                          console.log('🔍 Text length:', item.example_sentence.length)
+                          console.log('🔍 Text bytes:', Array.from(new TextEncoder().encode(item.example_sentence)))
+                          console.log('🔍 Text normalized:', item.example_sentence.normalize('NFD'))
+                          audioService.playAudio(item.example_sentence)
+                        }}
                         className="text-green-600 hover:text-green-700 transition-colors ml-2"
                         title="Listen to example sentence"
                       >
