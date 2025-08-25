@@ -1,121 +1,108 @@
+require('dotenv').config({ path: '.env.local' })
 const { createClient } = require('@supabase/supabase-js')
-require('dotenv').config({ path: '../.env.local' })
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('❌ Missing environment variables')
+  process.exit(1)
+}
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 async function cleanupDuplicateAudio() {
-  console.log('🧹 Starting cleanup of duplicate audio files...')
-  
-  // Debug environment variables
-  console.log('Environment variables:')
-  console.log('NEXT_PUBLIC_SUPABASE_URL:', process.env.NEXT_PUBLIC_SUPABASE_URL ? 'Set' : 'Not set')
-  console.log('NEXT_PUBLIC_SUPABASE_ANON_KEY:', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'Set' : 'Not set')
-  
-  // Create Supabase client
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  
-  if (!supabaseUrl || !supabaseAnonKey) {
-    console.error('❌ Missing required environment variables')
-    return
-  }
-  
-  const supabase = createClient(supabaseUrl, supabaseAnonKey)
+  console.log('🧹 Cleaning up duplicate audio records...\n')
   
   try {
-    // Get all audio records
-    const { data: allAudio, error: fetchError } = await supabase
-      .from('audio_pronunciations')
-      .select('*')
-      .order('created_at', { ascending: true })
-
-    if (fetchError) {
-      console.error('❌ Error fetching audio records:', fetchError)
-      return
-    }
-
-    if (!allAudio || allAudio.length === 0) {
-      console.log('ℹ️ No audio records found')
-      return
-    }
-
-    console.log(`📊 Found ${allAudio.length} total audio records`)
-
-    // Group by text to find duplicates
-    const textGroups = new Map()
+    // Step 1: Find all duplicate texts
+    console.log('🔍 Step 1: Finding duplicate texts...')
+    const { data: duplicates, error: dupError } = await supabase
+      .rpc('find_duplicate_texts')
     
-    allAudio.forEach(record => {
-      const text = record.text.trim()
-      if (!textGroups.has(text)) {
-        textGroups.set(text, [])
+    if (dupError) {
+      console.log('⚠️  RPC function not available, using manual approach...')
+      
+      // Manual approach: get all records and group by text
+      const { data: allRecords, error: allError } = await supabase
+        .from('audio_pronunciations')
+        .select('*')
+        .order('created_at', { ascending: false })
+      
+      if (allError) {
+        console.error('❌ Error fetching all records:', allError)
+        return
       }
-      textGroups.get(text).push(record)
-    })
-
-    // Find duplicates
-    const duplicates = new Map()
-    let totalDuplicates = 0
-    
-    textGroups.forEach((records, text) => {
-      if (records.length > 1) {
-        duplicates.set(text, records)
-        totalDuplicates += records.length - 1
-      }
-    })
-
-    console.log(`🔍 Found ${duplicates.size} texts with duplicates`)
-    console.log(`📈 Total duplicate records: ${totalDuplicates}`)
-
-    if (duplicates.size === 0) {
-      console.log('✅ No duplicates found')
-      return
-    }
-
-    // Process duplicates
-    let deletedCount = 0
-    
-    for (const [text, records] of duplicates) {
-      console.log(`\n📝 Processing: "${text}"`)
-      console.log(`   Found ${records.length} records`)
       
-      // Keep the oldest record (first created)
-      const toKeep = records[0]
-      const toDelete = records.slice(1)
+      // Group by text
+      const textGroups = {}
+      allRecords.forEach(record => {
+        if (!textGroups[record.text]) {
+          textGroups[record.text] = []
+        }
+        textGroups[record.text].push(record)
+      })
       
-      console.log(`   Keeping: ${toKeep.file_name} (created: ${toKeep.created_at})`)
+      // Find duplicates
+      const duplicateTexts = Object.entries(textGroups)
+        .filter(([text, records]) => records.length > 1)
+        .map(([text, records]) => ({ text, records }))
       
-      for (const record of toDelete) {
-        console.log(`   Deleting: ${record.file_name} (created: ${record.created_at})`)
+      console.log(`📊 Found ${duplicateTexts.length} texts with duplicates`)
+      
+      // Step 2: Keep only the most recent record for each duplicate text
+      console.log('\n🗑️  Step 2: Removing duplicate records...')
+      let totalRemoved = 0
+      
+      for (const { text, records } of duplicateTexts) {
+        // Keep the first record (most recent due to DESC order)
+        const toKeep = records[0]
+        const toRemove = records.slice(1)
         
-        try {
-          // Delete from database
+        console.log(`\n📝 Text: "${text}"`)
+        console.log(`   Keeping: ${toKeep.file_name} (${toKeep.created_at})`)
+        console.log(`   Removing: ${toRemove.length} duplicates`)
+        
+        for (const record of toRemove) {
+          console.log(`     - ${record.file_name} (${record.created_at})`)
+          
+          // Delete the duplicate record
           const { error: deleteError } = await supabase
             .from('audio_pronunciations')
             .delete()
             .eq('id', record.id)
-
-          if (deleteError) {
-            console.error(`      ❌ Database delete failed:`, deleteError)
-          } else {
-            console.log(`      ✅ Database record deleted`)
-            deletedCount++
-          }
-
-          // Note: We're not deleting from storage to avoid breaking existing references
-          // The storage cleanup can be done separately if needed
           
-        } catch (error) {
-          console.error(`      ❌ Error deleting record:`, error)
+          if (deleteError) {
+            console.error(`     ❌ Failed to delete: ${deleteError.message}`)
+          } else {
+            console.log(`     ✅ Deleted successfully`)
+            totalRemoved++
+          }
         }
       }
+      
+      console.log(`\n🎉 Cleanup complete! Removed ${totalRemoved} duplicate records`)
+      
+    } else {
+      console.log('✅ Found duplicates using RPC function')
+      console.log('Duplicates:', duplicates)
     }
-
-    console.log(`\n🎉 Cleanup complete!`)
-    console.log(`📊 Deleted ${deletedCount} duplicate database records`)
-    console.log(`💡 Note: Storage files were not deleted to avoid breaking references`)
-
+    
+    // Step 3: Verify cleanup
+    console.log('\n🔍 Step 3: Verifying cleanup...')
+    const { data: finalCount, error: countError } = await supabase
+      .from('audio_pronunciations')
+      .select('*', { count: 'exact' })
+    
+    if (countError) {
+      console.error('❌ Error getting final count:', countError)
+    } else {
+      console.log(`📊 Final record count: ${finalCount.length}`)
+    }
+    
   } catch (error) {
-    console.error('❌ Cleanup failed:', error)
+    console.error('❌ Unexpected error:', error)
   }
 }
 
-// Run the cleanup
-cleanupDuplicateAudio().catch(console.error)
+cleanupDuplicateAudio()

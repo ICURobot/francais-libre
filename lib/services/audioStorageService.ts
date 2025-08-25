@@ -152,6 +152,8 @@ export class AudioStorageService {
         .from('audio_pronunciations')
         .select('*')
         .eq('text', text)
+        .order('created_at', { ascending: false })
+        .limit(1)
         .single()
 
       if (error) {
