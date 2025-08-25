@@ -229,3 +229,5 @@ async function generateLesson4Patterns() {
 
 generateLesson4Patterns()
 
+
+
