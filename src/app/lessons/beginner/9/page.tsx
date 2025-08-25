@@ -288,19 +288,13 @@ export default function Lesson9Page() {
                       </div>
                       <button
                         onClick={() => {
-                          // Normalize the text to remove accents for better matching
-                          const normalizedText = item.example_sentence
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-                          
                           console.log('🔍 Vocabulary example audio button clicked')
                           console.log('📝 Original text:', item.example_sentence)
-                          console.log('🔍 Normalized text:', normalizedText)
-                          console.log('🔍 Text length:', normalizedText.length)
-                          console.log('🔍 Text bytes:', Array.from(new TextEncoder().encode(normalizedText)))
+                          console.log('🔍 Text length:', item.example_sentence.length)
+                          console.log('🔍 Text bytes:', Array.from(new TextEncoder().encode(item.example_sentence)))
                           
-                          // Try the normalized text first, then fall back to original
-                          audioService.playAudio(normalizedText)
+                          // Use the original text since that's what's stored in the database
+                          audioService.playAudio(item.example_sentence)
                         }}
                         className="text-green-600 hover:text-green-700 transition-colors ml-2"
                         title="Listen to example sentence"
