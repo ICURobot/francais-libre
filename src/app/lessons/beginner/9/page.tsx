@@ -201,9 +201,8 @@ export default function Lesson9Page() {
               <InteractiveExercise
                 key={exercise.id}
                 exercise={exercise}
-                onComplete={handleExerciseComplete}
-                isCompleted={completedExercises.has(exercise.id)}
-                isCorrect={correctAnswers.has(exercise.id)}
+                exerciseNumber={index + 1}
+                onComplete={(isCorrect) => handleExerciseComplete(exercise.id, isCorrect)}
               />
             ))}
           </div>
