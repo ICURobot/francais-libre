@@ -182,7 +182,7 @@ export default function Lesson9Page() {
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">More -er Verb Conjugations</h4>
                 {lesson.grammar.additional_conjugation_tables.map((verbTable, index) => (
                   <div key={index} className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-200">
-                    <h5 className="text-lg font-bold text-gray-900 mb-4 text-center">"{verbTable.verb}" (to {getEnglishTranslation(verbTable.verb)})</h5>
+                    <h5 className="text-lg font-bold text-gray-900 mb-4 text-center">&ldquo;{verbTable.verb}&rdquo; (to {getEnglishTranslation(verbTable.verb)})</h5>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {verbTable.forms.map((form, formIndex) => (
                         <div key={formIndex} className="bg-white rounded-lg p-4 border border-green-200 text-center hover:shadow-md transition-shadow">
