@@ -54,8 +54,14 @@ export const AudioPlayer = ({
         voicePreference = 'male' // Use Andre's voice for male speakers
       }
 
+      // Normalize the text to remove accents for database query
+      // This matches how Lessons 1-8 and Lesson 9 store their audio (normalized text)
+      const normalizedText = text
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+
       // Call the new audioService which will check for stored ElevenLabs audio first
-      const success = await audioService.playAudio(text, { 
+      const success = await audioService.playAudio(normalizedText, { 
         fallbackToTTS: true,
         voicePreference: voicePreference
       });
