@@ -6,7 +6,7 @@ import InteractiveExercise from '../../../../../components/lessons/InteractiveEx
 import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
 import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
 import Link from 'next/link'
-import { audioService } from '../../../../../lib/services/audioService'
+
 
 export default function Lesson9Page() {
   // State for exercise progress
@@ -157,8 +157,8 @@ export default function Lesson9Page() {
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {lesson.vocabulary.map((item, index) => (
-              <div key={index} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 border border-green-200 hover:shadow-lg transition-all duration-300">
+            {lesson.vocabulary.map((item) => (
+              <div key={item.word} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 border border-green-200 hover:shadow-lg transition-all duration-300">
                 <div className="text-center mb-4">
                   <div className="text-2xl mb-2">🎵</div>
                   <h4 className="text-lg font-bold text-gray-900 mb-2">{item.word}</h4>
@@ -189,9 +189,9 @@ export default function Lesson9Page() {
               Practice Exercises
             </h3>
             <ExerciseProgress 
-              completed={completedExercises.size}
-              total={lesson.exercises.length}
-              correct={correctAnswers.size}
+              totalExercises={lesson.exercises.length}
+              completedExercises={completedExercises.size}
+              correctAnswers={correctAnswers.size}
               onReset={handleResetExercises}
             />
           </div>
