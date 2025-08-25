@@ -322,9 +322,10 @@ export default function Lesson9Page() {
                       </div>
                       <button
                         onClick={() => {
-                          // Normalize the text to remove accents for database query
-                          // This matches how Lessons 1-8 and Lesson 9 store their audio (normalized text)
-                          const normalizedText = item.example_sentence
+                          // Remove trailing punctuation and normalize the text for database query
+                          // This matches how Lessons 1-8 and Lesson 9 store their audio (normalized text, no punctuation)
+                          const cleanText = item.example_sentence.replace(/[.!?]+$/, '') // Remove trailing punctuation
+                          const normalizedText = cleanText
                             .normalize('NFD')
                             .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
                           
