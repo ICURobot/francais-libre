@@ -254,7 +254,13 @@ export default function Lesson9Page() {
                   <div className="flex items-center justify-center mb-2">
                     <h4 className="text-lg font-bold text-gray-900 mr-3">{item.word}</h4>
                     <button
-                      onClick={() => audioService.playAudio(item.word)}
+                      onClick={() => {
+                        console.log('🔍 Vocabulary word audio button clicked')
+                        console.log('📝 Text to play:', item.word)
+                        console.log('🔍 Text length:', item.word.length)
+                        console.log('🔍 Text bytes:', new TextEncoder().encode(item.word))
+                        audioService.playAudio(item.word)
+                      }}
                       className="text-green-600 hover:text-green-700 transition-colors"
                       title="Listen to pronunciation"
                     >
@@ -277,7 +283,13 @@ export default function Lesson9Page() {
                         <p className="text-xs text-gray-500 italic">{item.example_translation}</p>
                       </div>
                       <button
-                        onClick={() => audioService.playAudio(item.example_sentence)}
+                        onClick={() => {
+                          console.log('🔍 Vocabulary example audio button clicked')
+                          console.log('📝 Text to play:', item.example_sentence)
+                          console.log('🔍 Text length:', item.example_sentence.length)
+                          console.log('🔍 Text bytes:', new TextEncoder().encode(item.example_sentence))
+                          audioService.playAudio(item.example_sentence)
+                        }}
                         className="text-green-600 hover:text-green-700 transition-colors ml-2"
                         title="Listen to example sentence"
                       >
