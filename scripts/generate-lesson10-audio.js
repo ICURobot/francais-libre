@@ -31,20 +31,14 @@ const ELEVENLABS_API_URL = 'https://api.elevenlabs.io/v1'
 // Lesson 10 content for audio generation
 const lesson10Content = {
   dialogue: [
-    { text: 'Bonjour Marc ! Comment ça va ?', speaker: 'female', context: 'dialogue' },
-    { text: 'Salut Sophie ! Ça va bien, merci. Et toi ?', speaker: 'male', context: 'dialogue' },
-    { text: 'Très bien ! J\'ai une grande nouvelle à te raconter.', speaker: 'female', context: 'dialogue' },
-    { text: 'Ah oui ? Qu\'est-ce qui se passe ?', speaker: 'male', context: 'dialogue' },
-    { text: 'Ma sœur Marie commence ses études à l\'université de Lyon en septembre.', speaker: 'female', context: 'dialogue' },
-    { text: 'Félicitations ! Elle va étudier quoi ?', speaker: 'male', context: 'dialogue' },
-    { text: 'Elle va étudier l\'espagnol et elle veut devenir professeure.', speaker: 'female', context: 'dialogue' },
-    { text: 'C\'est génial ! Et elle va habiter où à Lyon ?', speaker: 'male', context: 'dialogue' },
-    { text: 'Elle va habiter dans un petit appartement près de l\'université.', speaker: 'female', context: 'dialogue' },
-    { text: 'Parfait ! Lyon est une belle ville pour les étudiants.', speaker: 'male', context: 'dialogue' },
-    { text: 'Oui, et elle va pouvoir voyager facilement en Europe aussi !', speaker: 'female', context: 'dialogue' },
-    { text: 'Exactement ! Et toi, tu vas la visiter souvent ?', speaker: 'male', context: 'dialogue' },
-    { text: 'Oui, je vais la visiter au moins une fois par mois.', speaker: 'female', context: 'dialogue' },
-    { text: 'C\'est une excellente idée ! La famille, c\'est important.', speaker: 'male', context: 'dialogue' }
+    { text: 'Bonsoir mes enfants ! Lisa, tu n\'es pas française, n\'est-ce pas ?', speaker: 'female', context: 'dialogue' },
+    { text: 'Non, je suis américaine. Je ne parle jamais français chez moi.', speaker: 'female', context: 'dialogue' },
+    { text: 'Mais tu parles très bien ! Tu étudies depuis longtemps ?', speaker: 'male', context: 'dialogue' },
+    { text: 'Je commence seulement cette année. Ma sœur travaille comme professeure d\'anglais ici.', speaker: 'female', context: 'dialogue' },
+    { text: 'Formidable ! Et tes parents ? Ils ne visitent jamais la France ?', speaker: 'female', context: 'dialogue' },
+    { text: 'Mon père ne voyage plus maintenant, mais ma mère adore voyager.', speaker: 'female', context: 'dialogue' },
+    { text: 'Elle parle français aussi ?', speaker: 'male', context: 'dialogue' },
+    { text: 'Non, elle ne parle que anglais et espagnol. Elle enseigne l\'espagnol.', speaker: 'female', context: 'dialogue' }
   ],
   grammar: [
     { text: 'Je ne voyage jamais en avion.', speaker: 'male', context: 'vocabulary' },
