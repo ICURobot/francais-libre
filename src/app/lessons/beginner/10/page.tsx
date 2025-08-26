@@ -91,7 +91,7 @@ export default function Lesson10Page() {
           
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p className="text-lg">
-              This lesson combines advanced negation patterns with essential -er verbs for daily life, family, and work. You'll master the subtle differences between "never," "no longer," and "only" in French.
+              This lesson combines advanced negation patterns with essential -er verbs for daily life, family, and work. You&apos;ll master the subtle differences between &ldquo;never,&rdquo; &ldquo;no longer,&rdquo; and &ldquo;only&rdquo; in French.
             </p>
             
             <p className="text-lg">

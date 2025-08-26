@@ -4752,44 +4752,37 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           pronoun: 'je',
           form: 'commence',
-          pronunciation: 'zhuh ko-MAHNS',
-          english: 'I start'
+          pronunciation: 'zhuh ko-MAHNS'
         },
         {
           pronoun: 'tu',
           form: 'commences',
-          pronunciation: 'tu ko-MAHNS',
-          english: 'you start'
+          pronunciation: 'tu ko-MAHNS'
         },
         {
           pronoun: 'il/elle',
           form: 'commence',
-          pronunciation: 'eel/el ko-MAHNS',
-          english: 'he/she starts'
+          pronunciation: 'eel/el ko-MAHNS'
         },
         {
           pronoun: 'nous',
           form: 'commençons',
-          pronunciation: 'noo ko-mahn-SOHN',
-          english: 'we start'
+          pronunciation: 'noo ko-mahn-SOHN'
         },
         {
           pronoun: 'vous',
           form: 'commencez',
-          pronunciation: 'voo ko-mahn-SAY',
-          english: 'you start (formal/plural)'
+          pronunciation: 'voo ko-mahn-SAY'
         },
         {
           pronoun: 'ils/elles',
           form: 'commencent',
-          pronunciation: 'eel/el ko-MAHNS',
-          english: 'they start'
+          pronunciation: 'eel/el ko-MAHNS'
         }
       ],
       additional_conjugation_tables: [
                  {
            verb: 'voyager',
-           english: 'to travel',
            forms: [
              { pronoun: 'je', form: 'voyage', pronunciation: 'zhuh voy-AZH' },
              { pronoun: 'tu', form: 'voyages', pronunciation: 'tu voy-AZH' },
@@ -4801,7 +4794,6 @@ export const beginnerLessons: BeginnerLesson[] = [
          },
                  {
            verb: 'enseigner',
-           english: 'to teach',
            forms: [
              { pronoun: 'je', form: 'enseigne', pronunciation: 'zhuh ahn-SAYN' },
              { pronoun: 'tu', form: 'enseignes', pronunciation: 'tu ahn-SAYN' },
@@ -4813,7 +4805,6 @@ export const beginnerLessons: BeginnerLesson[] = [
          },
                  {
            verb: 'visiter',
-           english: 'to visit',
            forms: [
              { pronoun: 'je', form: 'visite', pronunciation: 'zhuh vee-ZEET' },
              { pronoun: 'tu', form: 'visites', pronunciation: 'tu vee-ZEET' },
@@ -5049,23 +5040,7 @@ export const beginnerLessons: BeginnerLesson[] = [
         type: 'multiple_choice',
         question: 'Choose the correct negation for each sentence:',
         options: ['ne...jamais', 'ne...pas', 'ne...plus', 'ne...que'],
-        exercises: [
-          {
-            sentence: 'Il _____ voyage _____ (He never travels)',
-            options: ['ne...jamais', 'ne...pas', 'ne...plus'],
-            correct: 0
-          },
-          {
-            sentence: 'Elle _____ travaille _____ (She doesn\'t work anymore)', 
-            options: ['ne...jamais', 'ne...pas', 'ne...plus'],
-            correct: 2
-          },
-          {
-            sentence: 'Nous _____ parlons _____ français (We only speak French)',
-            options: ['ne...que', 'ne...pas', 'ne...jamais'], 
-            correct: 0
-          }
-        ],
+
         correct_answer: ['ne...jamais', 'ne...plus', 'ne...que'],
         explanation: 'ne...jamais = never, ne...plus = no longer, ne...que = only',
         hints: ['Look at the meaning: never, no longer, only']
@@ -5075,23 +5050,7 @@ export const beginnerLessons: BeginnerLesson[] = [
         type: 'multiple_choice',
         question: 'Choose the correct nationality form:',
         options: ['français', 'française', 'france', 'italien', 'italienne', 'italie', 'espagnol', 'espagnole', 'espagne'],
-        exercises: [
-          {
-            question: 'Marie est _____ (Marie is French - feminine)',
-            options: ['français', 'française', 'france'],
-            correct: 1
-          },
-          {
-            question: 'Paolo est _____ (Paolo is Italian - masculine)', 
-            options: ['italienne', 'italien', 'italie'],
-            correct: 1
-          },
-          {
-            question: 'Sofia est _____ (Sofia is Spanish - feminine)',
-            options: ['espagnol', 'espagnole', 'espagne'],
-            correct: 1
-          }
-        ],
+
         correct_answer: ['française', 'italien', 'espagnole'],
         explanation: 'Nationality adjectives agree with gender: français/française, italien/italienne, espagnol/espagnole',
         hints: ['Look at the gender: Marie (feminine), Paolo (masculine), Sofia (feminine)']
