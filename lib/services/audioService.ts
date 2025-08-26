@@ -23,23 +23,29 @@ export class AudioService {
     try {
       console.log(`🔊 Attempting to play audio for: "${text}"`)
 
-      // Normalize the text for database query - remove accents and normalize punctuation
-      // This matches how the audio files are stored in the database (same as Lessons 1-8)
-      const normalizedText = text
-        .replace(/[.!]+$/, '') // Remove trailing periods and exclamation marks, but keep question marks
-        .trim() // Remove trailing spaces
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') // Remove diacritics (accents)
+      // Try multiple text formats to find audio in the database
+      // Different lessons store text in different formats (with/without accents, with/without punctuation)
+      const textVariants = [
+        text, // Original text
+        text.replace(/[.!]+$/, '').trim(), // Remove trailing punctuation and spaces
+        text.normalize('NFD').replace(/[\u0300-\u036f]/g, ''), // Remove accents only
+        text.replace(/[.!]+$/, '').trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove both
+      ]
 
-      console.log(`🔧 Normalized text for database query: "${normalizedText}"`)
+      console.log(`🔧 Trying text variants:`, textVariants)
 
-      // Check if we have stored audio for this text
-      const storedAudio = await audioStorageService.getAudioByText(normalizedText)
-      
-      if (storedAudio) {
-        console.log(`✅ Found stored audio: ${storedAudio.file_name}`)
-        return await this.playStoredAudio(storedAudio)
+      // Try each text variant to find stored audio
+      for (const textVariant of textVariants) {
+        console.log(`🔍 Trying variant: "${textVariant}"`)
+        const storedAudio = await audioStorageService.getAudioByText(textVariant)
+        
+        if (storedAudio) {
+          console.log(`✅ Found stored audio with variant: "${textVariant}"`)
+          return await this.playStoredAudio(storedAudio)
+        }
       }
+      
+      console.log(`❌ No stored audio found for any text variant`)
 
       // If no stored audio and fallback is enabled, generate it
       if (options.fallbackToTTS) {
