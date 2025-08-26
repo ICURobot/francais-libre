@@ -165,15 +165,7 @@ export default function Lesson9Page() {
                       )}
                     </div>
                     <button
-                      onClick={() => {
-                        // Normalize the text to remove accents for database query
-                        // This matches how Lessons 1-8 and Lesson 9 store their audio (normalized text)
-                        const normalizedText = example.french
-                          .normalize('NFD')
-                          .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-                        
-                        audioService.playAudio(normalizedText)
-                      }}
+                      onClick={() => audioService.playAudio(example.french)}
                       className="text-blue-600 hover:text-blue-700 transition-colors p-1 ml-2"
                       title="Listen to pronunciation"
                     >
@@ -210,13 +202,7 @@ export default function Lesson9Page() {
                               textToPlay = `${conj.pronoun} ${conj.form}`
                             }
                             
-                            // Normalize the text to remove accents for database query
-                            // This matches how Lessons 1-8 and Lesson 9 store their audio (normalized text)
-                            const normalizedText = textToPlay
-                              .normalize('NFD')
-                              .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-                            
-                            audioService.playAudio(normalizedText)
+                            audioService.playAudio(textToPlay)
                           }}
                           className="text-purple-600 hover:text-purple-700 transition-colors p-1 mt-2"
                           title="Listen to pronunciation"
@@ -258,13 +244,7 @@ export default function Lesson9Page() {
                                 textToPlay = `${form.pronoun} ${form.form}`
                               }
                               
-                              // Normalize the text to remove accents for database query
-                              // This matches how Lessons 1-8 and Lesson 9 store their audio (normalized text)
-                              const normalizedText = textToPlay
-                                .normalize('NFD')
-                                .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-                              
-                              audioService.playAudio(normalizedText)
+                              audioService.playAudio(textToPlay)
                             }}
                             className="text-green-600 hover:text-green-700 transition-colors p-1 mt-2"
                             title="Listen to pronunciation"
@@ -296,15 +276,7 @@ export default function Lesson9Page() {
                   <div className="flex items-center justify-center mb-2">
                     <h4 className="text-lg font-bold text-gray-900 mr-4 text-2xl">{item.word}</h4>
                     <button
-                      onClick={() => {
-                        // Normalize the text to remove accents for database query
-                        // This matches how Lessons 1-8 and Lesson 9 store their audio (normalized text)
-                        const normalizedText = item.word
-                          .normalize('NFD')
-                          .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-                        
-                        audioService.playAudio(normalizedText)
-                      }}
+                      onClick={() => audioService.playAudio(item.word)}
                       className="text-blue-600 hover:text-blue-700 transition-colors p-1"
                       title="Listen to pronunciation"
                     >
@@ -327,19 +299,7 @@ export default function Lesson9Page() {
                         <p className="text-xs text-gray-500 italic">{item.example_translation}</p>
                       </div>
                       <button
-                        onClick={() => {
-                          // Remove trailing periods and exclamation marks, but keep question marks
-                          // Then normalize the text for database query
-                          // This matches how Lessons 1-8 and Lesson 9 store their audio
-                          const cleanText = item.example_sentence
-                            .replace(/[.!]+$/, '') // Remove trailing periods and exclamation marks, but keep question marks
-                            .trim() // Remove trailing spaces
-                          const normalizedText = cleanText
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-                          
-                          audioService.playAudio(normalizedText)
-                        }}
+                        onClick={() => audioService.playAudio(item.example_sentence)}
                         className="text-green-600 hover:text-green-700 transition-colors ml-2"
                         title="Listen to example sentence"
                       >

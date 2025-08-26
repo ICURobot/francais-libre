@@ -23,8 +23,18 @@ export class AudioService {
     try {
       console.log(`🔊 Attempting to play audio for: "${text}"`)
 
+      // Normalize the text for database query - remove accents and normalize punctuation
+      // This matches how the audio files are stored in the database (same as Lessons 1-8)
+      const normalizedText = text
+        .replace(/[.!]+$/, '') // Remove trailing periods and exclamation marks, but keep question marks
+        .trim() // Remove trailing spaces
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove diacritics (accents)
+
+      console.log(`🔧 Normalized text for database query: "${normalizedText}"`)
+
       // Check if we have stored audio for this text
-      const storedAudio = await audioStorageService.getAudioByText(text)
+      const storedAudio = await audioStorageService.getAudioByText(normalizedText)
       
       if (storedAudio) {
         console.log(`✅ Found stored audio: ${storedAudio.file_name}`)
