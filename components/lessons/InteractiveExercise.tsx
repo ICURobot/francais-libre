@@ -109,24 +109,29 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
       case 'fill_blank':
         return (
           <div className="space-y-4">
-            {/* Interactive Fill-in-the-Blank */}
-            <div className="text-lg text-gray-700 leading-relaxed">
-              {exercise.question.split('_____').map((part, index, array) => (
-                <span key={index}>
-                  {part}
-                  {index < array.length - 1 && (
-                    <input
-                      type="text"
-                      value={userAnswer}
-                      onChange={(e) => setUserAnswer(e.target.value)}
-                      placeholder="Type your answer..."
-                      className="mx-2 px-3 py-2 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-medium text-center min-w-[120px] text-black"
-                      disabled={isSubmitted}
-                    />
-                  )}
-                </span>
-              ))}
+            {/* Question Display */}
+            <div className="text-lg text-gray-700 leading-relaxed mb-4">
+              {exercise.question}
             </div>
+            {/* Single Input Field for Complete Answer */}
+            <div className="text-center">
+              <input
+                type="text"
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                placeholder="Type your complete answer..."
+                className="w-full max-w-md px-4 py-3 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-medium text-black text-center"
+                disabled={isSubmitted}
+              />
+            </div>
+            {/* Show the expected format for multiple blanks */}
+            {exercise.question.split('_____').length > 2 && (
+              <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                <p className="text-sm text-blue-800">
+                  <strong>Note:</strong> This exercise has multiple blanks. Type your complete answer in the input field above.
+                </p>
+              </div>
+            )}
           </div>
         )
 
@@ -337,6 +342,38 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
           </div>
         )
 
+      case 'matching':
+        return (
+          <div className="space-y-4">
+            <div className="text-center mb-4">
+              <p className="text-gray-600">Match the irregular verb forms with their infinitives.</p>
+            </div>
+            
+            {/* Matching pairs display */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {exercise.pairs && exercise.pairs.map((pair, index) => (
+                <div key={index} className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                  <div className="text-center">
+                    <p className="font-medium text-blue-800 mb-2">{pair.french}</p>
+                    <p className="text-gray-600 text-sm">→</p>
+                    <p className="font-medium text-green-800">{pair.english}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="text-center">
+              <p className="text-gray-600 mb-3">Review the irregular verb forms above.</p>
+              <button
+                onClick={() => onComplete(true)}
+                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
+              >
+                Mark as Complete
+              </button>
+            </div>
+          </div>
+        )
+
       default:
         return <p className="text-gray-600">Exercise type not supported</p>
     }
@@ -352,6 +389,7 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
       case 'negation_transformation': return '🔄'
       case 'fill_blank_negation': return '✏️'
       case 'vocabulary_match': return '🔗'
+      case 'matching': return '🔗'
       default: return '❓'
     }
   }

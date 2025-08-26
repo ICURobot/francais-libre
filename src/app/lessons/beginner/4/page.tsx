@@ -334,13 +334,25 @@ export default function Lesson4Page() {
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center mt-12">
-          <Link href="/lessons/beginner/3" className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition">
+        {/* Navigation Footer */}
+        <div className="flex justify-between items-center mt-16 pt-8 border-t border-gray-200">
+          <Link
+            href="/lessons/beginner/3"
+            className="flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300"
+          >
             ← Previous Lesson
           </Link>
-          <Link href="/lessons" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-            Back to Lessons
+          <Link
+            href="/lessons/beginner"
+            className="flex items-center text-gray-600 hover:text-gray-700 font-medium transition-colors duration-300"
+          >
+            Back to Beginner Lessons
+          </Link>
+          <Link
+            href="/lessons/beginner/5"
+            className="flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300"
+          >
+            Next Lesson →
           </Link>
         </div>
       </div>

@@ -384,23 +384,21 @@ export default function Lesson10Page() {
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-          <Link 
-            href="/lessons/beginner/9" 
-            className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition flex items-center"
+        {/* Navigation Footer */}
+        <div className="flex justify-between items-center mt-16 pt-8 border-t border-gray-200">
+          <Link
+            href="/lessons/beginner/9"
+            className="flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300"
           >
             ← Previous Lesson
           </Link>
-          
-          <div className="text-center">
-            <p className="text-gray-600">Lesson 10 of 10</p>
-            <p className="text-sm text-gray-500">Completing Regular Verbs & Daily Life</p>
-          </div>
-          
-          <div className="text-gray-400 px-6 py-3">
-            Next Lesson →
-          </div>
+          <Link
+            href="/lessons/beginner"
+            className="flex items-center text-gray-600 hover:text-gray-700 font-medium transition-colors duration-300"
+          >
+            Back to Beginner Lessons
+          </Link>
+          <div></div>
         </div>
       </div>
     </div>

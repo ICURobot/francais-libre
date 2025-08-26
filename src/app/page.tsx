@@ -798,7 +798,7 @@ export default function Home() {
                 Master French with <span className="text-yellow-300 drop-shadow-lg">Smart</span> Learning
               </h1>
               <p className="text-xl md:text-2xl mb-8 opacity-95">
-                Learn French through proven dialogue-based lessons and structured grammar practice. Start with 10 free beginner lessons!
+                Learn French through proven dialogue-based lessons and structured grammar practice. Start with 10 free A1 lessons and progress to A2 level!
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
                 <EnhancedCTA 
@@ -821,7 +821,7 @@ export default function Home() {
               <div className="flex justify-center items-center space-x-8 text-sm opacity-90">
                 <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
                   <span className="text-green-300 mr-2">✓</span>
-                  10 Free Beginner Lessons
+                  10 Free A1 Lessons + A2 Level
                 </div>
                 <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
                   <span className="text-blue-200 mr-2">🎵</span>
@@ -1180,7 +1180,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 className="text-5xl md:text-6xl font-bold mb-8">Ready to Start Your French Journey?</h2>
             <p className="text-xl mb-10 opacity-95">
-              Begin with our first 10 free lessons and experience the most effective way to learn French
+              Begin with our first 10 free A1 lessons and progress to A2 level for intermediate French skills
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-8 mb-12">
               <EnhancedCTA 
@@ -1202,10 +1202,10 @@ export default function Home() {
                 <span className="text-green-300 mr-2">✓</span>
                 No credit card required
               </div>
-              <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
-                <span className="text-blue-200 mr-2">✓</span>
-                10 lessons completely free
-              </div>
+                              <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
+                  <span className="text-blue-200 mr-2">✓</span>
+                  10 A1 lessons + A2 level free
+                </div>
               <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
                 <span className="text-purple-200 mr-2">✓</span>
                 Start learning in 30 seconds
@@ -1242,8 +1242,9 @@ export default function Home() {
             <div>
               <h4 className="font-bold mb-6 text-lg">Learning</h4>
               <ul className="space-y-3 text-gray-300">
-                <li><Link href="/lessons/beginner" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Beginner Lessons</Link></li>
-                <li><Link href="/lessons" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">All Lessons</Link></li>
+                <li><Link href="/lessons/beginner" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">A1 Beginner Lessons</Link></li>
+                <li><Link href="/lessons/elementary" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">A2 Elementary Lessons</Link></li>
+                <li><Link href="/lessons" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">All Lessons by Level</Link></li>
                 <li><Link href="/grammar-guide" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Grammar Guide</Link></li>
                 <li><Link href="/vocabulary-builder" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Vocabulary Builder</Link></li>
                 <li><Link href="/pronunciation-guide" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Pronunciation Guide</Link></li>

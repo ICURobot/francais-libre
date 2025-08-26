@@ -328,23 +328,23 @@ export default function Lesson8Page() {
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center mt-12">
+        {/* Navigation Footer */}
+        <div className="flex justify-between items-center mt-16 pt-8 border-t border-gray-200">
           <Link
             href="/lessons/beginner/7"
-            className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition"
+            className="flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300"
           >
             ← Previous Lesson
           </Link>
-          
-          <div className="text-center">
-            <p className="text-gray-600">Lesson 8 of 9</p>
-            <p className="text-sm text-gray-500">Regular -er Verbs and Family</p>
-          </div>
-          
+          <Link
+            href="/lessons/beginner"
+            className="flex items-center text-gray-600 hover:text-gray-700 font-medium transition-colors duration-300"
+          >
+            Back to Beginner Lessons
+          </Link>
           <Link
             href="/lessons/beginner/9"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+            className="flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300"
           >
             Next Lesson →
           </Link>
