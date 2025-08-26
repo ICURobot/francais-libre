@@ -18,6 +18,7 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
   const [showHint, setShowHint] = useState(false)
   const [showExplanation, setShowExplanation] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [matchedPairs, setMatchedPairs] = useState<Set<number>>(new Set())
 
   const handleSubmit = useCallback(() => {
     if (!userAnswer.trim() && !selectedOption) return
@@ -253,28 +254,85 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
       case 'vocabulary_match':
         return (
           <div className="space-y-4">
-            {exercise.pairs && exercise.pairs.map((pair, index) => (
-              <div key={index} className="bg-purple-50 rounded-lg p-4 border border-purple-200">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <p className="font-medium text-purple-800 mb-1">French:</p>
-                    <p className="text-lg text-gray-800">{pair.french}</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="font-medium text-purple-800 mb-1">English:</p>
-                    <p className="text-lg text-gray-800">{pair.english}</p>
-                  </div>
-                </div>
+            <div className="text-center mb-4">
+              <p className="text-gray-600">Click on the French words to match them with their English meanings.</p>
+            </div>
+            
+            {/* French words (clickable) */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+              {exercise.pairs && exercise.pairs.map((pair, index) => (
+                <button
+                  key={`french-${index}`}
+                  onClick={() => {
+                    const newMatchedPairs = new Set(matchedPairs)
+                    if (newMatchedPairs.has(index)) {
+                      newMatchedPairs.delete(index)
+                    } else {
+                      newMatchedPairs.add(index)
+                    }
+                    setMatchedPairs(newMatchedPairs)
+                  }}
+                  className={`p-3 rounded-lg border-2 transition-all duration-200 text-center ${
+                    matchedPairs.has(index)
+                      ? 'bg-green-100 border-green-500 ring-2 ring-green-500'
+                      : 'bg-blue-100 hover:bg-blue-200 border-blue-300'
+                  }`}
+                >
+                  <p className={`font-medium ${
+                    matchedPairs.has(index) ? 'text-green-800' : 'text-blue-800'
+                  }`}>{pair.french}</p>
+                </button>
+              ))}
+            </div>
+
+            {/* English translations (clickable) */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {exercise.pairs && exercise.pairs.map((pair, index) => (
+                <button
+                  key={`english-${index}`}
+                  onClick={() => {
+                    const newMatchedPairs = new Set(matchedPairs)
+                    if (newMatchedPairs.has(index)) {
+                      newMatchedPairs.delete(index)
+                    } else {
+                      newMatchedPairs.add(index)
+                    }
+                    setMatchedPairs(newMatchedPairs)
+                  }}
+                  className={`p-3 rounded-lg border-2 transition-all duration-200 text-center ${
+                    matchedPairs.has(index)
+                      ? 'bg-green-100 border-green-500 ring-2 ring-green-500'
+                      : 'bg-purple-100 hover:bg-purple-200 border-purple-300'
+                  }`}
+                >
+                  <p className={`font-medium ${
+                    matchedPairs.has(index) ? 'text-green-800' : 'text-purple-800'
+                  }`}>{pair.english}</p>
+                </button>
+              ))}
+            </div>
+
+            {/* Progress and Instructions */}
+            <div className="text-center mt-4 space-y-3">
+              <div className="flex justify-center items-center space-x-2">
+                <span className="text-sm text-gray-600">Progress:</span>
+                <span className="text-sm font-medium text-blue-600">
+                  {matchedPairs.size} / {exercise.pairs?.length || 0} pairs matched
+                </span>
               </div>
-            ))}
-            <div className="text-center">
-              <p className="text-gray-600 mb-3">Match the French words with their English meanings.</p>
-              <button
-                onClick={() => onComplete(true)}
-                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
-              >
-                Mark as Complete
-              </button>
+              
+              <p className="text-sm text-gray-500">
+                💡 <strong>How to play:</strong> Click on a French word and its matching English translation to highlight them as a pair.
+              </p>
+              
+              {matchedPairs.size > 0 && (
+                <button
+                  onClick={() => onComplete(true)}
+                  className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
+                >
+                  Submit Matches
+                </button>
+              )}
             </div>
           </div>
         )

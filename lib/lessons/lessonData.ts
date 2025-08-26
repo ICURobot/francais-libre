@@ -5025,7 +5025,8 @@ export const beginnerLessons: BeginnerLesson[] = [
           'vous': 'you start (formal/plural)',
           'ils/elles': 'they start'
         },
-        correct_answer: ['je commence', 'tu commences', 'il/elle commence', 'nous commençons', 'vous commencez', 'ils/elles commencent']
+        correct_answer: ['je commence', 'tu commences', 'il/elle commence', 'nous commençons', 'vous commencez', 'ils/elles commencent'],
+        explanation: 'Regular -er verb conjugation: je -e, tu -es, il/elle -e, nous -ons, vous -ez, ils/elles -ent'
       },
       {
         id: 'ex-10-3',
@@ -5040,12 +5041,14 @@ export const beginnerLessons: BeginnerLesson[] = [
           'vous': 'you travel (formal/plural)',
           'ils/elles': 'they travel'
         },
-        correct_answer: ['je voyage', 'tu voyages', 'il/elle voyage', 'nous voyageons', 'vous voyagez', 'ils/elles voyagent']
+        correct_answer: ['je voyage', 'tu voyages', 'il/elle voyage', 'nous voyageons', 'vous voyagez', 'ils/elles voyagent'],
+        explanation: 'Regular -er verb conjugation: je -e, tu -es, il/elle -e, nous -ons, vous -ez, ils/elles -ent'
       },
       {
         id: 'ex-10-4',
         type: 'multiple_choice',
         question: 'Choose the correct negation for each sentence:',
+        options: ['ne...jamais', 'ne...pas', 'ne...plus', 'ne...que'],
         exercises: [
           {
             sentence: 'Il _____ voyage _____ (He never travels)',
@@ -5071,6 +5074,7 @@ export const beginnerLessons: BeginnerLesson[] = [
         id: 'ex-10-5',
         type: 'multiple_choice',
         question: 'Choose the correct nationality form:',
+        options: ['français', 'française', 'france', 'italien', 'italienne', 'italie', 'espagnol', 'espagnole', 'espagne'],
         exercises: [
           {
             question: 'Marie est _____ (Marie is French - feminine)',
@@ -5103,8 +5107,7 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-10-7',
         type: 'fill_blank',
-        question: 'Complete the sentence:',
-        sentence: 'Je _____ le français depuis deux ans.',
+        question: 'Complete the sentence: Je _____ le français depuis deux ans.',
         options: ['commence', 'commences', 'commençons', 'étudie'],
         correct_answer: ['étudie'],
         explanation: 'Je (I) + étudie (study) + le français (French) + depuis deux ans (for two years).',
@@ -5113,31 +5116,14 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-10-8',
         type: 'fill_blank',
-        question: 'Complete this conversation with appropriate -er verbs:',
-        exercises: [
-          {
-            sentence: 'Tu _____ souvent tes grands-parents ? (visit)',
-            answer: 'visites',
-            translation: 'Do you often visit your grandparents?'
-          },
-          {
-            sentence: 'Non, je ne _____ jamais le temps. (have/find)',
-            answer: 'trouve', 
-            translation: 'No, I never have time.'
-          },
-          {
-            sentence: 'Ils _____ encore dans la même maison ? (live)', 
-            answer: 'habitent',
-            translation: 'Do they still live in the same house?'
-          }
-        ],
+        question: 'Complete this conversation with appropriate -er verbs: Tu _____ souvent tes grands-parents ? (visit) Non, je ne _____ jamais le temps. (have/find) Ils _____ encore dans la même maison ? (live)',
         correct_answer: ['visites', 'trouve', 'habitent'],
         explanation: 'visites (you visit), trouve (I find), habitent (they live) - all regular -er verb forms.',
         hints: ['Look at the subject: tu = -es ending, je = -e ending, ils = -ent ending']
       },
       {
         id: 'ex-10-9',
-        type: 'matching',
+        type: 'vocabulary_match',
         question: 'Sort these words into categories:',
         pairs: [
           { french: 'française', english: 'French (feminine)' },
@@ -5156,18 +5142,8 @@ export const beginnerLessons: BeginnerLesson[] = [
       {
         id: 'ex-10-10',
         type: 'fill_blank',
-        question: 'All these verbs follow the same -er pattern. Fill in the missing forms:',
-        exercises: [
-          {
-            verb: 'enseigner',
-            forms: { 'je': 'enseigne', 'nous': 'enseignons', 'ils': 'enseignent' }
-          },
-          {
-            verb: 'chercher', 
-            forms: { 'tu': 'cherches', 'vous': 'cherchez', 'elle': 'cherche' }
-          }
-        ],
-        correct_answer: ['enseigner: tu enseignes, il/elle enseigne, vous enseignez, ils/elles enseignent', 'chercher: je cherche, il/elle cherche, nous cherchons, ils/elles cherchent'],
+        question: 'Complete the missing verb forms: enseigner: tu _____ (you teach), nous enseignons (we teach), ils _____ (they teach) | chercher: je _____ (I look for), tu cherches (you look for), elle _____ (she looks for)',
+        correct_answer: ['enseignes', 'enseignent', 'cherche', 'cherche'],
         explanation: 'Regular -er verbs follow the pattern: je -e, tu -es, il/elle -e, nous -ons, vous -ez, ils/elles -ent.',
         hints: ['Remember the pattern: -e, -es, -e, -ons, -ez, -ent', 'Look at the existing forms to see the pattern']
       }
