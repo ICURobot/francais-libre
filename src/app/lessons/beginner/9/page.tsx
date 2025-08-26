@@ -354,9 +354,12 @@ export default function Lesson9Page() {
             <p className="text-sm text-gray-500">More -er Verbs and Negation</p>
           </div>
           
-          <div className="text-gray-400 px-6 py-3">
+          <Link 
+            href="/lessons/beginner/10" 
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center"
+          >
             Next Lesson →
-          </div>
+          </Link>
         </div>
       </div>
     </div>
