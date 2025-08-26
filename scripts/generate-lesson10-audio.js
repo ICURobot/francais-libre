@@ -41,6 +41,9 @@ const lesson10Content = {
     { text: 'Non, elle ne parle que anglais et espagnol. Elle enseigne l\'espagnol.', speaker: 'female', context: 'dialogue' }
   ],
   grammar: [
+    { text: 'Je ne regarde jamais la télé.', speaker: 'male', context: 'vocabulary' },
+    { text: 'Il ne travaille plus le weekend.', speaker: 'male', context: 'vocabulary' },
+    { text: 'Elle ne parle que français.', speaker: 'male', context: 'vocabulary' },
     { text: 'Je ne voyage jamais en avion.', speaker: 'male', context: 'vocabulary' },
     { text: 'Tu ne travailles plus le samedi.', speaker: 'male', context: 'vocabulary' },
     { text: 'Elle ne parle que français.', speaker: 'male', context: 'vocabulary' },
