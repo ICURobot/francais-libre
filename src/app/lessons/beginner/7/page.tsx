@@ -44,7 +44,13 @@ export default function BeginnerLesson7Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden py-16">
-      <div className="max-w-6xl mx-auto px-4">
+      {/* Soft background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-48 h-48 bg-blue-200/10 rounded-[48px] blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-indigo-200/10 rounded-[40px] blur-3xl"></div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-6">
@@ -56,7 +62,7 @@ export default function BeginnerLesson7Page() {
         </div>
 
         {/* Welcome Introduction */}
-        <div className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl p-8 text-white text-center mb-12 shadow-lg">
+        <div className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-[24px] p-8 text-white text-center mb-12 shadow-[0_20px_60px_rgba(59,130,246,0.3)] relative overflow-hidden">
           <h2 className="text-3xl font-bold mb-4">Welcome to French Navigation! 🚇</h2>
           <p className="text-blue-100 text-lg leading-relaxed">
             Get ready to explore French cities with confidence! This lesson will transform you from a confused tourist 
@@ -67,7 +73,7 @@ export default function BeginnerLesson7Page() {
         </div>
 
         {/* Learning Objectives */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+        <div className="bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_16px_48px_rgba(0,0,0,0.1)] p-8 mb-12 border border-white/40">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">🎯 Learning Objectives</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {lesson.learning_objectives.map((objective, index) => (
@@ -80,7 +86,7 @@ export default function BeginnerLesson7Page() {
         </div>
 
         {/* Grammar Transition Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white text-center mb-12 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[24px] p-6 text-white text-center mb-12 shadow-[0_16px_48px_rgba(59,130,246,0.3)] transform transition-all duration-300 hover:scale-105 hover:shadow-[0_24px_80px_rgba(59,130,246,0.4)]">
           <h2 className="text-2xl font-bold mb-2">🧭 Navigation Language Mastery</h2>
           <p className="text-blue-100">
             Master the art of French directional expressions and spatial relationships
@@ -88,7 +94,7 @@ export default function BeginnerLesson7Page() {
         </div>
 
         {/* Grammar Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+        <div className="bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_16px_48px_rgba(0,0,0,0.1)] p-8 mb-12 border border-white/40">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
             📚 {lesson.grammar.topic}
           </h2>

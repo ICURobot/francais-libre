@@ -44,7 +44,7 @@ async function cleanupDuplicateAudio() {
     // Group by text to find duplicates
     const textGroups = new Map<string, AudioRecord[]>()
     
-    allAudio.forEach(record => {
+    allAudio.forEach((record: any) => {
       const text = record.text.trim()
       if (!textGroups.has(text)) {
         textGroups.set(text, [])

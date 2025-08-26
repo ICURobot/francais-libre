@@ -115,7 +115,7 @@ async function uploadToSupabase(text: string, audioData: Buffer, fileName: strin
   try {
     // Upload to Supabase Storage
     const formData = new FormData()
-    formData.append('file', new Blob([audioData]), fileName)
+    formData.append('file', new Blob([audioData as unknown as ArrayBuffer]), fileName)
     
     const uploadResponse = await fetch(`${SUPABASE_URL}/storage/v1/object/audio/${fileName}`, {
       method: 'POST',

@@ -54,7 +54,7 @@ export default function LessonsPage() {
         <div className="text-center">
           <div className="bg-white/80 backdrop-blur-sm rounded-[24px] p-8 shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_16px_48px_rgba(0,0,0,0.1)] border border-white/40 max-w-2xl mx-auto">
             <p className="text-gray-700 mb-6 text-lg">
-              More lessons coming soon! We're constantly adding new content to help you master French.
+              More lessons coming soon! We&apos;re constantly adding new content to help you master French.
             </p>
             <Link
               href="/"
