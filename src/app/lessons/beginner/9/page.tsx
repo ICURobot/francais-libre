@@ -272,7 +272,6 @@ export default function Lesson9Page() {
             {lesson.vocabulary.map((item) => (
               <div key={item.word} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 border border-green-200 hover:shadow-lg transition-all duration-300">
                 <div className="text-center mb-4">
-                  <div className="text-2xl mb-2">🎵</div>
                   <div className="flex items-center justify-center mb-2">
                     <h4 className="text-lg font-bold text-gray-900 mr-4 text-2xl">{item.word}</h4>
                     <button
