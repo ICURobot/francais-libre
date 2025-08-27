@@ -2,6 +2,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* Vercel Deployment Fix - Commit 5487d07 - All compilation errors resolved */
 'use client'
+
+// React-based animated checkmark with state management
+const AnimatedCheckmark = ({ delay = 0 }: { delay?: number }) => {
+  const [isPulsing, setIsPulsing] = useState(false)
+  
+  useEffect(() => {
+    // Start the animation after the initial delay
+    const startTimer = setTimeout(() => {
+      setIsPulsing(true)
+    }, delay)
+    
+    return () => clearTimeout(startTimer)
+  }, [delay])
+  
+  useEffect(() => {
+    if (!isPulsing) return
+    
+    // Create continuous pulsing effect
+    const interval = setInterval(() => {
+      setIsPulsing(prev => !prev)
+    }, 2000) // 2 second cycle
+    
+    return () => clearInterval(interval)
+  }, [isPulsing])
+  
+  return (
+    <span 
+      className="text-green-500 ml-3 text-lg inline-block transition-all duration-1000 ease-in-out"
+      style={{
+        opacity: isPulsing ? 0.7 : 1,
+        transform: isPulsing ? 'scale(1.1)' : 'scale(1)',
+        transformOrigin: 'center'
+      }}
+    >
+      ✓
+    </span>
+  )
+}
+
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase } from '../../lib/supabase'
@@ -919,22 +958,24 @@ export default function Home() {
                 <div className="space-y-5">
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
                     <span className="font-medium text-gray-900">Present Tense & Regular Verbs</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={100} color="blue" showPercentage />
-                      <span className="text-green-500 ml-3 text-lg">✓</span>
-                    </div>
+                                          <div className="flex items-center">
+                        <AnimatedProgressBar progress={100} color="blue" showPercentage />
+                        <AnimatedCheckmark delay={0} />
+                      </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
                     <span className="font-medium text-gray-900">Irregular Verbs & Conjugation</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={userProgress.grammar} color="blue" delay={200} showPercentage />
-                    </div>
+                                          <div className="flex items-center">
+                        <AnimatedProgressBar progress={userProgress.grammar} color="blue" delay={200} showPercentage />
+                        <AnimatedCheckmark delay={500} />
+                      </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
                     <span className="font-medium text-gray-900">Past Tenses (Passé Composé, Imparfait)</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={40} color="blue" delay={400} showPercentage />
-                    </div>
+                                          <div className="flex items-center">
+                        <AnimatedProgressBar progress={40} color="blue" delay={400} showPercentage />
+                        <AnimatedCheckmark delay={1000} />
+                      </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
                     <span className="font-medium text-gray-900">Future & Conditional Tenses</span>
@@ -968,22 +1009,24 @@ export default function Home() {
                 <div className="space-y-5">
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
                     <span className="font-medium text-gray-900">Greetings & Basic Introductions</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={100} color="green" showPercentage />
-                      <span className="text-green-500 ml-3 text-lg">✓</span>
-                    </div>
+                                          <div className="flex items-center">
+                        <AnimatedProgressBar progress={100} color="green" showPercentage />
+                        <AnimatedCheckmark delay={300} />
+                      </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
                     <span className="font-medium text-gray-900">Restaurant & Dining Situations</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={80} color="green" delay={200} showPercentage />
-                    </div>
+                                          <div className="flex items-center">
+                        <AnimatedProgressBar progress={80} color="green" delay={200} showPercentage />
+                        <AnimatedCheckmark delay={800} />
+                      </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
                     <span className="font-medium text-gray-900">Shopping & Daily Errands</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={userProgress.conversation} color="green" delay={400} showPercentage />
-                    </div>
+                                          <div className="flex items-center">
+                        <AnimatedProgressBar progress={userProgress.conversation} color="green" delay={400} showPercentage />
+                        <AnimatedCheckmark delay={1500} />
+                      </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
                     <span className="font-medium text-gray-900">Travel & Accommodation</span>
