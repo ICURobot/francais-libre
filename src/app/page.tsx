@@ -3,16 +3,37 @@
 /* Vercel Deployment Fix - Commit 5487d07 - All compilation errors resolved */
 'use client'
 
-// Bulletproof animated checkmark
+// React-based animated checkmark with state management
 const AnimatedCheckmark = ({ delay = 0 }: { delay?: number }) => {
+  const [isPulsing, setIsPulsing] = useState(false)
+  
+  useEffect(() => {
+    // Start the animation after the initial delay
+    const startTimer = setTimeout(() => {
+      setIsPulsing(true)
+    }, delay)
+    
+    return () => clearTimeout(startTimer)
+  }, [delay])
+  
+  useEffect(() => {
+    if (!isPulsing) return
+    
+    // Create continuous pulsing effect
+    const interval = setInterval(() => {
+      setIsPulsing(prev => !prev)
+    }, 2000) // 2 second cycle
+    
+    return () => clearInterval(interval)
+  }, [isPulsing])
+  
   return (
     <span 
-      className="text-green-500 ml-3 text-lg"
+      className="text-green-500 ml-3 text-lg inline-block transition-all duration-1000 ease-in-out"
       style={{
-        animation: 'pulse 2s ease-in-out infinite',
-        animationDelay: `${delay}ms`,
-        display: 'inline-block',
-        willChange: 'opacity, transform'
+        opacity: isPulsing ? 0.7 : 1,
+        transform: isPulsing ? 'scale(1.1)' : 'scale(1)',
+        transformOrigin: 'center'
       }}
     >
       ✓
@@ -677,31 +698,10 @@ export default function Home() {
       setUser(session?.user ?? null)
     })
 
-    // Add CSS keyframes for checkmark animations
-    const style = document.createElement('style')
-    style.textContent = `
-      @keyframes pulse {
-        0%, 100% { 
-          opacity: 1 !important; 
-          transform: scale(1) !important; 
-        }
-        50% { 
-          opacity: 0.7 !important; 
-          transform: scale(1.1) !important; 
-        }
-      }
-    `
-    style.id = 'checkmark-pulse-animations'
-    document.head.appendChild(style)
-    
-    // Force browser to recognize the animation
-    document.body.offsetHeight
+    // No CSS injection needed - using React state-based animations
     
     return () => {
       subscription.unsubscribe()
-      if (style.parentNode) {
-        style.parentNode.removeChild(style)
-      }
     }
   }, [])
 
