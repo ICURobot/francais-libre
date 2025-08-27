@@ -521,6 +521,18 @@ function CommunitySection() {
             Connect with fellow learners, practice with native speakers, and share your French learning journey
           </p>
         </div>
+        
+        {/* Community Image */}
+        <div className="mb-16">
+          <div className="relative h-[400px] rounded-[24px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
+            <Image
+              src="/community-group.png"
+              alt="French learning community members"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           <div className="bg-gray-800 rounded-2xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
@@ -585,8 +597,13 @@ function CommunitySection() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-gray-800 rounded-2xl p-8">
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mr-4 text-white font-bold">
-                S
+              <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
+                <Image
+                  src="/testimonial-woman.png"
+                  alt="Sarah Mitchell"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div>
                 <h4 className="font-bold">Sarah Mitchell</h4>
@@ -601,8 +618,13 @@ function CommunitySection() {
 
           <div className="bg-gray-800 rounded-2xl p-8">
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4 text-white font-bold">
-                M
+              <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
+                <Image
+                  src="/testimonial-man.png"
+                  alt="Marcus Johnson"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div>
                 <h4 className="font-bold">Marcus Johnson</h4>
@@ -906,6 +928,18 @@ export default function Home() {
               <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 Master French through our comprehensive curriculum combining dialogue immersion and grammar mastery
               </p>
+            </div>
+            
+            {/* Learning Image */}
+            <div className="mb-16">
+              <div className="relative h-[400px] rounded-[24px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
+                <Image
+                  src="/learning-study.png"
+                  alt="Students studying French together"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
 
             {/* Learning Tracks */}
