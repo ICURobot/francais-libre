@@ -3,16 +3,15 @@
 /* Vercel Deployment Fix - Commit 5487d07 - All compilation errors resolved */
 'use client'
 
-// Pure CSS animated checkmark
+// Bulletproof inline CSS animated checkmark
 const AnimatedCheckmark = ({ delay = 0 }: { delay?: number }) => {
   return (
     <span 
-      className="text-green-500 ml-3 text-lg inline-block animate-pulse"
+      className="text-green-500 ml-3 text-lg inline-block"
       style={{
+        animation: 'pulse 2s ease-in-out infinite',
         animationDelay: `${delay}ms`,
-        animationDuration: '2s',
-        animationIterationCount: 'infinite',
-        animationTimingFunction: 'ease-in-out'
+        display: 'inline-block'
       }}
     >
       ✓
@@ -1335,6 +1334,17 @@ export default function Home() {
         }
         .animate-fade-in {
           animation: fade-in 0.5s ease-out;
+        }
+        
+        @keyframes pulse {
+          0%, 100% { 
+            opacity: 1; 
+            transform: scale(1); 
+          }
+          50% { 
+            opacity: 0.5; 
+            transform: scale(1.2); 
+          }
         }
       `}</style>
     </div>
