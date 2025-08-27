@@ -6,6 +6,7 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase } from '../../lib/supabase'
 import Link from 'next/link'
+import Image from 'next/image'
 
 // Lazy loaded components
 const LazyPricingSection = lazy(() => Promise.resolve({ default: PricingSection }))
@@ -836,32 +837,36 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="bg-gradient-to-br from-blue-50 to-blue-100 py-20" aria-label="Platform statistics">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.1),0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.15),0_16px_48px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105 border border-white/40">
-                  <div className="text-5xl font-bold text-blue-500 mb-3 group-hover:scale-110 transition-transform duration-300">50K+</div>
-                  <div className="text-gray-700 font-medium">Active Learners</div>
+        {/* Hero Image Section - Full Width */}
+        <section className="py-20">
+          <div className="relative h-[500px] overflow-hidden">
+            <Image
+              src="/hero-students.png"
+              alt="Students learning French together"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            <div className="absolute bottom-8 left-8 right-8 text-white">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Join Thousands of Successful Learners
+              </h2>
+              <p className="text-lg text-gray-200 mb-6">
+                Our proven method combines traditional language learning with modern technology to help you achieve fluency faster.
+              </p>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                  <span className="text-green-300 mr-2">✓</span>
+                  10,000+ active students
                 </div>
-              </div>
-              <div className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.1),0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.15),0_16px_48px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105 border border-white/40">
-                  <div className="text-5xl font-bold text-green-500 mb-3 group-hover:scale-110 transition-transform duration-300">200+</div>
-                  <div className="text-gray-700 font-medium">Interactive Lessons</div>
+                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                  <span className="text-green-300 mr-2">✓</span>
+                  95% success rate
                 </div>
-              </div>
-              <div className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[24px] shadow-[inset_0_8px_32px_rgba(168,85,247,0.1),0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[inset_0_8px_32px_rgba(168,85,247,0.15),0_16px_48px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105 border border-white/40">
-                  <div className="text-5xl font-bold text-purple-500 mb-3 group-hover:scale-110 transition-transform duration-300">95%</div>
-                  <div className="text-gray-700 font-medium">Success Rate</div>
-                </div>
-              </div>
-              <div className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[24px] shadow-[inset_0_8px_32px_rgba(249,115,22,0.1),0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[inset_0_8px_32px_rgba(249,115,22,0.15),0_16px_48px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105 border border-white/40">
-                  <div className="text-5xl font-bold text-orange-500 mb-3 group-hover:scale-110 transition-transform duration-300">24/7</div>
-                  <div className="text-gray-700 font-medium">Support</div>
+                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                  <span className="text-green-300 mr-2">✓</span>
+                  Native French speakers
                 </div>
               </div>
             </div>
