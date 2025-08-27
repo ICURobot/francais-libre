@@ -179,36 +179,38 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Hero Image Section - Full Width */}
-        <section className="relative py-20">
-          <div className="relative h-[500px] overflow-hidden">
-            <Image
-              src="/hero-students.png"
-              alt="Students learning French together"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div className="absolute bottom-8 left-8 right-8 text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Join Thousands of Successful Learners
-              </h2>
-              <p className="text-lg text-gray-200 mb-6">
-                Our proven method combines traditional language learning with modern technology to help you achieve fluency faster.
-              </p>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                  <span className="text-green-300 mr-2">✓</span>
-                  10,000+ active students
-                </div>
-                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                  <span className="text-green-300 mr-2">✓</span>
-                  95% success rate
-                </div>
-                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                  <span className="text-green-300 mr-2">✓</span>
-                  Native French speakers
+        {/* Hero Image Section */}
+        <section className="relative py-20 bg-gradient-to-br from-gray-50 to-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="relative h-[500px] rounded-[24px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
+              <Image
+                src="/hero-students.png"
+                alt="Students learning French together"
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div className="absolute bottom-8 left-8 right-8 text-white">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Join Thousands of Successful Learners
+                </h2>
+                <p className="text-lg text-gray-200 mb-6">
+                  Our proven method combines traditional language learning with modern technology to help you achieve fluency faster.
+                </p>
+                <div className="flex flex-wrap gap-4 text-sm">
+                  <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                    <span className="text-green-300 mr-2">✓</span>
+                    10,000+ active students
+                  </div>
+                  <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                    <span className="text-green-300 mr-2">✓</span>
+                    95% success rate
+                  </div>
+                  <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                    <span className="text-green-300 mr-2">✓</span>
+                    Native French speakers
+                  </div>
                 </div>
               </div>
             </div>
@@ -381,83 +383,21 @@ export default function Home() {
           </div>
         </section>
 
-
-
-        {/* Community Section - Restructured */}
-        <section id="community" className="py-20 bg-black text-white">
-          <div className="max-w-7xl mx-auto px-4">
-            {/* Title at top, center-aligned */}
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Join Our Community
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Connect with fellow French learners, participate in study groups, and immerse yourself in French culture.
-              </p>
-            </div>
-            
-            {/* Wider image below title */}
-            <div className="mb-16">
-              <div className="relative h-[500px] rounded-[24px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
-                <Image
-                  src="/community-group.png"
-                  alt="French learning community members"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-            
-            {/* Feature cards below image */}
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-[24px] text-center hover:scale-105 transition-transform duration-300">
-                <div className="w-16 h-16 bg-blue-500 rounded-[16px] flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-xl">👥</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Study Groups</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Join topic-specific study groups and practice with learners at your level.
-                </p>
-              </div>
-              
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-[24px] text-center hover:scale-105 transition-transform duration-300">
-                <div className="w-16 h-16 bg-green-500 rounded-[16px] flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-xl">🗣️</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Language Exchange</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Practice with native French speakers who want to learn English.
-                </p>
-              </div>
-              
-              <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-8 rounded-[24px] text-center hover:scale-105 transition-transform duration-300">
-                <div className="w-16 h-16 bg-purple-500 rounded-[16px] flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-xl">🎭</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Live Events</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Join live conversation sessions, cultural workshops, and Q&A with experts.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Testimonials Section */}
-        <section className="py-20 bg-white text-gray-900">
+        <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 What Our Students Say
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Join thousands of successful learners who have transformed their French skills with FrançaisLibre.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* Testimonial 1 */}
-              <div className="bg-gray-50 rounded-[24px] p-8 hover:scale-105 transition-transform duration-300 border border-gray-200">
+              <div className="bg-gray-800 rounded-[24px] p-8 hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center mb-6">
                   <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4">
                     <Image
@@ -468,11 +408,11 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-gray-900">Sarah Mitchell</h4>
-                    <p className="text-gray-600">Student, University of Toronto</p>
+                    <h4 className="text-xl font-bold">Sarah Mitchell</h4>
+                    <p className="text-gray-400">Student, University of Toronto</p>
                   </div>
                 </div>
-                <p className="text-gray-700 mb-6 leading-relaxed">
+                <p className="text-gray-300 mb-6 leading-relaxed">
                   "FrançaisLibre made learning French actually enjoyable! The progressive lessons from basic dialogues to grammar mastery helped me go from complete beginner to conversational in just 6 months."
                 </p>
                 <div className="flex text-yellow-400">
@@ -481,7 +421,7 @@ export default function Home() {
               </div>
 
               {/* Testimonial 2 */}
-              <div className="bg-gray-50 rounded-[24px] p-8 hover:scale-105 transition-transform duration-300 border border-gray-200">
+              <div className="bg-gray-800 rounded-[24px] p-8 hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center mb-6">
                   <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4">
                     <Image
@@ -492,15 +432,70 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-gray-900">Marcus Johnson</h4>
-                    <p className="text-gray-600">Software Engineer, Google</p>
+                    <h4 className="text-xl font-bold">Marcus Johnson</h4>
+                    <p className="text-gray-400">Software Engineer, Google</p>
                   </div>
                 </div>
-                <p className="text-gray-700 mb-6 leading-relaxed">
+                <p className="text-gray-300 mb-6 leading-relaxed">
                   "The combination of Assimil-style dialogues and structured grammar exercises is perfect. I love how the free lessons gave me a solid foundation before upgrading to premium features."
                 </p>
                 <div className="flex text-yellow-400">
                   ⭐⭐⭐⭐⭐
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Community Section */}
+        <section id="community" className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="relative">
+                <div className="relative h-[400px] rounded-[24px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
+                  <Image
+                    src="/community-group.png"
+                    alt="French learning community members"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  Join Our Community
+                </h2>
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                  Connect with fellow French learners, participate in study groups, and immerse yourself in French culture.
+                </p>
+                <div className="space-y-6">
+                  <div className="flex items-center p-4 bg-blue-50 rounded-[16px]">
+                    <div className="w-12 h-12 bg-blue-500 rounded-[12px] flex items-center justify-center mr-4">
+                      <span className="text-white text-xl">👥</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Study Groups</h4>
+                      <p className="text-gray-600">Join weekly sessions with learners at your level.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center p-4 bg-green-50 rounded-[16px]">
+                    <div className="w-12 h-12 bg-green-500 rounded-[12px] flex items-center justify-center mr-4">
+                      <span className="text-white text-xl">🗣️</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Language Exchange</h4>
+                      <p className="text-gray-600">Practice with native French speakers.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center p-4 bg-purple-50 rounded-[16px]">
+                    <div className="w-12 h-12 bg-purple-500 rounded-[12px] flex items-center justify-center mr-4">
+                      <span className="text-white text-xl">🎭</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Cultural Events</h4>
+                      <p className="text-gray-600">Experience French culture through virtual events.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
