@@ -179,38 +179,36 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Hero Image Section */}
-        <section className="relative py-20 bg-gradient-to-br from-gray-50 to-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="relative h-[500px] rounded-[24px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
-              <Image
-                src="/hero-students.png"
-                alt="Students learning French together"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              <div className="absolute bottom-8 left-8 right-8 text-white">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Join Thousands of Successful Learners
-                </h2>
-                <p className="text-lg text-gray-200 mb-6">
-                  Our proven method combines traditional language learning with modern technology to help you achieve fluency faster.
-                </p>
-                <div className="flex flex-wrap gap-4 text-sm">
-                  <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                    <span className="text-green-300 mr-2">✓</span>
-                    10,000+ active students
-                  </div>
-                  <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                    <span className="text-green-300 mr-2">✓</span>
-                    95% success rate
-                  </div>
-                  <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                    <span className="text-green-300 mr-2">✓</span>
-                    Native French speakers
-                  </div>
+        {/* Hero Image Section - Full Width */}
+        <section className="relative py-20">
+          <div className="relative h-[500px] overflow-hidden">
+            <Image
+              src="/hero-students.png"
+              alt="Students learning French together"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            <div className="absolute bottom-8 left-8 right-8 text-white">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Join Thousands of Successful Learners
+              </h2>
+              <p className="text-lg text-gray-200 mb-6">
+                Our proven method combines traditional language learning with modern technology to help you achieve fluency faster.
+              </p>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                  <span className="text-green-300 mr-2">✓</span>
+                  10,000+ active students
+                </div>
+                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                  <span className="text-green-300 mr-2">✓</span>
+                  95% success rate
+                </div>
+                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
+                  <span className="text-green-300 mr-2">✓</span>
+                  Native French speakers
                 </div>
               </div>
             </div>
