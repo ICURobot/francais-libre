@@ -2,6 +2,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* Vercel Deployment Fix - Commit 5487d07 - All compilation errors resolved */
 'use client'
+
+// Bulletproof animated checkmark
+const AnimatedCheckmark = ({ delay = 0 }: { delay?: number }) => {
+  return (
+    <span 
+      className="text-green-500 ml-3 text-lg"
+      style={{
+        animation: 'pulse 2s ease-in-out infinite',
+        animationDelay: `${delay}ms`,
+        display: 'inline-block',
+        willChange: 'opacity, transform'
+      }}
+    >
+      ✓
+    </span>
+  )
+}
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase } from '../../lib/supabase'
@@ -520,6 +537,22 @@ function CommunitySection() {
             Connect with fellow learners, practice with native speakers, and share your French learning journey
           </p>
         </div>
+        
+        {/* Community Visual Section */}
+        <div className="mb-16">
+          <div className="relative">
+            <img 
+              src="/community-group.png" 
+              alt="Diverse group of people learning French together"
+              className="w-full h-64 object-cover rounded-2xl shadow-lg"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent rounded-2xl"></div>
+            <div className="absolute bottom-6 left-6 text-white">
+              <h3 className="text-2xl font-bold mb-2">50,000+ Learners Worldwide</h3>
+              <p className="text-gray-200">Join our global community of French learners</p>
+            </div>
+          </div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           <div className="bg-gray-800 rounded-2xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
@@ -584,9 +617,11 @@ function CommunitySection() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-gray-800 rounded-2xl p-8">
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mr-4 text-white font-bold">
-                S
-              </div>
+              <img 
+                src="/testimonial-woman.png" 
+                alt="Sarah Mitchell" 
+                className="w-20 h-20 rounded-full object-cover mr-4"
+              />
               <div>
                 <h4 className="font-bold">Sarah Mitchell</h4>
                 <p className="text-gray-400">Student, University of Toronto</p>
@@ -600,9 +635,11 @@ function CommunitySection() {
 
           <div className="bg-gray-800 rounded-2xl p-8">
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4 text-white font-bold">
-                M
-              </div>
+              <img 
+                src="/testimonial-man.png" 
+                alt="Marcus Johnson" 
+                className="w-20 h-20 rounded-full object-cover mr-4"
+              />
               <div>
                 <h4 className="font-bold">Marcus Johnson</h4>
                 <p className="text-gray-400">Software Engineer, Google</p>
@@ -640,7 +677,32 @@ export default function Home() {
       setUser(session?.user ?? null)
     })
 
-    return () => subscription.unsubscribe()
+    // Add CSS keyframes for checkmark animations
+    const style = document.createElement('style')
+    style.textContent = `
+      @keyframes pulse {
+        0%, 100% { 
+          opacity: 1 !important; 
+          transform: scale(1) !important; 
+        }
+        50% { 
+          opacity: 0.7 !important; 
+          transform: scale(1.1) !important; 
+        }
+      }
+    `
+    style.id = 'checkmark-pulse-animations'
+    document.head.appendChild(style)
+    
+    // Force browser to recognize the animation
+    document.body.offsetHeight
+    
+    return () => {
+      subscription.unsubscribe()
+      if (style.parentNode) {
+        style.parentNode.removeChild(style)
+      }
+    }
   }, [])
 
   const handleAuthAction = (action: string) => {
@@ -792,8 +854,8 @@ export default function Home() {
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/10 rounded-[16px] blur-xl animate-pulse delay-500"></div>
           </div>
           
-          <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
-            <div className="max-w-4xl mx-auto">
+          <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
               <h1 id="hero-heading" className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
                 Master French with <span className="text-yellow-300 drop-shadow-lg">Smart</span> Learning
               </h1>
@@ -818,7 +880,7 @@ export default function Home() {
                   ▶️ Try Demo Below
                 </EnhancedCTA>
               </div>
-              <div className="flex justify-center items-center space-x-8 text-sm opacity-90">
+              <div className="flex flex-wrap justify-center items-center space-x-4 space-y-2 text-sm opacity-90">
                 <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
                   <span className="text-green-300 mr-2">✓</span>
                   10 Free A1 Lessons + A2 Level
@@ -836,33 +898,22 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="bg-gradient-to-br from-blue-50 to-blue-100 py-20" aria-label="Platform statistics">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.1),0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.15),0_16px_48px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105 border border-white/40">
-                  <div className="text-5xl font-bold text-blue-500 mb-3 group-hover:scale-110 transition-transform duration-300">50K+</div>
-                  <div className="text-gray-700 font-medium">Active Learners</div>
-                </div>
-              </div>
-              <div className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.1),0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.15),0_16px_48px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105 border border-white/40">
-                  <div className="text-5xl font-bold text-green-500 mb-3 group-hover:scale-110 transition-transform duration-300">200+</div>
-                  <div className="text-gray-700 font-medium">Interactive Lessons</div>
-                </div>
-              </div>
-              <div className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[24px] shadow-[inset_0_8px_32px_rgba(168,85,247,0.1),0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[inset_0_8px_32px_rgba(168,85,247,0.15),0_16px_48px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105 border border-white/40">
-                  <div className="text-5xl font-bold text-purple-500 mb-3 group-hover:scale-110 transition-transform duration-300">95%</div>
-                  <div className="text-gray-700 font-medium">Success Rate</div>
-                </div>
-              </div>
-              <div className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[24px] shadow-[inset_0_8px_32px_rgba(249,115,22,0.1),0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[inset_0_8px_32px_rgba(249,115,22,0.15),0_16px_48px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105 border border-white/40">
-                  <div className="text-5xl font-bold text-orange-500 mb-3 group-hover:scale-110 transition-transform duration-300">24/7</div>
-                  <div className="text-gray-700 font-medium">Support</div>
-                </div>
+        {/* Hero Image Section */}
+        <section className="py-20">
+          <div className="max-w-none mx-auto px-0">
+            <div className="relative">
+              <img 
+                src="/hero-students.png" 
+                alt="Students learning French together in a modern classroom"
+                className="w-full h-[500px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent"></div>
+              <div className="absolute bottom-12 left-12 text-white max-w-2xl">
+                <h2 className="text-4xl font-bold mb-4">Join 50,000+ Learners Worldwide</h2>
+                <p className="text-xl text-blue-100 leading-relaxed">
+                  Experience the proven method that combines dialogue-based learning with structured grammar practice. 
+                  Start your French journey today with our free A1 lessons.
+                </p>
               </div>
             </div>
           </div>
@@ -921,19 +972,21 @@ export default function Home() {
                     <span className="font-medium text-gray-900">Present Tense & Regular Verbs</span>
                     <div className="flex items-center">
                       <AnimatedProgressBar progress={100} color="blue" showPercentage />
-                      <span className="text-green-500 ml-3 text-lg">✓</span>
+                      <AnimatedCheckmark delay={0} />
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
                     <span className="font-medium text-gray-900">Irregular Verbs & Conjugation</span>
                     <div className="flex items-center">
                       <AnimatedProgressBar progress={userProgress.grammar} color="blue" delay={200} showPercentage />
+                      <AnimatedCheckmark delay={500} />
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
-                    <span className="font-medium text-gray-900">Past Tenses (Passé Composé, Imparfait)</span>
+                    <span className="text-gray-900 font-medium">Past Tenses (Passé Composé, Imparfait)</span>
                     <div className="flex items-center">
                       <AnimatedProgressBar progress={40} color="blue" delay={400} showPercentage />
+                      <AnimatedCheckmark delay={1000} />
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
@@ -964,25 +1017,28 @@ export default function Home() {
                     <h3 className="text-3xl font-bold text-gray-900">Dialogue Practice</h3>
                     <p className="text-gray-700 text-lg">Real-world French Communication</p>
                   </div>
+
                 </div>
                 <div className="space-y-5">
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
                     <span className="font-medium text-gray-900">Greetings & Basic Introductions</span>
                     <div className="flex items-center">
                       <AnimatedProgressBar progress={100} color="green" showPercentage />
-                      <span className="text-green-500 ml-3 text-lg">✓</span>
+                      <AnimatedCheckmark delay={300} />
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
                     <span className="font-medium text-gray-900">Restaurant & Dining Situations</span>
                     <div className="flex items-center">
                       <AnimatedProgressBar progress={80} color="green" delay={200} showPercentage />
+                      <AnimatedCheckmark delay={800} />
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
                     <span className="font-medium text-gray-900">Shopping & Daily Errands</span>
                     <div className="flex items-center">
                       <AnimatedProgressBar progress={userProgress.conversation} color="green" delay={400} showPercentage />
+                      <AnimatedCheckmark delay={1500} />
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
@@ -1093,6 +1149,40 @@ export default function Home() {
                 Experience personalized French learning with modern technology and proven teaching methods
               </p>
             </div>
+            
+            {/* Visual Learning Section */}
+            <div className="mb-20">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-6">Learn at Your Own Pace</h3>
+                  <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                    Our proven method combines dialogue-based learning with structured grammar practice. 
+                    Start with real conversations, then build your understanding step by step.
+                  </p>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <span className="text-green-500 text-xl">✓</span>
+                      <span className="text-gray-700">10 free A1 lessons to get started</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-green-500 text-xl">✓</span>
+                      <span className="text-gray-700">Audio pronunciation for every word</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-green-500 text-xl">✓</span>
+                      <span className="text-gray-700">Progress to A2 level seamlessly</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative">
+                  <img 
+                    src="/learning-study.png" 
+                    alt="Person studying French with books and learning materials"
+                    className="w-full h-80 object-cover rounded-2xl shadow-lg"
+                  />
+                </div>
+              </div>
+            </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {/* Audio Pronunciation */}
@@ -1138,6 +1228,7 @@ export default function Home() {
                     <div className="font-medium mb-2">Premium AI Features:</div>
                     <div className="text-gray-700">Speech Analysis, Exercise Generation, AI Chat</div>
                   </div>
+
                 </div>
                 <span className="inline-block bg-gradient-to-r from-purple-500 to-purple-600 text-white text-sm px-4 py-2 rounded-[16px] font-medium shadow-[0_4px_16px_rgba(168,85,247,0.3)]">Premium Feature</span>
               </div>
