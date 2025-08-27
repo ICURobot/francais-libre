@@ -384,7 +384,7 @@ export default function Home() {
 
 
         {/* Community Section - Restructured */}
-        <section id="community" className="py-20 bg-white">
+        <section id="community" className="py-20 bg-black text-white">
           <div className="max-w-7xl mx-auto px-4">
             {/* Title at top, center-aligned */}
             <div className="text-center mb-16">
@@ -444,20 +444,20 @@ export default function Home() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+        <section className="py-20 bg-white text-gray-900">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
                 What Our Students Say
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Join thousands of successful learners who have transformed their French skills with FrançaisLibre.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* Testimonial 1 */}
-              <div className="bg-gray-800 rounded-[24px] p-8 hover:scale-105 transition-transform duration-300">
+              <div className="bg-gray-50 rounded-[24px] p-8 hover:scale-105 transition-transform duration-300 border border-gray-200">
                 <div className="flex items-center mb-6">
                   <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4">
                     <Image
@@ -468,11 +468,11 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold">Sarah Mitchell</h4>
-                    <p className="text-gray-400">Student, University of Toronto</p>
+                    <h4 className="text-xl font-bold text-gray-900">Sarah Mitchell</h4>
+                    <p className="text-gray-600">Student, University of Toronto</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-6 leading-relaxed">
+                <p className="text-gray-700 mb-6 leading-relaxed">
                   "FrançaisLibre made learning French actually enjoyable! The progressive lessons from basic dialogues to grammar mastery helped me go from complete beginner to conversational in just 6 months."
                 </p>
                 <div className="flex text-yellow-400">
@@ -481,7 +481,7 @@ export default function Home() {
               </div>
 
               {/* Testimonial 2 */}
-              <div className="bg-gray-800 rounded-[24px] p-8 hover:scale-105 transition-transform duration-300">
+              <div className="bg-gray-50 rounded-[24px] p-8 hover:scale-105 transition-transform duration-300 border border-gray-200">
                 <div className="flex items-center mb-6">
                   <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4">
                     <Image
@@ -492,11 +492,11 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold">Marcus Johnson</h4>
-                    <p className="text-gray-400">Software Engineer, Google</p>
+                    <h4 className="text-xl font-bold text-gray-900">Marcus Johnson</h4>
+                    <p className="text-gray-600">Software Engineer, Google</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-6 leading-relaxed">
+                <p className="text-gray-700 mb-6 leading-relaxed">
                   "The combination of Assimil-style dialogues and structured grammar exercises is perfect. I love how the free lessons gave me a solid foundation before upgrading to premium features."
                 </p>
                 <div className="flex text-yellow-400">
