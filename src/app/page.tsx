@@ -3,37 +3,16 @@
 /* Vercel Deployment Fix - Commit 5487d07 - All compilation errors resolved */
 'use client'
 
-// React-based animated checkmark with state management
+// Pure CSS animated checkmark
 const AnimatedCheckmark = ({ delay = 0 }: { delay?: number }) => {
-  const [isPulsing, setIsPulsing] = useState(false)
-  
-  useEffect(() => {
-    // Start the animation after the initial delay
-    const startTimer = setTimeout(() => {
-      setIsPulsing(true)
-    }, delay)
-    
-    return () => clearTimeout(startTimer)
-  }, [delay])
-  
-  useEffect(() => {
-    if (!isPulsing) return
-    
-    // Create continuous pulsing effect
-    const interval = setInterval(() => {
-      setIsPulsing(prev => !prev)
-    }, 2000) // 2 second cycle
-    
-    return () => clearInterval(interval)
-  }, [isPulsing])
-  
   return (
     <span 
-      className="text-green-500 ml-3 text-lg inline-block transition-all duration-1000 ease-in-out"
+      className="text-green-500 ml-3 text-lg inline-block animate-pulse"
       style={{
-        opacity: isPulsing ? 0.7 : 1,
-        transform: isPulsing ? 'scale(1.1)' : 'scale(1)',
-        transformOrigin: 'center'
+        animationDelay: `${delay}ms`,
+        animationDuration: '2s',
+        animationIterationCount: 'infinite',
+        animationTimingFunction: 'ease-in-out'
       }}
     >
       ✓
@@ -679,7 +658,32 @@ export default function Home() {
       setUser(session?.user ?? null)
     })
 
-    return () => subscription.unsubscribe()
+    // Add custom CSS for checkmark animations
+    const style = document.createElement('style')
+    style.textContent = `
+      @keyframes customPulse {
+        0%, 100% { 
+          opacity: 1; 
+          transform: scale(1); 
+        }
+        50% { 
+          opacity: 0.5; 
+          transform: scale(1.2); 
+        }
+      }
+      
+      .animate-pulse {
+        animation: customPulse 2s ease-in-out infinite !important;
+      }
+    `
+    document.head.appendChild(style)
+    
+    return () => {
+      subscription.unsubscribe()
+      if (style.parentNode) {
+        style.parentNode.removeChild(style)
+      }
+    }
   }, [])
 
   const handleAuthAction = (action: string) => {
