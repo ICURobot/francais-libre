@@ -100,31 +100,37 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'Je suis étudiant en médecine.',
           english: 'I am a medical student.',
+          pronunciation: 'Zhuh sweez ay-too-dyon on med-SIN',
           highlight: 'suis'
         },
         {
           french: 'Vous êtes très aimable.',
           english: 'You are very kind.',
+          pronunciation: 'Voo-zett treh eh-MAH-bluh',
           highlight: 'êtes'
         },
         {
           french: 'Elle est de Marseille.',
           english: 'She is from Marseille.',
+          pronunciation: 'El eh duh Mar-SAY',
           highlight: 'est'
         },
         {
           french: 'Nous sommes en retard.',
           english: 'We are late.',
+          pronunciation: 'Noo somm-zon ruh-TAR',
           highlight: 'sommes'
         },
         {
           french: 'Ils sont français.',
           english: 'They are French.',
+          pronunciation: 'Eel son fron-SEH',
           highlight: 'sont'
         },
         {
           french: 'Tu es mon ami.',
           english: 'You are my friend.',
+          pronunciation: 'Too eh mon-nah-MEE',
           highlight: 'es'
         }
       ],
@@ -528,36 +534,43 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'J\'ai vingt-cinq ans.',
           english: 'I am twenty-five years old.',
+          pronunciation: 'Jhay vant-sank ON',
           highlight: 'ai'
         },
         {
           french: 'Vous avez des enfants?',
           english: 'Do you have children?',
+          pronunciation: 'Voo-zah-vay day-zon-FON',
           highlight: 'avez'
         },
         {
           french: 'Elle a une belle maison.',
           english: 'She has a beautiful house.',
+          pronunciation: 'El ah oon bel may-ZON',
           highlight: 'a'
         },
         {
           french: 'Nous avons beaucoup d\'amis.',
           english: 'We have many friends.',
+          pronunciation: 'Noo-zah-von bo-koo dah-MEE',
           highlight: 'avons'
         },
         {
           french: 'Ils ont de la chance.',
           english: 'They are lucky.',
+          pronunciation: 'Eel-zon duh la SHONS',
           highlight: 'ont'
         },
         {
           french: 'Tu as raison.',
           english: 'You are right.',
+          pronunciation: 'Too ah ray-ZON',
           highlight: 'as'
         },
         {
           french: 'J\'ai soif et j\'ai faim.',
           english: 'I am thirsty and I am hungry.',
+          pronunciation: 'Jhay swaf ay jhay FAM',
           highlight: 'ai'
         }
       ],
@@ -977,31 +990,37 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'J\'ai très faim et j\'ai soif.',
           english: 'I am very hungry and I am thirsty.',
+          pronunciation: 'Jhay treh FAM ay jhay SWAF',
           highlight: 'ai faim... ai soif'
         },
         {
           french: 'Je voudrais un café, s\'il vous plaît.',
           english: 'I would like a coffee, please.',
+          pronunciation: 'Zhuh voo-dray un ka-FAY, seel voo PLEH',
           highlight: 'voudrais'
         },
         {
           french: 'Combien ça coûte?',
           english: 'How much does it cost?',
+          pronunciation: 'Com-byan sa KOOT?',
           highlight: 'combien'
         },
         {
           french: 'Nous avons froid en hiver.',
           english: 'We are cold in winter.',
+          pronunciation: 'Noo-zah-von frwa on-ee-VAIR',
           highlight: 'avons froid'
         },
         {
           french: 'Tu as raison, c\'est délicieux!',
           english: 'You are right, it\'s delicious!',
+          pronunciation: 'Too ah ray-ZON, say day-lee-SYUH!',
           highlight: 'as raison'
         },
         {
           french: 'Ils ont chaud en été.',
           english: 'They are hot in summer.',
+          pronunciation: 'Eel-zon show on-ay-TAY',
           highlight: 'ont chaud'
         }
       ],
@@ -1445,31 +1464,37 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'Il est quinze heures trente.',
           english: 'It is 3:30 PM.',
+          pronunciation: 'Eel eh kanz-ERR TRAHNT',
           highlight: 'quinze heures trente'
         },
         {
           french: 'Nous sommes lundi, le trois janvier.',
           english: 'It is Monday, January 3rd.',
+          pronunciation: 'Noo somm lun-DEE, luh trwa zhon-VYAY',
           highlight: 'lundi, le trois janvier'
         },
         {
           french: 'J\'ai rendez-vous à dix heures et demie.',
           english: 'I have an appointment at 10:30.',
+          pronunciation: 'Jhay ron-day-voo ah deez-ERR ay duh-MEE',
           highlight: 'dix heures et demie'
         },
         {
           french: 'Quelle heure est-il? Il est midi.',
           english: 'What time is it? It is noon.',
+          pronunciation: 'Kel err eh-TEEL? Eel eh mee-DEE',
           highlight: 'Quelle heure... midi'
         },
         {
           french: 'Mon anniversaire est le vingt-cinq décembre.',
           english: 'My birthday is December 25th.',
+          pronunciation: 'Mon ah-nee-ver-sair eh luh vant-sank day-SOM-bruh',
           highlight: 'le vingt-cinq décembre'
         },
         {
           french: 'Le magasin ouvre à neuf heures du matin.',
           english: 'The store opens at 9 AM.',
+          pronunciation: 'Luh ma-ga-zan oov-ruh ah nuh-VERR doo ma-TAN',
           highlight: 'neuf heures du matin'
         }
       ],
@@ -2127,31 +2152,37 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'Le pain et la viande sont délicieux.',
           english: 'The bread and the meat are delicious.',
+          pronunciation: 'Luh pan ay la vyond son day-lee-SYUH',
           highlight: 'Le... la'
         },
         {
           french: 'J\'achète un gâteau et une tarte.',
           english: 'I\'m buying a cake and a tart.',
+          pronunciation: 'Zha-shet un ga-TOE ay oon TART',
           highlight: 'un... une'
         },
         {
           french: 'Je voudrais du fromage et de la salade.',
           english: 'I would like some cheese and some salad.',
+          pronunciation: 'Zhuh voo-dray doo fro-MAZH ay duh la sa-LAHD',
           highlight: 'du... de la'
         },
         {
           french: 'Les tomates et les carottes sont fraîches.',
           english: 'The tomatoes and the carrots are fresh.',
+          pronunciation: 'Lay toe-mat ay lay ka-rot son FRESH',
           highlight: 'Les... les'
         },
         {
           french: 'Il y a des pommes et des oranges.',
           english: 'There are apples and oranges.',
+          pronunciation: 'Eel ee ah day pom ay day-zo-RONZH',
           highlight: 'des... des'
         },
         {
           french: 'L\'eau et l\'orange sont sur la table.',
           english: 'The water and the orange are on the table.',
+          pronunciation: 'Low ay lo-ronzh son soor la TAH-bluh',
           highlight: 'L\'... l\''
         }
       ],
@@ -2706,31 +2737,37 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'Je voudrais le menu, s\'il vous plaît.',
           english: 'I would like the menu, please.',
+          pronunciation: 'Zhuh voo-dray luh muh-NOO, seel voo PLEH',
           highlight: 'voudrais'
         },
         {
           french: 'Qu\'est-ce que vous recommandez comme dessert?',
           english: 'What do you recommend for dessert?',
+          pronunciation: 'Kess-kuh voo ruh-ko-mon-day kom day-SAIR?',
           highlight: 'recommandez'
         },
         {
           french: 'Je suis allergique aux fruits de mer.',
           english: 'I am allergic to seafood.',
+          pronunciation: 'Zhuh sweez ah-lair-ZHEEK oh frwee duh MAIR',
           highlight: 'allergique aux'
         },
         {
           french: 'L\'addition, s\'il vous plaît.',
           english: 'The bill, please.',
+          pronunciation: 'Lah-dee-SYON, seel voo PLEH',
           highlight: 'L\'addition'
         },
         {
           french: 'Est-ce que le service est compris?',
           english: 'Is service included?',
+          pronunciation: 'Ess-kuh luh sair-veess eh com-PREE?',
           highlight: 'service est compris'
         },
         {
           french: 'C\'est délicieux! Mes compliments au chef.',
           english: 'It\'s delicious! My compliments to the chef.',
+          pronunciation: 'Say day-lee-SYUH! May com-plee-MON oh SHEF',
           highlight: 'délicieux... compliments'
         }
       ],
@@ -3293,31 +3330,37 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'Allez tout droit jusqu\'au carrefour.',
           english: 'Go straight ahead until the intersection.',
+          pronunciation: 'Ah-lay too drwa zhoos-koh kar-FOOR',
           highlight: 'tout droit jusqu\'au'
         },
         {
           french: 'Tournez à gauche après la banque.',
           english: 'Turn left after the bank.',
+          pronunciation: 'Toor-nay ah GOASH ah-preh la BONK',
           highlight: 'Tournez à gauche après'
         },
         {
           french: 'La pharmacie est en face de la boulangerie.',
           english: 'The pharmacy is across from the bakery.',
+          pronunciation: 'La far-ma-SEE eh-ton fass duh la boo-lonzh-REE',
           highlight: 'en face de'
         },
         {
           french: 'C\'est à dix minutes à pied.',
           english: 'It\'s a 10-minute walk.',
+          pronunciation: 'Set ah dee mee-NOOT ah PYAY',
           highlight: 'à dix minutes à pied'
         },
         {
           french: 'Prenez le métro ligne 4 direction Porte de Clignancourt.',
           english: 'Take metro line 4 direction Porte de Clignancourt.',
+          pronunciation: 'Pruh-nay luh may-tro leen-yuh KATR dee-rek-syon Port duh Klee-nyon-KOOR',
           highlight: 'Prenez le métro ligne 4 direction'
         },
         {
           french: 'Descendez à la prochaine station.',
           english: 'Get off at the next station.',
+          pronunciation: 'Day-son-day ah la pro-shen stah-SYON',
           highlight: 'Descendez à la prochaine'
         }
       ],
@@ -3867,31 +3910,37 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'Je parle français avec mes amis.',
           english: 'I speak French with my friends.',
+          pronunciation: 'Zhuh parl fron-SEH ah-vek may-zah-MEE',
           highlight: 'parle'
         },
         {
           french: 'Tu habites dans une belle maison.',
           english: 'You live in a beautiful house.',
+          pronunciation: 'Too ah-beet donz-oon bel may-ZON',
           highlight: 'habites'
         },
         {
           french: 'Il travaille comme ingénieur.',
           english: 'He works as an engineer.',
+          pronunciation: 'Eel tra-vai kom an-zhay-NYUR',
           highlight: 'travaille'
         },
         {
           french: 'Nous étudions ensemble.',
           english: 'We study together.',
+          pronunciation: 'Noo-zay-too-DYON on-SOM-bluh',
           highlight: 'étudions'
         },
         {
           french: 'Vous aimez la cuisine française.',
           english: 'You like French cuisine.',
+          pronunciation: 'Voo-zem-ay la kwee-zeen fron-SEZ',
           highlight: 'aimez'
         },
         {
           french: 'Ils parlent plusieurs langues.',
           english: 'They speak several languages.',
+          pronunciation: 'Eel parl ploo-zyur LONG',
           highlight: 'parlent'
         }
       ],
@@ -4735,16 +4784,19 @@ export const beginnerLessons: BeginnerLesson[] = [
         {
           french: 'Je ne regarde jamais la télé',
           english: 'I never watch TV',
+          pronunciation: 'Zhuh nuh ruh-gard zha-may la tay-LAY',
           highlight: 'ne...jamais = never'
         },
         {
           french: 'Il ne travaille plus le weekend',
           english: 'He doesn\'t work on weekends anymore',
+          pronunciation: 'Eel nuh tra-vai PLOO luh week-END',
           highlight: 'ne...plus = no longer'
         },
         {
           french: 'Elle ne parle que français',
           english: 'She only speaks French',
+          pronunciation: 'El nuh parl kuh fron-SEH',
           highlight: 'ne...que = only'
         }
       ],

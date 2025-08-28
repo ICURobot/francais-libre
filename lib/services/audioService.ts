@@ -1,9 +1,7 @@
 import { audioStorageService, AudioFile } from './audioStorageService'
-import { elevenLabsService } from './elevenLabsService'
 
 export interface AudioPlaybackOptions {
   voicePreference?: 'female' | 'male' | 'auto'
-  fallbackToTTS?: boolean
 }
 
 export class AudioService {
@@ -45,14 +43,6 @@ export class AudioService {
         }
       }
       
-      console.log(`❌ No stored audio found for any text variant`)
-
-      // If no stored audio and fallback is enabled, generate it
-      if (options.fallbackToTTS) {
-        console.log(`🎵 No stored audio found, generating with ElevenLabs...`)
-        return await this.generateAndPlayAudio(text, options)
-      }
-
       console.log(`❌ No stored audio found for: "${text}"`)
       return false
 
@@ -146,70 +136,7 @@ export class AudioService {
     }
   }
 
-  // Generate audio with ElevenLabs and play it
-  private async generateAndPlayAudio(text: string, options: AudioPlaybackOptions): Promise<boolean> {
-    try {
-      // Determine which voice to use
-      const voice = this.selectVoice(options.voicePreference)
-      if (!voice) {
-        console.error('No suitable voice found')
-        return false
-      }
 
-      console.log(`🎵 Generating audio with voice: ${voice.name}`)
-
-      // Generate audio with ElevenLabs
-      const audioResponse = await elevenLabsService.generateAudio({
-        text: text,
-        voiceId: voice.id,
-        fileName: `${text}_${voice.name}_${Date.now()}.mp3`
-      })
-
-      if (!audioResponse.success || !audioResponse.audioUrl) {
-        console.error('Audio generation failed:', audioResponse.error)
-        return false
-      }
-
-      // Upload to Supabase Storage
-      const uploadedFile = await audioStorageService.uploadAudioFile({
-        text: text,
-        audioData: audioResponse.audioUrl,
-        voiceId: voice.id,
-        voiceName: voice.name,
-        category: 'vocabulary', // Default category
-        fileName: audioResponse.fileName!
-      })
-
-      if (uploadedFile) {
-        console.log(`✅ Audio generated and stored: ${uploadedFile.file_name}`)
-        // Play the newly generated audio
-        return await this.playStoredAudio(uploadedFile)
-      }
-
-      return false
-    } catch (error) {
-      console.error('Audio generation and playback failed:', error)
-      return false
-    }
-  }
-
-  // Select appropriate voice based on preference
-  private selectVoice(preference?: 'female' | 'male' | 'auto'): { id: string; name: string; category: string } | undefined {
-    const voices = elevenLabsService.getVoices()
-    
-    switch (preference) {
-      case 'female':
-        // For female preference, we need to determine which female voice to use
-        // This will be handled by the calling code based on speaker
-        return voices.find(v => v.category === 'female')
-      case 'male':
-        return voices.find(v => v.category === 'male')
-      case 'auto':
-      default:
-        // Default to first female voice (Mylène)
-        return voices.find(v => v.name === 'Mylène French') || voices.find(v => v.category === 'female') || voices[0]
-    }
-  }
 
   // Check if device is mobile
   private isMobileDevice(): boolean {
@@ -260,15 +187,11 @@ export class AudioService {
     try {
       console.log('🧪 Testing audio system...')
       
-      // Test ElevenLabs connection
-      const elevenLabsTest = await elevenLabsService.testConnection()
-      console.log(`ElevenLabs connection: ${elevenLabsTest ? '✅' : '❌'}`)
-      
-      // Test Supabase Storage connection
+      // Test Supabase Storage connection only
       const storageTest = await audioStorageService.testConnection()
       console.log(`Supabase Storage connection: ${storageTest ? '✅' : '❌'}`)
       
-      return elevenLabsTest && storageTest
+      return storageTest
     } catch (error) {
       console.error('System test failed:', error)
       return false

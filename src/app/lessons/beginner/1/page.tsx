@@ -196,9 +196,14 @@ export default function Lesson1Page() {
                       🔊
                     </button>
                   </div>
-                  <div className="text-gray-600">{example.english}</div>
+                                    <div className="text-gray-600">{example.english}</div>
+                  {example.pronunciation && (
+                    <div className="text-sm text-gray-700 mt-2 font-mono bg-gray-100 px-2 py-1 rounded">
+                      {example.pronunciation}
+                    </div>
+                  )}
                   {example.highlight && (
-                    <div className="text-sm text-blue-700 mt-1">
+                    <div className="text-sm text-blue-700 mt-2">
                       Key word: <span className="font-bold">{example.highlight}</span>
                     </div>
                   )}

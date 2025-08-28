@@ -23,6 +23,7 @@ export interface DialogueExchange {
   examples: {
     french: string;
     english: string;
+    pronunciation?: string;
     highlight?: string;
   }[];
   patterns: string[];

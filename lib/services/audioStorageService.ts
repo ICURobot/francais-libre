@@ -1,27 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
-import { AudioGenerationResponse } from './elevenLabsService'
-
-// Load environment variables from .env.local (Node.js only)
-if (typeof window === 'undefined') {
-  // Only import dotenv in Node.js environment
-  import('dotenv').then(dotenv => {
-    dotenv.config({ path: '.env.local' })
-  }).catch(() => {
-    // Ignore dotenv import errors in environments where it's not available
-  })
-}
-
-// For frontend (browser), use NEXT_PUBLIC_ variables
-// For backend (Node.js), use regular variables
-const supabaseUrl = typeof window === 'undefined' 
-  ? (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL!)
-  : process.env.NEXT_PUBLIC_SUPABASE_URL!
-
-const supabaseAnonKey = typeof window === 'undefined'
-  ? (process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
-  : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey)
+import { supabase } from '../supabase'
 
 export interface AudioFile {
   id: string

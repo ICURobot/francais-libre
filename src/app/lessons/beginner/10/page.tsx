@@ -212,6 +212,11 @@ export default function Lesson10Page() {
                     </button>
                   </div>
                   <div className="text-gray-600">{example.english}</div>
+                  {example.pronunciation && (
+                    <div className="text-sm text-gray-700 mt-2 font-mono bg-gray-100 px-2 py-1 rounded">
+                      {example.pronunciation}
+                    </div>
+                  )}
                   {example.highlight && (
                     <div className="text-blue-700 text-sm mt-2 font-medium">
                       💡 {example.highlight}
