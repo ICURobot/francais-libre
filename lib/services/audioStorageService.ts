@@ -92,40 +92,7 @@ export class AudioStorageService {
     }
   }
 
-  // Upload multiple audio files (bulk upload)
-  async uploadBulkAudio(audioResponses: AudioGenerationResponse[], category: string, lessonId?: string): Promise<AudioFile[]> {
-    console.log(`📤 Starting bulk upload for ${audioResponses.length} audio files`)
-    
-    const uploadedFiles: AudioFile[] = []
-    
-    for (const audioResponse of audioResponses) {
-      if (audioResponse.success && audioResponse.audioUrl && audioResponse.fileName) {
-        // Extract voice info from filename
-        const voiceInfo = this.extractVoiceInfoFromFileName(audioResponse.fileName)
-        
-        const uploadRequest: AudioUploadRequest = {
-          text: audioResponse.fileName.split('_')[0], // Extract text from filename
-          audioData: audioResponse.audioUrl,
-          voiceId: voiceInfo.voiceId,
-          voiceName: voiceInfo.voiceName,
-          category: category as 'vocabulary' | 'dialogue' | 'pronunciation',
-          lessonId: lessonId,
-          fileName: audioResponse.fileName
-        }
-        
-        const uploadedFile = await this.uploadAudioFile(uploadRequest)
-        if (uploadedFile) {
-          uploadedFiles.push(uploadedFile)
-        }
-        
-        // Small delay between uploads
-        await new Promise(resolve => setTimeout(resolve, 500))
-      }
-    }
-    
-    console.log(`✅ Bulk upload complete: ${uploadedFiles.length}/${audioResponses.length} files uploaded`)
-    return uploadedFiles
-  }
+
 
   // Get audio file by text
   async getAudioByText(text: string): Promise<AudioFile | null> {
@@ -236,18 +203,7 @@ export class AudioStorageService {
     return new Blob([byteArray], { type: mimeType })
   }
 
-  // Extract voice info from filename
-  private extractVoiceInfoFromFileName(fileName: string): { voiceId: string; voiceName: string } {
-    // Filename format: text_voiceName_timestamp.mp3
-    const parts = fileName.split('_')
-    const voiceName = parts[parts.length - 2] || 'unknown'
-    
-    // This is a simplified approach - in practice, you might want to store voice ID separately
-    return {
-      voiceId: 'unknown', // We'll need to store this properly
-      voiceName: voiceName
-    }
-  }
+
 
   // Test the storage connection
   async testConnection(): Promise<boolean> {

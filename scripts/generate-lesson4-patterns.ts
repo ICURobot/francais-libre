@@ -236,3 +236,5 @@ generateLesson4Patterns()
 
 
 
+
+

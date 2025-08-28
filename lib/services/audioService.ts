@@ -17,7 +17,7 @@ export class AudioService {
   }
 
   // Play audio for a given text
-  async playAudio(text: string, options: AudioPlaybackOptions = {}): Promise<boolean> {
+  async playAudio(text: string): Promise<boolean> {
     try {
       console.log(`🔊 Attempting to play audio for: "${text}"`)
 

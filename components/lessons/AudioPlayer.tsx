@@ -9,7 +9,7 @@ interface AudioPlayerProps {
   className?: string; // Optional CSS classes for custom styling
   showText?: boolean; // Whether to show helper text next to the button
   autoPlay?: boolean; // Whether the audio should play automatically on mount
-  speaker?: string; // The speaker name to determine which voice to use
+
 }
 
 /**
@@ -21,7 +21,6 @@ export const AudioPlayer = ({
   className = '', 
   showText = true, 
   autoPlay = false,
-  speaker 
 }: AudioPlayerProps) => {
   // State to track if audio is currently playing.
   const [isPlaying, setIsPlaying] = useState(false);
@@ -45,23 +44,13 @@ export const AudioPlayer = ({
     try {
       // For now, we'll use the voice preference system
       // The audioService will handle voice selection based on the preference
-      let voicePreference: 'female' | 'male' | 'auto' = 'auto'
-      if (speaker === 'Marie') {
-        voicePreference = 'female' // Use second female voice for Marie
-      } else if (speaker === 'Emma') {
-        voicePreference = 'female' // Use first female voice for Emma
-      } else if (speaker === 'Thomas' || speaker === 'Serveur' || speaker === 'Hôtesse') {
-        voicePreference = 'male' // Use Andre's voice for male speakers
-      }
+
 
       // The audioService now handles text normalization centrally
       // Just pass the original text and let the service handle it
 
       // Call the new audioService which will check for stored ElevenLabs audio first
-      const success = await audioService.playAudio(text, { 
-        fallbackToTTS: false, // Temporarily disable to prevent 406 errors
-        voicePreference: voicePreference
-      });
+      const success = await audioService.playAudio(text);
       if (success) {
         // Set isPlaying to false when speech ends (we'll use a timeout as fallback)
         setTimeout(() => setIsPlaying(false), 3000);
@@ -74,7 +63,7 @@ export const AudioPlayer = ({
       setError('Audio playback failed');
       setIsPlaying(false);
     }
-  }, [isSupported, text, speaker]);
+  }, [isSupported, text]);
 
   // useEffect hook runs after the component mounts.
   useEffect(() => {

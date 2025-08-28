@@ -363,7 +363,7 @@ export default function Lesson17() {
             <AudioPlayer 
               text={item.french}
               className="mt-3"
-              speaker="Student"
+              
             />
           </div>
         ))}
@@ -465,7 +465,7 @@ export default function Lesson17() {
             <DialogueSection dialogue={lessonData.dialogue} />
             <div className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Practice Speaking</h3>
-              <AudioPlayer speaker="Student" text="Practice the dialogue with the audio player" />
+              <AudioPlayer  text="Practice the dialogue with the audio player" />
             </div>
             {renderCulturalNotesSection()}
           </div>

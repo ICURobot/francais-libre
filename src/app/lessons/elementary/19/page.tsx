@@ -353,7 +353,7 @@ export default function Lesson19() {
             <AudioPlayer
               text={item.french}
               className="mt-3"
-              speaker="Student"
+              
             />
           </div>
         ))}

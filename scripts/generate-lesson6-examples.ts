@@ -30,10 +30,7 @@ async function generateLesson6Examples() {
 
         // Generate audio with Andre's voice (male)
         console.log(`   🎤 Generating audio with Andre's voice...`)
-        const success = await audioService.playAudio(example.french, {
-          voicePreference: 'male',
-          fallbackToTTS: true
-        })
+        const success = await audioService.playAudio(example.french)
 
         if (success) {
           console.log(`   ✅ Audio generated successfully`)
@@ -68,10 +65,7 @@ async function generateLesson6Examples() {
 
         // Generate audio with Andre's voice (male)
         console.log(`   🎤 Generating audio with Andre's voice...`)
-        const success = await audioService.playAudio(conjugation.form, {
-          voicePreference: 'male',
-          fallbackToTTS: true
-        })
+        const success = await audioService.playAudio(conjugation.form)
 
         if (success) {
           console.log(`   ✅ Audio generated successfully`)

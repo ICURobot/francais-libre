@@ -352,7 +352,7 @@ export default function Lesson12() {
             <AudioPlayer 
               text={item.french}
               className="mt-3"
-              speaker="Student"
+              
             />
           </div>
         ))}
@@ -430,7 +430,7 @@ export default function Lesson12() {
             <DialogueSection dialogue={lessonData.dialogue} />
             
             <div className="text-center">
-              <AudioPlayer text="Bonjour, je voudrais pratiquer le français" speaker="Student" />
+              <AudioPlayer text="Bonjour, je voudrais pratiquer le français"  />
             </div>
           </div>
         )}

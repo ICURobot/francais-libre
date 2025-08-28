@@ -65,7 +65,7 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
   const handleSpeak = useCallback(async (text: string) => {
     setIsLoading(true)
     try {
-      await audioService.playAudio(text, { fallbackToTTS: true })
+      await audioService.playAudio(text)
     } catch (error) {
       console.error('TTS error:', error)
     } finally {

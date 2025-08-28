@@ -366,7 +366,7 @@ export default function Lesson11() {
             <AudioPlayer 
               text={item.french}
               className="mt-3"
-              speaker="Student"
+
             />
           </div>
         ))}
