@@ -22,7 +22,7 @@ export const beginnerLessons: BeginnerLesson[] = [
     
     dialogue: {
       title: 'Meeting Someone New at a Parisian Café',
-      context: 'Marie and Thomas meet for the first time during lunch time at a busy café in the Latin Quarter. This dialogue shows both formal politeness and the transition to a more relaxed conversation.',
+      context: 'Marie and Jean meet for the first time during lunch time at a busy café in the Latin Quarter. This dialogue shows both formal politeness and the transition to a more relaxed conversation.',
       exchanges: [
         {
           speaker: 'Marie',
@@ -32,7 +32,7 @@ export const beginnerLessons: BeginnerLesson[] = [
           cultural_note: 'Always ask before sitting at someone\'s table in French cafés, even if there are empty chairs.'
         },
         {
-          speaker: 'Thomas',
+          speaker: 'Jean',
           french: 'Bonjour! Oui, bien sûr, je vous en prie.',
           english: 'Hello! Yes, of course, please do.',
           pronunciation: 'bon-ZHOOR! WEE, bee-ahn SOOR, zhuh voo zahn PREE.'
@@ -44,10 +44,10 @@ export const beginnerLessons: BeginnerLesson[] = [
           pronunciation: 'mer-SEE bo-KOO. zhuh ma-PELL ma-REE doo-BWAH.'
         },
         {
-          speaker: 'Thomas',
-          french: 'Enchanté! Moi, c\'est Thomas Martin. Comment allez-vous?',
-          english: 'Nice to meet you! I\'m Thomas Martin. How are you?',
-          pronunciation: 'ahn-shahn-TAY! MWAH, say toh-MAH mar-TAHN. ko-mahn ta-lay VOO?'
+          speaker: 'Jean',
+          french: 'Enchanté! Moi, c\'est Jean Martin. Comment allez-vous?',
+          english: 'Nice to meet you! I\'m Jean Martin. How are you?',
+          pronunciation: 'ahn-shahn-TAY! MWAH, say zhahn mar-TAHN. ko-mahn ta-lay VOO?'
         },
         {
           speaker: 'Marie',
@@ -56,7 +56,7 @@ export const beginnerLessons: BeginnerLesson[] = [
           pronunciation: 'zhuh vay tray bee-AHN, mer-SEE. ay VOO?'
         },
         {
-          speaker: 'Thomas',
+          speaker: 'Jean',
           french: 'Ça va bien, merci. Vous êtes d\'ici?',
           english: 'I\'m doing well, thank you. Are you from here?',
           pronunciation: 'sah vah bee-AHN, mer-SEE. voo zayt dee-SEE?'
@@ -68,7 +68,7 @@ export const beginnerLessons: BeginnerLesson[] = [
           pronunciation: 'WEE, zhuh swee pa-ree-zee-EN. ay VOO, voo zayt frahn-SAY?'
         },
         {
-          speaker: 'Thomas',
+          speaker: 'Jean',
           french: 'Oui, je suis de Lyon. Je suis ici pour le travail.',
           english: 'Yes, I\'m from Lyon. I\'m here for work.',
           pronunciation: 'WEE, zhuh swee duh lee-OHN. zhuh swee zee-SEE poor luh tra-VIE.',
