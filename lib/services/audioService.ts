@@ -7,7 +7,9 @@ export interface AudioPlaybackOptions {
 export class AudioService {
   private static instance: AudioService
   private audioCache: Map<string, HTMLAudioElement> = new Map()
+  private static MAX_CACHE_SIZE = 50
   private isPlaying: boolean = false
+  private audioContext: AudioContext | null = null
 
   static getInstance(): AudioService {
     if (!AudioService.instance) {
@@ -16,36 +18,40 @@ export class AudioService {
     return AudioService.instance
   }
 
+  private evictOldestCacheEntry(): void {
+    if (this.audioCache.size >= AudioService.MAX_CACHE_SIZE) {
+      const firstKey = this.audioCache.keys().next().value
+      if (firstKey) {
+        this.audioCache.delete(firstKey)
+      }
+    }
+  }
+
   // Play audio for a given text
   async playAudio(text: string): Promise<boolean> {
     try {
-      console.log(`🔊 Attempting to play audio for: "${text}"`)
-
-      // Try multiple text formats to find audio in the database
-      // Different lessons store text in different formats (with/without accents, with/without punctuation)
       const textVariants = [
-        text, // Original text
-        text.replace(/[.!]+$/, '').trim(), // Remove trailing punctuation and spaces
-        text.normalize('NFD').replace(/[\u0300-\u036f]/g, ''), // Remove accents only
-        text.replace(/[.!]+$/, '').trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove both
+        text,
+        text.replace(/[.!]+$/, '').trim(),
+        text.normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
+        text.replace(/[.!]+$/, '').trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       ]
+      // Deduplicate variants
+      const uniqueVariants = [...new Set(textVariants)]
 
-      console.log(`🔧 Trying text variants:`, textVariants)
-
-      // Try each text variant to find stored audio
-      for (const textVariant of textVariants) {
-        console.log(`🔍 Trying variant: "${textVariant}"`)
-        const storedAudio = await audioStorageService.getAudioByText(textVariant)
-        
-        if (storedAudio) {
-          console.log(`✅ Found stored audio with variant: "${textVariant}"`)
-          return await this.playStoredAudio(storedAudio)
-        }
+      try {
+        const storedAudio = await Promise.any(
+          uniqueVariants.map(async (variant) => {
+            const result = await audioStorageService.getAudioByText(variant)
+            if (!result) throw new Error('not found')
+            return result
+          })
+        )
+        return await this.playStoredAudio(storedAudio)
+      } catch {
+        // No stored audio found for any variant
+        return false
       }
-      
-      console.log(`❌ No stored audio found for: "${text}"`)
-      return false
-
     } catch (error) {
       console.error('Audio playback failed:', error)
       return false
@@ -64,24 +70,9 @@ export class AudioService {
 
       // Create new audio element
       const audio = new Audio(audioFile.audio_url)
-      
-      // Set up event handlers
-      audio.onloadstart = () => console.log(`📥 Loading audio: ${audioFile.file_name}`)
-      audio.oncanplay = () => console.log(`✅ Audio ready to play: ${audioFile.file_name}`)
-      audio.onplay = () => {
-        console.log(`🎵 Playing audio: ${audioFile.file_name}`)
-        this.isPlaying = true
-      }
-      audio.onended = () => {
-        console.log(`🏁 Audio finished: ${audioFile.file_name}`)
-        this.isPlaying = false
-      }
-      audio.onerror = (error) => {
-        console.error(`❌ Audio playback error: ${audioFile.file_name}`, error)
-        this.isPlaying = false
-      }
 
       // Cache the audio element
+      this.evictOldestCacheEntry()
       this.audioCache.set(audioFile.audio_url, audio)
       
       // Play the audio
@@ -96,21 +87,23 @@ export class AudioService {
   // Play HTML audio element with mobile compatibility
   private async playAudioElement(audio: HTMLAudioElement): Promise<boolean> {
     try {
-      // Reset audio to beginning
       audio.currentTime = 0
-      
-      // Play the audio
       await audio.play()
-      return true
+      return new Promise<boolean>((resolve) => {
+        audio.onended = () => {
+          this.isPlaying = false
+          resolve(true)
+        }
+        audio.onerror = () => {
+          this.isPlaying = false
+          resolve(false)
+        }
+      })
     } catch (error) {
       console.error('Audio element playback failed:', error)
-      
-      // Handle mobile audio restrictions
       if (this.isMobileDevice()) {
-        console.log('📱 Mobile device detected, attempting to handle audio restrictions...')
         return await this.handleMobileAudioPlayback(audio)
       }
-      
       return false
     }
   }
@@ -118,16 +111,14 @@ export class AudioService {
   // Handle mobile audio playback restrictions
   private async handleMobileAudioPlayback(audio: HTMLAudioElement): Promise<boolean> {
     try {
-      // Try to resume audio context if available
       if (typeof window !== 'undefined' && 'AudioContext' in window) {
-        const audioContext = new (window as unknown as { AudioContext: typeof AudioContext }).AudioContext()
-        if (audioContext.state === 'suspended') {
-          console.log('🔧 Resuming suspended audio context...')
-          await audioContext.resume()
+        if (!this.audioContext) {
+          this.audioContext = new AudioContext()
+        }
+        if (this.audioContext.state === 'suspended') {
+          await this.audioContext.resume()
         }
       }
-
-      // Try playing again
       await audio.play()
       return true
     } catch (retryError) {
@@ -153,7 +144,6 @@ export class AudioService {
       }
     })
     this.isPlaying = false
-    console.log('⏹️ Audio playback stopped')
   }
 
   // Check if audio is currently playing
@@ -179,18 +169,14 @@ export class AudioService {
   // Clear audio cache
   clearCache(): void {
     this.audioCache.clear()
-    console.log('🗑️ Audio cache cleared')
   }
 
   // Test the audio system
   async testSystem(): Promise<boolean> {
     try {
-      console.log('🧪 Testing audio system...')
-      
       // Test Supabase Storage connection only
       const storageTest = await audioStorageService.testConnection()
-      console.log(`Supabase Storage connection: ${storageTest ? '✅' : '❌'}`)
-      
+
       return storageTest
     } catch (error) {
       console.error('System test failed:', error)

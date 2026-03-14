@@ -1,35 +1,13 @@
-'use client'
-
-import { useState, useCallback } from 'react'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
+import LessonExercises from '../../../../../components/lessons/LessonExercises'
+import AudioButton from '../../../../../components/lessons/AudioButton'
+import { beginnerLesson10 } from '../../../../../lib/lessons/data/beginner-10'
 import Link from 'next/link'
-import { audioService } from '../../../../../lib/services/audioService'
 
 export default function Lesson10Page() {
-  // State for exercise progress
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
-  const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set())
-
-  // Handle exercise completion
-  const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
-    setCompletedExercises(prev => new Set([...prev, exerciseId]))
-    if (isCorrect) {
-      setCorrectAnswers(prev => new Set([...prev, exerciseId]))
-    }
-  }, [])
-
-  // Handle reset all exercises
-  const handleResetExercises = useCallback(() => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(new Set())
-  }, [])
-
   // Get the lesson data
-  const lesson = beginnerLessons.find(l => l.id === 'beginner-10')
-  
+  const lesson = beginnerLesson10
+
   if (!lesson || !lesson.dialogue) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 relative overflow-hidden">
@@ -37,7 +15,7 @@ export default function Lesson10Page() {
           <h1 className="text-5xl font-bold text-gray-900 mb-6">Lesson Not Found</h1>
           <p className="text-2xl text-gray-700 mb-8">This lesson could not be loaded.</p>
           <Link href="/lessons" className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-[20px] hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-semibold text-lg shadow-[0_8px_32px_rgba(59,130,246,0.3)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.4)] hover:scale-105 inline-block">
-            ← Back to Lessons
+            &larr; Back to Lessons
           </Link>
         </div>
       </div>
@@ -88,20 +66,20 @@ export default function Lesson10Page() {
               Advanced French Learning Journey!
             </h2>
           </div>
-          
+
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p className="text-lg">
               This lesson combines advanced negation patterns with essential -er verbs for daily life, family, and work. You&apos;ll master the subtle differences between &ldquo;never,&rdquo; &ldquo;no longer,&rdquo; and &ldquo;only&rdquo; in French.
             </p>
-            
+
             <p className="text-lg">
               Family and cultural contexts are central to French society, and this lesson explores international family dynamics, language learning, and professional development through authentic dialogue.
             </p>
-            
+
             <p className="text-lg">
               The advanced negation forms <span className="font-bold text-blue-600">ne...jamais</span> (never), <span className="font-bold text-blue-600">ne...plus</span> (no longer), and <span className="font-bold text-blue-600">ne...que</span> (only) will give you precise control over your French expressions.
             </p>
-            
+
             <div className="bg-white rounded-xl p-4 mt-6 border-l-4 border-blue-500">
               <p className="text-lg font-semibold text-blue-800 text-center">
                 🚀 Master advanced negation and essential life verbs!
@@ -127,7 +105,7 @@ export default function Lesson10Page() {
         </div>
 
         {/* Lesson Content */}
-        <DialogueSection 
+        <DialogueSection
           dialogue={dialogue}
         />
 
@@ -135,32 +113,32 @@ export default function Lesson10Page() {
         <div className="relative mb-8">
           {/* Background with gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-blue-50 to-indigo-50 rounded-3xl transform -skew-y-1"></div>
-          
+
           {/* Content */}
           <div className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 rounded-3xl p-8 text-center shadow-2xl transform hover:scale-[1.02] transition-all duration-500">
             {/* Decorative elements */}
             <div className="absolute top-4 left-4 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
             <div className="absolute top-6 right-6 w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
             <div className="absolute bottom-4 left-8 w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-            
+
             {/* Main content */}
             <div className="flex flex-col items-center space-y-4">
               {/* Icon */}
               <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
                 <span className="text-3xl">🧠</span>
               </div>
-              
+
               {/* Text */}
               <div>
                 <h2 className="text-2xl font-bold text-white mb-2">
                   Ready to Master Advanced Grammar?
                 </h2>
                 <p className="text-blue-100 text-lg leading-relaxed max-w-2xl">
-                  Now let&apos;s dive into advanced negation patterns and essential -er verbs that will unlock the secrets of sophisticated French expression. 
+                  Now let&apos;s dive into advanced negation patterns and essential -er verbs that will unlock the secrets of sophisticated French expression.
                   Get ready to understand the building blocks of advanced communication!
                 </p>
               </div>
-              
+
               {/* Arrow indicator */}
               <div className="flex items-center space-x-2 text-blue-200">
                 <span className="text-sm font-medium">Scroll down to continue</span>
@@ -170,7 +148,7 @@ export default function Lesson10Page() {
               </div>
             </div>
           </div>
-          
+
           {/* Bottom accent */}
           <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full"></div>
         </div>
@@ -182,7 +160,7 @@ export default function Lesson10Page() {
             {lesson.grammar.topic}
           </h3>
           <p className="text-gray-700 mb-6">{lesson.grammar.explanation}</p>
-          
+
           {/* Grammar Patterns */}
           <div className="mb-6">
             <h4 className="text-lg font-semibold text-gray-800 mb-3">Key Patterns:</h4>
@@ -203,13 +181,10 @@ export default function Lesson10Page() {
                 <div key={index} className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between mb-2">
                     <div className="font-semibold text-black">{example.french}</div>
-                    <button
-                      onClick={() => audioService.playAudio(example.french)}
-                      className="text-blue-600 hover:text-blue-700 transition-colors p-1 ml-2"
-                      title="Listen to pronunciation"
-                    >
-                      🔊
-                    </button>
+                    <AudioButton
+                      text={example.french}
+                      className="text-blue-600 hover:text-blue-700 p-1 ml-2"
+                    />
                   </div>
                   <div className="text-gray-600">{example.english}</div>
                   {example.pronunciation && (
@@ -226,47 +201,39 @@ export default function Lesson10Page() {
               ))}
             </div>
           </div>
-            
+
           {/* Conjugation Tables */}
           {lesson.grammar.conjugation_table && (
             <div className="mt-8">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">Conjugation Table - Regular -er Verbs</h4>
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200/50">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {lesson.grammar.conjugation_table.map((conj, index) => (
-                    <div key={index} className="bg-white rounded-lg p-4 border border-purple-200/50 text-center hover:shadow-md transition-shadow">
-                      <div className="text-sm font-medium text-purple-600 mb-1">{conj.pronoun}</div>
-                      <div className="text-lg font-bold text-gray-900 mb-1">{conj.form}</div>
-                      <div className="text-xs text-gray-500 font-mono mb-2">{conj.pronunciation}</div>
-                      <button
-                        onClick={() => {
-                          // For il/elle and ils/elles, we need to handle them specially
-                          // since the audio was stored as separate forms
-                          let textToPlay = ''
-                          if (conj.pronoun === 'il/elle') {
-                            // Use 'il' form since that's what we stored
-                            textToPlay = `il ${conj.form}`
-                          } else if (conj.pronoun === 'ils/elles') {
-                            // Use 'ils' form since that's what we stored
-                            textToPlay = `ils ${conj.form}`
-                          } else {
-                            textToPlay = `${conj.pronoun} ${conj.form}`
-                          }
-                          
-                          audioService.playAudio(textToPlay)
-                        }}
-                        className="text-purple-600 hover:text-purple-700 transition-colors p-1 mt-2"
-                        title="Listen to pronunciation"
-                      >
-                        🔊
-                      </button>
-                    </div>
-                  ))}
+                  {lesson.grammar.conjugation_table.map((conj, index) => {
+                    let textToPlay = ''
+                    if (conj.pronoun === 'il/elle') {
+                      textToPlay = `il ${conj.form}`
+                    } else if (conj.pronoun === 'ils/elles') {
+                      textToPlay = `ils ${conj.form}`
+                    } else {
+                      textToPlay = `${conj.pronoun} ${conj.form}`
+                    }
+                    return (
+                      <div key={index} className="bg-white rounded-lg p-4 border border-purple-200/50 text-center hover:shadow-md transition-shadow">
+                        <div className="text-sm font-medium text-purple-600 mb-1">{conj.pronoun}</div>
+                        <div className="text-lg font-bold text-gray-900 mb-1">{conj.form}</div>
+                        <div className="text-xs text-gray-500 font-mono mb-2">{conj.pronunciation}</div>
+                        <AudioButton
+                          text={textToPlay}
+                          className="text-purple-600 hover:text-purple-700 p-1 mt-2"
+                        />
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>
           )}
-            
+
           {/* Additional Conjugation Tables */}
           {lesson.grammar.additional_conjugation_tables && (
             <div className="mt-8 space-y-6">
@@ -275,35 +242,27 @@ export default function Lesson10Page() {
                 <div key={index} className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-200">
                   <h5 className="text-lg font-bold text-gray-900 mb-4 text-center">&ldquo;{verbTable.verb}&rdquo; (to {getEnglishTranslation(verbTable.verb)})</h5>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {verbTable.forms.map((form, formIndex) => (
-                      <div key={formIndex} className="bg-white rounded-lg p-4 border border-green-200 text-center hover:shadow-md transition-shadow">
-                        <div className="text-sm font-medium text-green-600 mb-1">{form.pronoun}</div>
-                        <div className="text-lg font-bold text-gray-900 mb-1">{form.form}</div>
-                        <div className="text-xs text-gray-500 font-mono mb-2">{form.pronunciation}</div>
-                        <button
-                          onClick={() => {
-                            // For il/elle and ils/elles, we need to handle them specially
-                            // since the audio was stored as separate forms
-                            let textToPlay = ''
-                            if (form.pronoun === 'il/elle') {
-                              // Use 'il' form since that's what we stored
-                              textToPlay = `il ${form.form}`
-                            } else if (form.pronoun === 'ils/elles') {
-                              // Use 'ils' form since that's what we stored
-                              textToPlay = `ils ${form.form}`
-                            } else {
-                              textToPlay = `${form.pronoun} ${form.form}`
-                            }
-                            
-                            audioService.playAudio(textToPlay)
-                          }}
-                          className="text-green-600 hover:text-green-700 transition-colors p-1 mt-2"
-                          title="Listen to pronunciation"
-                        >
-                          🔊
-                        </button>
-                      </div>
-                    ))}
+                    {verbTable.forms.map((form, formIndex) => {
+                      let textToPlay = ''
+                      if (form.pronoun === 'il/elle') {
+                        textToPlay = `il ${form.form}`
+                      } else if (form.pronoun === 'ils/elles') {
+                        textToPlay = `ils ${form.form}`
+                      } else {
+                        textToPlay = `${form.pronoun} ${form.form}`
+                      }
+                      return (
+                        <div key={formIndex} className="bg-white rounded-lg p-4 border border-green-200 text-center hover:shadow-md transition-shadow">
+                          <div className="text-sm font-medium text-green-600 mb-1">{form.pronoun}</div>
+                          <div className="text-lg font-bold text-gray-900 mb-1">{form.form}</div>
+                          <div className="text-xs text-gray-500 font-mono mb-2">{form.pronunciation}</div>
+                          <AudioButton
+                            text={textToPlay}
+                            className="text-green-600 hover:text-green-700 p-1 mt-2"
+                          />
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               ))}
@@ -317,20 +276,17 @@ export default function Lesson10Page() {
             <span className="text-green-600 mr-4 text-2xl">📖</span>
             Vocabulary
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {lesson.vocabulary.map((item) => (
               <div key={item.word} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 border border-green-200 hover:shadow-lg transition-all duration-300">
                 <div className="text-center mb-4">
                   <div className="flex items-center justify-center mb-2">
                     <h4 className="text-lg font-bold text-gray-900 mr-4 text-2xl">{item.word}</h4>
-                    <button
-                      onClick={() => audioService.playAudio(item.word)}
-                      className="text-blue-600 hover:text-blue-700 transition-colors p-1"
-                      title="Listen to pronunciation"
-                    >
-                      🎵
-                    </button>
+                    <AudioButton
+                      text={item.word}
+                      className="text-blue-600 hover:text-blue-700 p-1"
+                    />
                   </div>
                   <p className="text-gray-600 mb-3">{item.translation}</p>
                   {item.category && (
@@ -339,7 +295,7 @@ export default function Lesson10Page() {
                     </span>
                   )}
                 </div>
-                
+
                 {item.example_sentence && (
                   <div className="bg-white rounded-lg p-3 border border-green-200">
                     <div className="flex items-start justify-between">
@@ -347,13 +303,11 @@ export default function Lesson10Page() {
                         <p className="text-sm text-gray-700 mb-1">{item.example_sentence}</p>
                         <p className="text-xs text-gray-500 italic">{item.example_translation}</p>
                       </div>
-                      <button
-                        onClick={() => audioService.playAudio(item.example_sentence)}
-                        className="text-green-600 hover:text-green-700 transition-colors ml-2"
+                      <AudioButton
+                        text={item.example_sentence}
+                        className="text-green-600 hover:text-green-700 ml-2"
                         title="Listen to example sentence"
-                      >
-                        🔊
-                      </button>
+                      />
                     </div>
                   </div>
                 )}
@@ -363,31 +317,7 @@ export default function Lesson10Page() {
         </div>
 
         {/* Exercises Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12 border border-gray-200">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-              <span className="text-orange-600 mr-4 text-2xl">🧩</span>
-              Practice Exercises
-            </h3>
-            <ExerciseProgress 
-              totalExercises={lesson.exercises.length}
-              completedExercises={completedExercises.size}
-              correctAnswers={correctAnswers.size}
-              onReset={handleResetExercises}
-            />
-          </div>
-          
-          <div className="space-y-8">
-            {lesson.exercises.map((exercise, index) => (
-              <InteractiveExercise
-                key={exercise.id}
-                exercise={exercise}
-                exerciseNumber={index + 1}
-                onComplete={(isCorrect) => handleExerciseComplete(exercise.id, isCorrect)}
-              />
-            ))}
-          </div>
-        </div>
+        <LessonExercises exercises={lesson.exercises} />
 
         {/* Navigation Footer */}
         <div className="flex justify-between items-center mt-16 pt-8 border-t border-gray-200">
@@ -395,7 +325,7 @@ export default function Lesson10Page() {
             href="/lessons/beginner/9"
             className="flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300"
           >
-            ← Previous Lesson
+            &larr; Previous Lesson
           </Link>
           <Link
             href="/lessons/beginner"

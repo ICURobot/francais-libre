@@ -1,35 +1,13 @@
-'use client'
-
-import { useState, useCallback } from 'react'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
+import LessonExercises from '../../../../../components/lessons/LessonExercises'
+import AudioButton from '../../../../../components/lessons/AudioButton'
+import { beginnerLesson8 } from '../../../../../lib/lessons/data/beginner-8'
 import Link from 'next/link'
-import { audioService } from '../../../../../lib/services/audioService'
 
 export default function Lesson8Page() {
-  // State for exercise progress
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
-  const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set())
-
-  // Handle exercise completion
-  const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
-    setCompletedExercises(prev => new Set([...prev, exerciseId]))
-    if (isCorrect) {
-      setCorrectAnswers(prev => new Set([...prev, exerciseId]))
-    }
-  }, [])
-
-  // Handle reset all exercises
-  const handleResetExercises = useCallback(() => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(new Set())
-  }, [])
-
   // Get lesson 8 data from lessonData.ts
-  const lesson = beginnerLessons.find(l => l.id === 'beginner-8')
-  
+  const lesson = beginnerLesson8
+
   if (!lesson || !lesson.dialogue) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden py-16">
@@ -73,20 +51,20 @@ export default function Lesson8Page() {
               Welcome to French Verb Mastery!
             </h2>
           </div>
-          
+
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p className="text-lg">
               This lesson combines the best of both proven teaching methods: you&apos;ll start by listening to real French conversations about family and work (the natural immersion approach), then master the essential -er verb conjugation patterns (following structured learning principles).
             </p>
-            
+
             <p className="text-lg">
               Regular -er verbs are the foundation of French grammar—they make up about 80% of all French verbs! By mastering these conjugation patterns, you&apos;ll be able to express yourself in countless situations, from describing your daily routine to talking about your family and career.
             </p>
-            
+
             <p className="text-lg">
               Family relationships and professional life are central to French culture. The vocabulary you&apos;ll learn here will help you connect with French speakers on a personal level, whether you&apos;re discussing your background, asking about someone&apos;s family, or describing your work.
             </p>
-            
+
             <div className="bg-white rounded-xl p-4 mt-6 border-l-4 border-blue-500">
               <p className="text-lg font-semibold text-blue-800 text-center">
                 🚀 Let&apos;s begin with natural dialogue, then master the verb patterns that will unlock French conversation!
@@ -112,7 +90,7 @@ export default function Lesson8Page() {
         </div>
 
         {/* Lesson Content */}
-        <DialogueSection 
+        <DialogueSection
           dialogue={dialogue}
         />
 
@@ -120,32 +98,32 @@ export default function Lesson8Page() {
         <div className="relative mb-12">
           {/* Background with gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-blue-50 to-indigo-50 rounded-3xl transform -skew-y-1"></div>
-          
+
           {/* Content */}
           <div className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 rounded-3xl p-8 text-center shadow-2xl transform hover:scale-[1.02] transition-all duration-500">
             {/* Decorative elements */}
             <div className="absolute top-4 left-4 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
             <div className="absolute top-6 right-6 w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
             <div className="absolute bottom-4 left-8 w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-            
+
             {/* Main content */}
             <div className="flex flex-col items-center space-y-4">
               {/* Icon */}
               <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
                 <span className="text-3xl">🧠</span>
               </div>
-              
+
               {/* Text */}
               <div>
                 <h2 className="text-2xl font-bold text-white mb-2">
                   Ready to Master -er Verb Conjugation?
                 </h2>
                 <p className="text-blue-100 text-lg leading-relaxed max-w-2xl">
-                  Now let&apos;s dive into the essential patterns and rules that will unlock the secrets of French verb conjugation. 
+                  Now let&apos;s dive into the essential patterns and rules that will unlock the secrets of French verb conjugation.
                   Get ready to understand the building blocks of French verbs!
                 </p>
               </div>
-              
+
               {/* Arrow indicator */}
               <div className="flex items-center space-x-2 text-blue-200">
                 <span className="text-sm font-medium">Scroll down to continue</span>
@@ -155,7 +133,7 @@ export default function Lesson8Page() {
               </div>
             </div>
           </div>
-          
+
           {/* Bottom accent */}
           <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full"></div>
         </div>
@@ -167,7 +145,7 @@ export default function Lesson8Page() {
             {lesson.grammar.topic}
           </h3>
           <p className="text-gray-700 mb-6">{lesson.grammar.explanation}</p>
-          
+
           {/* Grammar Patterns */}
           <div className="mb-6">
             <h4 className="text-lg font-semibold text-gray-800 mb-3">Key Patterns:</h4>
@@ -188,13 +166,10 @@ export default function Lesson8Page() {
                 <div key={index} className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between mb-2">
                     <div className="font-semibold text-black">{example.french}</div>
-                    <button
-                      onClick={() => audioService.playAudio(example.french)}
-                      className="text-blue-600 hover:text-blue-700 transition-colors p-1 ml-2"
-                      title="Listen to pronunciation"
-                    >
-                      🔊
-                    </button>
+                    <AudioButton
+                      text={example.french}
+                      className="text-blue-600 hover:text-blue-700 p-1 ml-2"
+                    />
                   </div>
                   <div className="text-gray-600">{example.english}</div>
                   {example.pronunciation && (
@@ -222,13 +197,10 @@ export default function Lesson8Page() {
                     <div className="font-bold text-black">{conj.pronoun}</div>
                     <div className="text-lg text-black">{conj.form}</div>
                     <div className="text-sm text-gray-700">{conj.pronunciation}</div>
-                    <button
-                      onClick={() => audioService.playAudio(conj.form)}
-                      className="text-green-600 hover:text-green-700 transition-colors p-1 mt-2"
-                      title="Listen to pronunciation"
-                    >
-                      🔊
-                    </button>
+                    <AudioButton
+                      text={conj.form}
+                      className="text-green-600 hover:text-green-700 p-1 mt-2"
+                    />
                   </div>
                 ))}
               </div>
@@ -248,29 +220,24 @@ export default function Lesson8Page() {
                   <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">
                     {word.category}
                   </span>
-                  <button
-                    onClick={() => audioService.playAudio(word.word)}
-                    className="text-green-600 hover:text-green-700 transition-colors"
-                    title="Listen to pronunciation"
-                  >
-                    🔊
-                  </button>
+                  <AudioButton
+                    text={word.word}
+                    className="text-green-600 hover:text-green-700"
+                  />
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-black mb-2">{word.word}</h3>
                 <p className="text-gray-600 mb-2">{word.translation}</p>
                 <p className="text-sm text-gray-500 font-mono mb-3">{word.pronunciation}</p>
-                
+
                 <div className="border-t border-green-200 pt-3">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm text-gray-700">{word.example_sentence}</p>
-                    <button
-                      onClick={() => audioService.playAudio(word.example_sentence)}
-                      className="text-green-600 hover:text-green-700 transition-colors ml-2"
+                    <AudioButton
+                      text={word.example_sentence}
+                      className="text-green-600 hover:text-green-700 ml-2"
                       title="Listen to example sentence"
-                    >
-                      🔊
-                    </button>
+                    />
                   </div>
                   <p className="text-xs text-gray-500">{word.example_translation}</p>
                 </div>
@@ -279,31 +246,8 @@ export default function Lesson8Page() {
           </div>
         </div>
 
-        {/* Exercise Progress */}
-        <ExerciseProgress
-          totalExercises={lesson.exercises.length}
-          completedExercises={completedExercises.size}
-          correctAnswers={correctAnswers.size}
-          onReset={handleResetExercises}
-        />
-
-        {/* Exercises Section */}
-        <div className="bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_16px_48px_rgba(0,0,0,0.1)] p-8 mb-12 border border-white/40 transform hover:scale-[1.02] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300">
-          <h3 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-            <span className="text-orange-600 mr-4 text-2xl">✏️</span>
-            Practice Exercises
-          </h3>
-          <div className="space-y-6">
-            {lesson.exercises.map((exercise, index) => (
-              <InteractiveExercise
-                key={exercise.id}
-                exercise={exercise}
-                exerciseNumber={index + 1}
-                onComplete={(isCorrect) => handleExerciseComplete(exercise.id, isCorrect)}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Exercises */}
+        <LessonExercises exercises={lesson.exercises} />
 
         {/* Lesson Info */}
         <div className="bg-gray-50 rounded-2xl p-6 mb-12 transform hover:scale-[1.005] hover:shadow-lg transition-all duration-300">

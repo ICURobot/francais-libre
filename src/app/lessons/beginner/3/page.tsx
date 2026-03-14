@@ -1,35 +1,13 @@
-'use client'
-
-import { useState, useCallback } from 'react'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
+import LessonExercises from '../../../../../components/lessons/LessonExercises'
+import AudioButton from '../../../../../components/lessons/AudioButton'
+import { beginnerLesson3 } from '../../../../../lib/lessons/data/beginner-3'
 import Link from 'next/link'
-import { audioService } from '../../../../../lib/services/audioService'
 
 export default function Lesson3Page() {
-  // State for exercise progress
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
-  const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set())
-
-  // Handle exercise completion
-  const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
-    setCompletedExercises(prev => new Set([...prev, exerciseId]))
-    if (isCorrect) {
-      setCorrectAnswers(prev => new Set([...prev, exerciseId]))
-    }
-  }, [])
-
-  // Handle reset all exercises
-  const handleResetExercises = useCallback(() => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(new Set())
-  }, [])
-
   // Get the third lesson data from lessonData.ts
-  const lesson = beginnerLessons.find(l => l.id === 'beginner-3')
-  
+  const lesson = beginnerLesson3
+
   if (!lesson || !lesson.dialogue) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 relative overflow-hidden">
@@ -73,31 +51,31 @@ export default function Lesson3Page() {
               Welcome to the Parisian Café Experience!
             </h2>
           </div>
-          
+
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p className="text-lg">
-              Now that you&apos;ve mastered introductions and the verb &quot;avoir&quot;, 
-              you&apos;re ready for one of the most practical French experiences: ordering 
-              at a traditional Parisian café! This lesson combines everything you&apos;ve learned 
+              Now that you&apos;ve mastered introductions and the verb &quot;avoir&quot;,
+              you&apos;re ready for one of the most practical French experiences: ordering
+              at a traditional Parisian café! This lesson combines everything you&apos;ve learned
               with essential café vocabulary and polite expressions.
             </p>
-            
+
             <p className="text-lg">
-              French cafés are more than just places to drink coffee—they&apos;re social 
-              centers where people gather to work, chat, and observe the world. You&apos;ll 
-              learn to express basic needs like hunger and thirst using &quot;avoir&quot; 
-              expressions, order food and drinks politely, and handle the complete café 
+              French cafés are more than just places to drink coffee—they&apos;re social
+              centers where people gather to work, chat, and observe the world. You&apos;ll
+              learn to express basic needs like hunger and thirst using &quot;avoir&quot;
+              expressions, order food and drinks politely, and handle the complete café
               interaction from menu to payment.
             </p>
-            
+
             <p className="text-lg">
-              The key to sounding natural in French cafés is mastering polite request forms 
-              like <span className="font-bold text-orange-600">&quot;je voudrais&quot;</span> 
-              (I would like) and understanding French café culture. By the end of this lesson, 
-              you&apos;ll be able to confidently order your morning croissant and café au lait 
+              The key to sounding natural in French cafés is mastering polite request forms
+              like <span className="font-bold text-orange-600">&quot;je voudrais&quot;</span>
+              (I would like) and understanding French café culture. By the end of this lesson,
+              you&apos;ll be able to confidently order your morning croissant and café au lait
               like a true Parisian!
             </p>
-            
+
             <div className="bg-white rounded-xl p-4 mt-6 border-l-4 border-orange-500">
               <p className="text-lg font-semibold text-orange-800 text-center">
                 🥐 Let&apos;s master the art of French café ordering and become a confident French speaker!
@@ -123,7 +101,7 @@ export default function Lesson3Page() {
         </div>
 
         {/* Lesson Content */}
-        <DialogueSection 
+        <DialogueSection
           dialogue={dialogue}
         />
 
@@ -131,14 +109,14 @@ export default function Lesson3Page() {
         <div className="relative mb-8">
           {/* Background with gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-orange-50 via-yellow-50 to-red-50 rounded-3xl transform -skew-y-1"></div>
-          
+
           {/* Content */}
           <div className="relative bg-gradient-to-r from-orange-600 via-yellow-600 to-red-600 rounded-3xl p-8 text-center shadow-2xl transform hover:scale-[1.02] transition-all duration-500">
             {/* Decorative elements */}
             <div className="absolute top-4 left-4 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
             <div className="absolute top-6 right-6 w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
             <div className="absolute bottom-4 left-8 w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-            
+
             {/* Main content */}
             <div className="flex flex-col items-center space-y-4">
               {/* Icon */}
@@ -152,8 +130,8 @@ export default function Lesson3Page() {
                   Ready to Master Café French?
                 </h2>
                 <p className="text-orange-100 text-lg leading-relaxed max-w-2xl">
-                  Now let&apos;s dive into practical French expressions for daily life! 
-                  You&apos;ll learn to express needs, make polite requests, and handle 
+                  Now let&apos;s dive into practical French expressions for daily life!
+                  You&apos;ll learn to express needs, make polite requests, and handle
                   complete café interactions with confidence.
                 </p>
               </div>
@@ -179,7 +157,7 @@ export default function Lesson3Page() {
             {lesson.grammar.topic}
           </h3>
           <p className="text-gray-700 mb-6">{lesson.grammar.explanation}</p>
-          
+
           <div className="mb-6">
             <h4 className="text-lg font-semibold text-gray-800 mb-3">Key Patterns:</h4>
             <ul className="space-y-2">
@@ -198,13 +176,10 @@ export default function Lesson3Page() {
                 <div key={index} className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500 transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between mb-2">
                     <div className="font-semibold text-black">{example.french}</div>
-                    <button 
-                      onClick={() => audioService.playAudio(example.french)}
-                      className="text-orange-600 hover:text-orange-700 transition-colors p-1 ml-2"
-                      title="Listen to pronunciation"
-                    >
-                      🔊
-                    </button>
+                    <AudioButton
+                      text={example.french}
+                      className="text-orange-600 hover:text-orange-700 p-1 ml-2"
+                    />
                   </div>
                   <div className="text-gray-600">{example.english}</div>
                   {example.pronunciation && (
@@ -229,13 +204,10 @@ export default function Lesson3Page() {
                     <div className="font-bold text-black">{conj.pronoun}</div>
                     <div className="text-lg text-black">{conj.form}</div>
                     <div className="text-sm text-gray-700">{conj.pronunciation}</div>
-                    <button 
-                      onClick={() => audioService.playAudio(conj.form)}
-                      className="text-yellow-600 hover:text-yellow-700 transition-colors p-1 mt-2"
-                      title="Listen to pronunciation"
-                    >
-                      🔊
-                    </button>
+                    <AudioButton
+                      text={conj.form}
+                      className="text-yellow-600 hover:text-yellow-700 p-1 mt-2"
+                    />
                   </div>
                 ))}
               </div>
@@ -255,29 +227,24 @@ export default function Lesson3Page() {
                   <span className="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-medium">
                     {word.category}
                   </span>
-                  <button
-                    onClick={() => audioService.playAudio(word.word)}
-                    className="text-yellow-600 hover:text-yellow-700 transition-colors"
-                    title="Listen to pronunciation"
-                  >
-                    🔊
-                  </button>
+                  <AudioButton
+                    text={word.word}
+                    className="text-yellow-600 hover:text-yellow-700"
+                  />
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-black mb-2">{word.word}</h3>
                 <p className="text-gray-600 mb-2">{word.translation}</p>
                 <p className="text-sm text-gray-500 font-mono mb-3">{word.pronunciation}</p>
-                
+
                 <div className="border-t border-yellow-200 pt-3">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm text-gray-700">{word.example_sentence}</p>
-                    <button
-                      onClick={() => audioService.playAudio(word.example_sentence)}
-                      className="text-yellow-600 hover:text-yellow-700 transition-colors ml-2"
+                    <AudioButton
+                      text={word.example_sentence}
+                      className="text-yellow-600 hover:text-yellow-700 ml-2"
                       title="Listen to example sentence"
-                    >
-                      🔊
-                    </button>
+                    />
                   </div>
                   <p className="text-xs text-gray-500">{word.example_translation}</p>
                 </div>
@@ -286,31 +253,8 @@ export default function Lesson3Page() {
           </div>
         </div>
 
-        {/* Exercise Progress */}
-        <ExerciseProgress
-          totalExercises={lesson.exercises.length}
-          completedExercises={completedExercises.size}
-          correctAnswers={correctAnswers.size}
-          onReset={handleResetExercises}
-        />
-
-        {/* Exercises Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-200 transform hover:scale-[1.005] hover:shadow-xl transition-all duration-300">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-            <span className="text-orange-600 mr-3">✏️</span>
-            Practice Exercises
-          </h3>
-          <div className="space-y-6">
-            {lesson.exercises.map((exercise, index) => (
-              <InteractiveExercise
-                key={exercise.id}
-                exercise={exercise}
-                exerciseNumber={index + 1}
-                onComplete={(isCorrect) => handleExerciseComplete(exercise.id, isCorrect)}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Exercises */}
+        <LessonExercises exercises={lesson.exercises} />
 
         {/* Lesson Info */}
         <div className="bg-gray-50 rounded-2xl p-6 mb-8 transform hover:scale-[1.005] hover:shadow-lg transition-all duration-300">

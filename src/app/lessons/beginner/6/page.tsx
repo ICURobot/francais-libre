@@ -1,32 +1,11 @@
-'use client'
-
-import { useState, useCallback } from 'react'
 import Link from 'next/link'
-import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
+import { beginnerLesson6 } from '../../../../../lib/lessons/data/beginner-6'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { audioService } from '../../../../../lib/services/audioService'
+import LessonExercises from '../../../../../components/lessons/LessonExercises'
+import AudioButton from '../../../../../components/lessons/AudioButton'
 
 export default function BeginnerLesson6Page() {
-  const [completedExercises, setCompletedExercises] = useState<string[]>([])
-  const [correctAnswers, setCorrectAnswers] = useState(0)
-
-  const lesson = beginnerLessons.find(l => l.id === 'beginner-6')
-
-  const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
-    if (!completedExercises.includes(exerciseId)) {
-      setCompletedExercises(prev => [...prev, exerciseId])
-      if (isCorrect) {
-        setCorrectAnswers(prev => prev + 1)
-      }
-    }
-  }, [completedExercises])
-
-  const handleResetExercises = useCallback(() => {
-    setCompletedExercises([])
-    setCorrectAnswers(0)
-  }, [])
+  const lesson = beginnerLesson6
 
   if (!lesson) {
     return (
@@ -65,9 +44,9 @@ export default function BeginnerLesson6Page() {
         <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-[24px] p-8 text-white text-center mb-12 shadow-[0_20px_60px_rgba(251,146,60,0.3)] relative overflow-hidden">
           <h2 className="text-3xl font-bold mb-4">Welcome to French Fine Dining! 🍷</h2>
           <p className="text-orange-100 text-lg leading-relaxed">
-            Prepare to immerse yourself in the elegant world of French restaurant culture! This lesson will 
-            transform you from a hesitant diner to a confident French restaurant connoisseur. You&apos;ll learn 
-            everything from making reservations and reading menus to ordering wine and handling the bill with 
+            Prepare to immerse yourself in the elegant world of French restaurant culture! This lesson will
+            transform you from a hesitant diner to a confident French restaurant connoisseur. You&apos;ll learn
+            everything from making reservations and reading menus to ordering wine and handling the bill with
             perfect French etiquette. Get ready to experience the sophisticated charm of dining à la française!
           </p>
         </div>
@@ -120,13 +99,10 @@ export default function BeginnerLesson6Page() {
                 <div key={index} className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500 transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between mb-2">
                     <div className="font-semibold text-black">{example.french}</div>
-                    <button 
-                      onClick={() => audioService.playAudio(example.french)}
-                      className="text-orange-600 hover:text-orange-700 transition-colors p-1 ml-2"
-                      title="Listen to pronunciation"
-                    >
-                      🔊
-                    </button>
+                    <AudioButton
+                      text={example.french}
+                      className="text-orange-600 hover:text-orange-700 p-1 ml-2"
+                    />
                   </div>
                   <div className="text-gray-600">{example.english}</div>
                   {example.pronunciation && (
@@ -172,7 +148,7 @@ export default function BeginnerLesson6Page() {
 
         {/* Dialogue Section */}
         {lesson.dialogue && (
-          <DialogueSection 
+          <DialogueSection
             dialogue={lesson.dialogue}
           />
         )}
@@ -189,29 +165,24 @@ export default function BeginnerLesson6Page() {
                   <span className="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded-full font-medium">
                     {item.category}
                   </span>
-                  <button 
-                    onClick={() => audioService.playAudio(item.word)}
-                    className="text-orange-600 hover:text-orange-700 transition-colors"
-                    title="Listen to pronunciation"
-                  >
-                    🔊
-                  </button>
+                  <AudioButton
+                    text={item.word}
+                    className="text-orange-600 hover:text-orange-700"
+                  />
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-black mb-2">{item.word}</h3>
                 <p className="text-gray-600 mb-2">{item.translation}</p>
                 <p className="text-sm text-gray-500 font-mono mb-3">{item.pronunciation}</p>
-                
+
                 <div className="border-t border-orange-200 pt-3">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm text-gray-700">{item.example_sentence}</p>
-                    <button 
-                      onClick={() => audioService.playAudio(item.example_sentence)}
-                      className="text-orange-600 hover:text-orange-700 transition-colors p-1 ml-2"
+                    <AudioButton
+                      text={item.example_sentence}
+                      className="text-orange-600 hover:text-orange-700 ml-2"
                       title="Listen to example sentence"
-                    >
-                      🔊
-                    </button>
+                    />
                   </div>
                   <p className="text-xs text-gray-500">{item.example_translation}</p>
                 </div>
@@ -220,34 +191,8 @@ export default function BeginnerLesson6Page() {
           </div>
         </div>
 
-        {/* Exercise Progress */}
-        <ExerciseProgress
-          totalExercises={lesson.exercises.length}
-          completedExercises={completedExercises.length}
-          correctAnswers={correctAnswers}
-          onReset={handleResetExercises}
-        />
-
-        {/* Exercises Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-            🧪 Practice Exercises
-          </h2>
-          <p className="text-gray-600 text-center mb-12">
-            Test your restaurant French knowledge with these interactive exercises
-          </p>
-          
-          <div className="space-y-8">
-            {lesson.exercises.map((exercise, index) => (
-              <InteractiveExercise
-                key={exercise.id}
-                exercise={exercise}
-                exerciseNumber={index + 1}
-                onComplete={(isCorrect) => handleExerciseComplete(exercise.id, isCorrect)}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Exercises */}
+        <LessonExercises exercises={lesson.exercises} />
 
         {/* Navigation Footer */}
         <div className="flex justify-between items-center mt-16 pt-8 border-t border-gray-200">

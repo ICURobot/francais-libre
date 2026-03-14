@@ -2,15 +2,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* Vercel Deployment Fix - Commit 5487d07 - All compilation errors resolved */
 'use client'
-import { useState, useEffect, lazy, Suspense } from 'react'
+import { useState, useEffect } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase } from '../../lib/supabase'
 import Link from 'next/link'
 import Image from 'next/image'
-
-// Lazy loaded components
-const LazyPricingSection = lazy(() => Promise.resolve({ default: PricingSection }))
-const LazyCommunitySection = lazy(() => Promise.resolve({ default: CommunitySection }))
 
 // Analytics tracking function
 const trackEvent = (eventName: string, properties: Record<string, unknown> = {}) => {
@@ -20,19 +16,29 @@ const trackEvent = (eventName: string, properties: Record<string, unknown> = {})
 }
 
 // Enhanced Progress Bar Component with lesson-specific features
+const progressBarColors: Record<string, string> = {
+  blue: 'bg-blue-600',
+  green: 'bg-green-600',
+  purple: 'bg-purple-600',
+  red: 'bg-red-600',
+  yellow: 'bg-yellow-600',
+}
+
 const AnimatedProgressBar = ({ progress, color = "blue", delay = 0, showPercentage = false }: { progress: number; color?: string; delay?: number; showPercentage?: boolean }) => {
   const [currentProgress, setCurrentProgress] = useState(0)
-  
+
   useEffect(() => {
     const timer = setTimeout(() => setCurrentProgress(progress), 500 + delay)
     return () => clearTimeout(timer)
   }, [progress, delay])
-  
+
+  const colorClass = progressBarColors[color] || progressBarColors.blue
+
   return (
     <div className="flex items-center space-x-2">
       <div className="w-32 bg-gray-200 rounded-full h-2">
-        <div 
-          className={`bg-${color}-600 h-2 rounded-full transition-all duration-1000 ease-out`}
+        <div
+          className={`${colorClass} h-2 rounded-full transition-all duration-1000 ease-out`}
           style={{ width: `${currentProgress}%` }}
         />
       </div>
@@ -44,39 +50,39 @@ const AnimatedProgressBar = ({ progress, color = "blue", delay = 0, showPercenta
 }
 
 // Enhanced Interactive Example Component with pronunciation
+const INTERACTIVE_EXAMPLES = [
+  {
+    verb: "parler",
+    translation: "to speak",
+    forms: [
+      { french: "je parle", english: "I speak", pronunciation: "zhuh parl" },
+      { french: "tu parles", english: "you speak", pronunciation: "too parl" },
+      { french: "il/elle parle", english: "he/she speaks", pronunciation: "eel/ell parl" }
+    ]
+  },
+  {
+    verb: "manger",
+    translation: "to eat",
+    forms: [
+      { french: "je mange", english: "I eat", pronunciation: "zhuh mahnzh" },
+      { french: "tu manges", english: "you eat", pronunciation: "too mahnzh" },
+      { french: "il/elle mange", english: "he/she eats", pronunciation: "eel/ell mahnzh" }
+    ]
+  },
+  {
+    verb: "écouter",
+    translation: "to listen",
+    forms: [
+      { french: "j'écoute", english: "I listen", pronunciation: "zhay-koot" },
+      { french: "tu écoutes", english: "you listen", pronunciation: "too ay-koot" },
+      { french: "il/elle écoute", english: "he/she listens", pronunciation: "eel/ell ay-koot" }
+    ]
+  }
+] as const
+
 const InteractiveExample = () => {
   const [currentExample, setCurrentExample] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  
-  const examples = [
-    { 
-      verb: "parler", 
-      translation: "to speak", 
-      forms: [
-        { french: "je parle", english: "I speak", pronunciation: "zhuh parl" },
-        { french: "tu parles", english: "you speak", pronunciation: "too parl" },
-        { french: "il/elle parle", english: "he/she speaks", pronunciation: "eel/ell parl" }
-      ]
-    },
-    { 
-      verb: "manger", 
-      translation: "to eat", 
-      forms: [
-        { french: "je mange", english: "I eat", pronunciation: "zhuh mahnzh" },
-        { french: "tu manges", english: "you eat", pronunciation: "too mahnzh" },
-        { french: "il/elle mange", english: "he/she eats", pronunciation: "eel/ell mahnzh" }
-      ]
-    },
-    { 
-      verb: "écouter", 
-      translation: "to listen", 
-      forms: [
-        { french: "j'écoute", english: "I listen", pronunciation: "zhay-koot" },
-        { french: "tu écoutes", english: "you listen", pronunciation: "too ay-koot" },
-        { french: "il/elle écoute", english: "he/she listens", pronunciation: "eel/ell ay-koot" }
-      ]
-    }
-  ]
 
   const playPronunciation = async (text: string) => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -91,19 +97,19 @@ const InteractiveExample = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentExample((prev) => (prev + 1) % examples.length)
+      setCurrentExample((prev) => (prev + 1) % INTERACTIVE_EXAMPLES.length)
     }, 5000)
     return () => clearInterval(interval)
-  }, [examples.length])
+  }, [])
 
   return (
     <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[20px] border-l-4 border-blue-400 shadow-[inset_0_8px_32px_rgba(59,130,246,0.1),0_8px_32px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.15),0_12px_40px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02]">
       <div className="flex items-center justify-between mb-3">
         <div className="font-bold text-gray-900 text-lg">
-          {examples[currentExample].verb} ({examples[currentExample].translation})
+          {INTERACTIVE_EXAMPLES[currentExample].verb} ({INTERACTIVE_EXAMPLES[currentExample].translation})
         </div>
         <button
-          onClick={() => playPronunciation(examples[currentExample].verb)}
+          onClick={() => playPronunciation(INTERACTIVE_EXAMPLES[currentExample].verb)}
           disabled={isPlaying}
           className="text-blue-500 hover:text-blue-600 transition-colors p-2 rounded-[16px] hover:bg-blue-50"
           title="Play pronunciation"
@@ -112,7 +118,7 @@ const InteractiveExample = () => {
         </button>
       </div>
       <div className="space-y-2">
-        {examples[currentExample].forms.map((form, index) => (
+        {INTERACTIVE_EXAMPLES[currentExample].forms.map((form, index) => (
           <div key={index} className="animate-fade-in flex items-center justify-between">
             <div>
               <span className="text-blue-600 font-semibold">{form.french}</span>
@@ -130,7 +136,7 @@ const InteractiveExample = () => {
         ))}
       </div>
       <div className="mt-3 flex space-x-2">
-        {examples.map((_, index) => (
+        {INTERACTIVE_EXAMPLES.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentExample(index)}
@@ -1184,28 +1190,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Lazy Loaded Sections */}
-        <Suspense fallback={
-          <div className="py-20 text-center bg-gray-50">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4"></div>
-              <div className="h-4 bg-gray-300 rounded w-96 mx-auto"></div>
-            </div>
-          </div>
-        }>
-          <LazyPricingSection />
-        </Suspense>
-
-        <Suspense fallback={
-          <div className="py-20 text-center bg-gray-900">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-700 rounded w-64 mx-auto mb-4"></div>
-              <div className="h-4 bg-gray-700 rounded w-96 mx-auto"></div>
-            </div>
-          </div>
-        }>
-          <LazyCommunitySection />
-        </Suspense>
+        <PricingSection />
+        <CommunitySection />
 
         {/* Call to Action */}
         <section className="bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 text-white py-24 relative overflow-hidden">
