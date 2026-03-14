@@ -5,7 +5,7 @@ import { DialogueSection } from '../../../../../components/lessons/DialogueSecti
 import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
 import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
 import { audioService } from '../../../../../lib/services/audioService'
-import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
+import { beginnerLesson9 } from '../../../../../lib/lessons/data/beginner-9'
 import Link from 'next/link'
 
 
@@ -40,7 +40,7 @@ export default function Lesson9Page() {
   }, [])
 
   // Get lesson 9 data from lessonData.ts
-  const lesson = beginnerLessons.find(l => l.id === 'beginner-9')
+  const lesson = beginnerLesson9
   
   if (!lesson || !lesson.dialogue) {
     return (

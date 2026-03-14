@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
 import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
 import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
+import { beginnerLesson10 } from '../../../../../lib/lessons/data/beginner-10'
 import Link from 'next/link'
 import { audioService } from '../../../../../lib/services/audioService'
 
@@ -28,7 +28,7 @@ export default function Lesson10Page() {
   }, [])
 
   // Get the lesson data
-  const lesson = beginnerLessons.find(l => l.id === 'beginner-10')
+  const lesson = beginnerLesson10
   
   if (!lesson || !lesson.dialogue) {
     return (

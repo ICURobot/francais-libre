@@ -1,35 +1,13 @@
-'use client'
-
-import { useState, useCallback } from 'react'
 import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { beginnerLessons } from '../../../../../lib/lessons/lessonData'
+import LessonExercises from '../../../../../components/lessons/LessonExercises'
+import AudioButton from '../../../../../components/lessons/AudioButton'
+import { beginnerLesson4 } from '../../../../../lib/lessons/data/beginner-4'
 import Link from 'next/link'
-import { audioService } from '../../../../../lib/services/audioService'
 
 export default function Lesson4Page() {
-  // State for exercise progress
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
-  const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set())
-
-  // Handle exercise completion
-  const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
-    setCompletedExercises(prev => new Set([...prev, exerciseId]))
-    if (isCorrect) {
-      setCorrectAnswers(prev => new Set([...prev, exerciseId]))
-    }
-  }, [])
-
-  // Handle reset all exercises
-  const handleResetExercises = useCallback(() => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(new Set())
-  }, [])
-
   // Get the fourth lesson data from lessonData.ts
-  const lesson = beginnerLessons.find(l => l.id === 'beginner-4')
-  
+  const lesson = beginnerLesson4
+
   if (!lesson || !lesson.dialogue) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden py-16">
@@ -73,30 +51,30 @@ export default function Lesson4Page() {
               Time to Master French Numbers & Time!
             </h2>
           </div>
-          
+
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p className="text-lg">
-              Now that you&apos;ve mastered greetings, introductions, and café ordering, 
-              you&apos;re ready for one of the most practical aspects of French: numbers 
-              and time! This lesson will give you the confidence to schedule appointments, 
+              Now that you&apos;ve mastered greetings, introductions, and café ordering,
+              you&apos;re ready for one of the most practical aspects of French: numbers
+              and time! This lesson will give you the confidence to schedule appointments,
               tell time, and handle everyday situations involving numbers.
             </p>
-            
+
             <p className="text-lg">
-              French numbers follow fascinating patterns, and time expressions use unique 
-              constructions that make perfect sense once you understand them. You&apos;ll 
-              learn to count from 1 to 100, name all days and months, and tell time using 
+              French numbers follow fascinating patterns, and time expressions use unique
+              constructions that make perfect sense once you understand them. You&apos;ll
+              learn to count from 1 to 100, name all days and months, and tell time using
               both 12-hour and 24-hour formats—essential skills for any French speaker.
             </p>
-            
+
             <p className="text-lg">
-              The dialogue shows Marie and Thomas scheduling a professional interview, 
-              demonstrating how numbers and time expressions work in real business 
-              situations. By the end of this lesson, you&apos;ll be able to confidently 
-              say <span className="font-bold text-purple-600">&quot;Il est quinze heures 
+              The dialogue shows Marie and Thomas scheduling a professional interview,
+              demonstrating how numbers and time expressions work in real business
+              situations. By the end of this lesson, you&apos;ll be able to confidently
+              say <span className="font-bold text-purple-600">&quot;Il est quinze heures
               trente&quot;</span> (It&apos;s 3:30 PM) and schedule your own meetings in French!
             </p>
-            
+
             <div className="bg-white rounded-xl p-4 mt-6 border-l-4 border-purple-500">
               <p className="text-lg font-semibold text-purple-800 text-center">
                 🗓️ Let&apos;s master the art of French time and become scheduling experts!
@@ -122,7 +100,7 @@ export default function Lesson4Page() {
         </div>
 
         {/* Lesson Content */}
-        <DialogueSection 
+        <DialogueSection
           dialogue={dialogue}
         />
 
@@ -130,14 +108,14 @@ export default function Lesson4Page() {
         <div className="relative mb-12">
           {/* Background with gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-pink-50 to-indigo-50 rounded-3xl transform -skew-y-1"></div>
-          
+
           {/* Content */}
           <div className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 rounded-3xl p-8 text-center shadow-2xl transform hover:scale-[1.02] transition-all duration-500">
             {/* Decorative elements */}
             <div className="absolute top-4 left-4 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
             <div className="absolute top-6 right-6 w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
             <div className="absolute bottom-4 left-8 w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-            
+
             {/* Main content */}
             <div className="flex flex-col items-center space-y-4">
               {/* Icon */}
@@ -151,8 +129,8 @@ export default function Lesson4Page() {
                   Ready to Master Numbers & Time?
                 </h2>
                 <p className="text-purple-100 text-lg leading-relaxed max-w-2xl">
-                  Now let&apos;s dive into the fascinating world of French numbers and time 
-                  expressions! You&apos;ll discover patterns that make counting and scheduling 
+                  Now let&apos;s dive into the fascinating world of French numbers and time
+                  expressions! You&apos;ll discover patterns that make counting and scheduling
                   both logical and elegant.
                 </p>
               </div>
@@ -178,7 +156,7 @@ export default function Lesson4Page() {
             {lesson.grammar.topic}
           </h3>
           <p className="text-gray-700 mb-6">{lesson.grammar.explanation}</p>
-          
+
           <div className="mb-6">
             <h4 className="text-lg font-semibold text-gray-800 mb-3">Key Patterns:</h4>
             <ul className="space-y-2">
@@ -197,13 +175,10 @@ export default function Lesson4Page() {
                 <div key={index} className="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500 transform hover:scale-[1.01] hover:shadow-md transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between mb-2">
                     <div className="font-semibold text-black">{example.french}</div>
-                    <button 
-                      onClick={() => audioService.playAudio(example.french)}
-                      className="text-purple-600 hover:text-purple-700 transition-colors p-1 ml-2"
-                      title="Listen to pronunciation"
-                    >
-                      🔊
-                    </button>
+                    <AudioButton
+                      text={example.french}
+                      className="text-purple-600 hover:text-purple-700 p-1 ml-2"
+                    />
                   </div>
                   <div className="text-gray-600">{example.english}</div>
                   {example.pronunciation && (
@@ -228,13 +203,10 @@ export default function Lesson4Page() {
                     <div className="font-bold text-black">{conj.pronoun}</div>
                     <div className="text-lg text-black">{conj.form}</div>
                     <div className="text-sm text-gray-700">{conj.pronunciation}</div>
-                    <button 
-                      onClick={() => audioService.playAudio(conj.form)}
-                      className="text-pink-600 hover:text-pink-700 transition-colors p-1 mt-2"
-                      title="Listen to pronunciation"
-                    >
-                      🔊
-                    </button>
+                    <AudioButton
+                      text={conj.form}
+                      className="text-pink-600 hover:text-pink-700 p-1 mt-2"
+                    />
                   </div>
                 ))}
               </div>
@@ -254,29 +226,24 @@ export default function Lesson4Page() {
                   <span className="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium">
                     {word.category}
                   </span>
-                  <button
-                    onClick={() => audioService.playAudio(word.word)}
-                    className="text-purple-600 hover:text-purple-700 transition-colors"
-                    title="Listen to pronunciation"
-                  >
-                    🔊
-                  </button>
+                  <AudioButton
+                    text={word.word}
+                    className="text-purple-600 hover:text-purple-700"
+                  />
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-black mb-2">{word.word}</h3>
                 <p className="text-gray-600 mb-2">{word.translation}</p>
                 <p className="text-sm text-gray-500 font-mono mb-3">{word.pronunciation}</p>
-                
+
                 <div className="border-t border-purple-200 pt-3">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm text-gray-700">{word.example_sentence}</p>
-                    <button
-                      onClick={() => audioService.playAudio(word.example_sentence)}
-                      className="text-purple-600 hover:text-purple-700 transition-colors ml-2"
+                    <AudioButton
+                      text={word.example_sentence}
+                      className="text-purple-600 hover:text-purple-700 ml-2"
                       title="Listen to example sentence"
-                    >
-                      🔊
-                    </button>
+                    />
                   </div>
                   <p className="text-xs text-gray-500">{word.example_translation}</p>
                 </div>
@@ -285,31 +252,8 @@ export default function Lesson4Page() {
           </div>
         </div>
 
-        {/* Exercise Progress */}
-        <ExerciseProgress
-          totalExercises={lesson.exercises.length}
-          completedExercises={completedExercises.size}
-          correctAnswers={correctAnswers.size}
-          onReset={handleResetExercises}
-        />
-
-        {/* Exercises Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-12 border border-gray-200 transform hover:scale-[1.005] hover:shadow-xl transition-all duration-300">
-          <h3 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-            <span className="text-purple-600 mr-4 text-2xl">✏️</span>
-            Practice Exercises
-          </h3>
-          <div className="space-y-6">
-            {lesson.exercises.map((exercise, index) => (
-              <InteractiveExercise
-                key={exercise.id}
-                exercise={exercise}
-                exerciseNumber={index + 1}
-                onComplete={(isCorrect) => handleExerciseComplete(exercise.id, isCorrect)}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Exercises */}
+        <LessonExercises exercises={lesson.exercises} />
 
         {/* Lesson Info */}
         <div className="bg-gray-50 rounded-2xl p-6 mb-12 transform hover:scale-[1.005] hover:shadow-lg transition-all duration-300">

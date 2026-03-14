@@ -49,15 +49,13 @@ export const AudioPlayer = ({
       // The audioService now handles text normalization centrally
       // Just pass the original text and let the service handle it
 
-      // Call the new audioService which will check for stored ElevenLabs audio first
+      // Call the audioService which checks for stored audio first.
+      // playAudio resolves when playback finishes.
       const success = await audioService.playAudio(text);
-      if (success) {
-        // Set isPlaying to false when speech ends (we'll use a timeout as fallback)
-        setTimeout(() => setIsPlaying(false), 3000);
-      } else {
+      if (!success) {
         setError('Audio playback failed');
-        setIsPlaying(false);
       }
+      setIsPlaying(false);
     } catch (err: unknown) {
       console.error("Playback initiation failed:", err);
       setError('Audio playback failed');
@@ -80,9 +78,7 @@ export const AudioPlayer = ({
 
   // Function to stop audio playback.
   const stopAudio = () => {
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
+    audioService.stopAudio();
     setIsPlaying(false);
   };
 

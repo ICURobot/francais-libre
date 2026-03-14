@@ -1,4 +1,5 @@
 import { supabase } from '../supabase'
+import { base64ToBlob } from '../utils/base64'
 
 export interface AudioFile {
   id: string
@@ -192,15 +193,7 @@ export class AudioStorageService {
 
   // Convert base64 to blob
   private async base64ToBlob(base64: string, mimeType: string): Promise<Blob> {
-    const byteCharacters = atob(base64)
-    const byteNumbers = new Array(byteCharacters.length)
-    
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i)
-    }
-    
-    const byteArray = new Uint8Array(byteNumbers)
-    return new Blob([byteArray], { type: mimeType })
+    return base64ToBlob(base64, mimeType)
   }
 
 

@@ -1,4 +1,5 @@
 import { supabase } from '../supabase'
+import { base64ToBlob } from '../utils/base64'
 
 export interface TTSResponse {
   audioContent: string
@@ -9,11 +10,13 @@ export interface TTSResponse {
 export class TTSService {
   private static instance: TTSService
   private audioCache: Map<string, string> = new Map()
+  private static MAX_CACHE_SIZE = 50
   private isMobile: boolean
   private isIOS: boolean
   private isAndroid: boolean
   private browserTTS: SpeechSynthesis | null = null
-  private debugMode: boolean = true
+  private debugMode: boolean = process.env.NODE_ENV === 'development'
+  private audioContext: AudioContext | null = null
 
   constructor() {
     // Detect device type
@@ -135,7 +138,11 @@ export class TTSService {
         if (this.debugMode) {
           console.log('🔊 Google Cloud TTS successful, audio length:', data.audioContent.length)
         }
-        // Cache the audio
+        // Cache the audio (with LRU eviction)
+        if (this.audioCache.size >= TTSService.MAX_CACHE_SIZE) {
+          const firstKey = this.audioCache.keys().next().value
+          if (firstKey) this.audioCache.delete(firstKey)
+        }
         this.audioCache.set(cacheKey, data.audioContent)
         // Play the audio
         this.playAudio(data.audioContent)
@@ -258,15 +265,7 @@ export class TTSService {
 
     try {
       // Convert base64 to audio blob
-      const audioData = atob(base64Audio)
-      const arrayBuffer = new ArrayBuffer(audioData.length)
-      const view = new Uint8Array(arrayBuffer)
-      
-      for (let i = 0; i < audioData.length; i++) {
-        view[i] = audioData.charCodeAt(i)
-      }
-
-      const blob = new Blob([arrayBuffer], { type: 'audio/mp3' })
+      const blob = base64ToBlob(base64Audio, 'audio/mp3')
       const audioUrl = URL.createObjectURL(blob)
       
       const audio = new Audio(audioUrl)
@@ -306,12 +305,14 @@ export class TTSService {
           
           // Try to resume audio context if available
           if (typeof window !== 'undefined' && 'AudioContext' in window) {
-            const audioContext = new (window as typeof window & { AudioContext: typeof AudioContext }).AudioContext()
-            if (audioContext.state === 'suspended') {
+            if (!this.audioContext) {
+              this.audioContext = new AudioContext()
+            }
+            if (this.audioContext.state === 'suspended') {
               if (this.debugMode) {
                 console.log('🔊 Audio context suspended, attempting to resume...')
               }
-              audioContext.resume().then(() => {
+              this.audioContext.resume().then(() => {
                 if (this.debugMode) {
                   console.log('🔊 Audio context resumed, retrying playback...')
                 }
