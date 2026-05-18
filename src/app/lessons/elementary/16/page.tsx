@@ -1,485 +1,144 @@
 'use client'
 
-import { useState } from 'react'
-import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { AudioPlayer } from '../../../../../components/lessons/AudioPlayer'
-import Link from 'next/link'
+import ElementaryLessonLayout, { ElementaryLessonData } from '../../../../../components/lessons/ElementaryLessonLayout'
 
-type Section = 'dialogue' | 'grammar' | 'vocabulary' | 'exercises'
-
-const lessonData = {
+const lessonData: ElementaryLessonData = {
   id: 16,
-  title: "Mastering Past Tense (Passé Composé Review & Advanced Usage)",
+  title: "Les Verbes en -ir et -re",
   level: "A2",
-  description: "Master both avoir and être verbs in passé composé, learn time expressions, and practice complex past narratives",
-  
+  description: "Learn regular -ir and -re verbs in the present and passé composé, with special attention to their stems, endings, and common spoken forms.",
+
   dialogue: {
-    title: "Telling a Story About Last Weekend",
-    context: "Sarah and Antoine discuss Antoine's weekend activities using various passé composé forms",
-    speakers: ["Sarah", "Antoine"],
+    title: "En attendant les résultats",
+    context: "Deux étudiants, Alice et Karim, attendent leurs résultats d'examens et discutent de leurs choix d'études.",
     exchanges: [
-      {
-        speaker: "Sarah",
-        french: "Antoine, raconte-moi ton weekend ! Qu'est-ce qui s'est passé ?",
-        english: "Antoine, tell me about your weekend! What happened?",
-        pronunciation: "ahn-TWAHN, ra-kohn-tuh-MWAH tohn week-END! kes-kee say pah-SAY?"
-      },
-      {
-        speaker: "Antoine",
-        french: "Eh bien, samedi matin, je me suis levé tard. J'ai pris mon petit-déjeuner vers 10h.",
-        english: "Well, Saturday morning, I got up late. I had my breakfast around 10 AM.",
-        pronunciation: "ay bee-AHN, sam-DEE mah-TAHN, zhuh muh swee luh-VAY tar. zhay pree mohn puh-tee day-zhuh-NAY vair deez UR"
-      },
-      {
-        speaker: "Sarah",
-        french: "Et après ? Tu es sorti ?",
-        english: "And after? Did you go out?",
-        pronunciation: "ay ah-PRAY? tu ay sor-TEE?"
-      },
-      {
-        speaker: "Antoine",
-        french: "Oui, je suis allé en ville avec ma copine. Nous avons fait les magasins pendant deux heures.",
-        english: "Yes, I went into town with my girlfriend. We went shopping for two hours.",
-        pronunciation: "wee, zhuh swee zah-LAY ahn veel ah-VEK mah ko-PEEN. noo zah-VOHN fay lay mah-gah-ZAHN pahn-DAHN duh UR"
-      },
-      {
-        speaker: "Sarah",
-        french: "Vous avez acheté quelque chose ?",
-        english: "Did you buy anything?",
-        pronunciation: "voo zah-VAY ash-TAY kel-kuh SHOHS?"
-      },
-      {
-        speaker: "Antoine",
-        french: "Elle a acheté une robe, et moi j'ai trouvé des chaussures. Puis nous sommes rentrés vers 15h.",
-        english: "She bought a dress, and I found some shoes. Then we came home around 3 PM.",
-        pronunciation: "el ah ash-TAY un ROHB, ay mwah zhay troo-VAY day shoh-SUR. pwee noo som rahn-TRAY vair kahn UR"
-      },
-      {
-        speaker: "Sarah",
-        french: "Et le soir ? Vous êtes restés à la maison ?",
-        english: "And in the evening? Did you stay at home?",
-        pronunciation: "ay luh SWAHR? voo zet res-TAY ah lah may-ZOHN?"
-      },
-      {
-        speaker: "Antoine",
-        french: "Non, nous avons dîné au restaurant, puis nous sommes allés au cinéma. Le film a commencé à 21h.",
-        english: "No, we had dinner at the restaurant, then we went to the cinema. The movie started at 9 PM.",
-        pronunciation: "nohn, noo zah-VOHN dee-NAY oh res-toh-RAHN, pwee noo som zah-LAY oh see-nay-MAH. luh feelm ah ko-mahn-SAY ah vanh-tun UR"
-      },
-      {
-        speaker: "Sarah",
-        french: "Ça a été une belle journée ! Et dimanche ?",
-        english: "That was a nice day! And Sunday?",
-        pronunciation: "sah ah ay-TAY un bel zhoor-NAY! ay dee-MAHNSH?"
-      },
-      {
-        speaker: "Antoine",
-        french: "Dimanche, nous nous sommes reposés. Nous avons lu des livres et nous avons écouté de la musique.",
-        english: "Sunday, we rested. We read books and we listened to music.",
-        pronunciation: "dee-MAHNSH, noo noo som ruh-po-ZAY. noo zah-VOHN lu day LEE-vruh ay noo zah-VOHN ay-koo-TAY duh lah mu-ZEEK"
-      }
+      { speaker: "Alice", french: "Tu attends les résultats depuis longtemps ?", english: "Have you been waiting for the results for a long time?", pronunciation: "tu ah-TAHN lay ray-zul-TAH duh-PWEE lohn-TAHN?" },
+      { speaker: "Karim", french: "Oui, j'attends depuis ce matin. Je réfléchis à ce que je vais faire si je réussis.", english: "Yes, I've been waiting since this morning. I'm thinking about what I'll do if I pass.", pronunciation: "WEE, zhah-TAHN duh-PWEE suh mah-TAN. zhuh ray-FLAY-SHEE ah suh kuh zhuh VAY fair see zhuh ray-ew-SEE." },
+      { speaker: "Alice", french: "Tu finis tes études cette année, non ?", english: "You're finishing your studies this year, right?", pronunciation: "tu fee-NEE tay zay-TEWD set ah-NAY, NOHN?" },
+      { speaker: "Karim", french: "Oui, je finis en juin. Et toi, tu choisis déjà ta spécialité ?", english: "Yes, I finish in June. And you, are you already choosing your speciality?", pronunciation: "WEE, zhuh fee-NEE ahn zhwahn. ay TWAH, tu shwah-ZEE day-ZHAH tah spay-see-ah-lee-TAY?" },
+      { speaker: "Alice", french: "Je choisis encore. Je remplis des dossiers pour plusieurs universités.", english: "I'm still choosing. I'm filling out applications for several universities.", pronunciation: "zhuh shwah-ZEE ahn-KOR. zhuh rahm-PLEE day doh-SYAY poor plew-ZYUR ew-nee-vair-see-TAY." },
+      { speaker: "Karim", french: "Tu obéis à tes parents ou tu décides seule ?", english: "Do you obey your parents or do you decide alone?", pronunciation: "tu oh-BAY-EE ah tay pah-RAHN oo tu day-SEED suhl?" },
+      { speaker: "Alice", french: "Je réfléchis beaucoup, mais je décide seule. Ils comprennent.", english: "I think a lot, but I decide alone. They understand.", pronunciation: "zhuh ray-FLAY-SHEE bo-KOO, may zhuh day-SEED suhl. eel kohm-PREN." },
+      { speaker: "Karim", french: "Moi, je vends mes vieux livres pour payer les nouveaux.", english: "I'm selling my old books to pay for the new ones.", pronunciation: "MWAH, zhuh VAHN may vyuh LEE-vruh poor pay-YAY lay noo-VOH." },
+      { speaker: "Alice", french: "Bonne idée. Tu perds beaucoup d'argent avec les livres neufs.", english: "Good idea. You lose a lot of money with new books.", pronunciation: "bun ee-DAY. tu PAIR bo-KOO dar-ZHAHN ah-VEK lay LEE-vruh nuhf." },
+      { speaker: "Karim", french: "Je comprends. Mais j'attends aussi une bourse. J'espère recevoir une réponse.", english: "I understand. But I'm also waiting for a scholarship. I hope to receive an answer.", pronunciation: "zhuh kohm-PRAHN. may zhah-TAHN oh-SEE ewn BOORS. zhess-PAIR ruh-suh-VWAHR ewn ray-POHNS." },
+      { speaker: "Alice", french: "Tu mérites cette bourse. Tu as beaucoup grandi cette année.", english: "You deserve this scholarship. You've grown a lot this year.", pronunciation: "tu may-REET set BOORS. tu ah bo-KOO grahn-DEE set ah-NAY." },
     ]
   },
 
   grammarPoints: [
     {
-      title: "Complete Passé Composé Review - AVOIR vs ÊTRE",
-      explanation: "You now know both types of passé composé! Let's review when to use each helper verb. This is crucial for fluent French conversation because you'll use past tense constantly to tell stories, describe experiences, and talk about completed actions:",
+      title: "Les Verbes Réguliers en -ir (Modèle FINIR)",
+      explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and have -i as their past participle.",
       examples: [
-        "AVOIR VERBS (majority): actions, having, doing → J'ai mangé, Tu as regardé, Il a fait",
-        "ÊTRE VERBS (DR MRS VANDERTRAMP): movement, state change → Je suis allé, Tu es né, Elle est partie",
-        "AVOIR = no agreement: Elle a mangé (past participle stays same)",
-        "ÊTRE = agreement: Elle est allée (past participle agrees with subject)",
-        "MEMORY TIP: If it's not movement/life change, it's probably avoir"
+        "FINIR : je finis, tu finis, il finit, nous finissons, vous finissez, ils finissent",
+        "CHOISIR : je choisis, tu choisis, il choisit, nous choisissons, vous choisissez, ils choisissent",
+        "GRANDIR : je grandis, tu grandis, il grandit, nous grandissons, vous grandissez, ils grandissent",
+        "RÉUSSIR : je réussis, tu réussis, il réussit, nous réussissons, vous réussissez, ils réussissent",
+        "RÉFLÉCHIR : je réfléchis, tu réfléchis, il réfléchit, nous réfléchissons, vous réfléchissez, ils réfléchissent",
+        "Participe passé : fini, choisi, grandi, réussi, réfléchi — se terminent tous en -i"
       ]
     },
     {
-      title: "Reflexive Verbs in Passé Composé",
-      explanation: "Reflexive verbs (verbs with 'se') always use être in passé composé and follow agreement rules. These are verbs where the action reflects back on the subject - like 'se lever' (to get up), 'se reposer' (to rest). The reflexive pronoun comes before the helper verb:",
+      title: "Les Verbes Réguliers en -re (Modèle RÉPONDRE)",
+      explanation: "Regular -re verbs drop -re and add the present endings -s, -s, no ending, -ons, -ez, -ent. Their past participle usually ends in -u.",
       examples: [
-        "STRUCTURE: Subject + reflexive pronoun + être + past participle",
-        "se lever → Je me suis levé(e) (I got up), Tu t'es levé(e) (You got up)",
-        "se reposer → Nous nous sommes reposé(e)s (We rested)",  
-        "AGREEMENT: Past participle agrees with subject (like other être verbs)",
-        "COMMON REFLEXIVES: se lever (get up), se coucher (go to bed), se reposer (rest), se laver (wash)"
+        "RÉPONDRE : je réponds, tu réponds, il répond, nous répondons, vous répondez, ils répondent",
+        "ATTENDRE : j'attends, tu attends, il attend, nous attendons, vous attendez, ils attendent",
+        "VENDRE : je vends, tu vends, il vend, nous vendons, vous vendez, ils vendent",
+        "ENTENDRE : j'entends, tu entends, il entend, nous entendons, vous entendez, ils entendent",
+        "PERDRE : je perds, tu perds, il perd, nous perdons, vous perdez, ils perdent",
+        "Participe passé : répondu, attendu, vendu, entendu, perdu — se terminent tous en -u"
       ]
     },
     {
-      title: "Time Expressions with Passé Composé",
-      explanation: "Certain time expressions are essential for telling stories in the past. These help you sequence events and make your narratives clear and natural. French has specific expressions that signal past completed actions:",
+      title: "Au Passé Composé",
+      explanation: "For these regular verb families, form the passé composé with avoir plus the correct past participle: -i for regular -ir and -u for regular -re verbs.",
       examples: [
-        "SPECIFIC TIMES: hier (yesterday), samedi dernier (last Saturday), l'année dernière (last year)",
-        "SEQUENCING: d'abord (first), puis (then), après (after), enfin (finally)",
-        "DURATION: pendant deux heures (for two hours), depuis (since)",
-        "RECENT PAST: ce matin (this morning), cette semaine (this week)",
-        "EXAMPLE: Hier, j'ai travaillé pendant 8 heures, puis je suis rentré"
+        "J'ai fini mes devoirs. (I finished my homework.)",
+        "Tu as choisi le restaurant ? (Did you choose the restaurant?)",
+        "Il a attendu une heure. (He waited for an hour.)",
+        "Nous avons répondu à toutes les questions. (We answered all the questions.)",
+        "Elles ont perdu leurs clés. (They lost their keys.)",
+        "Négation : Je n'ai pas fini. / Tu n'as pas attendu."
       ]
     },
     {
-      title: "Complex Past Narratives - Combining Multiple Actions",
-      explanation: "To tell interesting stories, you need to combine multiple past actions in sequence. This involves using both avoir and être verbs together, different time expressions, and connecting words to create flow:",
+      title: "Attention : Les Faux Amis en -ir (Sans -iss-)",
+      explanation: "Not every verb ending in -ir follows finir. Verbs like partir, sortir, and dormir are irregular and do not use -iss- in the plural.",
       examples: [
-        "SEQUENCING: D'abord j'ai pris le petit-déjeuner, puis je suis sorti",
-        "MIXING HELPERS: J'ai acheté des fruits et je suis rentré à la maison",
-        "TIME + ACTION: À 8h, j'ai quitté la maison. À 9h, je suis arrivé au bureau",
-        "CAUSE/EFFECT: Il a plu, alors nous sommes restés à la maison",
-        "STORY FLOW: Ce matin → puis → après → enfin"
-      ]
-    },
-    {
-      title: "Advanced Passé Composé - Special Cases",
-      explanation: "Some verbs can use both avoir and être depending on their meaning. When they have a direct object, they use avoir. When they describe movement without an object, they use être. Don't worry about mastering this now, but be aware it exists:",
-      examples: [
-        "SORTIR: Je suis sorti (I went out) vs J'ai sorti les poubelles (I took out the trash)",
-        "MONTER: Elle est montée (She went up) vs Elle a monté les escaliers (She climbed the stairs)",
-        "DESCENDRE: Nous sommes descendus (We went down) vs Nous avons descendu les bagages (We brought down the luggage)",
-        "FOR NOW: Focus on the movement meanings (être), learn object meanings later",
-        "RECOGNITION: If there's a direct object after the verb, it probably uses avoir"
+        "PARTIR (group 2, no -iss-) : je pars, tu pars, il part, nous partons, vous partez, ils partent",
+        "SORTIR (group 2, no -iss-) : je sors, tu sors, il sort, nous sortons, vous sortez, ils sortent",
+        "DORMIR (group 2, no -iss-) : je dors, tu dors, il dort, nous dormons, vous dormez, ils dorment",
+        "MENTIR (group 2, no -iss-) : je mens, tu mens, il ment, nous mentons, vous mentez, ils mentent",
+        "OUVRIR (group 2, no -iss-, conjugué comme -er) : j'ouvre, tu ouvres, il ouvre, nous ouvrons, vous ouvrez, ils ouvrent",
+        "Erreur classique à éviter : *il partisse / *il dormisse → FAUX. Correct : il part / il dort.",
+        "Astuce mémo : PaSODOMe (Partir, Sortir, Dormir, Mentir) = pas d'-iss-."
       ]
     }
   ],
 
   vocabulary: [
-    { french: "raconter", english: "to tell/narrate", category: "verbs", example: "Je raconte une histoire à mes enfants." },
-    { french: "qu'est-ce qui s'est passé", english: "what happened", category: "expressions", example: "Qu'est-ce qui s'est passé hier soir ?" },
-    { french: "se lever", english: "to get up", category: "reflexive-verbs", example: "Je me lève à 7h00 tous les matins." },
-    { french: "tard", english: "late", category: "time", example: "Je me couche tard le weekend." },
-    { french: "le petit-déjeuner", english: "breakfast", category: "meals", example: "Le petit-déjeuner est le repas le plus important." },
-    { french: "en ville", english: "into town/downtown", category: "locations", example: "Je vais en ville pour faire les magasins." },
-    { french: "la copine", english: "girlfriend", category: "relationships", example: "Ma copine et moi, nous aimons voyager ensemble." },
-    { french: "faire les magasins", english: "to go shopping", category: "expressions", example: "Nous faisons les magasins le samedi après-midi." },
-    { french: "pendant", english: "for/during", category: "time-expressions", example: "J'étudie pendant deux heures chaque soir." },
-    { french: "quelque chose", english: "something", category: "indefinite", example: "Je veux acheter quelque chose de spécial." },
-    { french: "acheter", english: "to buy", category: "verbs", example: "J'achète des vêtements pour l'hiver." },
-    { french: "trouver", english: "to find", category: "verbs", example: "J'ai trouvé un excellent restaurant." },
-    { french: "les chaussures", english: "shoes", category: "clothing", example: "Ces chaussures sont très confortables." },
-    { french: "dîner", english: "to have dinner", category: "verbs", example: "Nous dînons à 20h00 tous les soirs." },
-    { french: "commencer", english: "to start/begin", category: "verbs", example: "Le film commence à 21h00." },
-    { french: "se reposer", english: "to rest", category: "reflexive-verbs", example: "Je me repose le dimanche après-midi." },
-    { french: "lire", english: "to read", category: "verbs", example: "J'aime lire des romans français." },
-    { french: "lu", english: "read (past participle)", category: "past-participles", example: "J'ai lu ce livre la semaine dernière." },
-    { french: "d'abord", english: "first", category: "sequencing", example: "D'abord, je me lève, puis je prends ma douche." },
-    { french: "enfin", english: "finally", category: "sequencing", example: "Enfin, nous arrivons à destination." }
+    { french: "finir", english: "to finish", category: "Verbe -ir", example: "Je finis le travail à 18h. (zhuh fee-NEE luh trav-EYE ah deez-WEE-tur)" },
+    { french: "choisir", english: "to choose", category: "Verbe -ir", example: "Tu choisis le film ? (tu shwah-ZEE luh feelm?)" },
+    { french: "grandir", english: "to grow (up)", category: "Verbe -ir", example: "Les enfants grandissent vite. (layz ahn-FAHN grahn-DEES veet)" },
+    { french: "réussir", english: "to succeed / pass", category: "Verbe -ir", example: "Elle réussit tous ses examens. (el ray-ew-SEE too sayz eg-zah-MAN)" },
+    { french: "réfléchir", english: "to think / reflect", category: "Verbe -ir", example: "Nous réfléchissons au problème. (noo ray-flay-shee-SOHN oh proh-BLEM)" },
+    { french: "rougir", english: "to blush", category: "Verbe -ir", example: "Il rougit quand il la voit. (eel roo-ZHEE kahn eel lah VWAH)" },
+    { french: "obéir", english: "to obey", category: "Verbe -ir", example: "Vous obéissez aux règles. (voo zoh-bay-ee-SAY oh REGL)" },
+    { french: "remplir", english: "to fill (out)", category: "Verbe -ir", example: "Je remplis le formulaire. (zhuh rahm-PLEE luh for-mew-LAIR)" },
+    { french: "répondre", english: "to answer", category: "Verbe -re", example: "Tu réponds au téléphone ? (tu ray-POHN oh tay-lay-FUN?)" },
+    { french: "attendre", english: "to wait (for)", category: "Verbe -re", example: "J'attends le bus depuis 20 minutes. (zhah-TAHN luh BEWS duh-PWEE van MEEN-ut)" },
+    { french: "vendre", english: "to sell", category: "Verbe -re", example: "Il vend sa voiture. (eel VAHN sah vwah-TEWR)" },
+    { french: "entendre", english: "to hear", category: "Verbe -re", example: "Vous entendez la musique ? (voo zahn-tahn-DAY lah mew-ZEEK?)" },
+    { french: "perdre", english: "to lose", category: "Verbe -re", example: "Elle perd toujours ses lunettes. (el PAIR too-ZHOOR say lew-NET)" },
+    { french: "rendre", english: "to give back / return", category: "Verbe -re", example: "Je rends le livre à la bibliothèque. (zhuh RAHN luh LEE-vruh ah lah bee-blee-oh-TEK)" },
+    { french: "un dossier", english: "a file / application", category: "Nom", example: "J'ai rempli le dossier d'inscription. (zhay rahm-PLEE luh doh-SYAY dan-skrip-SYOHN)" },
+    { french: "une bourse", english: "a scholarship / grant", category: "Nom", example: "Elle a reçu une bourse d'études. (el ah ruh-SEW ewn BOORS day-TEWD)" },
+    { french: "les études", english: "studies", category: "Nom", example: "Il finit ses études cette année. (eel fee-NEE say zay-TEWD set ah-NAY)" },
+    { french: "neuf / neuve", english: "new (brand new)", category: "Adjectif", example: "J'ai acheté un livre neuf. (zhay ash-TAY uh(n) LEE-vruh nuhf) Note: neuf = brand new, nouveau = new (to you)" },
   ],
 
   culturalNotes: [
-    {
-      title: "French Shopping Culture",
-      content: "'Faire les magasins' (going shopping) is a popular weekend activity in France. Shopping centers and downtown areas are busy on Saturdays. Many French people enjoy leisurely shopping followed by dining out."
-    },
-    {
-      title: "French Weekend Rhythm",
-      content: "French weekends often have a relaxed pace. 'Se lever tard' (getting up late) on weekends is common. Sunday is traditionally a rest day ('se reposer'), with many shops closed and families spending quiet time together."
-    }
+    { title: "Le système des bourses en France", content: "Les bourses d'études en France sont attribuées sur critères sociaux par le CROUS (Centre Régional des Œuvres Universitaires et Scolaires). Elles peuvent couvrir jusqu'à la totalité des frais d'inscription et offrir une aide mensuelle." },
+    { title: "L'orientation universitaire", content: "En France, l'orientation post-bac se fait via la plateforme Parcoursup, où les lycéens formulent des vœux pour les formations qu'ils souhaitent intégrer. Les réponses arrivent entre mai et juillet, créant une période de stress intense pour les terminales." },
+    { title: "Les livres universitaires", content: "Les manuels universitaires en France peuvent être très coûteux, surtout en droit et en médecine. Le marché de l'occasion est très développé, avec des bourses aux livres organisées par les associations étudiantes en début d'année." },
   ],
 
   exercises: [
+    { id: "l16-e1", type: "conjugation", question: "Conjuguez le verbe FINIR au présent.", verb: "finir", correct_answer: [{ pronoun: "je", form: "finis", pronunciation: "fee-NEE" }, { pronoun: "tu", form: "finis", pronunciation: "fee-NEE" }, { pronoun: "il/elle/on", form: "finit", pronunciation: "fee-NEE" }, { pronoun: "nous", form: "finissons", pronunciation: "fee-nee-SOHN" }, { pronoun: "vous", form: "finissez", pronunciation: "fee-nee-SAY" }, { pronoun: "ils/elles", form: "finissent", pronunciation: "fee-NEES" }], explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+    { id: "l16-e2", type: "fill_blank", question: "Complétez : Nous ____ (choisir) le restaurant italien.", correct_answer: "choisissons", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+    { id: "l16-e3", type: "fill_blank", question: "Complétez : Tu ____ (attendre) le train ?", correct_answer: "attends", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+    { id: "l16-e4", type: "multiple_choice", question: "Quelle est la forme correcte pour 'il' du verbe RÉPONDRE ?", options: ["il réponds", "il répond", "il réponde", "il répondent"], correct_answer: "il répond", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+    { id: "l16-e5", type: "transformation", question: "Mettez ces phrases à la forme négative.", instruction: "affirmative_to_negative", items: [{ original: "Je finis mes devoirs.", transformed: "Je ne finis pas mes devoirs.", translation: "I don't finish my homework." }, { original: "Il attend le bus.", transformed: "Il n'attend pas le bus.", translation: "He doesn't wait for the bus." }, { original: "Nous vendons la maison.", transformed: "Nous ne vendons pas la maison.", translation: "We don't sell the house." }], explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+    { id: "l16-e6", type: "fill_blank", question: "Complétez au passé composé : Elle ____ ____ (finir) son projet.", correct_answer: "a fini", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+    { id: "l16-e7", type: "matching", question: "Associez l'infinitif à son participe passé.", pairs: [{ french: "finir", english: "fini" }, { french: "choisir", english: "choisi" }, { french: "répondre", english: "répondu" }, { french: "vendre", english: "vendu" }, { french: "attendre", english: "attendu" }, { french: "perdre", english: "perdu" }], explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+    { id: "l16-e8", type: "translation", question: "Traduisez : 'He finished his studies and sold his books.'", direction: "en_to_fr", correct_answer: ["Il a fini ses études et il a vendu ses livres.", "Il a terminé ses études et a vendu ses livres."], explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+    { id: "l16-e9", type: "speaking_prompt", question: "Décrivez vos études ou votre travail en utilisant 2 verbes en -ir et 2 verbes en -re.", model_answer: "Je finis mon travail à 18h. Je réfléchis beaucoup. J'attends le bus tous les jours. Je perds souvent mes clés.", translation: "I finish work at 6pm. I think a lot. I wait for the bus every day. I often lose my keys.", tip: "For regular verbs, the stem tells you the family; the ending tells you the subject." },
     {
-      id: "ex1",
-      type: "multiple_choice" as const,
-      question: "How do you say 'I got up late this morning' in French?",
-      options: [
-        "Je me suis levé(e) tard ce matin",
-        "J'ai me levé tard ce matin",
-        "Je suis me levé tard ce matin",
-        "J'ai levé tard ce matin"
-      ],
-      correct_answer: "Je me suis levé(e) tard ce matin",
-      explanation: "Reflexive verbs use être: Je me suis levé(e) (with reflexive pronoun 'me')."
+      id: "l16-e10",
+      type: "error_correction",
+      question: "Corrigez ces formes incorrectes — attention aux faux amis en -ir qui ne prennent pas -iss-.",
+      items: [
+        { incorrect: "Il dormisse profondément.", correct: "Il dort profondément.", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+        { incorrect: "Nous partissons demain matin.", correct: "Nous partons demain matin.", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+        { incorrect: "Tu sortisses à quelle heure ?", correct: "Tu sors à quelle heure ?", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+        { incorrect: "Elle mentisse souvent.", correct: "Elle ment souvent.", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." },
+        { incorrect: "Il finit ses devoirs et il dort.", correct: "Il finit ses devoirs et il dort.", explanation: "Regular -ir verbs use the -iss- stem in the plural present forms and -i as the past participle. Regular -re verbs drop -re and use -s, -s, no ending, -ons, -ez, -ent." }
+      ]
     },
-
-    {
-      id: "ex2",
-      type: "conjugation" as const,
-      question: "Practice the conjugation of 'se lever' (to get up in past tense)",
-      verb: "se lever (être + levé)",
-      translations: {
-        "je": "I got up (me suis levé/levée)",
-        "tu": "you got up (t'es levé/levée)",
-        "il": "he got up (s'est levé)",
-        "elle": "she got up (s'est levée)",
-        "nous": "we got up (nous sommes levés/levées)",
-        "vous": "you got up (vous êtes levés/levées)",
-        "ils": "they got up (se sont levés)",
-        "elles": "they got up (se sont levées)"
-      },
-      correct_answer: "conjugation",
-      explanation: "Practice the complete conjugation pattern with se lever, including reflexive pronouns and agreement rules."
-    },
-
-    {
-      id: "ex3",
-      type: "matching" as const,
-      question: "Match the helper verbs with their correct usage:",
-      pairs: [
-        { french: "avoir", english: "action verbs (manger, faire, regarder)" },
-        { french: "être", english: "movement verbs (aller, venir, partir)" },
-        { french: "être", english: "reflexive verbs (se lever, se reposer)" },
-        { french: "être", english: "state change verbs (naître, mourir)" },
-        { french: "avoir", english: "having/doing verbs (avoir, prendre, acheter)" }
-      ],
-      correct_answer: "matching",
-      explanation: "Learn when to use avoir vs être in passé composé."
-    },
-
-    {
-      id: "ex4",
-      type: "fill_blank" as const,
-      question: "Complete with the correct passé composé form: Hier, je _____ _____ tard. (I got up late)",
-      correct_answer: ["me", "suis", "levé(e)"],
-      explanation: "Use être for reflexive verbs: je me suis levé(e)."
-    },
-
-    {
-      id: "ex5",
-      type: "translation" as const,
-      question: "Translate: 'First I got up, then I had breakfast, and finally I went to work.'",
-      correct_answer: "d'abord je me suis levé(e), puis j'ai pris mon petit-déjeuner, et enfin je suis allé(e) au travail",
-      explanation: "Use être for reflexive verbs and movement verbs, avoir for actions.",
-      hints: ["d'abord = first", "je me suis levé(e) = I got up", "puis = then", "j'ai pris = I had", "enfin = finally"]
-    },
-
-    {
-      id: "ex6",
-      type: "matching" as const,
-      question: "Match time expressions with their meanings:",
-      pairs: [
-        { french: "d'abord", english: "first" },
-        { french: "puis", english: "then" },
-        { french: "après", english: "after" },
-        { french: "enfin", english: "finally" },
-        { french: "pendant", english: "for/during" }
-      ],
-      correct_answer: "matching",
-      explanation: "Learn essential sequencing words for telling stories in the past."
-    },
-
-    {
-      id: "ex7",
-      type: "speaking" as const,
-      question: "Practice saying: 'Je me suis levé(e) tard ce matin' (I got up late this morning)",
-      correct_answer: "speaking",
-      explanation: "Focus on the pronunciation: 'zhuh muh swee luh-VAY tar suh mah-TAHN'",
-      audio_prompt: "Je me suis levé(e) tard ce matin"
-    },
-
-    {
-      id: "ex8",
-      type: "matching" as const,
-      question: "Match the French past tense expressions with their English meanings:",
-      pairs: [
-        { french: "je me suis levé(e)", english: "I got up" },
-        { french: "tu t'es reposé(e)", english: "you rested" },
-        { french: "il s'est couché", english: "he went to bed" },
-        { french: "nous nous sommes levés", english: "we got up" },
-        { french: "elles se sont reposées", english: "they rested (feminine)" }
-      ],
-      correct_answer: "matching",
-      explanation: "Practice recognizing reflexive verb forms in context with proper agreement."
-    }
   ]
 }
 
-export default function Lesson16() {
-  const [currentSection, setCurrentSection] = useState<Section>('dialogue')
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
-  const [correctAnswers, setCorrectAnswers] = useState<number>(0)
-
-  const sections = [
-    { id: 'dialogue', label: 'Dialogue', icon: '💬' },
-    { id: 'grammar', label: 'Grammar', icon: '📚' },
-    { id: 'vocabulary', label: 'Vocabulary', icon: '📖' },
-    { id: 'exercises', label: 'Exercises', icon: '✏️' }
-  ]
-
-  const handleExerciseComplete = (exerciseId: string) => {
-    setCompletedExercises(prev => new Set(prev).add(exerciseId))
-    setCorrectAnswers(prev => prev + 1)
-  }
-
-  const handleReset = () => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(0)
-  }
-
-  const renderGrammarSection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Grammar Points</h2>
-        <p className="text-lg text-gray-600">Master the essential concepts of passé composé review and advanced usage</p>
-      </div>
-      
-      {lessonData.grammarPoints.map((point, index) => (
-        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{point.title}</h3>
-          <p className="text-gray-700 mb-4 leading-relaxed">{point.explanation}</p>
-          <div className="space-y-2">
-            {point.examples.map((example, idx) => (
-              <div key={idx} className="bg-green-50 rounded-lg p-3 border-l-4 border-green-300">
-                <p className="text-gray-800 font-medium">{example}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-
-  const renderVocabularySection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Vocabulary</h2>
-        <p className="text-lg text-gray-600">Essential words and expressions for this lesson</p>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-6">
-        {lessonData.vocabulary.map((item, index) => (
-          <div key={index} className="bg-white/80 backdrop-blur-sm p-6 rounded-[16px] border border-gray-200 shadow-[inset_0_4px_16px_rgba(0,0,0,0.05),0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_4px_16px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02]">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xl font-bold text-gray-900">{item.french}</h3>
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-[12px] text-sm font-medium">
-                {item.category}
-              </span>
-            </div>
-            <p className="text-gray-700 text-lg mb-2">{item.english}</p>
-            {item.example && (
-              <div className="bg-blue-50 rounded-lg p-3 mb-3 border-l-4 border-blue-300">
-                <div className="flex items-center justify-between">
-                  <p className="text-gray-800 font-medium text-sm italic flex-1">&ldquo;{item.example}&rdquo;</p>
-                  <button 
-                    onClick={() => {
-                      if ('speechSynthesis' in window) {
-                        const utterance = new SpeechSynthesisUtterance(item.example);
-                        utterance.lang = 'fr-FR';
-                        utterance.rate = 0.8;
-                        speechSynthesis.speak(utterance);
-                      }
-                    }}
-                    className="ml-3 p-2 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-full transition-colors duration-200 hover:scale-110"
-                    title="Listen to example sentence"
-                  >
-                    <span className="text-lg">🎹</span>
-                  </button>
-                </div>
-              </div>
-            )}
-            <AudioPlayer 
-              text={item.french}
-              className="mt-3"
-              
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
-  const renderCulturalNotesSection = () => (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Cultural Notes</h2>
-        <p className="text-lg text-gray-600">Understanding French culture and daily life</p>
-      </div>
-      
-      {lessonData.culturalNotes.map((note, index) => (
-        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{note.title}</h3>
-          <p className="text-gray-700 leading-relaxed">{note.content}</p>
-        </div>
-      ))}
-    </div>
-  )
-
-  const renderExercisesSection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Exercises</h2>
-        <p className="text-lg text-gray-600">Practice your passé composé mastery skills</p>
-      </div>
-      
-      <ExerciseProgress
-        totalExercises={lessonData.exercises.length}
-        completedExercises={completedExercises.size}
-        correctAnswers={correctAnswers}
-        onReset={handleReset}
-      />
-      
-      <div className="space-y-6">
-        {lessonData.exercises.map((exercise, index) => (
-          <InteractiveExercise
-            key={exercise.id}
-            exercise={exercise}
-            onComplete={() => handleExerciseComplete(exercise.id)}
-            exerciseNumber={index + 1}
-          />
-        ))}
-      </div>
-    </div>
-  )
-
+export default function Lesson16Page() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-green-200 sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <Link href="/lessons/elementary" className="text-green-600 hover:text-green-700 transition-colors mb-2 inline-block">
-                ← Back to A2 Lessons
-              </Link>
-              <h1 className="text-4xl font-bold text-gray-900">{lessonData.title}</h1>
-              <p className="text-xl text-gray-600 mt-2">{lessonData.description}</p>
-            </div>
-            <div className="text-right">
-              <div className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                {lessonData.level}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Tabs */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-green-200 sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex justify-center space-x-1 py-4">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setCurrentSection(section.id as Section)}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-[16px] font-medium transition-all duration-300 ${
-                  currentSection === section.id
-                    ? 'bg-green-500 text-white shadow-lg scale-105'
-                    : 'bg-white/60 text-gray-700 hover:bg-white/80 hover:scale-105'
-                }`}
-              >
-                <span>{section.icon}</span>
-                <span>{section.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        {currentSection === 'dialogue' && (
-          <div className="space-y-8">
-            <DialogueSection dialogue={lessonData.dialogue} />
-            <div className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Practice Speaking</h3>
-              <AudioPlayer  text="Practice the dialogue with the audio player" />
-            </div>
-            {renderCulturalNotesSection()}
-          </div>
-        )}
-        
-        {currentSection === 'grammar' && renderGrammarSection()}
-        {currentSection === 'vocabulary' && renderVocabularySection()}
-        {currentSection === 'exercises' && renderExercisesSection()}
-      </div>
-    </div>
+    <ElementaryLessonLayout
+      lessonData={lessonData}
+      lessonNumber={16}
+      prevHref="/lessons/elementary/15"
+      prevLabel="Passé Composé III"
+      nextHref="/lessons/elementary/17"
+      nextLabel="Les Verbes Pronominaux"
+    />
   )
 }

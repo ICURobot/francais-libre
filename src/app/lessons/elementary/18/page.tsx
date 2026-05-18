@@ -1,479 +1,135 @@
 'use client'
 
-import { useState } from 'react'
-import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { AudioPlayer } from '../../../../../components/lessons/AudioPlayer'
-import Link from 'next/link'
+import ElementaryLessonLayout, { ElementaryLessonData } from '../../../../../components/lessons/ElementaryLessonLayout'
 
-type Section = 'dialogue' | 'grammar' | 'vocabulary' | 'exercises'
-
-const lessonData = {
+const lessonData: ElementaryLessonData = {
   id: 18,
-  title: "Advanced Future Planning & Time Expressions",
+  title: "Les Pronominaux au Passé Composé",
   level: "A2",
-  description: "Master complex future planning with detailed time expressions, conditional plans, and professional/personal goal setting",
-  
+  description: "Learn pronominal verbs in the passé composé with être, including reflexive pronoun placement, negation, and agreement patterns.",
+
   dialogue: {
-    title: "Planning a Study Abroad Year",
-    context: "Océane and Romain discuss Océane's plans to study abroad in Canada, covering timing, duration, and family support",
-    speakers: ["Océane", "Romain"],
+    title: "Retrouvailles après des mois",
+    context: "Deux amies, Léa et Manon, se retrouvent après plusieurs mois sans se voir et racontent ce qui s'est passé.",
     exchanges: [
-      {
-        speaker: "Océane",
-        french: "Romain, j'ai une grande nouvelle ! L'année prochaine, je vais étudier au Canada.",
-        english: "Romain, I have big news! Next year, I'm going to study in Canada.",
-        pronunciation: "oh-say-AHN, zhay un grahn-duh noo-VEL! lah-NAY pro-SHEN, zhuh vay zay-tu-dee-AY oh kah-nah-DAH"
-      },
-      {
-        speaker: "Romain",
-        french: "Vraiment ? Quand est-ce que tu vas partir exactement ?",
-        english: "Really? When exactly are you going to leave?",
-        pronunciation: "vray-MAHN? kahn es-kuh tu vah par-TEER eg-zak-tuh-MAHN?"
-      },
-      {
-        speaker: "Océane",
-        french: "Je vais partir au mois de septembre. D'abord, je vais passer l'été ici pour me préparer.",
-        english: "I'm going to leave in September. First, I'm going to spend the summer here to prepare myself.",
-        pronunciation: "zhuh vay par-TEER oh mwah duh sep-TAHN-bruh. dah-BOR, zhuh vay pah-SAY lay-TAY ee-SEE poor muh pray-pah-RAY"
-      },
-      {
-        speaker: "Romain",
-        french: "Et tu vas rester combien de temps là-bas ?",
-        english: "And how long are you going to stay there?",
-        pronunciation: "ay tu vah res-TAY kom-bee-AHN duh TAHN lah-BAH?"
-      },
-      {
-        speaker: "Océane",
-        french: "Je vais y rester toute l'année universitaire. Si tout va bien, je vais peut-être prolonger.",
-        english: "I'm going to stay there the whole academic year. If everything goes well, I might extend.",
-        pronunciation: "zhuh vay zee res-TAY toot lah-NAY u-nee-vair-see-TAIR. see too vah bee-AHN, zhuh vay puh-TEH-truh pro-lohn-ZHAY"
-      },
-      {
-        speaker: "Romain",
-        french: "Formidable ! Qu'est-ce que tu vas étudier exactement ?",
-        english: "Wonderful! What exactly are you going to study?",
-        pronunciation: "for-mee-DAHBL! kes-kuh tu vay zay-tu-dee-AY eg-zak-tuh-MAHN?"
-      },
-      {
-        speaker: "Océane",
-        french: "Je vais me spécialiser en marketing international. Après mes études, j'espère travailler dans une entreprise multinationale.",
-        english: "I'm going to specialize in international marketing. After my studies, I hope to work in a multinational company.",
-        pronunciation: "zhuh vay muh spay-see-ah-lee-ZAY ahn mar-kuh-TING an-tair-nah-see-oh-NAHL. ah-PRAY may zay-TUD, zhes-PAIR trah-vah-YAY dahn zun ahn-truh-PREEZ mul-tee-nah-see-oh-NAHL"
-      },
-      {
-        speaker: "Romain",
-        french: "Et tes parents ? Qu'est-ce qu'ils en pensent ?",
-        english: "And your parents? What do they think about it?",
-        pronunciation: "ay tay pah-RAHN? kes-keel zahn PAHNSS?"
-      },
-      {
-        speaker: "Océane",
-        french: "Au début, ils étaient inquiets. Mais maintenant, ils vont m'aider financièrement. Ils comprennent que c'est important pour mon avenir.",
-        english: "At first, they were worried. But now, they're going to help me financially. They understand it's important for my future.",
-        pronunciation: "oh day-BU, eel zay-tay an-kee-AY. may man-tuh-NAHN, eel vohn may-DAY fee-nahn-see-AIR-mahn. eel kom-PRAHN-nuh kuh say am-por-TAHN poor mohn nah-vuh-NEER"
-      }
+      { speaker: "Léa", french: "Manon ! Ça fait longtemps ! Qu'est-ce que tu es devenue ?", english: "Manon! It's been so long! What have you become?", pronunciation: "mah-NOHN! sah fay lohn-TAHN! kes-kuh tu ay duh-vuh-NEW?" },
+      { speaker: "Manon", french: "Je me suis mariée en mars ! Et toi ?", english: "I got married in March! And you?", pronunciation: "zhuh muh swee mah-ree-YAY ahn MAHRS! ay TWAH?" },
+      { speaker: "Léa", french: "Félicitations ! Moi, je me suis installée à Lyon.", english: "Congratulations! I moved to Lyon.", pronunciation: "fay-lee-see-tah-SYOHN! MWAH, zhuh muh swee zan-stah-LAY ah lee-OHN." },
+      { speaker: "Manon", french: "Ah bon ? Tu t'es décidée finalement ! Et Paul, il s'est installé avec toi ?", english: "Oh really? You finally decided! And Paul, did he move with you?", pronunciation: "ah BOHN? tu tay day-see-DAY fee-nal-MAHN! ay POHL, eel say zan-stah-LAY ah-VEK TWAH?" },
+      { speaker: "Léa", french: "Non, nous nous sommes disputés et nous nous sommes séparés.", english: "No, we argued and we separated.", pronunciation: "NOHN, noo noo sum dees-pew-TAY ay noo noo sum say-pah-RAY." },
+      { speaker: "Manon", french: "Oh non, je suis désolée. Vous vous êtes réconciliés depuis ?", english: "Oh no, I'm sorry. Have you made up since?", pronunciation: "oh NOHN, zhuh swee day-zoh-LAY. voo voo zet ray-kohn-see-lee-YAY duh-PWEE?" },
+      { speaker: "Léa", french: "Non, il ne s'est pas excusé. Mais je me suis bien adaptée à Lyon.", english: "No, he didn't apologise. But I've adapted well to Lyon.", pronunciation: "NOHN, eel nuh say pah zek-skew-ZAY. may zhuh muh swee byan ah-dap-TAY ah lee-OHN." },
+      { speaker: "Manon", french: "Tu t'es fait des amis ?", english: "Did you make friends?", pronunciation: "tu tay FAY day zah-MEE?" },
+      { speaker: "Léa", french: "Oui, je me suis inscrite à un cours de cuisine. Tout le monde s'est bien occupé de moi.", english: "Yes, I signed up for a cooking class. Everyone took good care of me.", pronunciation: "WEE, zhuh muh swee zan-SKREET ah uh(n) KOOR duh kwee-ZEEN. too luh MOHND say byan oh-kew-PAY duh MWAH." },
+      { speaker: "Manon", french: "Je suis contente pour toi. Nous nous sommes promis de rester en contact, tu te souviens ?", english: "I'm happy for you. We promised each other to stay in touch, remember?", pronunciation: "zhuh swee kohn-TAHNT poor TWAH. noo noo sum proh-MEE duh res-TAY ahn kohn-TAKT, tu tuh soo-VYAHN?" },
+      { speaker: "Léa", french: "Oui, je me suis souvenue de notre promesse. C'est pour ça que je t'ai appelée !", english: "Yes, I remembered our promise. That's why I called you!", pronunciation: "WEE, zhuh muh swee soo-vuh-NEW duh noh-truh proh-MES. say poor SAH kuh zhuh tay ah-puh-LAY!" },
+      { speaker: "Manon", french: "Et tu t'es bien levée ce matin pour venir me voir !", english: "And you got up early this morning to come see me!", pronunciation: "ay tu tay byan luh-VAY suh mah-TAN poor vuh-NEER muh VWAHR!" },
     ]
   },
 
   grammarPoints: [
     {
-      title: "Complex Time Expressions for Future Planning",
-      explanation: "To discuss detailed future plans, you need precise time expressions. French has specific ways to talk about exact timing, duration, and sequence of future events. These expressions make your planning conversations sound natural and professional:",
+      title: "Les Pronominaux au Passé Composé — Toujours Être",
+      explanation: "Pronominal verbs always use être in the passé composé: je me suis levé, elle s’est préparée.",
       examples: [
-        "EXACT TIMING: au mois de septembre (in the month of September), à la fin de l'année (at the end of the year)",
-        "DURATION: toute l'année (all year), pendant six mois (for six months), jusqu'en décembre (until December)",
-        "SEQUENCE: d'abord (first), ensuite (then), après ça (after that), finalement (finally)",
-        "ACADEMIC: l'année universitaire (academic year), le semestre (semester), les vacances scolaires (school holidays)",
-        "PROFESSIONAL: à partir de janvier (starting from January), d'ici un an (within a year)"
+        "SE LEVER : je me suis levé(e), tu t'es levé(e), il s'est levé, elle s'est levée, nous nous sommes levé(e)s, vous vous êtes levé(e)(s), ils se sont levés, elles se sont levées",
+        "SE LAVER : je me suis lavé(e), tu t'es lavé(e), elle s'est lavée",
+        "S'HABILLER : je me suis habillé(e), nous nous sommes habillé(e)s",
+        "SE DÉPÊCHER : il s'est dépêché, elles se sont dépêchées",
+        "SE SOUVENIR : je me suis souvenu(e), tu t'es souvenu(e)",
+        "Négation : ne + pronom + être + pas + participe : Je ne me suis pas levé(e) tôt."
       ]
     },
     {
-      title: "Conditional Future Plans with SI (If)",
-      explanation: "Real future planning often involves conditions - 'if this happens, then I will do that.' French uses 'si' (if) + present tense, followed by futur proche to express conditional future plans. This is essential for realistic planning conversations:",
+      title: "L'Accord du Participe Passé",
+      explanation: "Agreement with pronominal verbs depends on the function of the reflexive pronoun. Direct reflexive pronouns can trigger agreement; indirect ones do not.",
       examples: [
-        "STRUCTURE: Si + present tense, + futur proche",
-        "Si tout va bien, je vais prolonger (If everything goes well, I'm going to extend)",
-        "Si j'ai assez d'argent, je vais voyager (If I have enough money, I'm going to travel)",
-        "Si tu finis tes études, tu vas chercher un emploi ? (If you finish your studies, are you going to look for a job?)",
-        "NOTE: Use present tense after 'si', not future tense"
+        "Elle s'est lavée. (se = objet direct, accord féminin)",
+        "Elle s'est lavé les mains. (les mains = objet direct après le verbe, pas d'accord avec se)",
+        "Ils se sont rencontrés. (se = objet direct mutuel, accord masculin pluriel)",
+        "Elles se sont parlé. (se = objet indirect, PAS d'accord)",
+        "Nous nous sommes téléphoné. (se = objet indirect avec à, PAS d'accord)",
+        "Règle pratique : si le verbe est suivi de 'à' + personne → pas d'accord. Sinon → accord."
       ]
     },
     {
-      title: "Expressing Hopes, Intentions, and Possibilities",
-      explanation: "Beyond simple future plans, French has nuanced ways to express different levels of certainty about future events. These expressions show whether something is definite, hoped for, or just possible:",
+      title: "Réciproques à Structure Indirecte — Jamais d'Accord",
+      explanation: "Reciprocal verbs such as se parler and s’écrire have an indirect reflexive pronoun, so the past participle does not agree.",
       examples: [
-        "HOPE: J'espère + infinitive = I hope to: J'espère réussir (I hope to succeed)",
-        "INTENTION: J'ai l'intention de + infinitive = I intend to: J'ai l'intention de partir (I intend to leave)",
-        "POSSIBILITY: Je vais peut-être + infinitive = I might: Je vais peut-être déménager (I might move)",
-        "PLANNING: Je prévois de + infinitive = I plan to: Je prévois de voyager (I plan to travel)",
-        "CERTAINTY LEVELS: définitivement (definitely), probablement (probably), peut-être (maybe)"
+        "SE PARLER (parler à) : Elles se sont parlé toute la nuit. ✓ (parlé, sans e)",
+        "SE TÉLÉPHONER (téléphoner à) : Nous nous sommes téléphoné hier. ✓ (téléphoné, sans accord)",
+        "SE SOURIRE (sourire à) : Ils se sont souri en se quittant. ✓ (souri, sans accord)",
+        "SE RESSEMBLER (ressembler à) : Les deux sœurs se sont toujours ressemblé. ✓",
+        "S'ÉCRIRE (écrire à) : Elles se sont écrit des lettres pendant des années. ✓ (écrit, sans e)",
+        "SE DIRE (dire à) : Ils se sont dit au revoir. ✓ (dit, sans accord)",
+        "SE DONNER (donner à) : Elles se sont donné rendez-vous à 15h. ✓ (donné, sans accord)",
+        "ASTUCE : ces verbes se construisent tous avec 'à quelqu'un' → COI → pas d'accord. Testez : 'parler à qqn ?' → oui → jamais d'accord."
       ]
     },
     {
-      title: "Professional and Academic Future Vocabulary",
-      explanation: "When discussing career and education plans, French has specific vocabulary that's essential for professional conversations. These terms are commonly used in job interviews, academic discussions, and career planning:",
+      title: "Verbes de Vie et Relations au Passé Composé",
+      explanation: "Common relationship and life-event verbs often appear pronominally in the past, so they are useful for telling personal stories.",
       examples: [
-        "EDUCATION: se spécialiser en (to specialize in), faire des études de (to study), obtenir un diplôme (to get a degree)",
-        "CAREER: chercher un emploi (to look for a job), travailler dans une entreprise (to work in a company), faire carrière (to build a career)",
-        "GOALS: mon objectif (my goal), mon avenir (my future), mes projets professionnels (my professional plans)",
-        "SUPPORT: aider financièrement (to help financially), soutenir (to support), encourager (to encourage)"
-      ]
-    },
-    {
-      title: "Talking About Other People's Future Plans",
-      explanation: "To discuss what others are going to do or to report their plans, you need to shift perspectives and use appropriate pronouns. This is essential for social conversations and professional discussions:",
-      examples: [
-        "REPORTING: Il va étudier au Canada (He's going to study in Canada)",
-        "ASKING ABOUT OTHERS: Qu'est-ce qu'elle va faire ? (What is she going to do?)",
-        "FAMILY PLANS: Mes parents vont m'aider (My parents are going to help me)",
-        "GROUP PLANS: Nous allons tous voyager ensemble (We're all going to travel together)",
-        "OPINIONS: Qu'est-ce qu'ils en pensent ? (What do they think about it?)"
+        "SE MARIER → elle s'est mariée (she got married)",
+        "SE DISPUTER → ils se sont disputés (they argued)",
+        "SE RÉCONCILIER → elles se sont réconciliées (they made up)",
+        "SE SÉPARER → nous nous sommes séparés (we separated)",
+        "SE RENCONTRER → ils se sont rencontrés en 2020 (they met in 2020)",
+        "S'INSTALLER → je me suis installé(e) à Paris (I settled/moved to Paris)"
       ]
     }
   ],
 
   vocabulary: [
-    { french: "une grande nouvelle", english: "big news", category: "expressions", example: "J'ai une grande nouvelle à vous annoncer !" },
-    { french: "l'année prochaine", english: "next year", category: "time", example: "L'année prochaine, je vais étudier au Canada." },
-    { french: "exactement", english: "exactly", category: "adverbs", example: "C'est exactement ce que je veux faire." },
-    { french: "au mois de", english: "in the month of", category: "time-expressions", example: "Au mois de septembre, je commence mes études." },
-    { french: "septembre", english: "September", category: "months", example: "Septembre est le mois de la rentrée scolaire." },
-    { french: "se préparer", english: "to prepare oneself", category: "reflexive-verbs", example: "Je me prépare pour ce grand changement." },
-    { french: "toute l'année", english: "all year", category: "time", example: "Je vais rester au Canada toute l'année universitaire." },
-    { french: "universitaire", english: "academic/university", category: "education", example: "L'année universitaire commence en septembre." },
-    { french: "si tout va bien", english: "if everything goes well", category: "conditional", example: "Si tout va bien, je vais prolonger mon séjour." },
-    { french: "peut-être", english: "maybe/perhaps", category: "possibility", example: "Peut-être que je vais me spécialiser en commerce international." },
-    { french: "prolonger", english: "to extend", category: "verbs", example: "Je vais prolonger mes études d'un an." },
-    { french: "se spécialiser en", english: "to specialize in", category: "education", example: "Je vais me spécialiser en marketing international." },
-    { french: "international", english: "international", category: "adjectives", example: "Le commerce international est très intéressant." },
-    { french: "après", english: "after", category: "time-expressions", example: "Après mes études, je vais chercher un travail." },
-    { french: "les études", english: "studies", category: "education", example: "Mes études me passionnent vraiment." },
-    { french: "espérer", english: "to hope", category: "verbs", example: "J'espère trouver un bon emploi après mes études." },
-    { french: "une entreprise", english: "company", category: "business", example: "Je voudrais travailler dans une entreprise multinationale." },
-    { french: "multinationale", english: "multinational", category: "business", example: "Les entreprises multinationales offrent de bonnes opportunités." },
-    { french: "qu'est-ce qu'ils en pensent", english: "what do they think about it", category: "expressions", example: "Qu'est-ce qu'ils en pensent de mon projet ?" },
-    { french: "au début", english: "at first", category: "time-expressions", example: "Au début, mes parents étaient inquiets." },
-    { french: "inquiet/inquiète", english: "worried", category: "emotions", example: "Maintenant, ils ne sont plus inquiets du tout." },
-    { french: "maintenant", english: "now", category: "time", example: "Maintenant, ils comprennent et m'aident financièrement." },
-    { french: "aider financièrement", english: "to help financially", category: "expressions", example: "Mes parents m'aident financièrement pour mes études." },
-    { french: "comprendre", english: "to understand", category: "verbs", example: "Je comprends leurs inquiétudes maintenant." },
-    { french: "l'avenir", english: "future", category: "time", example: "L'avenir s'annonce prometteur pour moi." }
+    { french: "se marier", english: "to get married", category: "Vie/Relations", example: "Elle s'est mariée en juin. (el say mah-ree-YAY ahn zhwahn)" },
+    { french: "se disputer", english: "to argue", category: "Vie/Relations", example: "Ils se sont disputés hier soir. (eel suh son dees-pew-TAY ee-AIR SWAHR)" },
+    { french: "se réconcilier", english: "to make up / reconcile", category: "Vie/Relations", example: "Elles se sont réconciliées après une semaine. (el suh son ray-kohn-see-lee-YAY ah-PRAY ewn suh-MEN)" },
+    { french: "se séparer", english: "to separate / break up", category: "Vie/Relations", example: "Ils se sont séparés l'année dernière. (eel suh son say-pah-RAY lah-NAY dair-NYAIR)" },
+    { french: "se rencontrer", english: "to meet (each other)", category: "Vie/Relations", example: "Nous nous sommes rencontrés au travail. (noo noo sum rahn-kohn-TRAY oh trav-EYE)" },
+    { french: "s'installer", english: "to settle / move in", category: "Vie/Relations", example: "Je me suis installé à Bordeaux. (zhuh muh swee zan-stah-LAY ah bor-DOH)" },
+    { french: "se décider", english: "to make up one's mind", category: "Vie/Relations", example: "Tu t'es décidée ? (tu tay day-see-DAY?)" },
+    { french: "s'inscrire", english: "to sign up / register", category: "Vie/Relations", example: "Je me suis inscrit au gymnase. (zhuh muh swee zan-SKREE oh zheem-NAHZ)" },
+    { french: "s'occuper (de)", english: "to take care (of)", category: "Vie/Relations", example: "Elle s'est occupée des enfants. (el say toh-kew-PAY dayz ahn-FAHN)" },
+    { french: "se promettre", english: "to promise (each other)", category: "Vie/Relations", example: "Ils se sont promis de s'écrire. (eel suh son proh-MEE duh say-KREER)" },
+    { french: "s'adapter", english: "to adapt", category: "Vie/Relations", example: "Je me suis bien adapté. (zhuh muh swee byan ah-dap-TAY)" },
+    { french: "s'excuser", english: "to apologise", category: "Vie/Relations", example: "Il ne s'est pas excusé. (eel nuh say pah zek-skew-ZAY)" },
+    { french: "félicitations", english: "congratulations", category: "Expression", example: "Félicitations pour ton nouveau travail ! (fay-lee-see-tah-SYOHN poor tohn noo-VOH trav-EYE!)" },
+    { french: "ça fait longtemps", english: "it's been a long time", category: "Expression", example: "Ça fait longtemps qu'on ne s'est pas vus ! (sah fay lohn-TAHN kohn nuh say pah VEW!)" },
+    { french: "désolé(e)", english: "sorry", category: "Expression", example: "Je suis désolé d'apprendre ça. (zhuh swee day-zoh-LAY dah-PRAHN-druh SAH)" },
+    { french: "s'entendre (bien/mal)", english: "to get along (well/badly)", category: "Vie/Relations", example: "Nous nous sommes toujours bien entendus. (noo noo sum too-ZHOOR byan ahn-tahn-DEW)" },
+    { french: "se souvenir", english: "to remember", category: "Vie/Relations", example: "Elle s'est souvenue de la date. (el say soo-vuh-NEW duh lah DAT)" },
+    { french: "se tromper", english: "to be mistaken", category: "Vie/Relations", example: "Je me suis trompé de porte. (zhuh muh swee trohm-PAY duh PORT)" },
   ],
 
   culturalNotes: [
-    {
-      title: "Study Abroad in French Culture",
-      content: "Studying abroad ('étudier à l'étranger') is highly valued in France. Programs like Erasmus are very popular. Canada is a preferred destination due to shared francophone culture. Parents often initially worry but usually support educational opportunities."
-    },
-    {
-      title: "French Academic and Career Planning",
-      content: "French students often specialize early ('se spécialiser'). International experience is considered essential for career advancement. Family financial support for education is common and culturally expected."
-    }
+    { title: "Le mariage en France", content: "Le mariage civil est obligatoire en France avant toute cérémonie religieuse. Il est célébré à la mairie par le maire ou un adjoint. Le PACS (Pacte Civil de Solidarité), créé en 1999, est une alternative populaire au mariage." },
+    { title: "Lyon", content: "Troisième ville de France après Paris et Marseille, Lyon est la capitale de la gastronomie française. Située au confluent du Rhône et de la Saône, elle est célèbre pour ses bouchons (restaurants traditionnels), ses traboules (passages couverts) et sa Fête des Lumières le 8 décembre." },
+    { title: "Les relations amicales en France", content: "Les amitiés françaises se construisent souvent lentement mais deviennent très profondes. Les Français distinguent clairement 'copains' (amis décontractés) et 'amis' (proches, intimes). Se réconcilier après une dispute est une étape importante de l'amitié à la française." },
   ],
 
   exercises: [
-    {
-      id: "ex1",
-      type: "multiple_choice" as const,
-      question: "How do you say 'If everything goes well, I'm going to extend' in French?",
-      options: [
-        "Si tout va bien, je vais prolonger",
-        "Si tout ira bien, je vais prolonger",
-        "Quand tout va bien, je vais prolonger",
-        "Si tout va bien, je prolongerai"
-      ],
-      correct_answer: "Si tout va bien, je vais prolonger",
-      explanation: "Use present tense after 'si': Si tout va bien, je vais prolonger."
-    },
-
-    {
-      id: "ex2",
-      type: "matching" as const,
-      question: "Complete these conditional future plans:",
-      pairs: [
-        { french: "Si j'ai assez d'argent", english: "je vais voyager en Europe" },
-        { french: "Si tu finis tes études", english: "tu vas chercher un emploi" },
-        { french: "Si nous réussissons nos examens", english: "nous allons faire la fête" }
-      ],
-      correct_answer: "matching",
-      explanation: "Practice conditional planning with si + present tense."
-    },
-
-    {
-      id: "ex3",
-      type: "matching" as const,
-      question: "Match complex time expressions with appropriate contexts:",
-      pairs: [
-        { french: "au mois de septembre", english: "starting university" },
-        { french: "toute l'année universitaire", english: "study abroad duration" },
-        { french: "à la fin de l'année", english: "graduation time" },
-        { french: "d'ici un an", english: "career goal timeline" },
-        { french: "pendant six mois", english: "internship duration" }
-      ],
-      correct_answer: "matching",
-      explanation: "Learn to use complex time expressions in context."
-    },
-
-    {
-      id: "ex4",
-      type: "multiple_choice" as const,
-      question: "Choose the appropriate expression for each level of certainty:",
-      options: [
-        "peut-être",
-        "probablement", 
-        "définitivement"
-      ],
-      correct_answer: "définitivement",
-      explanation: "Use 'définitivement' for definite plans.",
-      context: "Je vais _____ étudier au Canada. (definitely)"
-    },
-
-    {
-      id: "ex5",
-      type: "fill_blank" as const,
-      question: "Complete with appropriate academic/professional terms: Je vais me _____ en marketing international. (specialize)",
-      correct_answer: ["spécialiser"],
-      explanation: "Use 'se spécialiser en' for academic specialization."
-    },
-
-    {
-      id: "ex6",
-      type: "translation" as const,
-      question: "Translate: 'Next year, I'm going to study abroad. If everything goes well, I might extend my stay.'",
-      correct_answer: "l'année prochaine, je vais étudier à l'étranger. si tout va bien, je vais peut-être prolonger mon séjour",
-      explanation: "Use futur proche and conditional expressions with si.",
-      hints: ["l'année prochaine = next year", "à l'étranger = abroad", "si tout va bien = if everything goes well", "peut-être = maybe", "prolonger = extend"]
-    },
-
-    {
-      id: "ex7",
-      type: "multiple_choice" as const,
-      question: "Choose the correct expression for each context:",
-      options: [
-        "espère",
-        "ai l'intention de",
-        "vais peut-être"
-      ],
-      correct_answer: "espère",
-      explanation: "Use 'espérer' to express hopes and wishes.",
-      context: "J'_____ réussir mes examens. (expressing a strong wish for the future)"
-    },
-
-    {
-      id: "ex8",
-      type: "matching" as const,
-      question: "Report what these people are going to do:",
-      pairs: [
-        { french: "Marie dit: 'Je vais étudier en Allemagne'", english: "Marie va étudier en Allemagne" },
-        { french: "Mes parents disent: 'Nous allons t'aider financièrement'", english: "Mes parents vont m'aider financièrement" },
-        { french: "Paul dit: 'Je vais peut-être prolonger'", english: "Paul va peut-être prolonger" }
-      ],
-      correct_answer: "matching",
-      explanation: "Practice reporting others' future plans."
-    }
+    { id: "l18-e1", type: "conjugation", question: "Conjuguez SE LEVER au passé composé (sujet féminin).", verb: "se lever (passé composé)", correct_answer: [{ pronoun: "je (f)", form: "me suis levée", pronunciation: "muh swee luh-VAY" }, { pronoun: "tu (f)", form: "t'es levée", pronunciation: "tay luh-VAY" }, { pronoun: "elle", form: "s'est levée", pronunciation: "say luh-VAY" }, { pronoun: "nous (f)", form: "nous sommes levées", pronunciation: "noo sum luh-VAY" }, { pronoun: "vous (f)", form: "vous êtes levées", pronunciation: "voo zet luh-VAY" }, { pronoun: "elles", form: "se sont levées", pronunciation: "suh son luh-VAY" }], explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." },
+    { id: "l18-e2", type: "fill_blank", question: "Complétez avec l'accord correct : Elle s'est ____ (laver).", correct_answer: "lavée", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." },
+    { id: "l18-e3", type: "multiple_choice", question: "Quel auxiliaire pour les verbes pronominaux au passé composé ?", options: ["avoir", "être"], correct_answer: "être", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." },
+    { id: "l18-e4", type: "fill_blank", question: "Complétez : Elles se sont ____ (parler) pendant deux heures. (Attention : se parler à → pas d'accord)", correct_answer: "parlé", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." },
+    { id: "l18-e5", type: "multiple_choice", question: "Quel accord pour 'Elle s'est ____ les mains' (laver) ?", options: ["lavé", "lavée", "lavés", "lavées"], correct_answer: "lavé", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." },
+    { id: "l18-e6", type: "transformation", question: "Mettez au passé composé à la forme négative.", instruction: "affirmative_to_negative", items: [{ original: "Je me lève.", transformed: "Je ne me suis pas levé(e).", translation: "I didn't get up." }, { original: "Il s'habille.", transformed: "Il ne s'est pas habillé.", translation: "He didn't get dressed." }, { original: "Nous nous excusons.", transformed: "Nous ne nous sommes pas excusé(e)s.", translation: "We didn't apologise." }], explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." },
+    { id: "l18-e7", type: "matching", question: "Associez l'infinitif au participe passé au masculin singulier.", pairs: [{ french: "se lever", english: "levé" }, { french: "se marier", english: "marié" }, { french: "s'installer", english: "installé" }, { french: "se souvenir", english: "souvenu" }, { french: "se disputer", english: "disputé" }, { french: "s'inscrire", english: "inscrit" }], explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." },
+    { id: "l18-e8", type: "translation", question: "Traduisez : 'She got married, moved to Lyon, and made many friends.'", direction: "en_to_fr", correct_answer: ["Elle s'est mariée, elle s'est installée à Lyon et elle s'est fait beaucoup d'amis."], explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." },
+    { id: "l18-e9", type: "speaking_prompt", question: "Racontez un événement important de votre vie en utilisant 3 verbes pronominaux au passé composé.", model_answer: "L'année dernière, je me suis installée à Paris. Je me suis inscrite à l'université. Je me suis fait beaucoup d'amis.", translation: "Last year, I moved to Paris. I enrolled at university. I made many friends.", tip: "In the passé composé, place the reflexive pronoun before être: je me suis, tu t’es, elle s’est." },
+    { id: "l18-e10", type: "error_correction", question: "Corrigez l'accord du participe passé (ou confirmez qu'il est correct).", items: [{ incorrect: "Elles se sont parlées pendant des heures.", correct: "Elles se sont parlé pendant des heures.", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." }, { incorrect: "Ils se sont souri timidement.", correct: "Ils se sont souri timidement. ✓", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." }, { incorrect: "Elles se sont écrites tous les mois.", correct: "Elles se sont écrit tous les mois.", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." }, { incorrect: "Nous nous sommes rencontrés à Lyon.", correct: "Nous nous sommes rencontrés à Lyon. ✓", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." }, { incorrect: "Elle s'est lavée les cheveux.", correct: "Elle s'est lavé les cheveux.", explanation: "Pronominal verbs use être in the passé composé. Agreement depends on whether the reflexive pronoun functions as a direct or indirect object." }] },
   ]
 }
 
-export default function Lesson18() {
-  const [currentSection, setCurrentSection] = useState<Section>('dialogue')
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
-  const [correctAnswers, setCorrectAnswers] = useState<number>(0)
-
-  const sections = [
-    { id: 'dialogue', label: 'Dialogue', icon: '💬' },
-    { id: 'grammar', label: 'Grammar', icon: '📚' },
-    { id: 'vocabulary', label: 'Vocabulary', icon: '📖' },
-    { id: 'exercises', label: 'Exercises', icon: '✏️' }
-  ]
-
-  const handleExerciseComplete = (exerciseId: string) => {
-    setCompletedExercises(prev => new Set(prev).add(exerciseId))
-    setCorrectAnswers(prev => prev + 1)
-  }
-
-  const handleReset = () => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(0)
-  }
-
-  const renderGrammarSection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Grammar Points</h2>
-        <p className="text-lg text-gray-600">Master advanced future planning concepts and conditional expressions</p>
-      </div>
-      
-      {lessonData.grammarPoints.map((point, index) => (
-        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{point.title}</h3>
-          <p className="text-gray-700 mb-4 leading-relaxed">{point.explanation}</p>
-          <div className="space-y-2">
-            {point.examples.map((example, idx) => (
-              <div key={idx} className="bg-green-50 rounded-lg p-3 border-l-4 border-green-300">
-                <p className="text-gray-800 font-medium">{example}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-
-  const renderVocabularySection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Vocabulary</h2>
-        <p className="text-lg text-gray-600">Essential words and expressions for advanced future planning</p>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-6">
-        {lessonData.vocabulary.map((item, index) => (
-          <div key={index} className="bg-white/80 backdrop-blur-sm p-6 rounded-[16px] border border-gray-200 shadow-[inset_0_4px_16px_rgba(0,0,0,0.05),0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_4px_16px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02]">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xl font-bold text-gray-900">{item.french}</h3>
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-[12px] text-sm font-medium">
-                {item.category}
-              </span>
-            </div>
-            <p className="text-gray-700 text-lg mb-2">{item.english}</p>
-            {item.example && (
-              <div className="bg-blue-50 rounded-lg p-3 mb-3 border-l-4 border-blue-300">
-                <div className="flex items-center justify-between">
-                  <p className="text-gray-800 font-medium text-sm italic flex-1">&ldquo;{item.example}&rdquo;</p>
-                  <button 
-                    onClick={() => {
-                      if ('speechSynthesis' in window) {
-                        const utterance = new SpeechSynthesisUtterance(item.example);
-                        utterance.lang = 'fr-FR';
-                        utterance.rate = 0.8;
-                        speechSynthesis.speak(utterance);
-                      }
-                    }}
-                    className="ml-3 p-2 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-full transition-colors duration-200 hover:scale-110"
-                    title="Listen to example sentence"
-                  >
-                    <span className="text-lg">🎹</span>
-                  </button>
-                </div>
-              </div>
-            )}
-            <AudioPlayer 
-              text={item.french}
-              className="mt-3"
-              
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
-  const renderCulturalNotesSection = () => (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Cultural Notes</h2>
-        <p className="text-lg text-gray-600">Understanding French culture and academic planning</p>
-      </div>
-      
-      {lessonData.culturalNotes.map((note, index) => (
-        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{note.title}</h3>
-          <p className="text-gray-700 leading-relaxed">{note.content}</p>
-        </div>
-      ))}
-    </div>
-  )
-
-  const renderExercisesSection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Exercises</h2>
-        <p className="text-lg text-gray-600">Practice your advanced future planning skills</p>
-      </div>
-      
-      <ExerciseProgress
-        totalExercises={lessonData.exercises.length}
-        completedExercises={completedExercises.size}
-        correctAnswers={correctAnswers}
-        onReset={handleReset}
-      />
-      
-      <div className="space-y-6">
-        {lessonData.exercises.map((exercise, index) => (
-          <InteractiveExercise
-            key={exercise.id}
-            exercise={exercise}
-            onComplete={() => handleExerciseComplete(exercise.id)}
-            exerciseNumber={index + 1}
-          />
-        ))}
-      </div>
-    </div>
-  )
-
+export default function Lesson18Page() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-green-200 sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <Link href="/lessons/elementary" className="text-green-600 hover:text-green-700 transition-colors mb-2 inline-block">
-                ← Back to A2 Lessons
-              </Link>
-              <h1 className="text-4xl font-bold text-gray-900">{lessonData.title}</h1>
-              <p className="text-xl text-gray-600 mt-2">{lessonData.description}</p>
-            </div>
-            <div className="text-right">
-              <div className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                {lessonData.level}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Tabs */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-green-200 sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex justify-center space-x-1 py-4">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setCurrentSection(section.id as Section)}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-[16px] font-medium transition-all duration-300 ${
-                  currentSection === section.id
-                    ? 'bg-green-500 text-white shadow-lg scale-105'
-                    : 'bg-white/60 text-gray-700 hover:bg-white/80 hover:scale-105'
-                }`}
-              >
-                <span>{section.icon}</span>
-                <span>{section.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        {currentSection === 'dialogue' && (
-          <div className="space-y-8">
-            <DialogueSection dialogue={lessonData.dialogue} />
-            <div className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Practice Speaking</h3>
-              <AudioPlayer  text="Practice the dialogue with the audio player" />
-            </div>
-            {renderCulturalNotesSection()}
-          </div>
-        )}
-        
-        {currentSection === 'grammar' && renderGrammarSection()}
-        {currentSection === 'vocabulary' && renderVocabularySection()}
-        {currentSection === 'exercises' && renderExercisesSection()}
-      </div>
-    </div>
+    <ElementaryLessonLayout
+      lessonData={lessonData}
+      lessonNumber={18}
+      prevHref="/lessons/elementary/17"
+      prevLabel="Les Verbes Pronominaux"
+      nextHref="/lessons/elementary/19"
+      nextLabel="L'Imparfait"
+    />
   )
 }

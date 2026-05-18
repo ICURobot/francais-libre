@@ -1,474 +1,241 @@
 'use client'
 
-import { useState } from 'react'
-import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { AudioPlayer } from '../../../../../components/lessons/AudioPlayer'
-import Link from 'next/link'
+import ElementaryLessonLayout, { ElementaryLessonData } from '../../../../../components/lessons/ElementaryLessonLayout'
 
-type Section = 'dialogue' | 'grammar' | 'vocabulary' | 'exercises'
-
-const lessonData = {
+const lessonData: ElementaryLessonData = {
   id: 14,
-  title: "Introduction to Past Tense (Passé Composé)",
+  title: "Le Passé Composé II",
   level: "A2",
-  description: "Learn to talk about completed past actions using passé composé with avoir - the most important past tense in French",
-  
+  description: "Master irregular past participles with avoir, including avoir, être, faire, prendre, voir, lire, écrire, dire, boire, vouloir, pouvoir, and savoir.",
+
   dialogue: {
-    title: "What Did You Do Yesterday?",
-    context: "Chloé and Maxime discuss what they did yesterday using passé composé",
-    speakers: ["Chloé", "Maxime"],
+    title: "Après l'examen",
+    context: "Deux étudiants, Lucas et Emma, discutent après un examen universitaire difficile.",
     exchanges: [
-      {
-        speaker: "Chloé",
-        french: "Salut Maxime ! Qu'est-ce que tu as fait hier ?",
-        english: "Hi Maxime! What did you do yesterday?",
-        pronunciation: "sah-LU mak-SEEM! kes-kuh tu ah fay ee-AIR?"
-      },
-      {
-        speaker: "Maxime",
-        french: "J'ai travaillé le matin, puis j'ai déjeuné avec ma sœur.",
-        english: "I worked in the morning, then I had lunch with my sister.",
-        pronunciation: "zhay trah-vah-YAY luh mah-TAHN, pwee zhay day-zhuh-NAY ah-VEK mah SUR"
-      },
-      {
-        speaker: "Chloé",
-        french: "Sympa ! Et l'après-midi ? Tu as regardé la télé ?",
-        english: "Nice! And in the afternoon? Did you watch TV?",
-        pronunciation: "sam-PAH! ay lah-pray-mee-DEE? tu ah ruh-gar-DAY lah tay-LAY?"
-      },
-      {
-        speaker: "Maxime",
-        french: "Non, j'ai préféré faire du sport. J'ai joué au tennis avec Paul.",
-        english: "No, I preferred to do sports. I played tennis with Paul.",
-        pronunciation: "nohn, zhay pray-fay-RAY fair du spor. zhay zhoo-AY oh tay-NEES ah-VEK POHL"
-      },
-      {
-        speaker: "Chloé",
-        french: "Tu as gagné ?",
-        english: "Did you win?",
-        pronunciation: "tu ah gah-NYAY?"
-      },
-      {
-        speaker: "Maxime",
-        french: "Oui ! Nous avons bien joué tous les deux. Et toi, qu'est-ce que tu as fait ?",
-        english: "Yes! We both played well. And you, what did you do?",
-        pronunciation: "wee! noo zah-VOHN bee-AHN zhoo-AY too lay DUH. ay TWAH, kes-kuh tu ah fay?"
-      },
-      {
-        speaker: "Chloé",
-        french: "J'ai étudié pour mon examen, puis j'ai écouté de la musique.",
-        english: "I studied for my exam, then I listened to music.",
-        pronunciation: "zhay ay-tu-dee-AY poor mohn eg-zah-MAHN, pwee zhay ay-koo-TAY duh lah mu-ZEEK"
-      },
-      {
-        speaker: "Maxime",
-        french: "Tu as fini tes révisions ?",
-        english: "Did you finish your review?",
-        pronunciation: "tu ah fee-NEE tay ray-vee-zee-OHN?"
-      }
+      { speaker: "Lucas", french: "Alors Emma, tu as fini l'examen à temps ?", english: "So Emma, did you finish the exam on time?", pronunciation: "ah-LOR eh-MAH, tu ah fee-NEE lek-sah-MAN ah TAHN?" },
+      { speaker: "Emma", french: "Oui, mais j'ai eu des difficultés avec la dernière question.", english: "Yes, but I had difficulties with the last question.", pronunciation: "WEE, may zhay EW day dee-fee-kul-TAY ah-VEK lah dair-NYAIR kes-TYOHN." },
+      { speaker: "Lucas", french: "Moi aussi. Je n'ai pas pu finir la première partie.", english: "Me too. I couldn't finish the first part.", pronunciation: "MWAH oh-SEE. zhuh nay pah PEW fee-NEER lah pruh-MYAIR par-TEE." },
+      { speaker: "Emma", french: "Tu as lu tous les chapitres du livre ?", english: "Did you read all the chapters of the book?", pronunciation: "tu ah LEW too lay shah-PEE-truh dew LEE-vruh?" },
+      { speaker: "Lucas", french: "J'ai lu la plupart, mais je n'ai pas eu le temps pour le chapitre huit.", english: "I read most of them, but I didn't have time for chapter eight.", pronunciation: "zhay LEW lah plew-PAHR, may zhuh nay pah EW luh TAHN poor luh shah-PEE-truh WEE." },
+      { speaker: "Emma", french: "Moi, j'ai écrit des notes pour chaque chapitre. Ça m'a beaucoup aidée.", english: "I wrote notes for every chapter. That helped me a lot.", pronunciation: "MWAH, zhay ay-KREE day NOT poor shahk shah-PEE-truh. sah mah bo-KOO ay-DAY." },
+      { speaker: "Lucas", french: "Bonne idée. Tu as bu un café avant l'examen ?", english: "Good idea. Did you have a coffee before the exam?", pronunciation: "bun ee-DAY. tu ah BEW uh(n) kah-FAY ah-VAHN lek-sah-MAN?" },
+      { speaker: "Emma", french: "Non, j'ai pris un thé. Le café, j'ai voulu éviter, c'est trop stressant.", english: "No, I had a tea. Coffee, I wanted to avoid it, it's too stressful.", pronunciation: "NOHN, zhay PREE uh(n) TAY. luh kah-FAY, zhay voo-LEW ay-vee-TAY, say troh stres-SAHN." },
+      { speaker: "Lucas", french: "Tu as fait un bon choix. Moi, j'ai mis trop de sucre dans mon café.", english: "You made a good choice. I put too much sugar in my coffee.", pronunciation: "tu ah FAY uh(n) bohn SHWAH. MWAH, zhay MEE troh duh SEW-kruh dah(n) mohn kah-FAY." },
+      { speaker: "Emma", french: "On a vu le professeur après l'examen ? Il a dit quelque chose ?", english: "Did we see the professor after the exam? Did he say something?", pronunciation: "ohn ah VEW luh proh-feh-SUR ah-PRAY lek-sah-MAN? eel ah DEE kel-kuh SHOHZ?" },
+      { speaker: "Lucas", french: "Oui, il a dit que les résultats vont être prêts vendredi.", english: "Yes, he said the results are going to be ready on Friday.", pronunciation: "WEE, eel ah DEE kuh lay ray-zul-TAH vohn TET-ruh PRAY vahn-druh-DEE." },
+      { speaker: "Emma", french: "J'ai reçu un email du département aussi. Ils ont déjà corrigé une partie.", english: "I received an email from the department too. They already corrected part of it.", pronunciation: "zhay ruh-SEW uh(n) ee-MAIL dew day-par-tuh-MAHN oh-SEE. eel zohn day-ZHAH kor-ee-ZHAY ewn par-TEE." },
     ]
   },
 
   grammarPoints: [
     {
-      title: "What Is Passé Composé?",
-      explanation: "Passé composé is the most important past tense in French for everyday conversation. It describes completed actions in the past - things that happened and are finished. Unlike English, which has several past tenses, French uses passé composé for most past situations. It's called 'composé' (compound) because it's made of two parts: a helper verb + past participle:",
+      title: "Participes Passés Irréguliers — Le Groupe en -u",
+      explanation: "Many high-frequency irregular past participles end in -u, including eu, bu, vu, lu, pu, su, voulu, and reçu. Learn them as a sound family.",
       examples: [
-        "STRUCTURE: Subject + helper verb (avoir/être) + past participle",
-        "ENGLISH EQUIVALENTS: 'I worked', 'I have worked', 'I did work' = J'ai travaillé",
-        "COMPLETED ACTIONS: J'ai mangé (I ate/have eaten) - the action is finished",
-        "PAST EVENTS: Hier, j'ai vu un film (Yesterday, I saw a movie)",
-        "KEY POINT: Most verbs use 'avoir' as the helper verb (we'll learn 'être' verbs later)"
+        "AVOIR → eu (had) : J'ai eu une bonne note.",
+        "BOIRE → bu (drank) : Tu as bu de l'eau ?",
+        "VOIR → vu (saw) : Il a vu le film.",
+        "LIRE → lu (read) : Nous avons lu le journal.",
+        "POUVOIR → pu (could/was able to) : Vous avez pu venir.",
+        "SAVOIR → su (knew) : Elle a su la réponse.",
+        "VOULOIR → voulu (wanted) : Ils ont voulu partir.",
+        "RECEVOIR → reçu (received) : J'ai reçu un message."
       ]
     },
     {
-      title: "Forming Past Participles with Regular -er Verbs",
-      explanation: "For regular -er verbs (which you know well from Lessons 1-10), forming the past participle is simple: remove -er from the infinitive and add -é. This -é ending never changes when using 'avoir' as the helper verb:",
+      title: "Participes Passés Irréguliers — Les Groupes -is et -it",
+      explanation: "Some essential irregular past participles end in -is or -it, such as pris, mis, dit, and écrit. These must be memorized individually and by family.",
       examples: [
-        "PATTERN: infinitive (-er) → past participle (-é)",
-        "travailler → travaillé: J'ai travaillé (I worked)",
-        "regarder → regardé: Tu as regardé (You watched)", 
-        "écouter → écouté: Il a écouté (He listened)",
-        "jouer → joué: Nous avons joué (We played)",
-        "PRONUNCIATION: The -é sounds like 'ay' in English 'day'"
+        "PRENDRE → pris (took) : J'ai pris le train.",
+        "METTRE → mis (put) : Tu as mis la table.",
+        "FAIRE → fait (did/made) : Il a fait ses devoirs.",
+        "DIRE → dit (said) : Elle a dit la vérité.",
+        "ÉCRIRE → écrit (wrote) : Nous avons écrit une lettre.",
+        "ÊTRE → été (been) : J'ai été malade hier. (Note: être uses avoir for passé composé when it means 'to have been')"
       ]
     },
     {
-      title: "Using AVOIR as Helper Verb - Complete Pattern",
-      explanation: "Most French verbs use 'avoir' (to have) as their helper verb in passé composé. You conjugate 'avoir' in the present tense, then add the past participle. The past participle stays the same regardless of who is doing the action:",
+      title: "La Négation au Passé Composé Irrégulier",
+      explanation: "Irregular participles do not change the negative structure: ne + auxiliary + pas + past participle.",
       examples: [
-        "AVOIR conjugation: j'ai, tu as, il/elle a, nous avons, vous avez, ils/elles ont",
-        "FULL PATTERN with 'manger' (to eat):",
-        "j'ai mangé (I ate), tu as mangé (you ate), il/elle a mangé (he/she ate)",
-        "nous avons mangé (we ate), vous avez mangé (you ate), ils/elles ont mangé (they ate)",
-        "PAST PARTICIPLE: mangé stays the same in all forms"
+        "Je n'ai pas eu le temps (I didn't have time)",
+        "Tu n'as pas bu assez d'eau (You didn't drink enough water)",
+        "Il n'a pas vu le panneau (He didn't see the sign)",
+        "Nous n'avons pas pu dormir (We couldn't sleep)",
+        "Elles n'ont pas fait attention (They didn't pay attention)"
       ]
     },
     {
-      title: "Past Participles of Common Irregular Verbs",
-      explanation: "While -er verbs are predictable (-é ending), irregular verbs have unique past participles that must be memorized. Here are the most essential ones you need for daily conversation:",
+      title: "Familles de Participes Irréguliers — Mémorisation par Groupe",
+      explanation: "Irregular past participles are easier to learn in families because related verbs often share the same pattern.",
       examples: [
-        "faire → fait: J'ai fait mes devoirs (I did my homework)",
-        "voir → vu: Tu as vu le film ? (Did you see the movie?)",
-        "dire → dit: Il a dit bonjour (He said hello)",
-        "prendre → pris: Nous avons pris le bus (We took the bus)",
-        "avoir → eu: Elle a eu 20 ans (She turned 20)",
-        "être → été: J'ai été malade (I was sick)"
-      ]
-    },
-    {
-      title: "Negative and Question Forms in Passé Composé",
-      explanation: "To make passé composé negative or ask questions, you work with the helper verb (avoir), not the past participle. The past participle always stays at the end:",
-      examples: [
-        "NEGATIVE: ne + avoir + pas + past participle",
-        "Je n'ai pas travaillé (I didn't work), Tu n'as pas mangé (You didn't eat)",
-        "QUESTIONS: (Est-ce que) + subject + avoir + past participle + ?",
-        "Tu as fini ? (Did you finish?), Est-ce que vous avez compris ? (Did you understand?)",
-        "QUESTION WORDS: Qu'est-ce que tu as fait ? (What did you do?)"
+        "FAMILLE PRENDRE (→ pris) : prendre→pris, apprendre→appris, comprendre→compris, surprendre→surpris",
+        "FAMILLE METTRE (→ mis) : mettre→mis, permettre→permis, promettre→promis, remettre→remis",
+        "FAMILLE VENIR (→ venu) : venir→venu, devenir→devenu, revenir→revenu, tenir→tenu, obtenir→obtenu",
+        "FAMILLE OUVRIR (→ ouvert) : ouvrir→ouvert, découvrir→découvert, offrir→offert, souffrir→souffert",
+        "FAMILLE ÉCRIRE (→ écrit) : écrire→écrit, décrire→décrit, inscrire→inscrit",
+        "FAMILLE VOIR (→ vu) : voir→vu, prévoir→prévu, revoir→revu",
+        "Participes orphelins à mémoriser seuls : avoir→eu, être→été, faire→fait, naître→né, mourir→mort"
       ]
     }
   ],
 
   vocabulary: [
-    { french: "hier", english: "yesterday", category: "time", example: "Hier, j'ai travaillé toute la journée." },
-    { french: "le matin", english: "morning", category: "time", example: "Le matin, je me lève à 7h00." },
-    { french: "l'après-midi", english: "afternoon", category: "time", example: "L'après-midi, je fais du sport." },
-    { french: "le soir", english: "evening", category: "time", example: "Le soir, je regarde la télévision." },
-    { french: "puis", english: "then", category: "connectors", example: "Je déjeune, puis je retourne au travail." },
-    { french: "déjeuner", english: "to have lunch", category: "verbs", example: "Je déjeune à midi avec mes collègues." },
-    { french: "sympa", english: "nice/cool", category: "adjectives", example: "Mon professeur est très sympa et patient." },
-    { french: "préférer", english: "to prefer", category: "verbs", example: "Je préfère étudier le matin." },
-    { french: "gagner", english: "to win", category: "verbs", example: "Nous avons gagné le match de tennis." },
-    { french: "tous les deux", english: "both", category: "expressions", example: "Tous les deux, nous aimons la musique." },
-    { french: "l'examen", english: "exam", category: "education", example: "L'examen de français est difficile mais intéressant." },
-    { french: "étudier", english: "to study", category: "verbs", example: "J'étudie le français depuis deux ans." },
-    { french: "finir", english: "to finish", category: "verbs", example: "Je finis mes devoirs avant de dormir." },
-    { french: "les révisions", english: "review/revision", category: "education", example: "Les révisions sont importantes pour réussir l'examen." },
-    { french: "fait", english: "done/made (past participle)", category: "past-participles", example: "J'ai fait mes devoirs hier soir." },
-    { french: "vu", english: "seen (past participle)", category: "past-participles", example: "J'ai vu un excellent film hier." },
-    { french: "dit", english: "said (past participle)", category: "past-participles", example: "J'ai dit la vérité à mes parents." },
-    { french: "pris", english: "taken (past participle)", category: "past-participles", example: "J'ai pris le bus pour aller au travail." },
-    { french: "eu", english: "had (past participle)", category: "past-participles", example: "J'ai eu une excellente note à l'examen." },
-    { french: "été", english: "been (past participle)", category: "past-participles", example: "J'ai été très content de mes résultats." }
+    { french: "eu", english: "had (past participle of avoir)", category: "Participe", example: "J'ai eu une idée formidable ! (zhay EW ewn ee-DAY for-mee-DAHBL!)" },
+    { french: "été", english: "been (past participle of être)", category: "Participe", example: "Tu as été très gentil. (tu ah ay-TAY tray zhahn-TEE)" },
+    { french: "fait", english: "done / made (pp of faire)", category: "Participe", example: "Il a fait un gâteau au chocolat. (eel ah FAY uh(n) gah-TOH oh shoh-koh-LAH)" },
+    { french: "pris", english: "taken (pp of prendre)", category: "Participe", example: "Elle a pris son manteau. (el ah PREE sohn mahn-TOH)" },
+    { french: "mis", english: "put (pp of mettre)", category: "Participe", example: "Nous avons mis la musique. (noo zah-VOHN MEE lah mew-ZEEK)" },
+    { french: "vu", english: "seen (pp of voir)", category: "Participe", example: "J'ai vu ce film trois fois. (zhay VEW suh feelm trwah FWAH)" },
+    { french: "lu", english: "read (pp of lire)", category: "Participe", example: "Tu as lu les informations ? (tu ah LEW layz an-for-mah-SYOHN?)" },
+    { french: "écrit", english: "written (pp of écrire)", category: "Participe", example: "Elle a écrit un livre pour enfants. (el ah ay-KREE uh(n) LEE-vruh poor ahn-FAHN)" },
+    { french: "dit", english: "said (pp of dire)", category: "Participe", example: "Le professeur a dit que c'était facile. (luh proh-feh-SUR ah DEE kuh say-TAY fah-SEEL)" },
+    { french: "bu", english: "drunk (pp of boire)", category: "Participe", example: "Tu as bu tout le jus d'orange ! (tu ah BEW too luh ZHEW doh-RAHNJ!)" },
+    { french: "voulu", english: "wanted (pp of vouloir)", category: "Participe", example: "J'ai voulu apprendre le français. (zhay voo-LEW ah-PRAHN-druh luh frahn-SAY)" },
+    { french: "pu", english: "could / was able to (pp of pouvoir)", category: "Participe", example: "Il n'a pas pu venir hier. (eel nah pah PEW vuh-NEER ee-AIR)" },
+    { french: "su", english: "known (pp of savoir)", category: "Participe", example: "Tu as su la réponse tout de suite. (tu ah SEW lah ray-POHNS toot SWEET)" },
+    { french: "reçu", english: "received (pp of recevoir)", category: "Participe", example: "J'ai reçu ton message ce matin. (zhay ruh-SEW tohn may-SAHZH suh mah-TAN)" },
+    { french: "une réunion", english: "a meeting", category: "Nom", example: "Il a eu une réunion importante. (eel ah EW ewn ray-ew-NYOHN an-por-TAHNT)" },
+    { french: "un projet", english: "a project", category: "Nom", example: "Nous avons fait un projet ensemble. (noo zah-VOHN FAY uh(n) proh-ZHAY ahn-SAHM-bluh)" },
+    { french: "un rapport", english: "a report", category: "Nom", example: "Tu as écrit le rapport ? (tu ah ay-KREE luh rah-POR?)" },
+    { french: "une décision", english: "a decision", category: "Nom", example: "Elle a pris une décision difficile. (el ah PREE ewn day-see-ZYOHN dee-fee-SEEL)" },
+    { french: "un problème", english: "a problem", category: "Nom", example: "J'ai eu un problème avec mon ordinateur. (zhay EW uh(n) proh-BLEM ah-VEK mohn or-dee-nah-TUR)" },
+    { french: "une erreur", english: "a mistake", category: "Nom", example: "Tu as fait une erreur dans le calcul. (tu ah FAY ewn air-UR dah(n) luh kal-KEWL)" },
+    { french: "une idée", english: "an idea", category: "Nom", example: "Elle a eu une idée géniale ! (el ah EW ewn ee-DAY zhay-NYAL!)" },
+    { french: "un résultat", english: "a result", category: "Nom", example: "Nous avons vu les résultats ce matin. (noo zah-VOHN VEW lay ray-zul-TAH suh mah-TAN)" },
   ],
 
   culturalNotes: [
     {
-      title: "French Daily Routines",
-      content: "French people often discuss their daily activities using passé composé. Lunch ('déjeuner') is typically taken between 12-2 PM and is considered an important meal. Studying for exams ('révisions') is taken very seriously in French academic culture."
+      title: "Le système universitaire français",
+      content: "L'année universitaire française est divisée en deux semestres, avec des examens partiels en janvier et mai. La note sur 20 est le système standard, où 10/20 est la moyenne. Un 16/20 est considéré comme une très bonne note."
     },
     {
-      title: "Sports and Leisure in France",
-      content: "Tennis is popular in France, and many people play regularly. The phrase 'faire du sport' (to do sports) is commonly used. French people often ask 'Qu'est-ce que tu as fait?' (What did you do?) to start conversations about recent activities."
-    }
+      title: "La culture du café en France",
+      content: "Le café fait partie intégrante de la vie quotidienne française. Le petit noir (expresso) est la commande la plus typique. Beaucoup d'étudiants prennent un café avant un examen, mais le thé gagne en popularité, surtout chez les jeunes générations."
+    },
+    {
+      title: "Prendre des notes à la française",
+      content: "Les étudiants français sont connus pour leur prise de notes méthodique. Beaucoup utilisent des abréviations standardisées comme 'càd' (c'est-à-dire), 'pb' (problème) et 'tjs' (toujours). La prise de notes est une compétence enseignée dès le lycée."
+    },
   ],
 
   exercises: [
     {
-      id: "ex1",
-      type: "multiple_choice" as const,
-      question: "How do you say 'I worked yesterday' in French?",
-      options: [
-        "J'ai travaillé hier",
-        "Je travaille hier",
-        "J'ai travailler hier", 
-        "Je suis travaillé hier"
-      ],
-      correct_answer: "J'ai travaillé hier",
-      explanation: "Use passé composé: J'ai (helper) + travaillé (past participle) + hier."
-    },
-
-    {
-      id: "ex2",
-      type: "conjugation" as const,
-      question: "Practice the conjugation of 'avoir + mangé' (to eat in past tense)",
-      verb: "avoir + mangé",
-      translations: {
-        "je": "I ate/have eaten",
-        "tu": "you ate/have eaten",
-        "il/elle": "he/she ate/has eaten",
-        "nous": "we ate/have eaten",
-        "vous": "you ate/have eaten (formal/plural)",
-        "ils/elles": "they ate/have eaten"
-      },
-      correct_answer: "conjugation",
-      explanation: "Practice the complete conjugation pattern with avoir + mangé."
-    },
-    {
-      id: "ex3",
-      type: "conjugation" as const,
-      question: "Practice the conjugation of 'avoir + regardé' (to watch in past tense)",
-      verb: "avoir + regardé",
-      translations: {
-        "je": "I watched/have watched",
-        "tu": "you watched/have watched",
-        "il/elle": "he/she watched/has watched",
-        "nous": "we watched/have watched",
-        "vous": "you watched/have watched (formal/plural)",
-        "ils/elles": "they watched/have watched"
-      },
-      correct_answer: "conjugation",
-      explanation: "Practice the complete conjugation pattern with avoir + regardé."
-    },
-
-    {
-      id: "ex4",
-      type: "matching" as const,
-      question: "Match irregular verbs with their past participles:",
+      id: "l14-e1",
+      type: "matching",
+      question: "Associez l'infinitif à son participe passé irrégulier.",
       pairs: [
+        { french: "avoir", english: "eu" },
+        { french: "être", english: "été" },
         { french: "faire", english: "fait" },
-        { french: "voir", english: "vu" },
-        { french: "dire", english: "dit" },
         { french: "prendre", english: "pris" },
-        { french: "avoir", english: "eu" }
+        { french: "voir", english: "vu" },
+        { french: "lire", english: "lu" },
+        { french: "écrire", english: "écrit" },
+        { french: "boire", english: "bu" },
+        { french: "pouvoir", english: "pu" },
+        { french: "vouloir", english: "voulu" },
+        { french: "savoir", english: "su" },
+        { french: "dire", english: "dit" },
       ],
-      correct_answer: "matching",
-      explanation: "Learn the essential irregular past participles for daily conversation."
+      explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain."
     },
-
     {
-      id: "ex5",
-      type: "fill_blank" as const,
-      question: "Complete with the correct passé composé form: Hier, j'_____ _____ au tennis. (played)",
-      correct_answer: ["ai", "joué"],
-      explanation: "Use the correct form of avoir + the past participle of jouer."
+      id: "l14-e2",
+      type: "fill_blank",
+      question: "Complétez avec le participe passé correct : J'ai ____ (voir) un très bon film hier.",
+      correct_answer: "vu",
+      explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain."
     },
-
     {
-      id: "ex6",
-      type: "translation" as const,
-      question: "Translate: 'Yesterday I studied, then I listened to music and watched TV.'",
-      correct_answer: "hier j'ai étudié, puis j'ai écouté de la musique et j'ai regardé la télé",
-      explanation: "Use passé composé for all past actions: j'ai étudié, j'ai écouté, j'ai regardé.",
-      hints: ["hier = yesterday", "j'ai étudié = I studied", "puis = then", "j'ai écouté = I listened", "j'ai regardé = I watched"]
+      id: "l14-e3",
+      type: "fill_blank",
+      question: "Complétez avec le participe passé correct : Elle a ____ (écrire) une lettre à sa grand-mère.",
+      correct_answer: "écrit",
+      explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain."
     },
-
     {
-      id: "ex7",
-      type: "speaking" as const,
-      question: "Practice saying: 'J'ai travaillé hier matin' (I worked yesterday morning)",
-      correct_answer: "speaking",
-      explanation: "Focus on the pronunciation: 'zhay trah-vah-YAY ee-AIR mah-TAHN'",
-      audio_prompt: "J'ai travaillé hier matin"
-    },
-
-    {
-      id: "ex8",
-      type: "matching" as const,
-      question: "Match the French past tense expressions with their English meanings:",
-      pairs: [
-        { french: "j'ai mangé", english: "I ate/have eaten" },
-        { french: "tu as vu", english: "you saw/have seen" },
-        { french: "il a dit", english: "he said/has said" },
-        { french: "nous avons pris", english: "we took/have taken" },
-        { french: "vous avez eu", english: "you had/have had" }
+      id: "l14-e4",
+      type: "transformation",
+      question: "Transformez l'infinitif en passé composé.",
+      instruction: "affirmative_to_negative",
+      items: [
+        { original: "Je (lire) le journal.", transformed: "J'ai lu le journal.", translation: "I read the newspaper." },
+        { original: "Tu (boire) un café.", transformed: "Tu as bu un café.", translation: "You drank a coffee." },
+        { original: "Elle (prendre) le bus.", transformed: "Elle a pris le bus.", translation: "She took the bus." },
+        { original: "Nous (faire) les courses.", transformed: "Nous avons fait les courses.", translation: "We did the shopping." },
       ],
-      correct_answer: "matching",
-      explanation: "Practice recognizing passé composé forms in context."
-    }
+      explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain."
+    },
+    {
+      id: "l14-e5",
+      type: "multiple_choice",
+      question: "Quel est le participe passé de 'pouvoir' ?",
+      options: ["pouvé", "pouvu", "pu", "pouvé"],
+      correct_answer: "pu",
+      explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain."
+    },
+    {
+      id: "l14-e6",
+      type: "transformation",
+      question: "Mettez ces phrases au passé composé à la forme négative.",
+      instruction: "affirmative_to_negative",
+      items: [
+        { original: "J'ai eu le temps.", transformed: "Je n'ai pas eu le temps.", translation: "I didn't have time." },
+        { original: "Tu as pu dormir.", transformed: "Tu n'as pas pu dormir.", translation: "You couldn't sleep." },
+        { original: "Il a fait ses devoirs.", transformed: "Il n'a pas fait ses devoirs.", translation: "He didn't do his homework." },
+      ],
+      explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain."
+    },
+    {
+      id: "l14-e7",
+      type: "translation",
+      question: "Traduisez en français : 'She received a message and she read it immediately.'",
+      direction: "en_to_fr",
+      correct_answer: ["Elle a reçu un message et elle l'a lu immédiatement.", "Elle a reçu un message et elle l'a lu tout de suite."],
+      explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain."
+    },
+    {
+      id: "l14-e8",
+      type: "multiple_choice",
+      question: "Complétez : 'Nous ____ ____ le film hier.' (voir)",
+      options: ["avons vu", "a vu", "ont vu", "avez vu"],
+      correct_answer: "avons vu",
+      explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain."
+    },
+    {
+      id: "l14-e9",
+      type: "speaking_prompt",
+      question: "Dites trois choses que vous avez faites la semaine dernière en utilisant des participes passés irréguliers.",
+      model_answer: "La semaine dernière, j'ai lu un livre. J'ai écrit un email important. J'ai bu un bon café.",
+      translation: "Last week, I read a book. I wrote an important email. I drank a good coffee.",
+      tip: "Memorize irregular participles in families instead of as isolated forms."
+    },
+    {
+      id: "l14-e10",
+      type: "error_correction",
+      question: "Corrigez le participe passé incorrect dans chaque phrase.",
+      items: [
+        { incorrect: "J'ai prendu le bus ce matin.", correct: "J'ai pris le bus ce matin.", explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain." },
+        { incorrect: "Nous avons mettis la table.", correct: "Nous avons mis la table.", explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain." },
+        { incorrect: "Il a voulu partir mais il n'a pas pouvé.", correct: "Il a voulu partir mais il n'a pas pu.", explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain." },
+        { incorrect: "Elle a découvrit une belle plage.", correct: "Elle a découvert une belle plage.", explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain." },
+        { incorrect: "Tu as venu avec nous ?", correct: "Tu es venu avec nous ?", explanation: "Irregular past participles must be memorized, but grouping them by sound family (-u, -is, -it, and related verb families) makes them easier to retain." }
+      ]
+    },
   ]
 }
 
-export default function Lesson14() {
-  const [currentSection, setCurrentSection] = useState<Section>('dialogue')
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
-  const [correctAnswers, setCorrectAnswers] = useState<number>(0)
-
-  const sections = [
-    { id: 'dialogue', label: 'Dialogue', icon: '💬' },
-    { id: 'grammar', label: 'Grammar', icon: '📚' },
-    { id: 'vocabulary', label: 'Vocabulary', icon: '📖' },
-    { id: 'exercises', label: 'Exercises', icon: '✏️' }
-  ]
-
-  const handleExerciseComplete = (exerciseId: string) => {
-    setCompletedExercises(prev => new Set(prev).add(exerciseId))
-    setCorrectAnswers(prev => prev + 1)
-  }
-
-  const handleReset = () => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(0)
-  }
-
-  const renderGrammarSection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Grammar Points</h2>
-        <p className="text-lg text-gray-600">Master the essential concepts of passé composé</p>
-      </div>
-      
-      {lessonData.grammarPoints.map((point, index) => (
-        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{point.title}</h3>
-          <p className="text-gray-700 mb-4 leading-relaxed">{point.explanation}</p>
-          <div className="space-y-2">
-            {point.examples.map((example, idx) => (
-              <div key={idx} className="bg-green-50 rounded-lg p-3 border-l-4 border-green-300">
-                <p className="text-gray-800 font-medium">{example}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-
-  const renderVocabularySection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Vocabulary</h2>
-        <p className="text-lg text-gray-600">Essential words and expressions for talking about the past</p>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-6">
-        {lessonData.vocabulary.map((item, index) => (
-          <div key={index} className="bg-white/80 backdrop-blur-sm p-6 rounded-[16px] border border-gray-200 shadow-[inset_0_4px_16px_rgba(0,0,0,0.05),0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_4px_16px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02]">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xl font-bold text-gray-900">{item.french}</h3>
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-[12px] text-sm font-medium">
-                {item.category}
-              </span>
-            </div>
-            <p className="text-gray-700 text-lg mb-2">{item.english}</p>
-            {item.example && (
-              <div className="bg-blue-50 rounded-lg p-3 mb-3 border-l-4 border-blue-300">
-                <div className="flex items-center justify-between">
-                  <p className="text-gray-800 font-medium text-sm italic flex-1">&ldquo;{item.example}&rdquo;</p>
-                  <button 
-                    onClick={() => {
-                      if ('speechSynthesis' in window) {
-                        const utterance = new SpeechSynthesisUtterance(item.example);
-                        utterance.lang = 'fr-FR';
-                        utterance.rate = 0.8;
-                        speechSynthesis.speak(utterance);
-                      }
-                    }}
-                    className="ml-3 p-2 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-full transition-colors duration-200 hover:scale-110"
-                    title="Listen to example sentence"
-                  >
-                    <span className="text-lg">🎹</span>
-                  </button>
-                </div>
-              </div>
-            )}
-            <AudioPlayer 
-              text={item.french}
-              className="mt-3"
-              
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
-  const renderCulturalNotesSection = () => (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Cultural Notes</h2>
-        <p className="text-lg text-gray-600">Understanding French culture and daily life</p>
-      </div>
-      
-      {lessonData.culturalNotes.map((note, index) => (
-        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{note.title}</h3>
-          <p className="text-gray-700 leading-relaxed">{note.content}</p>
-        </div>
-      ))}
-    </div>
-  )
-
-  const renderExercisesSection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Exercises</h2>
-        <p className="text-lg text-gray-600">Practice your passé composé skills</p>
-      </div>
-      
-      <ExerciseProgress
-        totalExercises={lessonData.exercises.length}
-        completedExercises={completedExercises.size}
-        correctAnswers={correctAnswers}
-        onReset={handleReset}
-      />
-      
-      <div className="space-y-6">
-        {lessonData.exercises.map((exercise, index) => (
-          <InteractiveExercise
-            key={exercise.id}
-            exercise={exercise}
-            onComplete={() => handleExerciseComplete(exercise.id)}
-            exerciseNumber={index + 1}
-          />
-        ))}
-      </div>
-    </div>
-  )
-
+export default function Lesson14Page() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-green-200 sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <Link href="/lessons/elementary" className="text-green-600 hover:text-green-700 transition-colors mb-2 inline-block">
-                ← Back to A2 Lessons
-              </Link>
-              <h1 className="text-4xl font-bold text-gray-900">{lessonData.title}</h1>
-              <p className="text-xl text-gray-600 mt-2">{lessonData.description}</p>
-            </div>
-            <div className="text-right">
-              <div className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                {lessonData.level}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Tabs */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-green-200 sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex justify-center space-x-1 py-4">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setCurrentSection(section.id as Section)}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-[16px] font-medium transition-all duration-300 ${
-                  currentSection === section.id
-                    ? 'bg-green-500 text-white shadow-lg scale-105'
-                    : 'bg-white/60 text-gray-700 hover:bg-white/80 hover:scale-105'
-                }`}
-              >
-                <span>{section.icon}</span>
-                <span>{section.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        {currentSection === 'dialogue' && (
-          <div className="space-y-8">
-            <DialogueSection dialogue={lessonData.dialogue} />
-            <div className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Practice Speaking</h3>
-              <AudioPlayer  text="Practice the dialogue with the audio player" />
-            </div>
-            {renderCulturalNotesSection()}
-          </div>
-        )}
-        
-        {currentSection === 'grammar' && renderGrammarSection()}
-        {currentSection === 'vocabulary' && renderVocabularySection()}
-        {currentSection === 'exercises' && renderExercisesSection()}
-      </div>
-    </div>
+    <ElementaryLessonLayout
+      lessonData={lessonData}
+      lessonNumber={14}
+      prevHref="/lessons/elementary/13"
+      prevLabel="Passé Composé I"
+      nextHref="/lessons/elementary/15"
+      nextLabel="Passé Composé III"
+    />
   )
 }

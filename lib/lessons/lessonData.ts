@@ -1,5180 +1,958 @@
-import { BeginnerLesson } from './lessonTypes'
-
-export const beginnerLessons: BeginnerLesson[] = [
-  {
-    id: 'beginner-1',
-    title: 'Bonjour! First Greetings & Introductions',
-    subtitle: 'Master French greetings, self-introductions, and the essential verb "être"',
-    level: 'beginner',
-    order: 1,
-    estimated_time: 25,
-    learning_objectives: [
-      'Master formal and informal French greetings throughout the day',
-      'Introduce yourself confidently in various situations', 
-      'Use politeness expressions appropriately',
-      'Conjugate and use the verb "être" (to be) correctly',
-      'Understand when to use "tu" vs "vous"',
-      'Ask and answer basic personal questions'
-    ],
-    is_free: true,
-    difficulty: 1,
-    tags: ['greetings', 'introductions', 'être', 'politeness', 'basic'],
-    
-    dialogue: {
-      title: 'Meeting Someone New at a Parisian Café',
-      context: 'Marie and Jean meet for the first time during lunch time at a busy café in the Latin Quarter. This dialogue shows both formal politeness and the transition to a more relaxed conversation.',
-      exchanges: [
-        {
-          speaker: 'Marie',
-          french: 'Bonjour! Excusez-moi, cette place est-elle libre?',
-          english: 'Hello! Excuse me, is this seat free?',
-          pronunciation: 'bon-ZHOOR! ex-koo-zay MWAH, set plahs ay-tell LEE-bruh?',
-          cultural_note: 'Always ask before sitting at someone\'s table in French cafés, even if there are empty chairs.'
-        },
-        {
-          speaker: 'Jean',
-          french: 'Bonjour! Oui, bien sûr, je vous en prie.',
-          english: 'Hello! Yes, of course, please do.',
-          pronunciation: 'bon-ZHOOR! WEE, bee-ahn SOOR, zhuh voo zahn PREE.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Merci beaucoup. Je m\'appelle Marie Dubois.',
-          english: 'Thank you very much. My name is Marie Dubois.',
-          pronunciation: 'mer-SEE bo-KOO. zhuh ma-PELL ma-REE doo-BWAH.'
-        },
-        {
-          speaker: 'Jean',
-          french: 'Enchanté! Moi, c\'est Jean Martin. Comment allez-vous?',
-          english: 'Nice to meet you! I\'m Jean Martin. How are you?',
-          pronunciation: 'ahn-shahn-TAY! MWAH, say zhahn mar-TAHN. ko-mahn ta-lay VOO?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Je vais très bien, merci. Et vous?',
-          english: 'I\'m doing very well, thank you. And you?',
-          pronunciation: 'zhuh vay tray bee-AHN, mer-SEE. ay VOO?'
-        },
-        {
-          speaker: 'Jean',
-          french: 'Ça va bien, merci. Vous êtes d\'ici?',
-          english: 'I\'m doing well, thank you. Are you from here?',
-          pronunciation: 'sah vah bee-AHN, mer-SEE. voo zayt dee-SEE?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Oui, je suis parisienne. Et vous, vous êtes français?',
-          english: 'Yes, I\'m Parisian. And you, are you French?',
-          pronunciation: 'WEE, zhuh swee pa-ree-zee-EN. ay VOO, voo zayt frahn-SAY?'
-        },
-        {
-          speaker: 'Jean',
-          french: 'Oui, je suis de Lyon. Je suis ici pour le travail.',
-          english: 'Yes, I\'m from Lyon. I\'m here for work.',
-          pronunciation: 'WEE, zhuh swee duh lee-OHN. zhuh swee zee-SEE poor luh tra-VIE.',
-          cultural_note: 'Lyon is considered France\'s gastronomic capital and is a major business center.'
-        }
-      ],
-      cultural_notes: [
-        'French greetings vary by time of day: "Bonjour" (morning/afternoon), "Bonsoir" (evening)',
-        'The formal "vous" is used with strangers, in business, or with people older than you',
-        'French people typically shake hands in formal introductions, but close friends do "la bise" (cheek kisses)',
-        'Always say "Bonjour/Bonsoir" when entering a shop, and "Au revoir/Bonne soirée" when leaving',
-        'Regional identity is important in France - people often mention their city or region of origin'
-      ],
-      vocabulary_highlights: ['bonjour', 'excusez-moi', 'je m\'appelle', 'enchanté', 'comment allez-vous', 'je suis']
-    },
-
-    grammar: {
-      topic: 'The Essential Verb "être" (to be) - Foundation of French',
-      explanation: 'The verb "être" (to be) is absolutely fundamental in French. It\'s used for identity, nationality, profession, location, and descriptions. Unlike English, French uses "être" for permanent characteristics and temporary states.',
-      patterns: [
-        'Identity: "Je suis Marie" (I am Marie)',
-        'Nationality: "Je suis française" (I am French)', 
-        'Location: "Je suis à Paris" (I am in Paris)',
-        'Profession: "Je suis professeur" (I am a teacher)',
-        'Description: "Il est grand" (He is tall)',
-        'Politeness: "Vous êtes très gentil" (You are very kind)'
-      ],
-      examples: [
-        {
-          french: 'Je suis étudiant en médecine.',
-          english: 'I am a medical student.',
-          pronunciation: 'Zhuh sweez ay-too-dyon on med-SIN',
-          highlight: 'suis'
-        },
-        {
-          french: 'Vous êtes très aimable.',
-          english: 'You are very kind.',
-          pronunciation: 'Voo-zett treh eh-MAH-bluh',
-          highlight: 'êtes'
-        },
-        {
-          french: 'Elle est de Marseille.',
-          english: 'She is from Marseille.',
-          pronunciation: 'El eh duh Mar-SAY',
-          highlight: 'est'
-        },
-        {
-          french: 'Nous sommes en retard.',
-          english: 'We are late.',
-          pronunciation: 'Noo somm-zon ruh-TAR',
-          highlight: 'sommes'
-        },
-        {
-          french: 'Ils sont français.',
-          english: 'They are French.',
-          pronunciation: 'Eel son fron-SEH',
-          highlight: 'sont'
-        },
-        {
-          french: 'Tu es mon ami.',
-          english: 'You are my friend.',
-          pronunciation: 'Too eh mon-nah-MEE',
-          highlight: 'es'
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'je', form: 'suis', pronunciation: 'zhuh swee' },
-        { pronoun: 'tu', form: 'es', pronunciation: 'too ay' },
-        { pronoun: 'il/elle/on', form: 'est', pronunciation: 'eel/ell/ohn ay' },
-        { pronoun: 'nous', form: 'sommes', pronunciation: 'noo som' },
-        { pronoun: 'vous', form: 'êtes', pronunciation: 'voo zayt' },
-        { pronoun: 'ils/elles', form: 'sont', pronunciation: 'eel/ell sohn' }
-      ]
-    },
-
-    vocabulary: [
-      // Greetings - Time-specific
-      {
-        word: 'bonjour',
-        translation: 'hello/good morning/good afternoon',
-        pronunciation: 'bon-ZHOOR',
-        example_sentence: 'Bonjour madame, comment allez-vous?',
-        example_translation: 'Good morning madam, how are you?',
-        category: 'greetings'
-      },
-      {
-        word: 'bonsoir',
-        translation: 'good evening',
-        pronunciation: 'bon-SWAHR',
-        example_sentence: 'Bonsoir tout le monde!',
-        example_translation: 'Good evening everyone!',
-        category: 'greetings'
-      },
-      {
-        word: 'bonne nuit',
-        translation: 'good night',
-        pronunciation: 'bun NWEE',
-        example_sentence: 'Bonne nuit et dormez bien!',
-        example_translation: 'Good night and sleep well!',
-        category: 'greetings'
-      },
-      {
-        word: 'salut',
-        translation: 'hi/bye (informal)',
-        pronunciation: 'sa-LUU',
-        example_sentence: 'Salut Pierre, ça va?',
-        example_translation: 'Hi Pierre, how\'s it going?',
-        category: 'greetings'
-      },
-      
-      // Self-introduction
-      {
-        word: 'je m\'appelle',
-        translation: 'my name is/I call myself',
-        pronunciation: 'zhuh ma-PELL',
-        example_sentence: 'Je m\'appelle Sophie Moreau.',
-        example_translation: 'My name is Sophie Moreau.',
-        category: 'introduction'
-      },
-      {
-        word: 'je suis',
-        translation: 'I am',
-        pronunciation: 'zhuh swee',
-        example_sentence: 'Je suis professeur de français.',
-        example_translation: 'I am a French teacher.',
-        category: 'introduction'
-      },
-      {
-        word: 'moi, c\'est',
-        translation: 'I\'m (casual way to introduce)',
-        pronunciation: 'mwah, say',
-        example_sentence: 'Moi, c\'est Paul.',
-        example_translation: 'I\'m Paul.',
-        category: 'introduction'
-      },
-      
-      // Politeness expressions
-      {
-        word: 'excusez-moi',
-        translation: 'excuse me (formal)',
-        pronunciation: 'ex-koo-zay MWAH',
-        example_sentence: 'Excusez-moi, où est la gare?',
-        example_translation: 'Excuse me, where is the train station?',
-        category: 'politeness'
-      },
-      {
-        word: 'pardon',
-        translation: 'pardon/excuse me',
-        pronunciation: 'par-DOHN',
-        example_sentence: 'Pardon, je n\'ai pas entendu.',
-        example_translation: 'Pardon, I didn\'t hear.',
-        category: 'politeness'
-      },
-      {
-        word: 's\'il vous plaît',
-        translation: 'please (formal)',
-        pronunciation: 'seel voo PLAY',
-        example_sentence: 'Un café, s\'il vous plaît.',
-        example_translation: 'A coffee, please.',
-        category: 'politeness'
-      },
-      {
-        word: 's\'il te plaît',
-        translation: 'please (informal)',
-        pronunciation: 'seel tuh PLAY',
-        example_sentence: 'Aide-moi, s\'il te plaît.',
-        example_translation: 'Help me, please.',
-        category: 'politeness'
-      },
-      {
-        word: 'merci',
-        translation: 'thank you',
-        pronunciation: 'mer-SEE',
-        example_sentence: 'Merci pour votre aide.',
-        example_translation: 'Thank you for your help.',
-        category: 'politeness'
-      },
-      {
-        word: 'merci beaucoup',
-        translation: 'thank you very much',
-        pronunciation: 'mer-SEE bo-KOO',
-        example_sentence: 'Merci beaucoup pour le cadeau!',
-        example_translation: 'Thank you very much for the gift!',
-        category: 'politeness'
-      },
-      {
-        word: 'de rien',
-        translation: 'you\'re welcome/don\'t mention it',
-        pronunciation: 'duh ree-AHN',
-        example_sentence: '- Merci! - De rien!',
-        example_translation: '- Thank you! - You\'re welcome!',
-        category: 'politeness'
-      },
-      {
-        word: 'je vous en prie',
-        translation: 'you\'re welcome (formal)',
-        pronunciation: 'zhuh voo zahn PREE',
-        example_sentence: '- Merci monsieur. - Je vous en prie.',
-        example_translation: '- Thank you sir. - You\'re welcome.',
-        category: 'politeness'
-      },
-      
-      // Essential questions and responses
-      {
-        word: 'comment allez-vous',
-        translation: 'how are you (formal)',
-        pronunciation: 'ko-mahn ta-lay VOO',
-        example_sentence: 'Bonjour Marie, comment allez-vous?',
-        example_translation: 'Hello Marie, how are you?',
-        category: 'questions'
-      },
-      {
-        word: 'comment ça va',
-        translation: 'how are you (informal)',
-        pronunciation: 'ko-mahn sah VAH',
-        example_sentence: 'Salut Paul, comment ça va?',
-        example_translation: 'Hi Paul, how are you?',
-        category: 'questions'
-      },
-      {
-        word: 'ça va bien',
-        translation: 'I\'m doing well',
-        pronunciation: 'sah vah bee-AHN',
-        example_sentence: 'Ça va bien, et toi?',
-        example_translation: 'I\'m doing well, and you?',
-        category: 'responses'
-      },
-      {
-        word: 'très bien',
-        translation: 'very well',
-        pronunciation: 'tray bee-AHN',
-        example_sentence: 'Je vais très bien, merci.',
-        example_translation: 'I\'m doing very well, thank you.',
-        category: 'responses'
-      },
-
-      // Meeting expressions
-      {
-        word: 'enchanté',
-        translation: 'nice to meet you (masculine)',
-        pronunciation: 'ahn-shahn-TAY',
-        example_sentence: 'Je m\'appelle Pierre. Enchanté!',
-        example_translation: 'My name is Pierre. Nice to meet you!',
-        category: 'meeting'
-      },
-      {
-        word: 'enchantée',
-        translation: 'nice to meet you (feminine)',
-        pronunciation: 'ahn-shahn-TAY',
-        example_sentence: 'Moi, c\'est Marie. Enchantée!',
-        example_translation: 'I\'m Marie. Nice to meet you!',
-        category: 'meeting'
-      },
-
-      // Farewells
-      {
-        word: 'au revoir',
-        translation: 'goodbye',
-        pronunciation: 'oh ruh-VWAHR',
-        example_sentence: 'Au revoir et à bientôt!',
-        example_translation: 'Goodbye and see you soon!',
-        category: 'farewells'
-      },
-      {
-        word: 'à bientôt',
-        translation: 'see you soon',
-        pronunciation: 'ah bee-ahn-TOH',
-        example_sentence: 'À bientôt, passez une bonne soirée!',
-        example_translation: 'See you soon, have a good evening!',
-        category: 'farewells'
-      },
-      {
-        word: 'à demain',
-        translation: 'see you tomorrow',
-        pronunciation: 'ah duh-MAHN',
-        example_sentence: 'À demain au bureau!',
-        example_translation: 'See you tomorrow at the office!',
-        category: 'farewells'
-      },
-      {
-        word: 'bonne journée',
-        translation: 'have a good day',
-        pronunciation: 'bun zhoor-NAY',
-        example_sentence: 'Au revoir, bonne journée!',
-        example_translation: 'Goodbye, have a good day!',
-        category: 'farewells'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-1-1',
-        type: 'multiple_choice',
-        question: 'Which greeting would you use at 8 PM?',
-        options: ['Bonjour', 'Bonsoir', 'Bonne nuit', 'Salut'],
-        correct_answer: 'Bonsoir',
-        explanation: '"Bonsoir" is used from around 6 PM onwards. "Bonne nuit" is only for bedtime.',
-        hints: ['Think about the time of day - evening has started']
-      },
-      {
-        id: 'ex-1-2',
-        type: 'fill_blank',
-        question: 'Complete the introduction: "Bonjour, je _____ Marie Dubois."',
-        correct_answer: ['m\'appelle'],
-        explanation: '"Je m\'appelle" means "my name is" or literally "I call myself".',
-        hints: ['This is the most common way to introduce your name in French']
-      },
-      {
-        id: 'ex-1-3',
-        type: 'multiple_choice',
-        question: 'How do you say "I am a student" using être?',
-        options: ['Je suis étudiant', 'J\'ai étudiant', 'Je m\'appelle étudiant', 'Je vais étudiant'],
-        correct_answer: 'Je suis étudiant',
-        explanation: 'Use "je suis" (I am) + profession/status. The verb "être" is essential for identity.',
-        hints: ['Remember the conjugation of être: je suis']
-      },
-      {
-        id: 'ex-1-4',
-        type: 'translation',
-        question: 'Translate to French: "Nice to meet you" (if you are female)',
-        correct_answer: ['Enchantée', 'enchantée'],
-        explanation: 'A female speaker says "Enchantée" (with an -e ending for feminine agreement).',
-        hints: ['Remember gender agreement - females add -e to adjectives']
-      },
-      {
-        id: 'ex-1-5',
-        type: 'fill_blank',
-        question: 'Respond politely: "Merci beaucoup!" - "_____!"',
-        correct_answer: ['De rien', 'Je vous en prie'],
-        explanation: '"De rien" (don\'t mention it) or "Je vous en prie" (formal: you\'re welcome) are correct responses.',
-        hints: ['Think of polite ways to respond to thanks']
-      },
-      {
-        id: 'ex-1-6',
-        type: 'multiple_choice',
-        question: 'Complete with être: "Vous _____ français?"',
-        options: ['êtes', 'avez', 'allez', 'faites'],
-        correct_answer: 'êtes',
-        explanation: 'With "vous" (you), the verb "être" becomes "êtes". This asks about nationality.',
-        hints: ['Look at the être conjugation table - what goes with vous?']
-      },
-      {
-        id: 'ex-1-7',
-        type: 'speaking',
-        question: 'Practice this formal introduction: "Bonjour, je m\'appelle [your name]. Enchanté(e)!"',
-        correct_answer: ['Bonjour, je m\'appelle [name]. Enchanté!', 'Bonjour, je m\'appelle [name]. Enchantée!'],
-        explanation: 'Perfect! This is how you introduce yourself formally in French.',
-        audio_prompt: 'Bonjour, je m\'appelle Marie. Enchantée!'
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 5,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-
-  {
-    id: 'beginner-2',
-    title: 'Je m\'appelle... Meeting Someone New',
-    subtitle: 'Deeper introductions, asking about origins, age, and mastering "avoir"',
-    level: 'beginner',
-    order: 2,
-    estimated_time: 22,
-    learning_objectives: [
-      'Ask and answer questions about origins and nationality',
-      'Express and ask about age using "avoir"',
-      'Master the essential verb "avoir" (to have) conjugation',
-      'Use polite question forms in conversation',
-      'Understand French geography and nationalities',
-      'Practice extended conversation beyond basic greetings'
-    ],
-    prerequisite_lessons: ['beginner-1'],
-    is_free: true,
-    difficulty: 2,
-    tags: ['introductions', 'origins', 'age', 'avoir', 'nationalities', 'conversation'],
-    
-    dialogue: {
-      title: 'Getting to Know Each Other Better',
-      context: 'Continuing the conversation from Lesson 1, Marie and Thomas share more personal information, discussing their backgrounds, ages, and what brought them to Paris. This shows how French conversations naturally progress from formal greetings to more personal exchanges.',
-      exchanges: [
-        {
-          speaker: 'Marie',
-          french: 'Alors Thomas, d\'où venez-vous exactement?',
-          english: 'So Thomas, where exactly are you from?',
-          pronunciation: 'ah-LOOR toh-MAH, doo vuh-nay voo ex-ak-tuh-MAHN?',
-          cultural_note: '"Alors" is a very common conversation starter, similar to "so" in English.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Je viens de Lyon, dans le sud-est de la France. C\'est une belle ville.',
-          english: 'I come from Lyon, in the southeast of France. It\'s a beautiful city.',
-          pronunciation: 'zhuh vee-ahn duh lee-OHN, dahn luh sood-EST duh lah frahnss. say toon bell veel.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Ah oui! J\'ai des amis à Lyon. Quel âge avez-vous, si ce n\'est pas indiscret?',
-          english: 'Oh yes! I have friends in Lyon. How old are you, if you don\'t mind me asking?',
-          pronunciation: 'ah WEE! zhay day za-MEE ah lee-OHN. kell ahzh a-vay VOO, see suh nay pah an-dees-KRAY?',
-          cultural_note: 'Adding "si ce n\'est pas indiscret" (if it\'s not indiscreet) is a polite way to ask personal questions.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'J\'ai vingt-huit ans. Et vous?',
-          english: 'I\'m twenty-eight years old. And you?',
-          pronunciation: 'zhuh vahn-weet AHN. ay VOO?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Moi, j\'ai vingt-cinq ans. Vous avez de la famille à Lyon?',
-          english: 'I\'m twenty-five years old. Do you have family in Lyon?',
-          pronunciation: 'mwah, zhay vahn-sank AHN. voo za-vay duh lah fa-MEEL ah lee-OHN?'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Oui, j\'ai mes parents et ma sœur là-bas. Ils ont un petit restaurant.',
-          english: 'Yes, I have my parents and my sister there. They have a small restaurant.',
-          pronunciation: 'WEE, zhay may pa-RAHN ay ma SUR lah-BAH. eel zohn tahn puh-TEE res-toh-RAHN.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Que c\'est intéressant! Et vous, vous avez quel métier?',
-          english: 'How interesting! And what\'s your profession?',
-          pronunciation: 'kuh say tan-tay-ray-SAHN! ay VOO, voo za-vay kell may-tee-AY?'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Je suis architecte. J\'ai un projet important ici à Paris. Et vous, Marie?',
-          english: 'I\'m an architect. I have an important project here in Paris. And you, Marie?',
-          pronunciation: 'zhuh swee ar-shee-TEKT. zhay tahn pro-ZHAY an-por-TAHN ee-see ah pa-REE. ay VOO, ma-REE?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Moi, je suis journaliste. J\'ai beaucoup de chance, j\'adore mon travail!',
-          english: 'I\'m a journalist. I\'m very lucky, I love my work!',
-          pronunciation: 'mwah, zhuh swee zhoor-na-LEEST. zhay bo-KOO duh shahnss, zha-DOOR mohn tra-VIE!',
-          cultural_note: 'French people often express enthusiasm about their work when it\'s something they\'re passionate about.'
-        }
-      ],
-      cultural_notes: [
-        'Lyon is France\'s third-largest city, famous for gastronomy and silk production',
-        'French people are generally comfortable discussing age in casual conversations',
-        'Family businesses, especially restaurants, are very common and respected in France',
-        'When French people say "j\'ai de la chance" (I\'m lucky), it often shows modesty about their success',
-        'Professions are an important part of French identity - people take pride in their work',
-        'The phrase "là-bas" (over there) is commonly used to refer to one\'s hometown when away'
-      ],
-      vocabulary_highlights: ['d\'où', 'venir de', 'avoir', 'âge', 'famille', 'métier', 'projet']
-    },
-
-    grammar: {
-      topic: 'The Essential Verb "avoir" (to have) - Expressing Possession, Age, and States',
-      explanation: 'The verb "avoir" (to have) is the second most important verb in French after "être". Unlike English, French uses "avoir" to express age ("I have 20 years" instead of "I am 20 years old"). It\'s also used for possessions, family relationships, and many idiomatic expressions that are essential for daily conversation.',
-      patterns: [
-        'Age: "J\'ai vingt ans" (I am twenty years old)',
-        'Possession: "J\'ai une voiture" (I have a car)',
-        'Family: "J\'ai deux frères" (I have two brothers)', 
-        'States: "J\'ai faim" (I am hungry - literally "I have hunger")',
-        'Experiences: "J\'ai de la chance" (I am lucky)',
-        'Physical traits: "Il a les yeux bleus" (He has blue eyes)'
-      ],
-      examples: [
-        {
-          french: 'J\'ai vingt-cinq ans.',
-          english: 'I am twenty-five years old.',
-          pronunciation: 'Jhay vant-sank ON',
-          highlight: 'ai'
-        },
-        {
-          french: 'Vous avez des enfants?',
-          english: 'Do you have children?',
-          pronunciation: 'Voo-zah-vay day-zon-FON',
-          highlight: 'avez'
-        },
-        {
-          french: 'Elle a une belle maison.',
-          english: 'She has a beautiful house.',
-          pronunciation: 'El ah oon bel may-ZON',
-          highlight: 'a'
-        },
-        {
-          french: 'Nous avons beaucoup d\'amis.',
-          english: 'We have many friends.',
-          pronunciation: 'Noo-zah-von bo-koo dah-MEE',
-          highlight: 'avons'
-        },
-        {
-          french: 'Ils ont de la chance.',
-          english: 'They are lucky.',
-          pronunciation: 'Eel-zon duh la SHONS',
-          highlight: 'ont'
-        },
-        {
-          french: 'Tu as raison.',
-          english: 'You are right.',
-          pronunciation: 'Too ah ray-ZON',
-          highlight: 'as'
-        },
-        {
-          french: 'J\'ai soif et j\'ai faim.',
-          english: 'I am thirsty and I am hungry.',
-          pronunciation: 'Jhay swaf ay jhay FAM',
-          highlight: 'ai'
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'j\'', form: 'ai', pronunciation: 'zhay' },
-        { pronoun: 'tu', form: 'as', pronunciation: 'too ah' },
-        { pronoun: 'il/elle/on', form: 'a', pronunciation: 'eel/ell/ohn ah' },
-        { pronoun: 'nous', form: 'avons', pronunciation: 'noo za-vohn' },
-        { pronoun: 'vous', form: 'avez', pronunciation: 'voo za-vay' },
-        { pronoun: 'ils/elles', form: 'ont', pronunciation: 'eel/ell zohn' }
-      ]
-    },
-
-    vocabulary: [
-      // Origins and geography
-      {
-        word: 'd\'où',
-        translation: 'from where',
-        pronunciation: 'DOO',
-        example_sentence: 'D\'où venez-vous?',
-        example_translation: 'Where are you from?',
-        category: 'origins'
-      },
-      {
-        word: 'venir de',
-        translation: 'to come from',
-        pronunciation: 'vuh-NEER duh',
-        example_sentence: 'Je viens de Marseille.',
-        example_translation: 'I come from Marseille.',
-        category: 'origins'
-      },
-      {
-        word: 'ville',
-        translation: 'city',
-        pronunciation: 'veel',
-        example_sentence: 'Paris est une grande ville.',
-        example_translation: 'Paris is a big city.',
-        category: 'geography'
-      },
-      {
-        word: 'région',
-        translation: 'region',
-        pronunciation: 'ray-zhee-OHN',
-        example_sentence: 'La Provence est une belle région.',
-        example_translation: 'Provence is a beautiful region.',
-        category: 'geography'
-      },
-      
-      // Age and numbers
-      {
-        word: 'âge',
-        translation: 'age',
-        pronunciation: 'ahzh',
-        example_sentence: 'Quel âge avez-vous?',
-        example_translation: 'How old are you?',
-        category: 'age'
-      },
-      {
-        word: 'an/ans',
-        translation: 'year/years',
-        pronunciation: 'ahn/ahn',
-        example_sentence: 'J\'ai trente ans.',
-        example_translation: 'I am thirty years old.',
-        category: 'age'
-      },
-      {
-        word: 'vingt',
-        translation: 'twenty',
-        pronunciation: 'vahn',
-        example_sentence: 'J\'ai vingt ans.',
-        example_translation: 'I am twenty years old.',
-        category: 'numbers'
-      },
-      {
-        word: 'vingt-cinq',
-        translation: 'twenty-five',
-        pronunciation: 'vahn-sank',
-        example_sentence: 'Elle a vingt-cinq ans.',
-        example_translation: 'She is twenty-five years old.',
-        category: 'age'
-      },
-      {
-        word: 'trente',
-        translation: 'thirty',
-        pronunciation: 'trahnnt',
-        example_sentence: 'Mon frère a trente ans.',
-        example_translation: 'My brother is thirty years old.',
-        category: 'numbers'
-      },
-      
-      // Family
-      {
-        word: 'famille',
-        translation: 'family',
-        pronunciation: 'ba-MEEL',
-        example_sentence: 'J\'ai une grande famille.',
-        example_translation: 'I have a big family.',
-        category: 'family'
-      },
-      {
-        word: 'parents',
-        translation: 'parents',
-        pronunciation: 'pa-RAHN',
-        example_sentence: 'Mes parents habitent à Lyon.',
-        example_translation: 'My parents live in Lyon.',
-        category: 'family'
-      },
-      {
-        word: 'frère',
-        translation: 'brother',
-        pronunciation: 'frair',
-        example_sentence: 'J\'ai un frère et une sœur.',
-        example_translation: 'I have a brother and a sister.',
-        category: 'family'
-      },
-      {
-        word: 'sœur',
-        translation: 'sister',
-        pronunciation: 'sur',
-        example_sentence: 'Ma sœur est médecin.',
-        example_translation: 'My sister is a doctor.',
-        category: 'family'
-      },
-      {
-        word: 'enfant',
-        translation: 'child',
-        pronunciation: 'ahn-fahn',
-        example_sentence: 'Ils ont deux enfants.',
-        example_translation: 'They have two children.',
-        category: 'family'
-      },
-      
-      // Professions
-      {
-        word: 'métier',
-        translation: 'profession/job',
-        pronunciation: 'may-tee-AY',
-        example_sentence: 'Quel est votre métier?',
-        example_translation: 'What is your profession?',
-        category: 'professions'
-      },
-      {
-        word: 'architecte',
-        translation: 'architect',
-        pronunciation: 'ar-shee-TEKT',
-        example_sentence: 'Je suis architecte.',
-        example_translation: 'I am an architect.',
-        category: 'professions'
-      },
-      {
-        word: 'journaliste',
-        translation: 'journalist',
-        pronunciation: 'zhoor-na-LEEST',
-        example_sentence: 'Elle est journaliste.',
-        example_translation: 'She is a journalist.',
-        category: 'professions'
-      },
-      {
-        word: 'professeur',
-        translation: 'teacher/professor',
-        pronunciation: 'pro-feh-SUR',
-        example_sentence: 'Mon père est professeur.',
-        example_translation: 'My father is a teacher.',
-        category: 'professions'
-      },
-      {
-        word: 'médecin',
-        translation: 'doctor',
-        pronunciation: 'mayd-sahn',
-        example_sentence: 'Dr. Martin est médecin.',
-        example_translation: 'Dr. Martin is a doctor.',
-        category: 'professions'
-      },
-      
-      // Common expressions with avoir
-      {
-        word: 'avoir de la chance',
-        translation: 'to be lucky',
-        pronunciation: 'a-vwahr duh lah shahnss',
-        example_sentence: 'J\'ai de la chance!',
-        example_translation: 'I\'m lucky!',
-        category: 'expressions'
-      },
-      {
-        word: 'avoir faim',
-        translation: 'to be hungry',
-        pronunciation: 'a-vwahr fahn',
-        example_sentence: 'J\'ai très faim.',
-        example_translation: 'I\'m very hungry.',
-        category: 'expressions'
-      },
-      {
-        word: 'avoir soif',
-        translation: 'to be thirsty',
-        pronunciation: 'a-vwahr swahf',
-        example_sentence: 'Tu as soif?',
-        example_translation: 'Are you thirsty?',
-        category: 'expressions'
-      },
-      {
-        word: 'avoir raison',
-        translation: 'to be right',
-        pronunciation: 'a-vwahr ray-ZOHN',
-        example_sentence: 'Vous avez raison.',
-        example_translation: 'You are right.',
-        category: 'expressions'
-      },
-      
-      // Conversation connectors
-      {
-        word: 'alors',
-        translation: 'so/then',
-        pronunciation: 'ah-LOOR',
-        example_sentence: 'Alors, comment ça va?',
-        example_translation: 'So, how are you?',
-        category: 'connectors'
-      },
-      {
-        word: 'exactement',
-        translation: 'exactly',
-        pronunciation: 'ex-ak-tuh-MAHN',
-        example_sentence: 'Oui, exactement!',
-        example_translation: 'Yes, exactly!',
-        category: 'connectors'
-      },
-      {
-        word: 'là-bas',
-        translation: 'over there/back there',
-        pronunciation: 'lah-BAH',
-        example_sentence: 'Mes amis habitent là-bas.',
-        example_translation: 'My friends live over there.',
-        category: 'location'
-      },
-      {
-        word: 'ici',
-        translation: 'here',
-        pronunciation: 'ee-SEE',
-        example_sentence: 'Je travaille ici.',
-        example_translation: 'I work here.',
-        category: 'location'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-2-1',
-        type: 'multiple_choice',
-        question: 'How do you ask "How old are you?" formally in French?',
-        options: ['Quel âge tu as?', 'Quel âge avez-vous?', 'Combien d\'ans êtes-vous?', 'Vous êtes quel âge?'],
-        correct_answer: 'Quel âge avez-vous?',
-        explanation: '"Quel âge avez-vous?" is the correct formal way to ask someone\'s age using "avoir".',
-        hints: ['Remember to use "vous" for formal situations and "avoir" for age']
-      },
-      {
-        id: 'ex-2-2',
-        type: 'fill_blank',
-        question: 'Complete: "J\'_____ vingt-cinq ans." (I am twenty-five years old)',
-        correct_answer: ['ai'],
-        explanation: 'In French, age is expressed with "avoir" (to have). "J\'ai vingt-cinq ans" literally means "I have twenty-five years".',
-        hints: ['French uses "avoir" for age, not "être"']
-      },
-      {
-        id: 'ex-2-3',
-        type: 'multiple_choice',
-        question: 'Complete with "avoir": "Vous _____ des enfants?"',
-        options: ['êtes', 'avez', 'allez', 'faites'],
-        correct_answer: 'avez',
-        explanation: 'With "vous" (you), the verb "avoir" becomes "avez". This asks about having children.',
-        hints: ['Look at the avoir conjugation table - what goes with vous?']
-      },
-      {
-        id: 'ex-2-4',
-        type: 'translation',
-        question: 'Translate to French: "Where are you from?" (formal)',
-        correct_answer: ['D\'où venez-vous?', 'D\'où venez-vous', 'Vous venez d\'où?'],
-        explanation: '"D\'où venez-vous?" is the formal way to ask about someone\'s origin.',
-        hints: ['Use "d\'où" (from where) and the formal "vous"']
-      },
-      {
-        id: 'ex-2-5',
-        type: 'multiple_choice',
-        question: 'Which expression means "to be lucky" in French?',
-        options: ['avoir peur', 'avoir de la chance', 'avoir soif', 'avoir raison'],
-        correct_answer: 'avoir de la chance',
-        explanation: '"Avoir de la chance" literally means "to have luck" and is used to say "to be lucky".',
-        hints: ['Think about which expression contains the word for "luck" (chance)']
-      },
-      {
-        id: 'ex-2-6',
-        type: 'fill_blank',
-        question: 'Complete: "Je _____ de Lyon." (I come from Lyon)',
-        correct_answer: ['viens'],
-        explanation: '"Je viens de" means "I come from". "Venir de" is used to express origin.',
-        hints: ['This is about where someone comes from, not about having something']
-      },
-      {
-        id: 'ex-2-7',
-        type: 'speaking',
-        question: 'Practice introducing yourself with age and origin: "Je m\'appelle [name], j\'ai [age] ans et je viens de [city]."',
-        correct_answer: ['Je m\'appelle [name], j\'ai [age] ans et je viens de [city].'],
-        explanation: 'Perfect! This is a complete self-introduction including name, age, and origin.',
-        audio_prompt: 'Je m\'appelle Marie, j\'ai vingt-cinq ans et je viens de Paris.'
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 5,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-
-  {
-    id: 'beginner-3',
-    title: 'Au Café - Ordering & Basic Needs',
-    subtitle: 'Essential phrases for ordering, expressing needs, and polite requests',
-    level: 'beginner',
-    order: 3,
-    estimated_time: 20,
-    learning_objectives: [
-      'Order food and drinks confidently in French cafés',
-      'Express basic needs and wants using "avoir" expressions',
-      'Use polite request forms and restaurant etiquette',
-      'Master numbers for prices and quantities',
-      'Handle basic café interactions from arrival to payment',
-      'Understand French café culture and menu basics'
-    ],
-    prerequisite_lessons: ['beginner-1', 'beginner-2'],
-    is_free: true,
-    difficulty: 2,
-    tags: ['café', 'ordering', 'food', 'drinks', 'politeness', 'money', 'avoir-expressions'],
-    
-    dialogue: {
-      title: 'Ordering at a Traditional Parisian Café',
-      context: 'Marie and Thomas decide to order something at the café where they met. This dialogue shows a complete café interaction from getting the server\'s attention to paying the bill, demonstrating essential vocabulary and polite expressions used daily in France.',
-      exchanges: [
-        {
-          speaker: 'Marie',
-          french: 'Excusez-moi, monsieur! Pourrions-nous avoir la carte, s\'il vous plaît?',
-          english: 'Excuse me, sir! Could we have the menu, please?',
-          pronunciation: 'ex-koo-zay MWAH, muh-SYUR! poor-ee-ohn NOO za-vwahr la kart, seel voo PLAY?',
-          cultural_note: 'Always address waiters as "monsieur" and waitresses as "mademoiselle" or "madame".'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Bien sûr! Voici la carte. Que désirez-vous boire?',
-          english: 'Of course! Here\'s the menu. What would you like to drink?',
-          pronunciation: 'bee-ahn SOOR! vwah-SEE la kart. kuh day-zee-ray VOO bwahr?'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'J\'ai très soif... Je voudrais un café, s\'il vous plaît.',
-          english: 'I\'m very thirsty... I would like a coffee, please.',
-          pronunciation: 'zhay tray SWAHF... zhuh voo-DRAY zuhn ka-FAY, seel voo PLAY.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Et moi, je prends un thé au citron. Avez-vous des croissants?',
-          english: 'And I\'ll have a lemon tea. Do you have croissants?',
-          pronunciation: 'ay MWAH, zhuh prahn zuhn tay oh see-TROHN. a-vay VOO day krwah-SAHN?'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Oui, nous avons des croissants frais. Vous avez faim?',
-          english: 'Yes, we have fresh croissants. Are you hungry?',
-          pronunciation: 'WEE, noo za-vohn day krwah-SAHN fray. voo za-vay FAHN?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Oui, j\'ai un peu faim. Deux croissants, s\'il vous plaît.',
-          english: 'Yes, I\'m a little hungry. Two croissants, please.',
-          pronunciation: 'WEE, zhay zuhn puh FAHN. duh krwah-SAHN, seel voo PLAY.',
-          cultural_note: '"Un peu" (a little) is a polite way to express mild hunger rather than saying you\'re very hungry.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Parfait! Et combien ça coûte, tout ça?',
-          english: 'Perfect! And how much does all that cost?',
-          pronunciation: 'par-FAY! ay kohn-bee-ahn sah KOOT, too SAH?'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Alors... un café, un thé, deux croissants... ça fait huit euros cinquante.',
-          english: 'So... one coffee, one tea, two croissants... that makes eight euros fifty.',
-          pronunciation: 'ah-LOOR... zuhn ka-FAY, zuhn TAY, duh krwah-SAHN... sah fay weet uh-ROH san-KAHNNT.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Très bien. Voici dix euros. Gardez la monnaie!',
-          english: 'Very good. Here\'s ten euros. Keep the change!',
-          pronunciation: 'tray bee-AHN. vwah-SEE dees uh-ROH. gar-day la mo-NAY!',
-          cultural_note: 'Tipping in French cafés is optional - rounding up or leaving small change is sufficient.'
-        }
-      ],
-      cultural_notes: [
-        'French café culture: people sit for hours, cafés are social centers, not just for quick coffee',
-        'Morning pastries: croissants, pain au chocolat, and tartines are typical breakfast items',
-        'Café etiquette: wait to be seated at table service, but you can sit anywhere at counter service',
-        'Pricing: drinks cost more at tables than at the counter ("au comptoir")',
-        'Tipping: 5-10% is appreciated but not mandatory; rounding up the bill is common',
-        'French cafés often double as neighborhood meeting places and informal offices'
-      ],
-      vocabulary_highlights: ['avoir soif', 'avoir faim', 'je voudrais', 'combien', 'ça coûte', 'euros']
-    },
-
-    grammar: {
-      topic: 'Essential "Avoir" Expressions & Polite Requests',
-      explanation: 'French uses "avoir" (to have) for many states that English expresses with "to be". These expressions are essential for daily life - expressing hunger, thirst, and needs. Additionally, polite request forms like "je voudrais" (I would like) make your French sound more natural and courteous.',
-      patterns: [
-        'Physical states: "J\'ai faim/soif/froid/chaud" (I am hungry/thirsty/cold/hot)',
-        'Emotions: "J\'ai peur/honte" (I am scared/ashamed)', 
-        'Conditions: "J\'ai raison/tort" (I am right/wrong)',
-        'Polite requests: "Je voudrais..." (I would like...)',
-        'Asking prices: "Combien ça coûte?" (How much does it cost?)',
-        'Age reminder: "J\'ai vingt ans" (I am twenty years old)'
-      ],
-      examples: [
-        {
-          french: 'J\'ai très faim et j\'ai soif.',
-          english: 'I am very hungry and I am thirsty.',
-          pronunciation: 'Jhay treh FAM ay jhay SWAF',
-          highlight: 'ai faim... ai soif'
-        },
-        {
-          french: 'Je voudrais un café, s\'il vous plaît.',
-          english: 'I would like a coffee, please.',
-          pronunciation: 'Zhuh voo-dray un ka-FAY, seel voo PLEH',
-          highlight: 'voudrais'
-        },
-        {
-          french: 'Combien ça coûte?',
-          english: 'How much does it cost?',
-          pronunciation: 'Com-byan sa KOOT?',
-          highlight: 'combien'
-        },
-        {
-          french: 'Nous avons froid en hiver.',
-          english: 'We are cold in winter.',
-          pronunciation: 'Noo-zah-von frwa on-ee-VAIR',
-          highlight: 'avons froid'
-        },
-        {
-          french: 'Tu as raison, c\'est délicieux!',
-          english: 'You are right, it\'s delicious!',
-          pronunciation: 'Too ah ray-ZON, say day-lee-SYUH!',
-          highlight: 'as raison'
-        },
-        {
-          french: 'Ils ont chaud en été.',
-          english: 'They are hot in summer.',
-          pronunciation: 'Eel-zon show on-ay-TAY',
-          highlight: 'ont chaud'
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'j\'', form: 'ai faim/soif/froid', pronunciation: 'zhay fahn/swahf/frwah' },
-        { pronoun: 'tu', form: 'as faim/soif/froid', pronunciation: 'too ah fahn/swahf/frwah' },
-        { pronoun: 'il/elle', form: 'a faim/soif/froid', pronunciation: 'eel/ell ah fahn/swahf/frwah' },
-        { pronoun: 'nous', form: 'avons faim/soif/froid', pronunciation: 'noo za-vohn fahn/swahf/frwah' },
-        { pronoun: 'vous', form: 'avez faim/soif/froid', pronunciation: 'voo za-vay fahn/swahf/frwah' },
-        { pronoun: 'ils/elles', form: 'ont faim/soif/froid', pronunciation: 'eel/ell zohn fahn/swahf/frwah' }
-      ]
-    },
-
-    vocabulary: [
-      // Café vocabulary
-      {
-        word: 'café',
-        translation: 'coffee/café',
-        pronunciation: 'ka-FAY',
-        example_sentence: 'Je prends un café noir.',
-        example_translation: 'I\'ll have a black coffee.',
-        category: 'drinks'
-      },
-      {
-        word: 'thé',
-        translation: 'tea',
-        pronunciation: 'TAY',
-        example_sentence: 'Un thé au lait, s\'il vous plaît.',
-        example_translation: 'A tea with milk, please.',
-        category: 'drinks'
-      },
-      {
-        word: 'eau',
-        translation: 'water',
-        pronunciation: 'OH',
-        example_sentence: 'Une carafe d\'eau, s\'il vous plaît.',
-        example_translation: 'A carafe of water, please.',
-        category: 'drinks'
-      },
-      {
-        word: 'jus',
-        translation: 'juice',
-        pronunciation: 'ZHUU',
-        example_sentence: 'Un jus d\'orange frais.',
-        example_translation: 'A fresh orange juice.',
-        category: 'drinks'
-      },
-      
-      // Food items
-      {
-        word: 'croissant',
-        translation: 'croissant',
-        pronunciation: 'krwah-SAHN',
-        example_sentence: 'Deux croissants au beurre.',
-        example_translation: 'Two butter croissants.',
-        category: 'food'
-      },
-      {
-        word: 'pain',
-        translation: 'bread',
-        pronunciation: 'PAHN',
-        example_sentence: 'Du pain frais avec du beurre.',
-        example_translation: 'Fresh bread with butter.',
-        category: 'food'
-      },
-      {
-        word: 'sandwich',
-        translation: 'sandwich',
-        pronunciation: 'sahn-DWEESH',
-        example_sentence: 'Un sandwich jambon-fromage.',
-        example_translation: 'A ham and cheese sandwich.',
-        category: 'food'
-      },
-      {
-        word: 'salade',
-        translation: 'salad',
-        pronunciation: 'sa-LAHD',
-        example_sentence: 'Une salade verte, s\'il vous plaît.',
-        example_translation: 'A green salad, please.',
-        category: 'food'
-      },
-      
-      // Avoir expressions (physical states)
-      {
-        word: 'avoir faim',
-        translation: 'to be hungry',
-        pronunciation: 'a-vwahr FAHN',
-        example_sentence: 'J\'ai très faim!',
-        example_translation: 'I\'m very hungry!',
-        category: 'avoir-expressions'
-      },
-      {
-        word: 'avoir soif',
-        translation: 'to be thirsty',
-        pronunciation: 'a-vwahr SWAHF',
-        example_sentence: 'Tu as soif? Veux-tu de l\'eau?',
-        example_translation: 'Are you thirsty? Do you want some water?',
-        category: 'avoir-expressions'
-      },
-      {
-        word: 'avoir chaud',
-        translation: 'to be hot',
-        pronunciation: 'a-vwahr SHOH',
-        example_sentence: 'J\'ai chaud, ouvrez la fenêtre!',
-        example_translation: 'I\'m hot, open the window!',
-        category: 'avoir-expressions'
-      },
-      {
-        word: 'avoir froid',
-        translation: 'to be cold',
-        pronunciation: 'a-vwahr FRWAH',
-        example_sentence: 'Nous avons froid en hiver.',
-        example_translation: 'We are cold in winter.',
-        category: 'avoir-expressions'
-      },
-      
-      // Polite expressions
-      {
-        word: 'je voudrais',
-        translation: 'I would like',
-        pronunciation: 'zhuh voo-DRAY',
-        example_sentence: 'Je voudrais un café, s\'il vous plaît.',
-        example_translation: 'I would like a coffee, please.',
-        category: 'politeness'
-      },
-      {
-        word: 'pourriez-vous',
-        translation: 'could you (formal)',
-        pronunciation: 'poor-ee-ay VOO',
-        example_sentence: 'Pourriez-vous m\'aider?',
-        example_translation: 'Could you help me?',
-        category: 'politeness'
-      },
-      {
-        word: 'je prends',
-        translation: 'I\'ll take/have',
-        pronunciation: 'zhuh PRAHN',
-        example_sentence: 'Je prends la salade, merci.',
-        example_translation: 'I\'ll have the salad, thank you.',
-        category: 'ordering'
-      },
-      {
-        word: 'pour moi',
-        translation: 'for me',
-        pronunciation: 'poor MWAH',
-        example_sentence: 'Un thé pour moi, s\'il vous plaît.',
-        example_translation: 'A tea for me, please.',
-        category: 'ordering'
-      },
-      
-      // Money and numbers
-      {
-        word: 'combien',
-        translation: 'how much/how many',
-        pronunciation: 'kohn-bee-AHN',
-        example_sentence: 'Combien ça coûte?',
-        example_translation: 'How much does it cost?',
-        category: 'money'
-      },
-      {
-        word: 'ça coûte',
-        translation: 'it costs',
-        pronunciation: 'sah KOOT',
-        example_sentence: 'Ça coûte dix euros.',
-        example_translation: 'It costs ten euros.',
-        category: 'money'
-      },
-      {
-        word: 'euro',
-        translation: 'euro',
-        pronunciation: 'uh-ROH',
-        example_sentence: 'Cinq euros, s\'il vous plaît.',
-        example_translation: 'Five euros, please.',
-        category: 'money'
-      },
-      {
-        word: 'centimes',
-        translation: 'cents',
-        pronunciation: 'sahn-TEEM',
-        example_sentence: 'Deux euros cinquante centimes.',
-        example_translation: 'Two euros fifty cents.',
-        category: 'money'
-      },
-      {
-        word: 'monnaie',
-        translation: 'change/coins',
-        pronunciation: 'mo-NAY',
-        example_sentence: 'Gardez la monnaie!',
-        example_translation: 'Keep the change!',
-        category: 'money'
-      },
-      
-      // Numbers (essential for ordering)
-      {
-        word: 'un/une',
-        translation: 'one',
-        pronunciation: 'uhn/UUN',
-        example_sentence: 'Un café et une eau.',
-        example_translation: 'One coffee and one water.',
-        category: 'numbers'
-      },
-      {
-        word: 'deux',
-        translation: 'two',
-        pronunciation: 'DUH',
-        example_sentence: 'Deux croissants, s\'il vous plaît.',
-        example_translation: 'Two croissants, please.',
-        category: 'numbers'
-      },
-      {
-        word: 'trois',
-        translation: 'three',
-        pronunciation: 'TRWAH',
-        example_sentence: 'Trois cafés pour la table.',
-        example_translation: 'Three coffees for the table.',
-        category: 'numbers'
-      },
-      {
-        word: 'cinq',
-        translation: 'five',
-        pronunciation: 'SANK',
-        example_sentence: 'Ça fait cinq euros.',
-        example_translation: 'That makes five euros.',
-        category: 'numbers'
-      },
-      {
-        word: 'dix',
-        translation: 'ten',
-        pronunciation: 'DEES',
-        example_sentence: 'Voici dix euros.',
-        example_translation: 'Here are ten euros.',
-        category: 'numbers'
-      },
-      
-      // Café service
-      {
-        word: 'serveur',
-        translation: 'waiter',
-        pronunciation: 'ser-VUR',
-        example_sentence: 'Le serveur est très aimable.',
-        example_translation: 'The waiter is very kind.',
-        category: 'service'
-      },
-      {
-        word: 'carte',
-        translation: 'menu',
-        pronunciation: 'KART',
-        example_sentence: 'Pourrions-nous avoir la carte?',
-        example_translation: 'Could we have the menu?',
-        category: 'service'
-      },
-      {
-        word: 'addition',
-        translation: 'bill/check',
-        pronunciation: 'a-dee-see-OHN',
-        example_sentence: 'L\'addition, s\'il vous plaît.',
-        example_translation: 'The bill, please.',
-        category: 'service'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-3-1',
-        type: 'multiple_choice',
-        question: 'How do you say "I am hungry" in French?',
-        options: ['Je suis faim', 'J\'ai faim', 'Je veux faim', 'Je mange faim'],
-        correct_answer: 'J\'ai faim',
-        explanation: 'French uses "avoir" (to have) for hunger: "J\'ai faim" literally means "I have hunger".',
-        hints: ['Remember that French uses "avoir" for physical states like hunger']
-      },
-      {
-        id: 'ex-3-2',
-        type: 'fill_blank',
-        question: 'Complete the polite request: "Je _______ un café, s\'il vous plaît."',
-        correct_answer: ['voudrais'],
-        explanation: '"Je voudrais" (I would like) is the polite way to make requests in French.',
-        hints: ['This is the conditional form that sounds more polite than "je veux"']
-      },
-      {
-        id: 'ex-3-3',
-        type: 'multiple_choice',
-        question: 'How do you ask "How much does it cost?" in French?',
-        options: ['Quel prix ça?', 'Combien ça coûte?', 'Combien prix?', 'Ça coûte quoi?'],
-        correct_answer: 'Combien ça coûte?',
-        explanation: '"Combien ça coûte?" is the standard way to ask about price in French.',
-        hints: ['"Combien" means "how much" and "coûter" means "to cost"']
-      },
-      {
-        id: 'ex-3-4',
-        type: 'translation',
-        question: 'Translate to French: "Two croissants, please."',
-        correct_answer: ['Deux croissants, s\'il vous plaît.', 'Deux croissants, s\'il vous plaît'],
-        explanation: '"Deux croissants, s\'il vous plaît" - remember that "croissant" stays the same in plural.',
-        hints: ['Use "deux" for "two" and don\'t forget the polite "s\'il vous plaît"']
-      },
-      {
-        id: 'ex-3-5',
-        type: 'fill_blank',
-        question: 'Complete: "Nous ______ très soif!" (We are very thirsty!)',
-        correct_answer: ['avons'],
-        explanation: 'With "nous" (we), the verb "avoir" becomes "avons". "Avoir soif" means "to be thirsty".',
-        hints: ['This is about being thirsty, not about having something']
-      },
-      {
-        id: 'ex-3-6',
-        type: 'multiple_choice',
-        question: 'In a French café, how do you politely ask for the menu?',
-        options: ['Donnez-moi la carte!', 'Je veux la carte.', 'Pourriez-vous avoir la carte?', 'Pourrions-nous avoir la carte, s\'il vous plaît?'],
-        correct_answer: 'Pourrions-nous avoir la carte, s\'il vous plaît?',
-        explanation: '"Pourrions-nous avoir la carte, s\'il vous plaît?" is the most polite way to request the menu.',
-        hints: ['The most polite option includes "pourriez-vous" or "pourrions-nous" + "s\'il vous plaît"']
-      },
-      {
-        id: 'ex-3-7',
-        type: 'speaking',
-        question: 'Practice ordering: "Je voudrais un café et un croissant, s\'il vous plaît. Combien ça coûte?"',
-        correct_answer: ['Je voudrais un café et un croissant, s\'il vous plaît. Combien ça coûte?'],
-        explanation: 'Excellent! You\'ve mastered a complete café order with polite language.',
-        audio_prompt: 'Je voudrais un café et un croissant, s\'il vous plaît. Combien ça coûte?'
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 5,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-
-  {
-    id: 'beginner-4',
-    title: 'Les Nombres et le Temps - Numbers & Time',
-    subtitle: 'Master numbers, days, months, and telling time in French',
-    level: 'beginner',
-    order: 4,
-    estimated_time: 28,
-    learning_objectives: [
-      'Count from 1 to 100 confidently in French',
-      'Name all days of the week and months of the year',
-      'Tell time using both 12-hour and 24-hour formats',
-      'Ask and answer questions about dates and schedules',
-      'Use time expressions in daily conversations',
-      'Handle practical situations involving numbers and time'
-    ],
-    prerequisite_lessons: ['beginner-1', 'beginner-2', 'beginner-3'],
-    is_free: true,
-    difficulty: 2,
-    tags: ['numbers', 'time', 'dates', 'schedule', 'calendar', 'practical'],
-    
-    dialogue: {
-      title: 'Planning a Meeting - At the Office',
-      context: 'Marie (the journalist from previous lessons) is scheduling an interview with Thomas (the architect) for her article about urban development in Paris. This dialogue demonstrates practical use of numbers, time expressions, and scheduling vocabulary in a professional context.',
-      exchanges: [
-        {
-          speaker: 'Marie',
-          french: 'Bonjour Thomas! Quel jour sommes-nous aujourd\'hui?',
-          english: 'Hello Thomas! What day is it today?',
-          pronunciation: 'bon-ZHOOR toh-MAH! kell ZHOOR som noo oh-zhoor-DWEE?'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Nous sommes mardi, le quinze octobre.',
-          english: 'It\'s Tuesday, October 15th.',
-          pronunciation: 'noo som mar-DEE, luh KANZ ok-TOH-bruh.',
-          cultural_note: 'In French, dates are written day-month-year, and "le" is used before the date number.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Parfait! Pourriez-vous me donner une interview jeudi prochain?',
-          english: 'Perfect! Could you give me an interview next Thursday?',
-          pronunciation: 'par-FAY! poor-ee-ay VOO muh do-NAY UUN an-ter-VYUU zhuh-DEE pro-SHAHN?'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Jeudi... c\'est le dix-sept octobre. Quelle heure vous convient?',
-          english: 'Thursday... that\'s October 17th. What time suits you?',
-          pronunciation: 'zhuh-DEE... say luh dees-SET ok-TOH-bruh. kell UR voo kohn-vee-AHN?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'À quatorze heures? Ou préférez-vous quinze heures trente?',
-          english: 'At 2 PM? Or do you prefer 3:30 PM?',
-          pronunciation: 'ah ka-TORZ UR? oo pray-fay-ray VOO kanz UR trahnnt?',
-          cultural_note: 'French commonly uses 24-hour time in formal situations: 14h00 = 2 PM, 15h30 = 3:30 PM.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Quinze heures trente, c\'est parfait. Où nous retrouvons-nous?',
-          english: '3:30 PM is perfect. Where shall we meet?',
-          pronunciation: 'kanz UR trahnnt, say par-FAY. oo noo ruh-troo-vohn NOO?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'À mon bureau, au vingt-cinq, rue de Rivoli. Premier étage.',
-          english: 'At my office, at 25 Rue de Rivoli. First floor.',
-          pronunciation: 'ah mohn buu-ROH, oh vahn-sank, ruu duh ree-vo-LEE. pruh-mee-AY ay-TAHZH.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Très bien! L\'interview va durer combien de temps?',
-          english: 'Very good! How long will the interview last?',
-          pronunciation: 'tray bee-AHN! lan-ter-VYUU vah duu-RAY kohn-bee-AHN duh TAHN?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Environ une heure, une heure et demie maximum.',
-          english: 'About an hour, an hour and a half maximum.',
-          pronunciation: 'ahn-vee-ROHN UUN UR, UUN UR ay duh-MEE max-ee-MUUM.',
-          cultural_note: '"Environ" (about/approximately) is very useful for expressing approximate time and quantities.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Parfait! Alors, rendez-vous jeudi à quinze heures trente!',
-          english: 'Perfect! So, see you Thursday at 3:30 PM!',
-          pronunciation: 'par-FAY! ah-LOOR, rahn-day VOO zhuh-DEE ah kanz UR trahnnt!'
-        }
-      ],
-      cultural_notes: [
-        'French business culture: appointments are very punctual, arrive exactly on time',
-        'Address format: number + street name, then floor ("étage")',
-        'Time expressions: "prochain" (next) vs "dernier" (last) for weeks/months',
-        'Professional meetings: often scheduled in 30-minute or 1-hour blocks',
-        'French work week: Monday to Friday, lunch break typically 12:00-14:00',
-        'Formal vs informal time: 24-hour format in business, 12-hour in casual conversation'
-      ],
-      vocabulary_highlights: ['quel jour', 'quinze', 'octobre', 'quelle heure', 'quatorze heures', 'rendez-vous']
-    },
-
-    grammar: {
-      topic: 'Numbers, Time Expressions & Date Constructions',
-      explanation: 'French numbers follow specific patterns, and time expressions use unique constructions. Understanding these patterns is essential for daily communication, from shopping to scheduling appointments. French uses both 12-hour and 24-hour time systems, with 24-hour being more formal.',
-      patterns: [
-        'Numbers 1-19: irregular forms to memorize',
-        'Numbers 20-99: pattern-based (vingt-un, trente-deux, etc.)',
-        'Time: "Il est" + hour + "heure(s)" + minutes',
-        'Dates: "Nous sommes" + day + "le" + number + month',
-        'Days/Months: always lowercase unless starting a sentence',
-        'Asking time: "Quelle heure est-il?" (What time is it?)'
-      ],
-      examples: [
-        {
-          french: 'Il est quinze heures trente.',
-          english: 'It is 3:30 PM.',
-          pronunciation: 'Eel eh kanz-ERR TRAHNT',
-          highlight: 'quinze heures trente'
-        },
-        {
-          french: 'Nous sommes lundi, le trois janvier.',
-          english: 'It is Monday, January 3rd.',
-          pronunciation: 'Noo somm lun-DEE, luh trwa zhon-VYAY',
-          highlight: 'lundi, le trois janvier'
-        },
-        {
-          french: 'J\'ai rendez-vous à dix heures et demie.',
-          english: 'I have an appointment at 10:30.',
-          pronunciation: 'Jhay ron-day-voo ah deez-ERR ay duh-MEE',
-          highlight: 'dix heures et demie'
-        },
-        {
-          french: 'Quelle heure est-il? Il est midi.',
-          english: 'What time is it? It is noon.',
-          pronunciation: 'Kel err eh-TEEL? Eel eh mee-DEE',
-          highlight: 'Quelle heure... midi'
-        },
-        {
-          french: 'Mon anniversaire est le vingt-cinq décembre.',
-          english: 'My birthday is December 25th.',
-          pronunciation: 'Mon ah-nee-ver-sair eh luh vant-sank day-SOM-bruh',
-          highlight: 'le vingt-cinq décembre'
-        },
-        {
-          french: 'Le magasin ouvre à neuf heures du matin.',
-          english: 'The store opens at 9 AM.',
-          pronunciation: 'Luh ma-ga-zan oov-ruh ah nuh-VERR doo ma-TAN',
-          highlight: 'neuf heures du matin'
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'Time expressions', form: 'Il est + time', pronunciation: 'eel ay + time' },
-        { pronoun: 'Date expressions', form: 'Nous sommes + day/date', pronunciation: 'noo som + day/date' },
-        { pronoun: 'Question form', form: 'Quelle heure est-il?', pronunciation: 'kell UR ay-TEEL?' },
-        { pronoun: 'Appointment', form: 'J\'ai rendez-vous à...', pronunciation: 'zhay rahn-day VOO ah...' },
-        { pronoun: 'Duration', form: 'Ça dure... heures', pronunciation: 'sah DUUR... UR' },
-        { pronoun: 'Frequency', form: 'Tous les jours/mois', pronunciation: 'too lay ZHOOR/MWAH' }
-      ]
-    },
-
-    vocabulary: [
-      // Numbers 1-20 (essential base)
-      {
-        word: 'un',
-        translation: 'one',
-        pronunciation: 'uhn',
-        example_sentence: 'Il est une heure.',
-        example_translation: 'It is one o\'clock.',
-        category: 'numbers'
-      },
-      {
-        word: 'deux',
-        translation: 'two',
-        pronunciation: 'duh',
-        example_sentence: 'Deux cafés, s\'il vous plaît.',
-        example_translation: 'Two coffees, please.',
-        category: 'numbers'
-      },
-      {
-        word: 'trois',
-        translation: 'three',
-        pronunciation: 'trwah',
-        example_sentence: 'Il est trois heures.',
-        example_translation: 'It is three o\'clock.',
-        category: 'numbers'
-      },
-      {
-        word: 'quatre',
-        translation: 'four',
-        pronunciation: 'KAH-truh',
-        example_sentence: 'J\'ai quatre frères.',
-        example_translation: 'I have four brothers.',
-        category: 'numbers'
-      },
-      {
-        word: 'cinq',
-        translation: 'five',
-        pronunciation: 'sank',
-        example_sentence: 'Cinq euros, s\'il vous plaît.',
-        example_translation: 'Five euros, please.',
-        category: 'numbers'
-      },
-      {
-        word: 'six',
-        translation: 'six',
-        pronunciation: 'sees',
-        example_sentence: 'Il est six heures du soir.',
-        example_translation: 'It is six o\'clock in the evening.',
-        category: 'numbers'
-      },
-      {
-        word: 'sept',
-        translation: 'seven',
-        pronunciation: 'set',
-        example_sentence: 'Sept jours par semaine.',
-        example_translation: 'Seven days per week.',
-        category: 'numbers'
-      },
-      {
-        word: 'huit',
-        translation: 'eight',
-        pronunciation: 'weet',
-        example_sentence: 'Il est huit heures.',
-        example_translation: 'It is eight o\'clock.',
-        category: 'numbers'
-      },
-      {
-        word: 'neuf',
-        translation: 'nine',
-        pronunciation: 'nuf',
-        example_sentence: 'Neuf heures du matin.',
-        example_translation: 'Nine o\'clock in the morning.',
-        category: 'numbers'
-      },
-      {
-        word: 'dix',
-        translation: 'ten',
-        pronunciation: 'dees',
-        example_sentence: 'Dix minutes de retard.',
-        example_translation: 'Ten minutes late.',
-        category: 'numbers'
-      },
-      {
-        word: 'onze',
-        translation: 'eleven',
-        pronunciation: 'ohnz',
-        example_sentence: 'Il est onze heures.',
-        example_translation: 'It is eleven o\'clock.',
-        category: 'numbers'
-      },
-      {
-        word: 'douze',
-        translation: 'twelve',
-        pronunciation: 'dooz',
-        example_sentence: 'Douze mois par an.',
-        example_translation: 'Twelve months per year.',
-        category: 'numbers'
-      },
-
-      // Numbers 13-19 (teen numbers)
-      {
-        word: 'treize',
-        translation: 'thirteen',
-        pronunciation: 'tray',
-        example_sentence: 'Il est treize heures.',
-        example_translation: 'It is 1 PM (13:00).',
-        category: 'numbers'
-      },
-      {
-        word: 'quatorze',
-        translation: 'fourteen',
-        pronunciation: 'ka-torz',
-        example_sentence: 'Quatorze juillet, fête nationale.',
-        example_translation: 'July 14th, national holiday.',
-        category: 'numbers'
-      },
-      {
-        word: 'quinze',
-        translation: 'fifteen',
-        pronunciation: 'kanz',
-        example_sentence: 'Quinze heures trente.',
-        example_translation: '3:30 PM (15:30).',
-        category: 'numbers'
-      },
-      {
-        word: 'seize',
-        translation: 'sixteen',
-        pronunciation: 'say',
-        example_sentence: 'J\'ai seize ans.',
-        example_translation: 'I am sixteen years old.',
-        category: 'numbers'
-      },
-      {
-        word: 'dix-sept',
-        translation: 'seventeen',
-        pronunciation: 'dees-set',
-        example_sentence: 'Le dix-sept octobre.',
-        example_translation: 'October 17th.',
-        category: 'numbers'
-      },
-      {
-        word: 'dix-huit',
-        translation: 'eighteen',
-        pronunciation: 'dees-weet',
-        example_sentence: 'Dix-huit ans, majorité.',
-        example_translation: 'Eighteen years old, legal age.',
-        category: 'numbers'
-      },
-      {
-        word: 'dix-neuf',
-        translation: 'nineteen',
-        pronunciation: 'dees-nuf',
-        example_sentence: 'Dix-neuf heures, c\'est tard.',
-        example_translation: '7 PM (19:00), that\'s late.',
-        category: 'numbers'
-      },
-
-      // Tens (20, 30, 40, etc.)
-      {
-        word: 'vingt',
-        translation: 'twenty',
-        pronunciation: 'vahn',
-        example_sentence: 'J\'ai vingt ans.',
-        example_translation: 'I am twenty years old.',
-        category: 'numbers'
-      },
-      {
-        word: 'trente',
-        translation: 'thirty',
-        pronunciation: 'trahnnt',
-        example_sentence: 'Trente minutes de pause.',
-        example_translation: 'Thirty minutes break.',
-        category: 'numbers'
-      },
-      {
-        word: 'quarante',
-        translation: 'forty',
-        pronunciation: 'ka-rahnnt',
-        example_sentence: 'Ma mère a quarante ans.',
-        example_translation: 'My mother is forty years old.',
-        category: 'numbers'
-      },
-      {
-        word: 'cinquante',
-        translation: 'fifty',
-        pronunciation: 'san-kahnnt',
-        example_sentence: 'Cinquante euros, c\'est cher.',
-        example_translation: 'Fifty euros, that\'s expensive.',
-        category: 'numbers'
-      },
-      {
-        word: 'soixante',
-        translation: 'sixty',
-        pronunciation: 'swas-sahnnt',
-        example_sentence: 'Soixante minutes = une heure.',
-        example_translation: 'Sixty minutes = one hour.',
-        category: 'numbers'
-      },
-      {
-        word: 'cent',
-        translation: 'one hundred',
-        pronunciation: 'sahn',
-        example_sentence: 'Cent euros pour le dîner.',
-        example_translation: 'One hundred euros for dinner.',
-        category: 'numbers'
-      },
-
-      // Days of the week
-      {
-        word: 'lundi',
-        translation: 'Monday',
-        pronunciation: 'luhn-DEE',
-        example_sentence: 'Lundi, je travaille.',
-        example_translation: 'Monday, I work.',
-        category: 'days'
-      },
-      {
-        word: 'mardi',
-        translation: 'Tuesday',
-        pronunciation: 'mar-DEE',
-        example_sentence: 'Nous sommes mardi.',
-        example_translation: 'It is Tuesday.',
-        category: 'days'
-      },
-      {
-        word: 'mercredi',
-        translation: 'Wednesday',
-        pronunciation: 'mer-kruh-DEE',
-        example_sentence: 'Mercredi, j\'ai cours.',
-        example_translation: 'Wednesday, I have class.',
-        category: 'days'
-      },
-      {
-        word: 'jeudi',
-        translation: 'Thursday',
-        pronunciation: 'zhuh-DEE',
-        example_sentence: 'Jeudi prochain, rendez-vous.',
-        example_translation: 'Next Thursday, appointment.',
-        category: 'days'
-      },
-      {
-        word: 'vendredi',
-        translation: 'Friday',
-        pronunciation: 'vahn-druh-DEE',
-        example_sentence: 'Vendredi soir, cinéma!',
-        example_translation: 'Friday evening, movies!',
-        category: 'days'
-      },
-      {
-        word: 'samedi',
-        translation: 'Saturday',
-        pronunciation: 'sam-DEE',
-        example_sentence: 'Samedi, je me repose.',
-        example_translation: 'Saturday, I rest.',
-        category: 'days'
-      },
-      {
-        word: 'dimanche',
-        translation: 'Sunday',
-        pronunciation: 'dee-mahnsh',
-        example_sentence: 'Dimanche en famille.',
-        example_translation: 'Sunday with family.',
-        category: 'days'
-      },
-
-      // Months (first 6)
-      {
-        word: 'janvier',
-        translation: 'January',
-        pronunciation: 'zhahn-vee-AY',
-        example_sentence: 'En janvier, il fait froid.',
-        example_translation: 'In January, it\'s cold.',
-        category: 'months'
-      },
-      {
-        word: 'février',
-        translation: 'February',
-        pronunciation: 'fay-vree-AY',
-        example_sentence: 'Février a vingt-huit jours.',
-        example_translation: 'February has twenty-eight days.',
-        category: 'months'
-      },
-      {
-        word: 'mars',
-        translation: 'March',
-        pronunciation: 'mars',
-        example_sentence: 'Le printemps commence en mars.',
-        example_translation: 'Spring begins in March.',
-        category: 'months'
-      },
-      {
-        word: 'avril',
-        translation: 'April',
-        pronunciation: 'a-vreel',
-        example_sentence: 'En avril, les fleurs poussent.',
-        example_translation: 'In April, flowers grow.',
-        category: 'months'
-      },
-      {
-        word: 'mai',
-        translation: 'May',
-        pronunciation: 'may',
-        example_sentence: 'Mai est un beau mois.',
-        example_translation: 'May is a beautiful month.',
-        category: 'months'
-      },
-      {
-        word: 'juin',
-        translation: 'June',
-        pronunciation: 'zhwahn',
-        example_sentence: 'En juin, il fait chaud.',
-        example_translation: 'In June, it\'s hot.',
-        category: 'months'
-      },
-
-      // Time expressions
-      {
-        word: 'heure',
-        translation: 'hour/time/o\'clock',
-        pronunciation: 'UR',
-        example_sentence: 'Quelle heure est-il?',
-        example_translation: 'What time is it?',
-        category: 'time'
-      },
-      {
-        word: 'minute',
-        translation: 'minute',
-        pronunciation: 'mee-nuut',
-        example_sentence: 'Dix minutes de retard.',
-        example_translation: 'Ten minutes late.',
-        category: 'time'
-      },
-      {
-        word: 'et demie',
-        translation: 'and a half (30 minutes)',
-        pronunciation: 'ay duh-MEE',
-        example_sentence: 'Il est deux heures et demie.',
-        example_translation: 'It is 2:30.',
-        category: 'time'
-      },
-      {
-        word: 'et quart',
-        translation: 'and a quarter (15 minutes)',
-        pronunciation: 'ay kar',
-        example_sentence: 'Il est trois heures et quart.',
-        example_translation: 'It is 3:15.',
-        category: 'time'
-      },
-      {
-        word: 'moins le quart',
-        translation: 'quarter to (45 minutes)',
-        pronunciation: 'mwahn luh kar',
-        example_sentence: 'Il est quatre heures moins le quart.',
-        example_translation: 'It is 3:45 (quarter to four).',
-        category: 'time'
-      },
-      {
-        word: 'midi',
-        translation: 'noon',
-        pronunciation: 'mee-DEE',
-        example_sentence: 'À midi, on déjeune.',
-        example_translation: 'At noon, we have lunch.',
-        category: 'time'
-      },
-      {
-        word: 'minuit',
-        translation: 'midnight',
-        pronunciation: 'mee-NWEE',
-        example_sentence: 'À minuit, nouvelle année!',
-        example_translation: 'At midnight, new year!',
-        category: 'time'
-      },
-
-      // Time periods
-      {
-        word: 'matin',
-        translation: 'morning',
-        pronunciation: 'ma-TAHN',
-        example_sentence: 'Le matin, je bois du café.',
-        example_translation: 'In the morning, I drink coffee.',
-        category: 'time-periods'
-      },
-      {
-        word: 'après-midi',
-        translation: 'afternoon',
-        pronunciation: 'a-pray mee-DEE',
-        example_sentence: 'Cet après-midi, rendez-vous.',
-        example_translation: 'This afternoon, appointment.',
-        category: 'time-periods'
-      },
-      {
-        word: 'soir',
-        translation: 'evening',
-        pronunciation: 'swahr',
-        example_sentence: 'Le soir, je regarde la télé.',
-        example_translation: 'In the evening, I watch TV.',
-        category: 'time-periods'
-      },
-      {
-        word: 'nuit',
-        translation: 'night',
-        pronunciation: 'nwee',
-        example_sentence: 'La nuit, je dors.',
-        example_translation: 'At night, I sleep.',
-        category: 'time-periods'
-      },
-
-      // Useful time expressions
-      {
-        word: 'aujourd\'hui',
-        translation: 'today',
-        pronunciation: 'oh-zhoor-DWEE',
-        example_sentence: 'Aujourd\'hui, il fait beau.',
-        example_translation: 'Today, the weather is nice.',
-        category: 'time-expressions'
-      },
-      {
-        word: 'demain',
-        translation: 'tomorrow',
-        pronunciation: 'duh-MAHN',
-        example_sentence: 'Demain, je travaille.',
-        example_translation: 'Tomorrow, I work.',
-        category: 'time-expressions'
-      },
-      {
-        word: 'hier',
-        translation: 'yesterday',
-        pronunciation: 'ee-AIR',
-        example_sentence: 'Hier, j\'étais fatigué.',
-        example_translation: 'Yesterday, I was tired.',
-        category: 'time-expressions'
-      },
-      {
-        word: 'maintenant',
-        translation: 'now',
-        pronunciation: 'man-tuh-NAHN',
-        example_sentence: 'Maintenant, je dois partir.',
-        example_translation: 'Now, I must leave.',
-        category: 'time-expressions'
-      },
-      {
-        word: 'rendez-vous',
-        translation: 'appointment/meeting',
-        pronunciation: 'rahn-day VOO',
-        example_sentence: 'J\'ai rendez-vous à trois heures.',
-        example_translation: 'I have an appointment at three o\'clock.',
-        category: 'appointments'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-4-1',
-        type: 'multiple_choice',
-        question: 'How do you say "15" in French?',
-        options: ['cinq-dix', 'quinze', 'dix-cinq', 'quatorze'],
-        correct_answer: 'quinze',
-        explanation: '"Quinze" is the French word for fifteen. Numbers 11-16 have unique forms.',
-        hints: ['This is one of the irregular teen numbers (13-16) that must be memorized']
-      },
-      {
-        id: 'ex-4-2',
-        type: 'fill_blank',
-        question: 'Complete: "Il est ______ heures." (It is 3 o\'clock)',
-        correct_answer: ['trois'],
-        explanation: 'For time, use the number + "heure(s)". "Il est trois heures" = "It is 3 o\'clock".',
-        hints: ['Use the French word for the number 3']
-      },
-      {
-        id: 'ex-4-3',
-        type: 'multiple_choice',
-        question: 'How do you ask "What time is it?" in French?',
-        options: ['Quelle heure il est?', 'Combien d\'heure?', 'Quelle heure est-il?', 'Quel temps est-il?'],
-        correct_answer: 'Quelle heure est-il?',
-        explanation: '"Quelle heure est-il?" is the correct way to ask "What time is it?" in French.',
-        hints: ['Remember the inversion: "est-il" not "il est" in questions']
-      },
-      {
-        id: 'ex-4-4',
-        type: 'translation',
-        question: 'Translate to French: "Thursday, October 17th"',
-        correct_answer: ['jeudi, le dix-sept octobre', 'jeudi le dix-sept octobre'],
-        explanation: 'In French: day + "le" + number + month. "Jeudi, le dix-sept octobre".',
-        hints: ['Days and months are lowercase, use "le" before the date number']
-      },
-      {
-        id: 'ex-4-5',
-        type: 'fill_blank',
-        question: 'Complete: "Il est deux heures _____." (It is 2:30)',
-        correct_answer: ['et demie'],
-        explanation: '"Et demie" means "and a half" for 30 minutes past the hour.',
-        hints: ['For 30 minutes, use "et demie" (and a half)']
-      },
-      {
-        id: 'ex-4-6',
-        type: 'multiple_choice',
-        question: 'Which day comes after "mardi"?',
-        options: ['lundi', 'mercredi', 'jeudi', 'vendredi'],
-        correct_answer: 'mercredi',
-        explanation: 'The French days of the week: lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche.',
-        hints: ['Think of the sequence: Monday, Tuesday, Wednesday...']
-      },
-      {
-        id: 'ex-4-7',
-        type: 'multiple_choice',
-        question: 'How do you say "I have an appointment at 3 PM" in French?',
-        options: ['J\'ai rendez-vous à trois après-midi', 'J\'ai rendez-vous à quinze heures', 'J\'ai meeting à trois heures', 'J\'ai rendez-vous trois heures'],
-        correct_answer: 'J\'ai rendez-vous à quinze heures',
-        explanation: '"J\'ai rendez-vous à quinze heures" - use 24-hour format (15h) for formal appointments.',
-        hints: ['In formal contexts, 3 PM = 15 heures (15:00)']
-      },
-      {
-        id: 'ex-4-8',
-        type: 'speaking',
-        question: 'Practice saying: "Aujourd\'hui nous sommes lundi, le cinq janvier. Il est quatorze heures trente."',
-        correct_answer: ['Aujourd\'hui nous sommes lundi, le cinq janvier. Il est quatorze heures trente.'],
-        explanation: 'Perfect! You\'ve combined date and time expressions correctly.',
-        audio_prompt: 'Aujourd\'hui nous sommes lundi, le cinq janvier. Il est quatorze heures trente.'
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 6,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-
-  {
-    id: 'beginner-5',
-    title: 'Les Articles et les Noms - Articles & Nouns',
-    subtitle: 'Master French articles, noun genders, and essential vocabulary categories',
-    level: 'beginner',
-    order: 5,
-    estimated_time: 26,
-    learning_objectives: [
-      'Understand and use definite articles: le, la, l\', les',
-      'Master indefinite articles: un, une, des',
-      'Recognize masculine and feminine noun patterns',
-      'Build vocabulary in key categories: family, food, objects',
-      'Use articles correctly in context and sentences',
-      'Apply gender rules and exceptions confidently'
-    ],
-    prerequisite_lessons: ['beginner-1', 'beginner-2', 'beginner-3', 'beginner-4'],
-    is_free: true,
-    difficulty: 3,
-    tags: ['articles', 'nouns', 'gender', 'vocabulary', 'grammar', 'masculine', 'feminine'],
-    
-    dialogue: {
-      title: 'Shopping for a Dinner Party',
-      context: 'Marie is preparing for a dinner party at her apartment and goes shopping with her friend Sophie. This dialogue demonstrates the extensive use of articles and nouns in a practical, everyday situation - perfect for learning how French speakers naturally use gender and articles.',
-      exchanges: [
-        {
-          speaker: 'Sophie',
-          french: 'Alors Marie, qu\'est-ce qu\'on achète pour le dîner?',
-          english: 'So Marie, what are we buying for the dinner?',
-          pronunciation: 'ah-LOOR ma-REE, kess kohn na-SHET poor luh dee-NAY?',
-          cultural_note: '"Le dîner" (dinner) is typically eaten later in France (7-9 PM) and is the main meal with guests.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'J\'ai une liste: du pain, de la viande, des légumes et du fromage.',
-          english: 'I have a list: bread, meat, vegetables and cheese.',
-          pronunciation: 'zhay UUN leest: duu PAHN, duh la vee-AHNND, day lay-GUUM ay duu fro-MAHZH.',
-          cultural_note: 'French shopping lists typically include fresh items bought daily: bread, meat, vegetables.'
-        },
-        {
-          speaker: 'Sophie',
-          french: 'Parfait! D\'abord, allons à la boulangerie pour le pain.',
-          english: 'Perfect! First, let\'s go to the bakery for the bread.',
-          pronunciation: 'par-FAY! da-BOOR, a-lohn ah la boo-lahn-zhuh-REE poor luh PAHN.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Oui, et après à la boucherie pour la viande. J\'adore le bœuf!',
-          english: 'Yes, and then to the butcher shop for the meat. I love beef!',
-          pronunciation: 'WEE, ay a-PRAY ah la boo-shuh-REE poor la vee-AHNND. zha-DOOR luh BUF!',
-          cultural_note: 'French neighborhoods typically have specialized shops: boulangerie, boucherie, fromagerie.'
-        },
-        {
-          speaker: 'Sophie',
-          french: 'Et les légumes? On va au marché ou au supermarché?',
-          english: 'And the vegetables? Are we going to the market or the supermarket?',
-          pronunciation: 'ay lay lay-GUUM? ohn vah oh mar-SHAY oo oh suu-per-mar-SHAY?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Au marché! Les tomates et les carottes sont plus fraîches.',
-          english: 'To the market! The tomatoes and carrots are fresher.',
-          pronunciation: 'oh mar-SHAY! lay to-MAHT ay lay ka-ROT sohn pluu FRESH.',
-          cultural_note: 'French markets (marchés) are very popular for fresh produce and happen 2-3 times per week.'
-        },
-        {
-          speaker: 'Sophie',
-          french: 'D\'accord. Et pour le dessert? Une tarte ou un gâteau?',
-          english: 'Agreed. And for dessert? A tart or a cake?',
-          pronunciation: 'da-KOOR. ay poor luh day-SAIR? UUN tart oo uhn gah-TOH?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Une tarte aux pommes! C\'est la spécialité de ma grand-mère.',
-          english: 'An apple tart! It\'s my grandmother\'s specialty.',
-          pronunciation: 'UUN tart oh POM! say la spay-see-a-lee-TAY duh ma grahn-MAIR.',
-          cultural_note: 'Apple tart (tarte aux pommes) is a classic French dessert, often made with family recipes.'
-        },
-        {
-          speaker: 'Sophie',
-          french: 'Excellent! Et le vin? Du vin rouge ou du vin blanc?',
-          english: 'Excellent! And the wine? Red wine or white wine?',
-          pronunciation: 'ex-say-LAHN! ay luh VAHN? duu vahn ROOZH oo duu vahn BLAHN?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Les deux! Un bordeaux rouge et un sancerre blanc.',
-          english: 'Both! A red Bordeaux and a white Sancerre.',
-          pronunciation: 'lay DUH! uhn bor-DOH ROOZH ay uhn sahn-SAIR BLAHN.',
-          cultural_note: 'Bordeaux and Sancerre are famous French wine regions - knowing wine regions shows cultural knowledge.'
-        }
-      ],
-      cultural_notes: [
-        'French shopping culture: daily fresh shopping vs. weekly supermarket trips',
-        'Specialized shops: boulangerie (bakery), boucherie (butcher), fromagerie (cheese shop)',
-        'French markets: social gathering places, typically 2-3 times per week',
-        'Dinner party etiquette: wine selection is important, often regional wines',
-        'Family recipes: "spécialité de grand-mère" shows importance of family cooking traditions',
-        'Fresh ingredients: French cooking emphasizes fresh, quality ingredients over convenience'
-      ],
-      vocabulary_highlights: ['le dîner', 'la viande', 'les légumes', 'un gâteau', 'une tarte', 'du vin']
-    },
-
-    grammar: {
-      topic: 'French Articles & Noun Gender System',
-      explanation: 'French nouns have gender (masculine or feminine) and number (singular or plural). Articles must agree with the noun they modify. This system is fundamental to French - every noun needs an article, and choosing the wrong gender sounds immediately incorrect to French speakers. Learning common patterns helps, but many need to be memorized.',
-      patterns: [
-        'Definite articles: le (masc. sing.), la (fem. sing.), l\' (before vowel), les (plural)',
-        'Indefinite articles: un (masc. sing.), une (fem. sing.), des (plural)',
-        'Partitive articles: du (masc.), de la (fem.), de l\' (vowel), des (plural)',
-        'Masculine patterns: -age, -ment, -eau, -ou (le fromage, le moment, le bureau)',
-        'Feminine patterns: -tion, -sion, -té, -ée (la nation, la maison, la beauté)',
-        'Contractions: du = de + le, des = de + les, au = à + le, aux = à + les'
-      ],
-      examples: [
-        {
-          french: 'Le pain et la viande sont délicieux.',
-          english: 'The bread and the meat are delicious.',
-          pronunciation: 'Luh pan ay la vyond son day-lee-SYUH',
-          highlight: 'Le... la'
-        },
-        {
-          french: 'J\'achète un gâteau et une tarte.',
-          english: 'I\'m buying a cake and a tart.',
-          pronunciation: 'Zha-shet un ga-TOE ay oon TART',
-          highlight: 'un... une'
-        },
-        {
-          french: 'Je voudrais du fromage et de la salade.',
-          english: 'I would like some cheese and some salad.',
-          pronunciation: 'Zhuh voo-dray doo fro-MAZH ay duh la sa-LAHD',
-          highlight: 'du... de la'
-        },
-        {
-          french: 'Les tomates et les carottes sont fraîches.',
-          english: 'The tomatoes and the carrots are fresh.',
-          pronunciation: 'Lay toe-mat ay lay ka-rot son FRESH',
-          highlight: 'Les... les'
-        },
-        {
-          french: 'Il y a des pommes et des oranges.',
-          english: 'There are apples and oranges.',
-          pronunciation: 'Eel ee ah day pom ay day-zo-RONZH',
-          highlight: 'des... des'
-        },
-        {
-          french: 'L\'eau et l\'orange sont sur la table.',
-          english: 'The water and the orange are on the table.',
-          pronunciation: 'Low ay lo-ronzh son soor la TAH-bluh',
-          highlight: 'L\'... l\''
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'Masculine singular', form: 'le / un', pronunciation: 'luh / uhn' },
-        { pronoun: 'Feminine singular', form: 'la / une', pronunciation: 'la / UUN' },
-        { pronoun: 'Before vowel/h', form: 'l\'', pronunciation: 'l\'' },
-        { pronoun: 'Plural (any gender)', form: 'les / des', pronunciation: 'lay / day' },
-        { pronoun: 'Partitive masc.', form: 'du (de + le)', pronunciation: 'duu' },
-        { pronoun: 'Partitive fem.', form: 'de la', pronunciation: 'duh la' }
-      ]
-    },
-
-    vocabulary: [
-      // Family members (mixed genders)
-      {
-        word: 'le père',
-        translation: 'father',
-        pronunciation: 'luh PAIR',
-        example_sentence: 'Mon père travaille à Paris.',
-        example_translation: 'My father works in Paris.',
-        category: 'family'
-      },
-      {
-        word: 'la mère',
-        translation: 'mother',
-        pronunciation: 'la MAIR',
-        example_sentence: 'Ma mère est professeure.',
-        example_translation: 'My mother is a teacher.',
-        category: 'family'
-      },
-      {
-        word: 'le frère',
-        translation: 'brother',
-        pronunciation: 'luh frair',
-        example_sentence: 'J\'ai un frère et une sœur.',
-        example_translation: 'I have a brother and a sister.',
-        category: 'family'
-      },
-      {
-        word: 'la sœur',
-        translation: 'sister',
-        pronunciation: 'la sur',
-        example_sentence: 'Ma sœur habite à Lyon.',
-        example_translation: 'My sister lives in Lyon.',
-        category: 'family'
-      },
-      {
-        word: 'le fils',
-        translation: 'son',
-        pronunciation: 'luh FEES',
-        example_sentence: 'Leur fils a dix ans.',
-        example_translation: 'Their son is ten years old.',
-        category: 'family'
-      },
-      {
-        word: 'la fille',
-        translation: 'daughter/girl',
-        pronunciation: 'la FEEL',
-        example_sentence: 'Leur fille est très intelligente.',
-        example_translation: 'Their daughter is very intelligent.',
-        category: 'family'
-      },
-      {
-        word: 'les parents',
-        translation: 'parents',
-        pronunciation: 'lay pa-RAHN',
-        example_sentence: 'Mes parents sont sympas.',
-        example_translation: 'My parents are nice.',
-        category: 'family'
-      },
-      {
-        word: 'les enfants',
-        translation: 'children',
-        pronunciation: 'lay zahn-FAHN',
-        example_sentence: 'Les enfants jouent dans le jardin.',
-        example_translation: 'The children are playing in the garden.',
-        category: 'family'
-      },
-
-      // Food items (showing gender patterns)
-      {
-        word: 'le pain',
-        translation: 'bread',
-        pronunciation: 'luh PAHN',
-        example_sentence: 'Le pain français est délicieux.',
-        example_translation: 'French bread is delicious.',
-        category: 'food'
-      },
-      {
-        word: 'la viande',
-        translation: 'meat',
-        pronunciation: 'la vee-AHNND',
-        example_sentence: 'La viande est tendre.',
-        example_translation: 'The meat is tender.',
-        category: 'food'
-      },
-      {
-        word: 'le fromage',
-        translation: 'cheese',
-        pronunciation: 'luh fro-MAHZH',
-        example_sentence: 'Le fromage français est célèbre.',
-        example_translation: 'French cheese is famous.',
-        category: 'food'
-      },
-      {
-        word: 'la salade',
-        translation: 'salad',
-        pronunciation: 'la sa-LAHD',
-        example_sentence: 'Je mange une salade verte.',
-        example_translation: 'I eat a green salad.',
-        category: 'food'
-      },
-      {
-        word: 'les légumes',
-        translation: 'vegetables',
-        pronunciation: 'lay lay-GUUM',
-        example_sentence: 'Les légumes sont bons pour la santé.',
-        example_translation: 'Vegetables are good for health.',
-        category: 'food'
-      },
-      {
-        word: 'les fruits',
-        translation: 'fruits',
-        pronunciation: 'lay FRWEE',
-        example_sentence: 'J\'adore les fruits de saison.',
-        example_translation: 'I love seasonal fruits.',
-        category: 'food'
-      },
-      {
-        word: 'le gâteau',
-        translation: 'cake',
-        pronunciation: 'luh gah-TOH',
-        example_sentence: 'Le gâteau au chocolat est délicieux.',
-        example_translation: 'The chocolate cake is delicious.',
-        category: 'food'
-      },
-      {
-        word: 'la tarte',
-        translation: 'tart/pie',
-        pronunciation: 'la TART',
-        example_sentence: 'Une tarte aux pommes, s\'il vous plaît.',
-        example_translation: 'An apple tart, please.',
-        category: 'food'
-      },
-      {
-        word: 'le vin',
-        translation: 'wine',
-        pronunciation: 'luh VAHN',
-        example_sentence: 'Ce vin rouge est excellent.',
-        example_translation: 'This red wine is excellent.',
-        category: 'food'
-      },
-      {
-        word: 'l\'eau',
-        translation: 'water',
-        pronunciation: 'LOH',
-        example_sentence: 'L\'eau est essentielle à la vie.',
-        example_translation: 'Water is essential to life.',
-        category: 'food'
-      },
-
-      // Shops and places
-      {
-        word: 'la boulangerie',
-        translation: 'bakery',
-        pronunciation: 'la boo-lahn-zhuh-REE',
-        example_sentence: 'Je vais à la boulangerie.',
-        example_translation: 'I\'m going to the bakery.',
-        category: 'shops'
-      },
-      {
-        word: 'la boucherie',
-        translation: 'butcher shop',
-        pronunciation: 'la boo-shuh-REE',
-        example_sentence: 'La boucherie ferme à midi.',
-        example_translation: 'The butcher shop closes at noon.',
-        category: 'shops'
-      },
-      {
-        word: 'le marché',
-        translation: 'market',
-        pronunciation: 'luh mar-SHAY',
-        example_sentence: 'Le marché est ouvert le matin.',
-        example_translation: 'The market is open in the morning.',
-        category: 'shops'
-      },
-      {
-        word: 'le supermarché',
-        translation: 'supermarket',
-        pronunciation: 'luh suu-per-mar-SHAY',
-        example_sentence: 'Je fais mes courses au supermarché.',
-        example_translation: 'I do my shopping at the supermarket.',
-        category: 'shops'
-      },
-      {
-        word: 'la pharmacie',
-        translation: 'pharmacy',
-        pronunciation: 'la far-ma-SEE',
-        example_sentence: 'La pharmacie est près d\'ici.',
-        example_translation: 'The pharmacy is near here.',
-        category: 'shops'
-      },
-
-      // Common objects (household)
-      {
-        word: 'la table',
-        translation: 'table',
-        pronunciation: 'la TAH-bluh',
-        example_sentence: 'La table est dans la cuisine.',
-        example_translation: 'The table is in the kitchen.',
-        category: 'objects'
-      },
-      {
-        word: 'la chaise',
-        translation: 'chair',
-        pronunciation: 'la SHAYZ',
-        example_sentence: 'Cette chaise est confortable.',
-        example_translation: 'This chair is comfortable.',
-        category: 'objects'
-      },
-      {
-        word: 'le lit',
-        translation: 'bed',
-        pronunciation: 'luh LEE',
-        example_sentence: 'Le lit est dans la chambre.',
-        example_translation: 'The bed is in the bedroom.',
-        category: 'objects'
-      },
-      {
-        word: 'la voiture',
-        translation: 'car',
-        pronunciation: 'la vwa-TUUR',
-        example_sentence: 'Ma voiture est bleue.',
-        example_translation: 'My car is blue.',
-        category: 'objects'
-      },
-      {
-        word: 'le téléphone',
-        translation: 'phone',
-        pronunciation: 'luh tay-lay-FON',
-        example_sentence: 'Le téléphone sonne.',
-        example_translation: 'The phone is ringing.',
-        category: 'objects'
-      },
-      {
-        word: 'l\'ordinateur',
-        translation: 'computer',
-        pronunciation: 'lor-dee-na-TUR',
-        example_sentence: 'L\'ordinateur est sur le bureau.',
-        example_translation: 'The computer is on the desk.',
-        category: 'objects'
-      },
-
-      // Articles (to reinforce learning)
-      {
-        word: 'le/la/les',
-        translation: 'the (definite articles)',
-        pronunciation: 'luh/la/lay',
-        example_sentence: 'Le chat, la chaise, les livres.',
-        example_translation: 'The cat, the chair, the books.',
-        category: 'articles'
-      },
-      {
-        word: 'un/une/des',
-        translation: 'a, an, some (indefinite articles)',
-        pronunciation: 'uhn/UUN/day',
-        example_sentence: 'Un homme, une femme, des enfants.',
-        example_translation: 'A man, a woman, some children.',
-        category: 'articles'
-      },
-      {
-        word: 'du/de la/des',
-        translation: 'some/of the (partitive articles)',
-        pronunciation: 'duu/duh la/day',
-        example_sentence: 'Du pain, de la salade, des fruits.',
-        example_translation: 'Some bread, some salad, some fruits.',
-        category: 'articles'
-      },
-
-      // Colors (adjectives that agree)
-      {
-        word: 'rouge',
-        translation: 'red',
-        pronunciation: 'ROOZH',
-        example_sentence: 'Le vin rouge et la pomme rouge.',
-        example_translation: 'The red wine and the red apple.',
-        category: 'colors'
-      },
-      {
-        word: 'blanc/blanche',
-        translation: 'white',
-        pronunciation: 'BLAHN/BLAHNSH',
-        example_sentence: 'Le vin blanc et la robe blanche.',
-        example_translation: 'The white wine and the white dress.',
-        category: 'colors'
-      },
-      {
-        word: 'noir/noire',
-        translation: 'black',
-        pronunciation: 'NWAHR/NWAHR',
-        example_sentence: 'Le chat noir et la voiture noire.',
-        example_translation: 'The black cat and the black car.',
-        category: 'colors'
-      },
-      {
-        word: 'bleu/bleue',
-        translation: 'blue',
-        pronunciation: 'BLUH/BLUH',
-        example_sentence: 'Le ciel bleu et la mer bleue.',
-        example_translation: 'The blue sky and the blue sea.',
-        category: 'colors'
-      },
-      {
-        word: 'vert/verte',
-        translation: 'green',
-        pronunciation: 'VAIR/VAIRT',
-        example_sentence: 'Le jardin vert et la salade verte.',
-        example_translation: 'The green garden and the green salad.',
-        category: 'colors'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-5-1',
-        type: 'multiple_choice',
-        question: 'Which article goes with "pain" (bread)?',
-        options: ['la pain', 'le pain', 'les pain', 'une pain'],
-        correct_answer: 'le pain',
-        explanation: '"Pain" (bread) is masculine, so it takes "le". Most food words ending in consonants tend to be masculine.',
-        hints: ['Bread (pain) is masculine in French - use the masculine definite article']
-      },
-      {
-        id: 'ex-5-2',
-        type: 'fill_blank',
-        question: 'Complete: "J\'achète _____ pommes." (I\'m buying some apples)',
-        correct_answer: ['des'],
-        explanation: 'For plural indefinite quantities, use "des" (some). "Des pommes" = "some apples".',
-        hints: ['For "some" + plural noun, use "des"']
-      },
-      {
-        id: 'ex-5-3',
-        type: 'multiple_choice',
-        question: 'Which is correct: "I want some cheese"?',
-        options: ['Je veux des fromage', 'Je veux le fromage', 'Je veux du fromage', 'Je veux une fromage'],
-        correct_answer: 'Je veux du fromage',
-        explanation: 'For uncountable items like cheese, use partitive "du" (masculine). "Du fromage" = "some cheese".',
-        hints: ['Cheese is uncountable and masculine - use the partitive article "du"']
-      },
-      {
-        id: 'ex-5-4',
-        type: 'translation',
-        question: 'Translate: "The mother and the father" (using definite articles)',
-        correct_answer: ['la mère et le père', 'Le père et la mère'],
-        explanation: '"La mère" (feminine) and "le père" (masculine) - family words follow gender patterns.',
-        hints: ['Mother is feminine (la), father is masculine (le)']
-      },
-      {
-        id: 'ex-5-5',
-        type: 'multiple_choice',
-        question: 'What article goes before "eau" (water)?',
-        options: ['la eau', 'le eau', 'l\'eau', 'une eau'],
-        correct_answer: 'l\'eau',
-        explanation: 'Before vowels or silent h, "la" and "le" become "l\'". "Eau" starts with a vowel, so "l\'eau".',
-        hints: ['Before vowels, use l\' instead of le or la']
-      },
-      {
-        id: 'ex-5-6',
-        type: 'fill_blank',
-        question: 'Complete: "Je voudrais _____ salade verte." (I would like a green salad)',
-        correct_answer: ['une'],
-        explanation: '"Salade" is feminine, so use "une". "Une salade verte" = "a green salad".',
-        hints: ['Salade is feminine - use the feminine indefinite article']
-      },
-      {
-        id: 'ex-5-7',
-        type: 'multiple_choice',
-        question: 'Which shows correct plural agreement?',
-        options: ['les voiture rouge', 'les voitures rouge', 'les voitures rouges', 'le voitures rouges'],
-        correct_answer: 'les voitures rouges',
-        explanation: 'Plural: "les voitures rouges" - both noun and adjective take plural forms.',
-        hints: ['In plural, both the noun and the adjective need to agree']
-      },
-      {
-        id: 'ex-5-8',
-        type: 'speaking',
-        question: 'Practice: "Je vais à la boulangerie acheter du pain et des croissants."',
-        correct_answer: ['Je vais à la boulangerie acheter du pain et des croissants.'],
-        explanation: 'Perfect! You\'ve used articles correctly: "la boulangerie", "du pain", "des croissants".',
-        audio_prompt: 'Je vais à la boulangerie acheter du pain et des croissants.'
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 6,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-  {
-    id: 'beginner-6',
-    title: 'Au Restaurant - Dining & Food Culture',
-    subtitle: 'Master restaurant conversations, food ordering, and French dining etiquette',
-    level: 'beginner',
-    order: 6,
-    estimated_time: 30,
-    learning_objectives: [
-      'Navigate complete restaurant experiences from arrival to payment',
-      'Order meals confidently using proper food vocabulary',
-      'Understand French menu structure and dining customs',
-      'Express food preferences, dietary restrictions, and complaints',
-      'Use polite restaurant expressions and etiquette',
-      'Handle payment and tipping appropriately in French culture'
-    ],
-    prerequisite_lessons: ['beginner-1', 'beginner-2', 'beginner-3', 'beginner-4', 'beginner-5'],
-    is_free: true,
-    difficulty: 3,
-    tags: ['restaurant', 'food', 'dining', 'menu', 'ordering', 'culture', 'etiquette'],
-    
-    dialogue: {
-      title: 'A Traditional French Dinner Experience',
-      context: 'Thomas takes Marie to "Le Petit Bistrot," a traditional French restaurant in the Marais district, to thank her for the interview. This dialogue shows a complete restaurant experience from reservation to dessert, demonstrating authentic French dining culture and essential restaurant vocabulary.',
-      exchanges: [
-        {
-          speaker: 'Hôtesse',
-          french: 'Bonsoir! Vous avez une réservation?',
-          english: 'Good evening! Do you have a reservation?',
-          pronunciation: 'bon-SWAHR! voo za-vay UUN ray-zair-va-see-OHN?',
-          cultural_note: 'In good French restaurants, reservations are almost always necessary, especially for dinner.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Oui, au nom de Martin, pour deux personnes à vingt heures.',
-          english: 'Yes, under the name Martin, for two people at 8 PM.',
-          pronunciation: 'WEE, oh nohn duh mar-TAHN, poor duh pair-SON ah vahn UR.',
-          cultural_note: 'French dinner typically starts at 8 PM or later - much later than in many countries.'
-        },
-        {
-          speaker: 'Hôtesse',
-          french: 'Parfait! Suivez-moi, s\'il vous plaît. Voici votre table.',
-          english: 'Perfect! Follow me, please. Here is your table.',
-          pronunciation: 'par-FAY! swee-vay MWAH, seel voo PLAY. vwah-SEE vo-truh TAH-bluh.'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Bonsoir! Puis-je vous apporter quelque chose à boire?',
-          english: 'Good evening! May I bring you something to drink?',
-          pronunciation: 'bon-SWAHR! pwee zhuh voo za-por-TAY kel-kuh SHOHZ ah BWAHR?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Qu\'est-ce que vous avez comme vin rouge?',
-          english: 'What red wine do you have?',
-          pronunciation: 'kess kuh voo za-vay kom vahn ROOZH?',
-          cultural_note: 'Asking "Qu\'est-ce que vous avez comme..." is a polite way to inquire about options.'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Nous avons un excellent bordeaux et un côtes du rhône.',
-          english: 'We have an excellent Bordeaux and a Côtes du Rhône.',
-          pronunciation: 'noo za-vohn zuhn ex-say-LAHN bor-DOH ay uhn koht duu ROHN.',
-          cultural_note: 'French waiters are often knowledgeable about wine and can make recommendations.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Le bordeaux, s\'il vous plaît. Et pour commencer, la carte?',
-          english: 'The Bordeaux, please. And to start, the menu?',
-          pronunciation: 'luh bor-DOH, seel voo PLAY. ay poor ko-mahn-SAY, la KART?'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Bien sûr! Voici la carte. Avez-vous des allergies alimentaires?',
-          english: 'Of course! Here\'s the menu. Do you have any food allergies?',
-          pronunciation: 'bee-ahn SOOR! vwah-SEE la KART. a-vay voo day za-lair-ZHEE a-lee-mahn-TAIR?',
-          cultural_note: 'French restaurants increasingly ask about allergies due to health regulations.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Non, pas d\'allergies. Qu\'est-ce que vous recommandez?',
-          english: 'No, no allergies. What do you recommend?',
-          pronunciation: 'nohn, pah da-lair-ZHEE. kess kuh voo ruh-ko-mahn-DAY?'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Comme entrée, la soupe à l\'oignon est délicieuse. Et le coq au vin est notre spécialité.',
-          english: 'For starters, the onion soup is delicious. And the coq au vin is our specialty.',
-          pronunciation: 'kom ahn-TRAY, la soop ah lo-nyohn ay day-lee-see-UHZ. ay luh kok oh vahn ay no-truh spay-see-a-lee-TAY.',
-          cultural_note: 'French meals traditionally have multiple courses: entrée (starter), plat (main), dessert.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Parfait! Alors, deux soupes à l\'oignon et deux coq au vin.',
-          english: 'Perfect! So, two onion soups and two coq au vin.',
-          pronunciation: 'par-FAY! ah-LOOR, duh soop ah lo-nyohn ay duh kok oh vahn.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Et comme accompagnement? Des légumes ou des pommes de terre?',
-          english: 'And as a side dish? Vegetables or potatoes?',
-          pronunciation: 'ay kom a-kom-pan-yuh-MAHN? day lay-GUUM oo day pom duh TAIR?'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Avec le coq au vin, je recommande les pommes de terre sautées.',
-          english: 'With the coq au vin, I recommend the sautéed potatoes.',
-          pronunciation: 'a-vek luh kok oh vahn, zhuh ruh-ko-mahn lay pom duh tair soh-TAY.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Excellent! Et plus tard, nous prendrons le dessert.',
-          english: 'Excellent! And later, we\'ll have dessert.',
-          pronunciation: 'ex-say-LAHN! ay pluu tar, noo prahn-drohn luh day-SAIR.',
-          cultural_note: 'In France, dessert is ordered after the main course, not with the meal.'
-        },
-        {
-          speaker: 'Serveur',
-          french: 'Très bien! Je reviens avec vos entrées dans quelques minutes.',
-          english: 'Very good! I\'ll be back with your starters in a few minutes.',
-          pronunciation: 'tray bee-AHN! zhuh ruh-vee-ahn a-vek vo an-TRAY dahn kel-kuh mee-NUUT.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'L\'addition, s\'il vous plaît. Est-ce que le service est compris?',
-          english: 'The bill, please. Is service included?',
-          pronunciation: 'la-dee-see-OHN, seel voo PLAY. ess kuh luh ser-VEES ay kom-PREE?',
-          cultural_note: 'Service is usually included in French restaurants (service compris), but small tips are appreciated.'
-        }
-      ],
-      cultural_notes: [
-        'French dining schedule: lunch 12:00-14:00, dinner 19:30-22:00, much later than many countries',
-        'Reservation culture: always call ahead for dinner, especially in good restaurants',
-        'Menu structure: entrée (starter), plat principal (main course), fromage (cheese), dessert',
-        'Wine culture: French people often order wine with dinner, waiters are knowledgeable',
-        'Service compris: tip is included, but rounding up 5-10% is polite',
-        'Dining pace: French meals are leisurely, rushing is considered rude'
-      ],
-      vocabulary_highlights: ['réservation', 'entrée', 'plat principal', 'recommandez', 'spécialité', 'addition']
-    },
-
-    grammar: {
-      topic: 'Restaurant Language: Polite Requests, Recommendations & Food Expressions',
-      explanation: 'Restaurant French uses specific polite forms and expressions. Understanding conditional mood ("je voudrais", "pourriez-vous") and food-related expressions is essential. French restaurant etiquette requires more formal language than casual conversation, and certain phrases are expected in dining contexts.',
-      patterns: [
-        'Polite requests: "Je voudrais..." (I would like), "Pourriez-vous..." (Could you)',
-        'Asking for recommendations: "Qu\'est-ce que vous recommandez?" (What do you recommend?)',
-        'Expressing preferences: "J\'aime / Je n\'aime pas..." (I like / I don\'t like)',
-        'Ordering: "Je prends..." (I\'ll take), "Pour moi..." (For me)',
-        'Asking about ingredients: "Qu\'est-ce qu\'il y a dans...?" (What\'s in...?)',
-        'Payment: "L\'addition, s\'il vous plaît" (The bill, please)'
-      ],
-      examples: [
-        {
-          french: 'Je voudrais le menu, s\'il vous plaît.',
-          english: 'I would like the menu, please.',
-          pronunciation: 'Zhuh voo-dray luh muh-NOO, seel voo PLEH',
-          highlight: 'voudrais'
-        },
-        {
-          french: 'Qu\'est-ce que vous recommandez comme dessert?',
-          english: 'What do you recommend for dessert?',
-          pronunciation: 'Kess-kuh voo ruh-ko-mon-day kom day-SAIR?',
-          highlight: 'recommandez'
-        },
-        {
-          french: 'Je suis allergique aux fruits de mer.',
-          english: 'I am allergic to seafood.',
-          pronunciation: 'Zhuh sweez ah-lair-ZHEEK oh frwee duh MAIR',
-          highlight: 'allergique aux'
-        },
-        {
-          french: 'L\'addition, s\'il vous plaît.',
-          english: 'The bill, please.',
-          pronunciation: 'Lah-dee-SYON, seel voo PLEH',
-          highlight: 'L\'addition'
-        },
-        {
-          french: 'Est-ce que le service est compris?',
-          english: 'Is service included?',
-          pronunciation: 'Ess-kuh luh sair-veess eh com-PREE?',
-          highlight: 'service est compris'
-        },
-        {
-          french: 'C\'est délicieux! Mes compliments au chef.',
-          english: 'It\'s delicious! My compliments to the chef.',
-          pronunciation: 'Say day-lee-SYUH! May com-plee-MON oh SHEF',
-          highlight: 'délicieux... compliments'
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'Polite request', form: 'Je voudrais + noun/infinitive', pronunciation: 'zhuh voo-DRAY' },
-        { pronoun: 'Recommendation', form: 'Qu\'est-ce que vous recommandez?', pronunciation: 'kess kuh voo ruh-ko-mahn-DAY?' },
-        { pronoun: 'Ordering', form: 'Je prends + food item', pronunciation: 'zhuh prahn' },
-        { pronoun: 'Preference', form: 'J\'aime / Je préfère', pronunciation: 'zhay-m / zhuh pray-FAIR' },
-        { pronoun: 'Allergy', form: 'Je suis allergique à/aux', pronunciation: 'zhuh swee za-lair-ZHEEK ah/oh' },
-        { pronoun: 'Payment', form: 'L\'addition, s\'il vous plaît', pronunciation: 'la-dee-see-OHN seel voo PLAY' }
-      ]
-    },
-
-    vocabulary: [
-      // Restaurant vocabulary
-      {
-        word: 'le restaurant',
-        translation: 'restaurant',
-        pronunciation: 'luh res-toh-RAHN',
-        example_sentence: 'Ce restaurant est excellent.',
-        example_translation: 'This restaurant is excellent.',
-        category: 'restaurant'
-      },
-      {
-        word: 'le bistrot',
-        translation: 'bistro/small restaurant',
-        pronunciation: 'luh bees-TROH',
-        example_sentence: 'J\'aime les petits bistrots parisiens.',
-        example_translation: 'I like small Parisian bistros.',
-        category: 'restaurant'
-      },
-      {
-        word: 'la réservation',
-        translation: 'reservation',
-        pronunciation: 'la ray-zair-va-see-OHN',
-        example_sentence: 'J\'ai une réservation à vingt heures.',
-        example_translation: 'I have a reservation at 8 PM.',
-        category: 'restaurant'
-      },
-      {
-        word: 'la table',
-        translation: 'table',
-        pronunciation: 'la TAH-bluh',
-        example_sentence: 'Cette table près de la fenêtre est libre?',
-        example_translation: 'Is this table by the window free?',
-        category: 'restaurant'
-      },
-      {
-        word: 'le serveur',
-        translation: 'waiter',
-        pronunciation: 'luh ser-VUR',
-        example_sentence: 'Le serveur est très aimable.',
-        example_translation: 'The waiter is very kind.',
-        category: 'restaurant'
-      },
-      {
-        word: 'la serveuse',
-        translation: 'waitress',
-        pronunciation: 'la ser-VUHZ',
-        example_sentence: 'La serveuse connaît bien la carte.',
-        example_translation: 'The waitress knows the menu well.',
-        category: 'restaurant'
-      },
-
-      // Menu sections
-      {
-        word: 'la carte',
-        translation: 'menu',
-        pronunciation: 'la KART',
-        example_sentence: 'Pourriez-vous m\'apporter la carte?',
-        example_translation: 'Could you bring me the menu?',
-        category: 'menu'
-      },
-      {
-        word: 'l\'entrée',
-        translation: 'starter/appetizer',
-        pronunciation: 'lahn-TRAY',
-        example_sentence: 'Comme entrée, je prends la salade.',
-        example_translation: 'For starter, I\'ll have the salad.',
-        category: 'menu'
-      },
-      {
-        word: 'le plat principal',
-        translation: 'main course',
-        pronunciation: 'luh plah pran-see-PAL',
-        example_sentence: 'Le plat principal arrive bientôt.',
-        example_translation: 'The main course is coming soon.',
-        category: 'menu'
-      },
-      {
-        word: 'le dessert',
-        translation: 'dessert',
-        pronunciation: 'luh day-SAIR',
-        example_sentence: 'Quel dessert me conseillez-vous?',
-        example_translation: 'What dessert do you advise me?',
-        category: 'menu'
-      },
-      {
-        word: 'la spécialité',
-        translation: 'specialty',
-        pronunciation: 'la spay-see-a-lee-TAY',
-        example_sentence: 'Quelle est la spécialité de la maison?',
-        example_translation: 'What is the house specialty?',
-        category: 'menu'
-      },
-      {
-        word: 'le menu du jour',
-        translation: 'daily menu',
-        pronunciation: 'luh muh-NUU duu ZHOOR',
-        example_sentence: 'Le menu du jour est à vingt euros.',
-        example_translation: 'The daily menu is twenty euros.',
-        category: 'menu'
-      },
-
-      // Food items - French specialties
-      {
-        word: 'la soupe à l\'oignon',
-        translation: 'onion soup',
-        pronunciation: 'la soop ah lo-NYOHN',
-        example_sentence: 'La soupe à l\'oignon est une spécialité française.',
-        example_translation: 'Onion soup is a French specialty.',
-        category: 'food'
-      },
-      {
-        word: 'le coq au vin',
-        translation: 'chicken cooked in wine',
-        pronunciation: 'luh kok oh VAHN',
-        example_sentence: 'Le coq au vin est délicieux ici.',
-        example_translation: 'The coq au vin is delicious here.',
-        category: 'food'
-      },
-      {
-        word: 'le bœuf bourguignon',
-        translation: 'beef stew in red wine',
-        pronunciation: 'luh buf boor-gee-NYOHN',
-        example_sentence: 'J\'adore le bœuf bourguignon de ma grand-mère.',
-        example_translation: 'I love my grandmother\'s beef bourguignon.',
-        category: 'food'
-      },
-      {
-        word: 'les escargots',
-        translation: 'snails',
-        pronunciation: 'lay zes-kar-GOH',
-        example_sentence: 'Les escargots sont préparés avec de l\'ail.',
-        example_translation: 'The snails are prepared with garlic.',
-        category: 'food'
-      },
-      {
-        word: 'le steak-frites',
-        translation: 'steak and fries',
-        pronunciation: 'luh steyk FREET',
-        example_sentence: 'Un steak-frites bien cuit, s\'il vous plaît.',
-        example_translation: 'A well-done steak and fries, please.',
-        category: 'food'
-      },
-      {
-        word: 'la ratatouille',
-        translation: 'vegetable stew from Provence',
-        pronunciation: 'la ra-ta-TOO-yuh',
-        example_sentence: 'La ratatouille est parfaite en été.',
-        example_translation: 'Ratatouille is perfect in summer.',
-        category: 'food'
-      },
-
-      // Drinks
-      {
-        word: 'l\'apéritif',
-        translation: 'aperitif/pre-dinner drink',
-        pronunciation: 'la-pay-ree-TEEF',
-        example_sentence: 'Prenons un apéritif avant le dîner.',
-        example_translation: 'Let\'s have an aperitif before dinner.',
-        category: 'drinks'
-      },
-      {
-        word: 'le vin rouge',
-        translation: 'red wine',
-        pronunciation: 'luh vahn ROOZH',
-        example_sentence: 'Ce vin rouge se marie bien avec la viande.',
-        example_translation: 'This red wine goes well with meat.',
-        category: 'drinks'
-      },
-      {
-        word: 'le vin blanc',
-        translation: 'white wine',
-        pronunciation: 'luh vahn BLAHN',
-        example_sentence: 'Le vin blanc accompagne le poisson.',
-        example_translation: 'White wine goes with fish.',
-        category: 'drinks'
-      },
-      {
-        word: 'l\'eau gazeuse',
-        translation: 'sparkling water',
-        pronunciation: 'loh ga-ZUHZ',
-        example_sentence: 'Une bouteille d\'eau gazeuse, s\'il vous plaît.',
-        example_translation: 'A bottle of sparkling water, please.',
-        category: 'drinks'
-      },
-      {
-        word: 'l\'eau plate',
-        translation: 'still water',
-        pronunciation: 'loh PLAHT',
-        example_sentence: 'Je préfère l\'eau plate à l\'eau gazeuse.',
-        example_translation: 'I prefer still water to sparkling water.',
-        category: 'drinks'
-      },
-
-      // Cooking methods & descriptions
-      {
-        word: 'saignant',
-        translation: 'rare (meat)',
-        pronunciation: 'say-NYAHN',
-        example_sentence: 'Je voudrais mon steak saignant.',
-        example_translation: 'I would like my steak rare.',
-        category: 'cooking'
-      },
-      {
-        word: 'à point',
-        translation: 'medium (meat)',
-        pronunciation: 'ah PWAHN',
-        example_sentence: 'Mon mari préfère son steak à point.',
-        example_translation: 'My husband prefers his steak medium.',
-        category: 'cooking'
-      },
-      {
-        word: 'bien cuit',
-        translation: 'well-done (meat)',
-        pronunciation: 'bee-ahn KWEE',
-        example_sentence: 'Elle commande toujours bien cuit.',
-        example_translation: 'She always orders well-done.',
-        category: 'cooking'
-      },
-      {
-        word: 'grillé',
-        translation: 'grilled',
-        pronunciation: 'gree-YAY',
-        example_sentence: 'Le poisson grillé est excellent.',
-        example_translation: 'The grilled fish is excellent.',
-        category: 'cooking'
-      },
-      {
-        word: 'sauté',
-        translation: 'sautéed',
-        pronunciation: 'soh-TAY',
-        example_sentence: 'Les légumes sautés sont délicieux.',
-        example_translation: 'The sautéed vegetables are delicious.',
-        category: 'cooking'
-      },
-
-      // Restaurant expressions
-      {
-        word: 'recommander',
-        translation: 'to recommend',
-        pronunciation: 'ruh-ko-mahn-DAY',
-        example_sentence: 'Que me recommandez-vous?',
-        example_translation: 'What do you recommend to me?',
-        category: 'expressions'
-      },
-      {
-        word: 'commander',
-        translation: 'to order',
-        pronunciation: 'ko-mahn-DAY',
-        example_sentence: 'Nous allons commander maintenant.',
-        example_translation: 'We are going to order now.',
-        category: 'expressions'
-      },
-      {
-        word: 'l\'addition',
-        translation: 'the bill/check',
-        pronunciation: 'la-dee-see-OHN',
-        example_sentence: 'L\'addition, s\'il vous plaît.',
-        example_translation: 'The bill, please.',
-        category: 'expressions'
-      },
-      {
-        word: 'le pourboire',
-        translation: 'tip',
-        pronunciation: 'luh poor-BWAHR',
-        example_sentence: 'Le pourboire n\'est pas obligatoire.',
-        example_translation: 'The tip is not mandatory.',
-        category: 'expressions'
-      },
-      {
-        word: 'délicieux',
-        translation: 'delicious',
-        pronunciation: 'day-lee-see-UH',
-        example_sentence: 'Ce plat est vraiment délicieux!',
-        example_translation: 'This dish is really delicious!',
-        category: 'expressions'
-      },
-
-      // Allergies and dietary restrictions
-      {
-        word: 'l\'allergie',
-        translation: 'allergy',
-        pronunciation: 'la-lair-ZHEE',
-        example_sentence: 'J\'ai une allergie aux noix.',
-        example_translation: 'I have an allergy to nuts.',
-        category: 'dietary'
-      },
-      {
-        word: 'végétarien',
-        translation: 'vegetarian',
-        pronunciation: 'vay-zhay-ta-ree-AHN',
-        example_sentence: 'Je suis végétarien.',
-        example_translation: 'I am vegetarian.',
-        category: 'dietary'
-      },
-      {
-        word: 'sans gluten',
-        translation: 'gluten-free',
-        pronunciation: 'sahn gluu-TAHN',
-        example_sentence: 'Avez-vous des plats sans gluten?',
-        example_translation: 'Do you have gluten-free dishes?',
-        category: 'dietary'
-      },
-
-      // Side dishes
-      {
-        word: 'les pommes de terre',
-        translation: 'potatoes',
-        pronunciation: 'lay pom duh TAIR',
-        example_sentence: 'Les pommes de terre sautées sont parfaites.',
-        example_translation: 'The sautéed potatoes are perfect.',
-        category: 'sides'
-      },
-      {
-        word: 'les légumes',
-        translation: 'vegetables',
-        pronunciation: 'lay lay-GUUM',
-        example_sentence: 'Je voudrais des légumes de saison.',
-        example_translation: 'I would like seasonal vegetables.',
-        category: 'sides'
-      },
-      {
-        word: 'la salade verte',
-        translation: 'green salad',
-        pronunciation: 'la sa-LAHD VAIRT',
-        example_sentence: 'Une salade verte avec la vinaigrette.',
-        example_translation: 'A green salad with vinaigrette.',
-        category: 'sides'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-6-1',
-        type: 'multiple_choice',
-        question: 'How do you politely ask for the menu in a French restaurant?',
-        options: ['Donnez-moi la carte!', 'Je veux la carte.', 'La carte, s\'il vous plaît.', 'Où est la carte?'],
-        correct_answer: 'La carte, s\'il vous plaît.',
-        explanation: '"La carte, s\'il vous plaît" is the polite way to ask for the menu in a French restaurant.',
-        hints: ['Always use "s\'il vous plaît" for politeness in restaurants']
-      },
-      {
-        id: 'ex-6-2',
-        type: 'fill_blank',
-        question: 'Complete the polite order: "Je _______ le coq au vin, s\'il vous plaît."',
-        correct_answer: ['voudrais'],
-        explanation: '"Je voudrais" (I would like) is the polite conditional form for ordering in restaurants.',
-        hints: ['Use the conditional form "voudrais" for polite requests']
-      },
-      {
-        id: 'ex-6-3',
-        type: 'multiple_choice',
-        question: 'What does "Qu\'est-ce que vous recommandez?" mean?',
-        options: ['What do you want?', 'What do you recommend?', 'What do you have?', 'What do you prefer?'],
-        correct_answer: 'What do you recommend?',
-        explanation: '"Qu\'est-ce que vous recommandez?" means "What do you recommend?" - essential for getting suggestions.',
-        hints: ['This is how you ask for the waiter\'s recommendation']
-      },
-      {
-        id: 'ex-6-4',
-        type: 'translation',
-        question: 'How do you say "The bill, please" in French?',
-        correct_answer: ['L\'addition, s\'il vous plaît', 'L\'addition, s\'il vous plaît.'],
-        explanation: '"L\'addition, s\'il vous plaît" is how you ask for the bill in a French restaurant.',
-        hints: ['"Addition" means bill/check in restaurant context']
-      },
-      {
-        id: 'ex-6-5',
-        type: 'multiple_choice',
-        question: 'If you want your steak cooked medium, you say:',
-        options: ['bien cuit', 'saignant', 'à point', 'grillé'],
-        correct_answer: 'à point',
-        explanation: '"À point" means medium. "Saignant" = rare, "bien cuit" = well-done.',
-        hints: ['Think of the cooking levels: rare, medium, well-done']
-      },
-      {
-        id: 'ex-6-6',
-        type: 'fill_blank',
-        question: 'Complete: "Je suis _______ aux fruits de mer." (I am allergic to seafood)',
-        correct_answer: ['allergique'],
-        explanation: '"Je suis allergique à/aux..." is how you express food allergies in French.',
-        hints: ['This is how you express food allergies safely']
-      },
-      {
-        id: 'ex-6-7',
-        type: 'multiple_choice',
-        question: 'Which is a typical French restaurant appetizer?',
-        options: ['le coq au vin', 'la soupe à l\'oignon', 'le bœuf bourguignon', 'les pommes de terre'],
-        correct_answer: 'la soupe à l\'oignon',
-        explanation: 'Onion soup is a classic French appetizer. The others are main courses or sides.',
-        hints: ['Think about what would be done as a starter in France']
-      },
-      {
-        id: 'ex-6-8',
-        type: 'speaking',
-        question: 'Practice a complete restaurant order: "Je voudrais la soupe à l\'oignon en entrée, et le coq au vin comme plat principal, s\'il vous plaît."',
-        correct_answer: ['Je voudrais la soupe à l\'oignon en entrée, et le coq au vin comme plat principal, s\'il vous plaît.'],
-        explanation: 'Perfect! You\'ve ordered appetizer and main course using proper restaurant vocabulary.',
-        audio_prompt: 'Je voudrais la soupe à l\'oignon en entrée, et le coq au vin comme plat principal, s\'il vous plaît.'
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 6,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-
-  // Lesson 7: Les Directions - Getting Around
-  {
-    id: 'beginner-7',
-    title: 'Les Directions - Getting Around',
-    subtitle: 'Navigate French cities with confidence: directions, transportation, and city vocabulary',
-    level: 'beginner',
-    order: 7,
-    estimated_time: 28,
-    learning_objectives: [
-      'Ask for and give directions clearly in French',
-      'Use public transportation confidently (métro, bus, train)',
-      'Navigate French cities with essential location vocabulary',
-      'Understand French address system and landmarks',
-      'Handle transportation tickets, schedules, and travel issues',
-      'Master prepositions of place and directional expressions'
-    ],
-    prerequisite_lessons: ['beginner-1', 'beginner-2', 'beginner-3', 'beginner-4', 'beginner-5', 'beginner-6'],
-    is_free: true,
-    difficulty: 3,
-    tags: ['directions', 'transportation', 'city', 'métro', 'navigation', 'prepositions', 'travel'],
-    
-    dialogue: {
-      title: 'Lost Tourist Finds Help in Paris',
-      context: 'Emma, an American tourist, is lost in Paris trying to find the Louvre Museum. She asks Marie (from our previous lessons) for directions. This dialogue demonstrates how French people typically give directions, including landmarks, public transportation options, and helpful cultural tips for navigating Paris.',
-      exchanges: [
-        {
-          speaker: 'Emma',
-          french: 'Excusez-moi, madame. Je suis perdue. Où est le Louvre, s\'il vous plaît?',
-          english: 'Excuse me, ma\'am. I\'m lost. Where is the Louvre, please?',
-          pronunciation: 'ex-koo-zay MWAH, ma-DAHM. zhuh swee pair-DUU. oo ay luh LOO-vruh, seel voo PLAY?',
-          cultural_note: 'Always start with "Excusez-moi" when asking strangers for help - it\'s more polite than "Pardon".'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Ah, le musée du Louvre! Vous êtes à pied ou vous prenez le métro?',
-          english: 'Ah, the Louvre Museum! Are you walking or taking the metro?',
-          pronunciation: 'ah, luh muu-ZAY duu LOO-vruh! voo zayt ah pee-AY oo voo pruh-nay luh may-TROH?',
-          cultural_note: 'French people often ask about your preferred transportation method before giving directions.'
-        },
-        {
-          speaker: 'Emma',
-          french: 'Je préfère marcher si ce n\'est pas trop loin.',
-          english: 'I prefer to walk if it\'s not too far.',
-          pronunciation: 'zhuh pray-FAIR mar-SHAY see suh nay pah troh LWAHN.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'C\'est à quinze minutes à pied. Allez tout droit jusqu\'à la Seine.',
-          english: 'It\'s a 15-minute walk. Go straight ahead until you reach the Seine.',
-          pronunciation: 'say tah kanz mee-NUUT ah pee-AY. a-lay too DRWAH zhus-KAH lah SAYN.',
-          cultural_note: 'French directions often use the Seine river as a major landmark in Paris.'
-        },
-        {
-          speaker: 'Emma',
-          french: 'Tout droit... Et après la Seine?',
-          english: 'Straight ahead... And after the Seine?',
-          pronunciation: 'too DRWAH... ay a-PRAY la SAYN?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Tournez à droite sur le quai, puis traversez le pont du Carrousel.',
-          english: 'Turn right on the quay, then cross the Carrousel bridge.',
-          pronunciation: 'toor-nay ah DRWAHT suur luh KAY, pwee tra-vair-say luh pohn duu ka-roo-SELL.',
-          cultural_note: 'Paris quays (les quais) are the roads along the Seine - important navigation reference points.'
-        },
-        {
-          speaker: 'Emma',
-          french: 'À droite sur le quai, pont du Carrousel... Et ensuite?',
-          english: 'Right on the quay, Carrousel bridge... And then?',
-          pronunciation: 'ah DRWAHT suur luh KAY, pohn duu ka-roo-SELL... ay ahn-SWEET?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Après le pont, vous voyez une grande pyramide de verre. C\'est l\'entrée du Louvre!',
-          english: 'After the bridge, you\'ll see a large glass pyramid. That\'s the Louvre entrance!',
-          pronunciation: 'a-PRAY luh pohn, voo voy-YAY UUN grahndd pee-ra-MEED duh VAIR. say lahn-TRAY duu LOO-vruh!',
-          cultural_note: 'The glass pyramid is the famous modern entrance to the Louvre, very recognizable landmark.'
-        },
-        {
-          speaker: 'Emma',
-          french: 'Parfait! Et si je me perds, quelle est la station de métro la plus proche?',
-          english: 'Perfect! And if I get lost, what\'s the nearest metro station?',
-          pronunciation: 'par-FAY! ay see zhuh muh PAIR, kell ay la sta-see-OHN duh may-TROH la pluu PROSH?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'La station "Palais-Royal - Musée du Louvre" sur les lignes 1 et 7.',
-          english: 'The "Palais-Royal - Musée du Louvre" station on lines 1 and 7.',
-          pronunciation: 'la sta-see-OHN pa-LAY roy-YAL muu-ZAY duu LOO-vruh suur lay LEE-nyuh uhn ay SET.'
-        },
-        {
-          speaker: 'Emma',
-          french: 'Vous êtes très aimable. Combien coûte un ticket de métro?',
-          english: 'You\'re very kind. How much does a metro ticket cost?',
-          pronunciation: 'voo zayt tray zay-MAH-bluh. kohn-bee-AHN koot uhn tee-KAY duh may-TROH?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Un ticket coûte deux euros dix, mais je conseille un carnet de dix tickets.',
-          english: 'A ticket costs two euros ten, but I recommend a book of ten tickets.',
-          pronunciation: 'uhn tee-KAY koot duh uh-ROH DEES, may zhuh kohn-SAY uhn kar-NAY duh dees tee-KAY.',
-          cultural_note: 'A "carnet" (book of 10 tickets) is much more economical than buying individual tickets.'
-        },
-        {
-          speaker: 'Emma',
-          french: 'Merci beaucoup pour votre aide! Bonne journée!',
-          english: 'Thank you very much for your help! Have a good day!',
-          pronunciation: 'mer-SEE bo-KOO poor vo-truh AYD! bun zhoor-NAY!'
-        },
-        {
-          speaker: 'Marie',
-          french: 'De rien! Bon voyage et profitez bien de votre visite!',
-          english: 'You\'re welcome! Have a good trip and enjoy your visit!',
-          pronunciation: 'duh ree-AHN! bohn voy-YAHZH ay pro-fee-tay bee-AHN duh vo-truh vee-ZEET!'
-        }
-      ],
-      cultural_notes: [
-        'French people are generally helpful with directions, especially to tourists who make an effort to speak French',
-        'Paris métro: color-coded lines, stations named after landmarks/streets, efficient but can be crowded',
-        'Walking culture: Paris is very walkable, French people often prefer walking to short metro rides',
-        'Landmarks: Parisians use famous monuments, rivers, and bridges as reference points for directions',
-        'Politeness: Always thank people profusely for help - "Merci beaucoup" is expected',
-        'Metro etiquette: validate tickets, offer seats to elderly/pregnant, move to center of car'
-      ],
-      vocabulary_highlights: ['perdue', 'tout droit', 'tournez', 'traversez', 'station', 'ligne']
-    },
-
-    grammar: {
-      topic: 'Directional Expressions & Prepositions of Place',
-      explanation: 'French uses specific verbs and prepositions for giving directions and describing locations. Movement verbs (aller, tourner, traverser) combined with prepositions (à, de, sur, vers) create precise directional instructions. Understanding these patterns is essential for navigation and spatial relationships.',
-      patterns: [
-        'Basic directions: "tout droit" (straight), "à droite/gauche" (right/left)',
-        'Movement verbs: "allez" (go), "tournez" (turn), "traversez" (cross), "continuez" (continue)',
-        'Location prepositions: "à côté de" (next to), "en face de" (across from), "près de" (near)',
-        'Distance expressions: "à ... minutes" (... minutes away), "loin/près" (far/near)',
-        'Transportation: "en métro/bus/taxi" (by metro/bus/taxi), "à pied" (on foot)',
-        'Asking for help: "Où est...?" (Where is...?), "Comment aller à...?" (How to get to...?)'
-      ],
-      examples: [
-        {
-          french: 'Allez tout droit jusqu\'au carrefour.',
-          english: 'Go straight ahead until the intersection.',
-          pronunciation: 'Ah-lay too drwa zhoos-koh kar-FOOR',
-          highlight: 'tout droit jusqu\'au'
-        },
-        {
-          french: 'Tournez à gauche après la banque.',
-          english: 'Turn left after the bank.',
-          pronunciation: 'Toor-nay ah GOASH ah-preh la BONK',
-          highlight: 'Tournez à gauche après'
-        },
-        {
-          french: 'La pharmacie est en face de la boulangerie.',
-          english: 'The pharmacy is across from the bakery.',
-          pronunciation: 'La far-ma-SEE eh-ton fass duh la boo-lonzh-REE',
-          highlight: 'en face de'
-        },
-        {
-          french: 'C\'est à dix minutes à pied.',
-          english: 'It\'s a 10-minute walk.',
-          pronunciation: 'Set ah dee mee-NOOT ah PYAY',
-          highlight: 'à dix minutes à pied'
-        },
-        {
-          french: 'Prenez le métro ligne 4 direction Porte de Clignancourt.',
-          english: 'Take metro line 4 direction Porte de Clignancourt.',
-          pronunciation: 'Pruh-nay luh may-tro leen-yuh KATR dee-rek-syon Port duh Klee-nyon-KOOR',
-          highlight: 'Prenez le métro ligne 4 direction'
-        },
-        {
-          french: 'Descendez à la prochaine station.',
-          english: 'Get off at the next station.',
-          pronunciation: 'Day-son-day ah la pro-shen stah-SYON',
-          highlight: 'Descendez à la prochaine'
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'Movement commands', form: 'Allez/Tournez/Traversez', pronunciation: 'a-lay/toor-nay/tra-vair-say' },
-        { pronoun: 'Location questions', form: 'Où est...? / Où se trouve...?', pronunciation: 'oo ay / oo suh troov' },
-        { pronoun: 'Direction expressions', form: 'à droite/gauche, tout droit', pronunciation: 'ah drwaht/gohsh, too drwah' },
-        { pronoun: 'Distance', form: 'à X minutes / près/loin', pronunciation: 'ah X mee-nuut / pray/lwahn' },
-        { pronoun: 'Direction expressions', form: 'en métro/bus, à pied', pronunciation: 'ahn may-troh/buus, ah pee-ay' },
-        { pronoun: 'Position', form: 'à côté de, en face de, près de', pronunciation: 'ah ko-tay duh, ahn fahs duh, pray duh' }
-      ]
-    },
-
-    vocabulary: [
-      // Direction basics
-      {
-        word: 'tout droit',
-        translation: 'straight ahead',
-        pronunciation: 'too DRWAH',
-        example_sentence: 'Allez tout droit jusqu\'au feu rouge.',
-        example_translation: 'Go straight ahead until the traffic light.',
-        category: 'directions'
-      },
-      {
-        word: 'à droite',
-        translation: 'to the right',
-        pronunciation: 'ah DRWAHT',
-        example_sentence: 'Tournez à droite après l\'église.',
-        example_translation: 'Turn right after the church.',
-        category: 'directions'
-      },
-      {
-        word: 'à gauche',
-        translation: 'to the left',
-        pronunciation: 'ah GOHSH',
-        example_sentence: 'La banque est à gauche.',
-        example_translation: 'The bank is on the left.',
-        category: 'directions'
-      },
-      {
-        word: 'tourner',
-        translation: 'to turn',
-        pronunciation: 'toor-NAY',
-        example_sentence: 'Vous devez tourner ici.',
-        example_translation: 'You need to turn here.',
-        category: 'directions'
-      },
-      {
-        word: 'traverser',
-        translation: 'to cross',
-        pronunciation: 'tra-vair-SAY',
-        example_sentence: 'Traversez la rue avec prudence.',
-        example_translation: 'Cross the street carefully.',
-        category: 'directions'
-      },
-      {
-        word: 'continuer',
-        translation: 'to continue',
-        pronunciation: 'kohn-tee-nuu-AY',
-        example_sentence: 'Continuez jusqu\'à la place.',
-        example_translation: 'Continue until the square.',
-        category: 'directions'
-      },
-
-      // Location prepositions
-      {
-        word: 'à côté de',
-        translation: 'next to/beside',
-        pronunciation: 'ah ko-TAY duh',
-        example_sentence: 'La poste est à côté de la pharmacie.',
-        example_translation: 'The post office is next to the pharmacy.',
-        category: 'location'
-      },
-      {
-        word: 'en face de',
-        translation: 'across from/opposite',
-        pronunciation: 'ahn FAHS duh',
-        example_sentence: 'Le café est en face de l\'hôtel.',
-        example_translation: 'The café is across from the hotel.',
-        category: 'location'
-      },
-      {
-        word: 'près de',
-        translation: 'near/close to',
-        pronunciation: 'pray duh',
-        example_sentence: 'J\'habite près de la gare.',
-        example_translation: 'I live near the train station.',
-        category: 'location'
-      },
-      {
-        word: 'loin de',
-        translation: 'far from',
-        pronunciation: 'lwahn duh',
-        example_sentence: 'C\'est loin de votre hôtel?',
-        example_translation: 'Is it far from your hotel?',
-        category: 'location'
-      },
-      {
-        word: 'entre',
-        translation: 'between',
-        pronunciation: 'ahn-truh',
-        example_sentence: 'Le restaurant est entre la banque et la poste.',
-        example_translation: 'The restaurant is between the bank and the post office.',
-        category: 'location'
-      },
-      {
-        word: 'au coin de',
-        translation: 'at the corner of',
-        pronunciation: 'oh kwahn duh',
-        example_sentence: 'Il y a une boulangerie au coin de la rue.',
-        example_translation: 'There\'s a bakery at the corner of the street.',
-        category: 'location'
-      },
-
-      // Transportation
-      {
-        word: 'le métro',
-        translation: 'subway/metro',
-        pronunciation: 'luh may-TROH',
-        example_sentence: 'Je prends le métro tous les jours.',
-        example_translation: 'I take the metro every day.',
-        category: 'transportation'
-      },
-      {
-        word: 'l\'autobus/le bus',
-        translation: 'bus',
-        pronunciation: 'loh-toh-BUUS/luh BUUS',
-        example_sentence: 'Le bus numéro 21 va à l\'aéroport.',
-        example_translation: 'Bus number 21 goes to the airport.',
-        category: 'transportation'
-      },
-      {
-        word: 'le train',
-        translation: 'train',
-        pronunciation: 'luh TRAHN',
-        example_sentence: 'Le train pour Lyon part dans dix minutes.',
-        example_translation: 'The train to Lyon leaves in ten minutes.',
-        category: 'transportation'
-      },
-      {
-        word: 'le taxi',
-        translation: 'taxi',
-        pronunciation: 'luh tak-SEE',
-        example_sentence: 'Appelons un taxi, il pleut.',
-        example_translation: 'Let\'s call a taxi, it\'s raining.',
-        category: 'transportation'
-      },
-      {
-        word: 'à pied',
-        translation: 'on foot/walking',
-        pronunciation: 'ah pee-AY',
-        example_sentence: 'C\'est plus rapide à pied.',
-        example_translation: 'It\'s faster on foot.',
-        category: 'transportation'
-      },
-      {
-        word: 'en voiture',
-        translation: 'by car',
-        pronunciation: 'ahn vwa-TUUR',
-        example_sentence: 'Nous y allons en voiture.',
-        example_translation: 'We\'re going there by car.',
-        category: 'transportation'
-      },
-
-      // Metro/Transit vocabulary
-      {
-        word: 'la station',
-        translation: 'station (metro/bus)',
-        pronunciation: 'la sta-see-OHN',
-        example_sentence: 'Quelle est la prochaine station?',
-        example_translation: 'What\'s the next station?',
-        category: 'metro'
-      },
-      {
-        word: 'la gare',
-        translation: 'train station',
-        pronunciation: 'la GAHR',
-        example_sentence: 'La gare du Nord est très grande.',
-        example_translation: 'The Gare du Nord is very big.',
-        category: 'metro'
-      },
-      {
-        word: 'la ligne',
-        translation: 'line (metro/bus)',
-        pronunciation: 'la LEE-nyuh',
-        example_sentence: 'Prenez la ligne 1 direction Vincennes.',
-        example_translation: 'Take line 1 direction Vincennes.',
-        category: 'metro'
-      },
-      {
-        word: 'la direction',
-        translation: 'direction',
-        pronunciation: 'la dee-rek-see-OHN',
-        example_sentence: 'Métro ligne 4, direction Porte d\'Orléans.',
-        example_translation: 'Metro line 4, direction Porte d\'Orléans.',
-        category: 'metro'
-      },
-      {
-        word: 'le ticket',
-        translation: 'ticket',
-        pronunciation: 'luh tee-KAY',
-        example_sentence: 'J\'ai besoin d\'un ticket de métro.',
-        example_translation: 'I need a metro ticket.',
-        category: 'metro'
-      },
-      {
-        word: 'le carnet',
-        translation: 'book of tickets',
-        pronunciation: 'luh kar-NAY',
-        example_sentence: 'Un carnet coûte moins cher.',
-        example_translation: 'A book of tickets costs less.',
-        category: 'metro'
-      },
-      {
-        word: 'composter',
-        translation: 'to validate (ticket)',
-        pronunciation: 'kom-pos-TAY',
-        example_sentence: 'N\'oubliez pas de composter votre ticket.',
-        example_translation: 'Don\'t forget to validate your ticket.',
-        category: 'metro'
-      },
-
-      // City landmarks & places
-      {
-        word: 'la place',
-        translation: 'square/plaza',
-        pronunciation: 'la PLAHS',
-        example_sentence: 'Rendez-vous place de la République.',
-        example_translation: 'Meet at République square.',
-        category: 'landmarks'
-      },
-      {
-        word: 'le pont',
-        translation: 'bridge',
-        pronunciation: 'luh POHN',
-        example_sentence: 'Traversez le pont Neuf.',
-        example_translation: 'Cross the Pont Neuf.',
-        category: 'landmarks'
-      },
-      {
-        word: 'la rue',
-        translation: 'street',
-        pronunciation: 'la RUU',
-        example_sentence: 'J\'habite rue de Rivoli.',
-        example_translation: 'I live on rue de Rivoli.',
-        category: 'landmarks'
-      },
-      {
-        word: 'l\'avenue',
-        translation: 'avenue',
-        pronunciation: 'la-vuh-NUU',
-        example_sentence: 'L\'avenue des Champs-Élysées est célèbre.',
-        example_translation: 'The Champs-Élysées avenue is famous.',
-        category: 'landmarks'
-      },
-      {
-        word: 'le boulevard',
-        translation: 'boulevard',
-        pronunciation: 'luh bool-VAHR',
-        example_sentence: 'Le boulevard Saint-Germain est animé.',
-        example_translation: 'Boulevard Saint-Germain is lively.',
-        category: 'landmarks'
-      },
-      {
-        word: 'le carrefour',
-        translation: 'intersection/crossroads',
-        pronunciation: 'luh kar-FOOR',
-        example_sentence: 'Tournez à droite au carrefour.',
-        example_translation: 'Turn right at the intersection.',
-        category: 'landmarks'
-      },
-      {
-        word: 'le feu rouge',
-        translation: 'traffic light',
-        pronunciation: 'luh fuh ROOZH',
-        example_sentence: 'Arrêtez-vous au feu rouge.',
-        example_translation: 'Stop at the traffic light.',
-        category: 'landmarks'
-      },
-
-      // Buildings and places
-      {
-        word: 'la banque',
-        translation: 'bank',
-        pronunciation: 'luh BAHNK',
-        example_sentence: 'La banque ferme à 17 heures.',
-        example_translation: 'The bank closes at 5 PM.',
-        category: 'buildings'
-      },
-      {
-        word: 'la poste',
-        translation: 'post office',
-        pronunciation: 'la POST',
-        example_sentence: 'Où est la poste la plus proche?',
-        example_translation: 'Where is the nearest post office?',
-        category: 'buildings'
-      },
-      {
-        word: 'l\'hôpital',
-        translation: 'hospital',
-        pronunciation: 'lo-pee-TAL',
-        example_sentence: 'L\'hôpital est à dix minutes d\'ici.',
-        example_translation: 'The hospital is ten minutes from here.',
-        category: 'buildings'
-      },
-      {
-        word: 'l\'église',
-        translation: 'church',
-        pronunciation: 'lay-GLEEZ',
-        example_sentence: 'L\'église Notre-Dame est magnifique.',
-        example_translation: 'Notre-Dame church is magnificent.',
-        category: 'buildings'
-      },
-      {
-        word: 'le musée',
-        translation: 'museum',
-        pronunciation: 'luh muu-ZAY',
-        example_sentence: 'Le musée d\'Orsay expose les impressionnistes.',
-        example_translation: 'The Orsay museum exhibits the impressionists.',
-        category: 'buildings'
-      },
-      {
-        word: 'l\'hôtel',
-        translation: 'hotel',
-        pronunciation: 'lo-TELL',
-        example_sentence: 'Mon hôtel est près de la gare.',
-        example_translation: 'My hotel is near the train station.',
-        category: 'buildings'
-      },
-
-      // Distance and time
-      {
-        word: 'proche',
-        translation: 'near/close',
-        pronunciation: 'PROSH',
-        example_sentence: 'C\'est très proche d\'ici.',
-        example_translation: 'It\'s very close to here.',
-        category: 'distance'
-      },
-      {
-        word: 'loin',
-        translation: 'far',
-        pronunciation: 'LWAHN',
-        example_sentence: 'Ce n\'est pas très loin.',
-        example_translation: 'It\'s not very far.',
-        category: 'distance'
-      },
-      {
-        word: 'à ... minutes',
-        translation: 'X minutes away',
-        pronunciation: 'ah ... mee-NUUT',
-        example_sentence: 'C\'est à cinq minutes à pied.',
-        example_translation: 'It\'s a 5-minute walk.',
-        category: 'distance'
-      },
-
-      // Getting lost/help
-      {
-        word: 'perdu(e)',
-        translation: 'lost',
-        pronunciation: 'per-DUU',
-        example_sentence: 'Je suis perdu, pouvez-vous m\'aider?',
-        example_translation: 'I\'m lost, can you help me?'
-      },
-      {
-        word: 'se perdre',
-        translation: 'to get lost',
-        pronunciation: 'suh pair-druh',
-        example_sentence: 'Je me perds toujours dans cette ville.',
-        example_translation: 'I always get lost in this city.'
-      },
-      {
-        word: 'aider',
-        translation: 'to help',
-        pronunciation: 'ay-DAY',
-        example_sentence: 'Pouvez-vous m\'aider, s\'il vous plaît?',
-        example_translation: 'Can you help me, please?'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-7-1',
-        type: 'multiple_choice',
-        question: 'How do you say "Go straight ahead" in French?',
-        options: ['Allez à droite', 'Allez tout droit', 'Tournez à gauche', 'Traversez la rue'],
-        correct_answer: 'Allez tout droit',
-        explanation: '"Allez tout droit" means "go straight ahead" - essential for basic directions.',
-        hints: ['"Tout droit" means "straight ahead"']
-      },
-      {
-        id: 'ex-7-2',
-        type: 'fill_blank',
-        question: 'Complete: "La banque est _____ la poste." (The bank is next to the post office)',
-        correct_answer: ['à côté de'],
-        explanation: '"À côté de" means "next to" or "beside" - important preposition for describing location.',
-        hints: ['This preposition means "next to" or "beside"']
-      },
-      {
-        id: 'ex-7-3',
-        type: 'multiple_choice',
-        question: 'If someone is lost and asks for help, they might say:',
-        options: ['Je suis fatigué', 'Je suis perdu', 'Je suis français', 'Je suis content'],
-        correct_answer: 'Je suis perdu',
-        explanation: '"Je suis perdu(e)" means "I am lost" - essential phrase for getting help with directions.',
-        hints: ['Think about what you\'d say if you don\'t know where you are']
-      },
-      {
-        id: 'ex-7-4',
-        type: 'translation',
-        question: 'How do you ask "Where is the metro station?" in French?',
-        correct_answer: ['Où est la station de métro?', 'Où se trouve la station de métro?'],
-        explanation: '"Où est la station de métro?" is the standard way to ask for the metro station location.',
-        hints: ['Use "Où est..." (Where is...) + "la station de métro"']
-      },
-      {
-        id: 'ex-7-5',
-        type: 'multiple_choice',
-        question: 'What does "Tournez à droite après l\'église" mean?',
-        options: ['Turn left before the church', 'Turn right after the church', 'Go straight to the church', 'Cross at the church'],
-        correct_answer: 'Turn right after the church',
-        explanation: '"Tournez à droite après l\'église" = "Turn right after the church".',
-        hints: ['"Après" means "after", "à droite" means "to the right"']
-      },
-      {
-        id: 'ex-7-6',
-        type: 'fill_blank',
-        question: 'Complete: "C\'est _____ dix minutes à pied." (It\'s a 10-minute walk)',
-        correct_answer: ['à'],
-        explanation: '"C\'est à dix minutes à pied" expresses walking distance in French. The preposition "à" is used to indicate time/distance.',
-        hints: ['Use the preposition "à" to indicate time or distance']
-      },
-      {
-        id: 'ex-7-7',
-        type: 'multiple_choice',
-        question: 'Which transportation uses "la ligne" and "la direction"?',
-        options: ['le taxi', 'la voiture', 'le métro', 'à pied'],
-        correct_answer: 'le métro',
-        explanation: 'Metro uses "ligne" (line) and "direction" for navigation, like "ligne 1 direction Vincennes".',
-        hints: ['Think about which transport system has numbered lines and specific directions']
-      },
-      {
-        id: 'ex-7-8',
-        type: 'speaking',
-        question: 'Practice giving directions: "Allez tout droit, puis tournez à gauche après la banque. C\'est à côté de la pharmacie."',
-        correct_answer: ['Allez tout droit, puis tournez à gauche après la banque. C\'est à côté de la pharmacie.'],
-        explanation: 'Perfect! You\'ve given clear directions using proper directional vocabulary and landmarks.',
-        audio_prompt: 'Allez tout droit, puis tournez à gauche après la banque. C\'est à côté de la pharmacie.'
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 6,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-  {
-    id: 'beginner-8',
-    title: 'Regular -er Verbs and Family',
-    subtitle: 'Learn to conjugate regular -er verbs and talk about family, professions, and nationalities',
-    level: 'beginner',
-    order: 8,
-    estimated_time: 30,
-    learning_objectives: [
-      'Master regular -er verb conjugation patterns',
-      'Use family vocabulary with proper possessive adjectives',
-      'Discuss professions and nationalities correctly',
-      'Apply -er verb conjugation in family conversations',
-      'Understand masculine/feminine forms for professions and nationalities'
-    ],
-    is_free: true,
-    difficulty: 2,
-    tags: ['verbs', 'conjugation', 'family', 'professions', 'nationalities', 'grammar'],
-    
-    dialogue: {
-      title: 'Meeting the Family',
-      context: 'Marie and Thomas discuss their families, professions, and language skills. This dialogue demonstrates the use of regular -er verbs and family vocabulary in natural conversation.',
-      exchanges: [
-        {
-          speaker: 'Marie',
-          french: 'Bonjour Thomas ! Tu habites ici avec ta famille ?',
-          english: 'Hello Thomas! Do you live here with your family?',
-          pronunciation: 'bon-ZHOOR to-MAH! tu ah-BEET ee-SEE ah-VEK tah fah-MEEL?',
-          cultural_note: 'French people often live with family while studying or starting their careers.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Oui, j\'habite avec mes parents. Mon père travaille comme médecin.',
-          english: 'Yes, I live with my parents. My father works as a doctor.',
-          pronunciation: 'wee, zhah-BEET ah-VEK may pah-RAHN. mohn PAIR trah-VY kom may-SAH',
-          cultural_note: 'In France, it\'s common for young adults to live with parents while studying.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Et ta mère ? Elle travaille aussi ?',
-          english: 'And your mother? Does she work too?',
-          pronunciation: 'ay tah MAIR? el trah-VY oh-SEE?'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Ma mère parle trois langues. Elle enseigne l\'anglais à l\'université.',
-          english: 'My mother speaks three languages. She teaches English at the university.',
-          pronunciation: 'mah MAIR parl twah LAHNG. el ahn-SAYN lahn-GLAY ah lu-nee-vair-see-TAY',
-          cultural_note: 'French universities are prestigious institutions where many teachers are civil servants.'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Formidable ! Moi, je parle français et italien. Ma famille est italienne.',
-          english: 'Wonderful! I speak French and Italian. My family is Italian.',
-          pronunciation: 'for-mee-DAHBL! mwah, zhuh parl frahn-SAY ay ee-tah-lee-AH. mah fah-MEEL ay ee-tah-lee-EN',
-          cultural_note: 'Italy and France share a border and have strong cultural connections.'
-        },
-        {
-          speaker: 'Thomas',
-          french: 'Tu aimes étudier les langues ?',
-          english: 'Do you like studying languages?',
-          pronunciation: 'tu em ay-tu-dee-AY lay LAHNG?'
-        },
-        {
-          speaker: 'Marie',
-          french: 'Oui, j\'aime beaucoup ! Et toi, tu étudies quoi ?',
-          english: 'Yes, I like it a lot! And you, what do you study?',
-          pronunciation: 'wee, zhem bo-KOO! ay twah, tu ay-tu-dee KWAH?'
-        }
-      ],
-      cultural_notes: [
-        'French families often maintain close relationships across generations',
-        'It\'s common for young adults to live with parents while studying',
-        'Family Sunday lunches are an important French tradition',
-        'The French education system is highly centralized and prestigious',
-        'Teachers (enseignants) are civil servants in France'
-      ],
-      vocabulary_highlights: ['habiter', 'travailler', 'parler', 'enseigner', 'étudier', 'aimer', 'famille', 'parents']
-    },
-
-    grammar: {
-      topic: 'Regular -er Verb Conjugation - The Foundation of French Verbs',
-      explanation: 'Regular -er verbs are the most common verb type in French and follow a predictable conjugation pattern. By mastering these patterns, you\'ll be able to conjugate hundreds of French verbs. The key is to remove the -er ending and add the appropriate personal endings.',
-      patterns: [
-        'Remove -er from the infinitive (parler → parl)',
-        'Add personal endings: -e, -es, -e, -ons, -ez, -ent',
-        'First person singular (je) often uses a contraction: j\'habite',
-        'Third person singular (il/elle) is the same as first person singular',
-        'The nous and vous forms are distinct and important for politeness'
-      ],
-      examples: [
-        {
-          french: 'Je parle français avec mes amis.',
-          english: 'I speak French with my friends.',
-          pronunciation: 'Zhuh parl fron-SEH ah-vek may-zah-MEE',
-          highlight: 'parle'
-        },
-        {
-          french: 'Tu habites dans une belle maison.',
-          english: 'You live in a beautiful house.',
-          pronunciation: 'Too ah-beet donz-oon bel may-ZON',
-          highlight: 'habites'
-        },
-        {
-          french: 'Il travaille comme ingénieur.',
-          english: 'He works as an engineer.',
-          pronunciation: 'Eel tra-vai kom an-zhay-NYUR',
-          highlight: 'travaille'
-        },
-        {
-          french: 'Nous étudions ensemble.',
-          english: 'We study together.',
-          pronunciation: 'Noo-zay-too-DYON on-SOM-bluh',
-          highlight: 'étudions'
-        },
-        {
-          french: 'Vous aimez la cuisine française.',
-          english: 'You like French cuisine.',
-          pronunciation: 'Voo-zem-ay la kwee-zeen fron-SEZ',
-          highlight: 'aimez'
-        },
-        {
-          french: 'Ils parlent plusieurs langues.',
-          english: 'They speak several languages.',
-          pronunciation: 'Eel parl ploo-zyur LONG',
-          highlight: 'parlent'
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'je', form: 'parle', pronunciation: 'zhuh parl' },
-        { pronoun: 'tu', form: 'parles', pronunciation: 'too parl' },
-        { pronoun: 'il/elle', form: 'parle', pronunciation: 'eel/ell parl' },
-        { pronoun: 'nous', form: 'parlons', pronunciation: 'noo par-LOHN' },
-        { pronoun: 'vous', form: 'parlez', pronunciation: 'voo par-LAY' },
-        { pronoun: 'ils/elles', form: 'parlent', pronunciation: 'eel/ell parl' }
-      ]
-    },
-
-    vocabulary: [
-      {
-        word: 'habiter',
-        translation: 'to live',
-        pronunciation: 'ah-bee-TAY',
-        example_sentence: 'J\'habite à Paris avec ma famille.',
-        example_translation: 'I live in Paris with my family.',
-        category: 'verbs'
-      },
-      {
-        word: 'parler',
-        translation: 'to speak',
-        pronunciation: 'par-LAY',
-        example_sentence: 'Je parle français et anglais.',
-        example_translation: 'I speak French and English.',
-        category: 'verbs'
-      },
-      {
-        word: 'travailler',
-        translation: 'to work',
-        pronunciation: 'trah-vy-YAY',
-        example_sentence: 'Mon père travaille comme médecin.',
-        example_translation: 'My father works as a doctor.',
-        category: 'verbs'
-      },
-      {
-        word: 'aimer',
-        translation: 'to like/love',
-        pronunciation: 'ay-MAY',
-        example_sentence: 'J\'aime beaucoup étudier les langues.',
-        example_translation: 'I really like studying languages.',
-        category: 'verbs'
-      },
-      {
-        word: 'étudier',
-        translation: 'to study',
-        pronunciation: 'ay-tu-dee-AY',
-        example_sentence: 'Nous étudions le français ensemble.',
-        example_translation: 'We study French together.',
-        category: 'verbs'
-      },
-      {
-        word: 'enseigner',
-        translation: 'to teach',
-        pronunciation: 'ahn-say-NYAY',
-        example_sentence: 'Ma mère enseigne l\'anglais à l\'université.',
-        example_translation: 'My mother teaches English at the university.',
-        category: 'verbs'
-      },
-      {
-        word: 'la famille',
-        translation: 'family',
-        pronunciation: 'lah fah-MEE',
-        example_sentence: 'Ma famille est très importante pour moi.',
-        example_translation: 'My family is very important to me.',
-        category: 'family'
-      },
-      {
-        word: 'les parents',
-        translation: 'parents',
-        pronunciation: 'lay pah-RAHN',
-        example_sentence: 'Mes parents habitent à Lyon.',
-        example_translation: 'My parents live in Lyon.',
-        category: 'family'
-      },
-      {
-        word: 'le père',
-        translation: 'father',
-        pronunciation: 'luh PAIR',
-        example_sentence: 'Mon père est médecin.',
-        example_translation: 'My father is a doctor.',
-        category: 'family'
-      },
-      {
-        word: 'la mère',
-        translation: 'mother',
-        pronunciation: 'lah MAIR',
-        example_sentence: 'Ma mère parle trois langues.',
-        example_translation: 'My mother speaks three languages.',
-        category: 'family'
-      },
-      {
-        word: 'le médecin',
-        translation: 'doctor',
-        pronunciation: 'luh may-SAH',
-        example_sentence: 'Le médecin travaille à l\'hôpital.',
-        example_translation: 'The doctor works at the hospital.',
-        category: 'professions'
-      },
-      {
-        word: 'l\'enseignant(e)',
-        translation: 'teacher',
-        pronunciation: 'lahn-say-NYAHN',
-        example_sentence: 'L\'enseignante est très patiente.',
-        example_translation: 'The teacher is very patient.',
-        category: 'professions'
-      },
-      {
-        word: 'français(e)',
-        translation: 'French',
-        pronunciation: 'frahn-SAY',
-        example_sentence: 'Je suis française et ma famille est italienne.',
-        example_translation: 'I am French and my family is Italian.',
-        category: 'nationalities'
-      },
-      {
-        word: 'italien(ne)',
-        translation: 'Italian',
-        pronunciation: 'ee-tah-lee-AH',
-        example_sentence: 'Ma grand-mère est italienne.',
-        example_translation: 'My grandmother is Italian.',
-        category: 'nationalities'
-      },
-      {
-        word: 'la langue',
-        translation: 'language',
-        pronunciation: 'lah LAHNG',
-        example_sentence: 'J\'aime apprendre de nouvelles langues.',
-        example_translation: 'I like learning new languages.',
-        category: 'general'
-      },
-      {
-        word: 'l\'université',
-        translation: 'university',
-        pronunciation: 'lu-nee-vair-see-TAY',
-        example_sentence: 'L\'université de Paris est très prestigieuse.',
-        example_translation: 'The University of Paris is very prestigious.',
-        category: 'general'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-8-1',
-        type: 'multiple_choice',
-        question: 'How do you say "I live with my parents" in French?',
-        options: [
-          'J\'habite avec mes parents',
-          'Je habite avec mon parents', 
-          'J\'habites avec mes parents',
-          'Je travaille avec mes parents'
-        ],
-        correct_answer: 'J\'habite avec mes parents',
-        explanation: 'J\'habite (I live) uses the first person singular form, and "mes parents" (my parents) uses the plural possessive.',
-        hints: ['Use the first person singular form of "habiter"', 'Remember "mes" for plural possessions']
-      },
-      {
-        id: 'ex-8-2',
-        type: 'fill_blank',
-        question: 'Complete: "Mon père _____ français et anglais." (My father speaks French and English)',
-        options: ['parle', 'parles', 'parlons', 'parlez'],
-        correct_answer: ['parle'],
-        explanation: 'Mon père (my father) is third person singular, so we use "parle" (speaks).',
-        hints: ['Think about the subject: "mon père" is he/she', 'Use the third person singular form']
-      },
-      {
-        id: 'ex-8-3',
-        type: 'translation',
-        question: 'Translate: "My mother works as a teacher"',
-        correct_answer: ['ma mère travaille comme enseignante'],
-        explanation: 'Ma mère (my mother) + travaille (works) + comme (as) + enseignante (teacher, feminine form).',
-        hints: ['ma mère = my mother', 'travaille = works', 'comme = as', 'enseignante = teacher (feminine)']
-      },
-      {
-        id: 'ex-8-4',
-        type: 'multiple_choice',
-        question: 'Which form is correct for "you speak" (informal)?',
-        options: ['tu parle', 'tu parles', 'tu parlons', 'tu parlez'],
-        correct_answer: 'tu parles',
-        explanation: 'With "tu" (informal you), we add -s to the verb stem: parl + es = parles.',
-        hints: ['Remember the -er verb pattern: tu + verb stem + es']
-      },
-      {
-        id: 'ex-8-5',
-        type: 'fill_blank',
-        question: 'Complete: "Nous _____ ensemble." (We study together)',
-        options: ['étudie', 'étudies', 'étudions', 'étudiez'],
-        correct_answer: ['étudions'],
-        explanation: 'Nous (we) takes the -ons ending: étud + ions = étudions.',
-        hints: ['Nous = we, so use the -ons ending', 'Remove -er and add -ons']
-      },
-      {
-        id: 'ex-8-6',
-        type: 'translation',
-        question: 'How do you say "They like French food" in French?',
-        correct_answer: ['ils aiment la cuisine française', 'elles aiment la cuisine française'],
-        explanation: 'Ils/elles (they) + aiment (like) + la cuisine française (French food).',
-        hints: ['Use "ils" or "elles" for they', 'Remember the -ent ending for third person plural']
-      },
-      {
-        id: 'ex-8-7',
-        type: 'multiple_choice',
-        question: 'What does "Ma famille est italienne" mean?',
-        options: [
-          'My family is Italian',
-          'My family is French',
-          'My family is big',
-          'My family is here'
-        ],
-        correct_answer: 'My family is Italian',
-        explanation: 'Ma famille (my family) + est (is) + italienne (Italian, feminine form).',
-        hints: ['"est" means "is"', 'Look at the last word: italienne']
-      },
-      {
-        id: 'ex-8-8',
-        type: 'speaking',
-        question: 'Practice: "Je parle français et ma famille habite à Paris. Nous aimons la culture française."',
-        correct_answer: ['Je parle français et ma famille habite à Paris. Nous aimons la culture française.'],
-        explanation: 'Excellent! You\'ve used multiple -er verbs correctly: parle, habite, and aimons.',
-        audio_prompt: 'Je parle français et ma famille habite à Paris. Nous aimons la culture française.'
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 6,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-  {
-    id: 'beginner-9',
-    title: 'More -er Verbs and Negation',
-    subtitle: 'Learn more regular -er verbs, express what you don\'t do with negation (ne...pas), and discuss daily activities',
-    level: 'beginner',
-    order: 9,
-    estimated_time: 30,
-    learning_objectives: [
-      'Master negation with ne...pas for all verb types',
-      'Learn additional regular -er verb conjugations',
-      'Express preferences and frequency in daily activities',
-      'Use negation naturally in conversations',
-      'Discuss leisure activities and hobbies'
-    ],
-    is_free: true,
-    difficulty: 2,
-    tags: ['verbs', 'conjugation', 'negation', 'daily-activities', 'leisure', 'grammar'],
-    
-    dialogue: {
-      title: 'Daily Routines',
-      context: 'Sophie and Marc discuss their daily activities, preferences, and what they don\'t do. This dialogue demonstrates negation with ne...pas and various -er verbs in natural conversation.',
-      exchanges: [
-        {
-          speaker: 'Sophie',
-          french: 'Salut Marc ! Tu regardes souvent la télévision ?',
-          english: 'Hi Marc! Do you often watch television?',
-          pronunciation: 'sah-LU mark! tu ruh-GARD soo-VAHN lah tay-lay-vee-see-OHN?',
-          cultural_note: 'French people often ask about TV habits as a way to start conversations about entertainment preferences.'
-        },
-        {
-          speaker: 'Marc',
-          french: 'Non, je ne regarde pas beaucoup la télé. Je préfère écouter de la musique.',
-          english: 'No, I don\'t watch TV much. I prefer to listen to music.',
-          pronunciation: 'nohn, zhuh nuh ruh-GARD pah bo-KOO lah tay-LAY. zhuh pray-FAIR ay-koo-TAY duh lah mu-ZEEK',
-          cultural_note: 'Music is very important in French culture, with many famous composers and contemporary artists.'
-        },
-        {
-          speaker: 'Sophie',
-          french: 'Moi, j\'adore danser ! Tu danses aussi ?',
-          english: 'Me, I love to dance! Do you dance too?',
-          pronunciation: 'mwah, zhah-DOR dahn-SAY! tu DAHNS oh-SEE?',
-          cultural_note: 'Dancing is popular in France, especially traditional dances like the waltz and modern styles.'
-        },
-        {
-          speaker: 'Marc',
-          french: 'Je ne danse pas très bien, mais j\'aime chanter.',
-          english: 'I don\'t dance very well, but I like to sing.',
-          pronunciation: 'zhuh nuh DAHNS pah tray bee-AHN, may zhem shahn-TAY',
-          cultural_note: 'French people often express modesty about their abilities while still showing enthusiasm.'
-        },
-        {
-          speaker: 'Sophie',
-          french: 'Et le sport ? Tu joues au tennis ?',
-          english: 'And sports? Do you play tennis?',
-          pronunciation: 'ay luh spor? tu ZHOO oh tay-NEES?',
-          cultural_note: 'Tennis is very popular in France, especially during the French Open tournament at Roland Garros.'
-        },
-        {
-          speaker: 'Marc',
-          french: 'Non, je ne joue pas au tennis. Je préfère nager à la piscine.',
-          english: 'No, I don\'t play tennis. I prefer to swim at the pool.',
-          pronunciation: 'nohn, zhuh nuh ZHOO pah oh tay-NEES. zhuh pray-FAIR nah-ZHAY ah lah pee-SEEN',
-          cultural_note: 'Swimming is a popular sport in France, with many municipal pools offering affordable access.'
-        },
-        {
-          speaker: 'Sophie',
-          french: 'Et le weekend ? Tu restes à la maison ?',
-          english: 'And on weekends? Do you stay at home?',
-          pronunciation: 'ay luh week-end? tu REST ah lah may-ZOHN?',
-          cultural_note: 'Weekends in France often involve cultural activities, family time, and outdoor recreation.'
-        },
-        {
-          speaker: 'Marc',
-          french: 'Je ne reste pas toujours à la maison. J\'aime visiter des musées.',
-          english: 'I don\'t always stay at home. I like to visit museums.',
-          pronunciation: 'zhuh nuh REST pah too-ZHOOR ah lah may-ZOHN. zhem vee-zee-TAY day mu-ZAY',
-          cultural_note: 'France has some of the world\'s most famous museums, and many offer free admission on certain days.'
-        }
-      ],
-      cultural_notes: [
-        'French people value cultural activities and often visit museums, theaters, and concerts',
-        'Sports and physical activities are popular, with many municipal facilities available',
-        'Weekends are typically reserved for family time and cultural enrichment',
-        'Music and dance are deeply embedded in French culture and education',
-        'Many French cities have excellent public pools and sports facilities'
-      ],
-      vocabulary_highlights: ['regarder', 'écouter', 'danser', 'chanter', 'jouer', 'nager', 'rester', 'visiter', 'préférer', 'adorer']
-    },
-
-    grammar: {
-      topic: 'Negation with ne...pas - Complete Guide',
-      explanation: 'To make any French sentence negative, wrap the verb with \'ne\' and \'pas\'. This is the most important negation pattern in French and works with all verb types. The \'ne\' often contracts to \'n\'\' before vowels and silent h.',
-      patterns: [
-        'Basic structure: Subject + ne + verb + pas + rest of sentence',
-        'Contraction: ne becomes n\' before vowels and silent h',
-        'Position: ne comes before the verb, pas comes after',
-        'Works with: all verb types, all tenses, all persons',
-        'Common expressions: ne...jamais (never), ne...plus (no more), ne...rien (nothing)'
-      ],
-      examples: [
-        {
-          french: 'Je parle français → Je ne parle pas français',
-          english: 'I speak French → I don\'t speak French',
-          highlight: 'ne...pas'
-        },
-        {
-          french: 'Tu regardes la télé → Tu ne regardes pas la télé',
-          english: 'You watch TV → You don\'t watch TV',
-          highlight: 'ne...pas'
-        },
-        {
-          french: 'Elle danse bien → Elle ne danse pas bien',
-          english: 'She dances well → She doesn\'t dance well',
-          highlight: 'ne...pas'
-        },
-        {
-          french: 'Je aime → Je n\'aime pas',
-          english: 'I like → I don\'t like',
-          highlight: 'n\'...pas'
-        },
-        {
-          french: 'Il habite → Il n\'habite pas',
-          english: 'He lives → He doesn\'t live',
-          highlight: 'n\'...pas'
-        }
-      ],
-      conjugation_table: [
-        { pronoun: 'je', form: 'regarde', pronunciation: 'zhuh ruh-GARD' },
-        { pronoun: 'tu', form: 'regardes', pronunciation: 'too ruh-GARD' },
-        { pronoun: 'il/elle', form: 'regarde', pronunciation: 'eel/ell ruh-GARD' },
-        { pronoun: 'nous', form: 'regardons', pronunciation: 'noo ruh-gar-DOHN' },
-        { pronoun: 'vous', form: 'regardez', pronunciation: 'voo ruh-gar-DAY' },
-        { pronoun: 'ils/elles', form: 'regardent', pronunciation: 'eel/ell ruh-GARD' }
-      ],
-      additional_conjugation_tables: [
-        {
-          verb: 'écouter',
-          forms: [
-            { pronoun: 'je', form: 'écoute', pronunciation: 'zhuh ay-KOOT' },
-            { pronoun: 'tu', form: 'écoutes', pronunciation: 'too ay-KOOT' },
-            { pronoun: 'il/elle', form: 'écoute', pronunciation: 'eel/ell ay-KOOT' },
-            { pronoun: 'nous', form: 'écoutons', pronunciation: 'noo ay-koo-TOHN' },
-            { pronoun: 'vous', form: 'écoutez', pronunciation: 'voo ay-koo-TAY' },
-            { pronoun: 'ils/elles', form: 'écoutent', pronunciation: 'eel/ell ay-KOOT' }
-          ]
-        },
-        {
-          verb: 'danser',
-          forms: [
-            { pronoun: 'je', form: 'danse', pronunciation: 'zhuh DAHNS' },
-            { pronoun: 'tu', form: 'danses', pronunciation: 'too DAHNS' },
-            { pronoun: 'il/elle', form: 'danse', pronunciation: 'eel/ell DAHNS' },
-            { pronoun: 'nous', form: 'dansons', pronunciation: 'noo dahn-SOHN' },
-            { pronoun: 'vous', form: 'dansez', pronunciation: 'voo dahn-SAY' },
-            { pronoun: 'ils/elles', form: 'dansent', pronunciation: 'eel/ell DAHNS' }
-          ]
-        },
-        {
-          verb: 'jouer',
-          forms: [
-            { pronoun: 'je', form: 'joue', pronunciation: 'zhuh ZHOO' },
-            { pronoun: 'tu', form: 'joues', pronunciation: 'too ZHOO' },
-            { pronoun: 'il/elle', form: 'joue', pronunciation: 'eel/ell ZHOO' },
-            { pronoun: 'nous', form: 'jouons', pronunciation: 'noo zhoo-OHN' },
-            { pronoun: 'vous', form: 'jouez', pronunciation: 'voo zhoo-AY' },
-            { pronoun: 'ils/elles', form: 'jouent', pronunciation: 'eel/ell ZHOO' }
-          ]
-        },
-        {
-          verb: 'préférer',
-          forms: [
-            { pronoun: 'je', form: 'préfère', pronunciation: 'zhuh pray-FAIR' },
-            { pronoun: 'tu', form: 'préfères', pronunciation: 'too pray-FAIR' },
-            { pronoun: 'il/elle', form: 'préfère', pronunciation: 'eel/ell pray-FAIR' },
-            { pronoun: 'nous', form: 'préférons', pronunciation: 'noo pray-fay-ROHN' },
-            { pronoun: 'vous', form: 'préférez', pronunciation: 'voo pray-fay-RAY' },
-            { pronoun: 'ils/elles', form: 'préfèrent', pronunciation: 'eel/ell pray-FAIR' }
-          ]
-        }
-      ]
-    },
-
-    vocabulary: [
-      {
-        word: 'regarder',
-        translation: 'to watch',
-        category: 'verbs',
-        example_sentence: 'Je regarde la télé le soir.',
-        example_translation: 'I watch TV in the evening.'
-      },
-      {
-        word: 'écouter',
-        translation: 'to listen',
-        category: 'verbs',
-        example_sentence: 'J\'écoute de la musique classique.',
-        example_translation: 'I listen to classical music.'
-      },
-      {
-        word: 'danser',
-        translation: 'to dance',
-        category: 'verbs',
-        example_sentence: 'Elle danse très bien.',
-        example_translation: 'She dances very well.'
-      },
-      {
-        word: 'chanter',
-        translation: 'to sing',
-        category: 'verbs',
-        example_sentence: 'Nous chantons ensemble.',
-        example_translation: 'We sing together.'
-      },
-      {
-        word: 'jouer',
-        translation: 'to play',
-        category: 'verbs',
-        example_sentence: 'Tu joues au tennis le weekend.',
-        example_translation: 'You play tennis on weekends.'
-      },
-      {
-        word: 'nager',
-        translation: 'to swim',
-        category: 'verbs',
-        example_sentence: 'Ils nagent à la piscine.',
-        example_translation: 'They swim at the pool.'
-      },
-      {
-        word: 'rester',
-        translation: 'to stay',
-        category: 'verbs',
-        example_sentence: 'Je reste à la maison le dimanche.',
-        example_translation: 'I stay at home on Sundays.'
-      },
-      {
-        word: 'visiter',
-        translation: 'to visit',
-        category: 'verbs',
-        example_sentence: 'Nous visitons des musées.',
-        example_translation: 'We visit museums.'
-      },
-      {
-        word: 'préférer',
-        translation: 'to prefer',
-        category: 'verbs',
-        example_sentence: 'Je préfère écouter de la musique.',
-        example_translation: 'I prefer to listen to music.'
-      },
-      {
-        word: 'adorer',
-        translation: 'to love/adore',
-        category: 'verbs',
-        example_sentence: 'J\'adore danser le weekend.',
-        example_translation: 'I love dancing on weekends.'
-      },
-      {
-        word: 'la télévision',
-        translation: 'television',
-        category: 'entertainment',
-        example_sentence: 'Je ne regarde pas la télévision.',
-        example_translation: 'I don\'t watch television.'
-      },
-      {
-        word: 'la musique',
-        translation: 'music',
-        category: 'entertainment',
-        example_sentence: 'J\'écoute de la musique française.',
-        example_translation: 'I listen to French music.'
-      },
-      {
-        word: 'le sport',
-        translation: 'sport',
-        category: 'activities',
-        example_sentence: 'Le sport est important pour la santé.',
-        example_translation: 'Sport is important for health.'
-      },
-      {
-        word: 'le tennis',
-        translation: 'tennis',
-        category: 'activities',
-        example_sentence: 'Tu joues au tennis ?',
-        example_translation: 'Do you play tennis?'
-      },
-      {
-        word: 'la piscine',
-        translation: 'pool',
-        category: 'places',
-        example_sentence: 'Je nage à la piscine municipale.',
-        example_translation: 'I swim at the municipal pool.'
-      },
-      {
-        word: 'le musée',
-        translation: 'museum',
-        category: 'places',
-        example_sentence: 'Nous visitons le musée du Louvre.',
-        example_translation: 'We visit the Louvre Museum.'
-      },
-      {
-        word: 'la maison',
-        translation: 'house',
-        category: 'places',
-        example_sentence: 'Je reste à la maison le weekend.',
-        example_translation: 'I stay at home on weekends.'
-      },
-      {
-        word: 'le weekend',
-        translation: 'weekend',
-        category: 'time',
-        example_sentence: 'Le weekend, je fais du sport.',
-        example_translation: 'On weekends, I do sports.'
-      },
-      {
-        word: 'souvent',
-        translation: 'often',
-        category: 'frequency',
-        example_sentence: 'Tu regardes souvent la télé ?',
-        example_translation: 'Do you often watch TV?'
-      },
-      {
-        word: 'toujours',
-        translation: 'always',
-        category: 'frequency',
-        example_sentence: 'Il ne regarde jamais la télé.',
-        example_translation: 'He never watches TV.'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-9-1',
-        type: 'multiple_choice',
-        question: 'How do you say "I don\'t watch television" in French?',
-        options: [
-          'Je ne regarde pas la télévision',
-          'Je regarde ne pas la télévision',
-          'Je ne pas regarde la télévision',
-          'Je regarde pas la télévision'
-        ],
-        correct_answer: 'Je ne regarde pas la télévision',
-        explanation: 'Negation requires \'ne\' before the verb and \'pas\' after: je ne regarde pas.',
-        hints: ['Remember the ne...pas structure', 'ne comes before the verb, pas after']
-      },
-      {
-        id: 'ex-9-2',
-        type: 'conjugation',
-        question: 'Conjugate the verb "regarder" (to watch) in all persons:',
-        verb: 'regarder',
-        translations: {
-          'je': 'I watch',
-          'tu': 'you watch',
-          'il/elle': 'he/she watches',
-          'nous': 'we watch',
-          'vous': 'you watch (formal/plural)',
-          'ils/elles': 'they watch'
-        },
-        correct_answer: ['regarde', 'regardes', 'regarde', 'regardons', 'regardez', 'regardent'],
-        explanation: 'Regarder follows the regular -er verb pattern: remove -er, add endings.',
-        hints: ['Remove -er from regarder', 'Add: -e, -es, -e, -ons, -ez, -ent']
-      },
-      {
-        id: 'ex-9-3',
-        type: 'conjugation',
-        question: 'Conjugate the verb "écouter" (to listen) in all persons:',
-        verb: 'écouter',
-        translations: {
-          'je': 'I listen',
-          'tu': 'you listen',
-          'il/elle': 'he/she listens',
-          'nous': 'we listen',
-          'vous': 'you listen (formal/plural)',
-          'ils/elles': 'they listen'
-        },
-        correct_answer: ['écoute', 'écoutes', 'écoute', 'écoutons', 'écoutez', 'écoutent'],
-        explanation: 'Écouter follows the same -er pattern as regarder.',
-        hints: ['Remove -er from écouter', 'Add: -e, -es, -e, -ons, -ez, -ent']
-      },
-      {
-        id: 'ex-9-4',
-        type: 'conjugation',
-        question: 'Conjugate the verb "danser" (to dance) in all persons:',
-        verb: 'danser',
-        translations: {
-          'je': 'I dance',
-          'tu': 'you dance',
-          'il/elle': 'he/she dances',
-          'nous': 'we dance',
-          'vous': 'you dance (formal/plural)',
-          'ils/elles': 'they dance'
-        },
-        correct_answer: ['danse', 'danses', 'danse', 'dansons', 'dansez', 'dansent'],
-        explanation: 'Danser follows the regular -er verb pattern.',
-        hints: ['Remove -er from danser', 'Add: -e, -es, -e, -ons, -ez, -ent']
-      },
-      {
-        id: 'ex-9-5',
-        type: 'conjugation',
-        question: 'Conjugate the verb "jouer" (to play) in all persons:',
-        verb: 'jouer',
-        translations: {
-          'je': 'I play',
-          'tu': 'you play',
-          'il/elle': 'he/she plays',
-          'nous': 'we play',
-          'vous': 'you play (formal/plural)',
-          'ils/elles': 'they play'
-        },
-        correct_answer: ['joue', 'joues', 'joue', 'jouons', 'jouez', 'jouent'],
-        explanation: 'Jouer follows the regular -er verb pattern.',
-        hints: ['Remove -er from jouer', 'Add: -e, -es, -e, -ons, -ez, -ent']
-      },
-      {
-        id: 'ex-9-6',
-        type: 'conjugation',
-        question: 'Conjugate the verb "préférer" (to prefer) in all persons:',
-        verb: 'préférer',
-        translations: {
-          'je': 'I prefer',
-          'tu': 'you prefer',
-          'il/elle': 'he/she prefers',
-          'nous': 'we prefer',
-          'vous': 'you prefer (formal/plural)',
-          'ils/elles': 'they prefer'
-        },
-        correct_answer: ['préfère', 'préfères', 'préfère', 'préférons', 'préférez', 'préfèrent'],
-        explanation: 'Préférer follows the regular -er verb pattern.',
-        hints: ['Remove -er from préférer', 'Add: -e, -es, -e, -ons, -ez, -ent']
-      },
-      {
-        id: 'ex-9-7',
-        type: 'negation_transformation',
-        question: 'Transform these positive sentences to negative:',
-        exercises: [
-          {
-            positive: 'Je regarde la télé le soir',
-            negative: 'Je ne regarde pas la télé le soir',
-            translation: 'I don\'t watch TV in the evening'
-          },
-          {
-            positive: 'Tu danses très bien',
-            negative: 'Tu ne danses pas très bien',
-            translation: 'You don\'t dance very well'
-          },
-          {
-            positive: 'Elle écoute de la musique',
-            negative: 'Elle n\'écoute pas de la musique',
-            translation: 'She doesn\'t listen to music'
-          },
-          {
-            positive: 'Nous jouons au tennis',
-            negative: 'Nous ne jouons pas au tennis',
-            translation: 'We don\'t play tennis'
-          }
-        ],
-        correct_answer: ['Je ne regarde pas la télé le soir', 'Tu ne danses pas très bien', 'Elle n\'écoute pas de la musique', 'Nous ne jouons pas au tennis'],
-        explanation: 'Remember: ne before the verb, pas after. Use contractions (n\') before vowels and silent h.',
-        hints: ['ne comes before the verb', 'pas comes after the verb', 'Use n\' before vowels']
-      },
-      {
-        id: 'ex-9-8',
-        type: 'fill_blank_negation',
-        question: 'Complete the negative sentences:',
-        sentences: [
-          {
-            sentence: 'Je _____ regarde _____ la télévision.',
-            blanks: ['ne', 'pas'],
-            translation: 'I don\'t watch television.'
-          },
-          {
-            sentence: 'Il _____ danse _____ le weekend.',
-            blanks: ['ne', 'pas'],
-            translation: 'He doesn\'t dance on weekends.'
-          },
-          {
-            sentence: 'Nous _____ écoutons _____ de musique classique.',
-            blanks: ['ne', 'pas'],
-            translation: 'We don\'t listen to classical music.'
-          }
-        ],
-        correct_answer: ['ne', 'pas', 'ne', 'pas', 'ne', 'pas'],
-        explanation: 'Fill in the negation words: ne before the verb, pas after.',
-        hints: ['ne goes before the verb', 'pas goes after the verb']
-      },
-      {
-        id: 'ex-9-9',
-        type: 'translation',
-        question: 'Translate: "She doesn\'t dance very well, but she loves to sing"',
-        correct_answer: ['elle ne danse pas très bien, mais elle adore chanter'],
-        explanation: 'elle (she) + ne danse pas (doesn\'t dance) + très bien (very well) + mais (but) + elle adore (she loves) + chanter (to sing).',
-        hints: ['elle = she', 'ne...pas = doesn\'t', 'très bien = very well', 'mais = but', 'adore = loves']
-      },
-      {
-        id: 'ex-9-10',
-        type: 'fill_blank',
-        question: 'Tu _____ souvent au tennis le weekend ?',
-        options: ['joues', 'joue', 'jouons', 'jouez'],
-        correct_answer: ['joues'],
-        explanation: 'Tu (informal you) + joues (play) + souvent (often) + au tennis (tennis) + le weekend (weekend).',
-        hints: ['Tu = informal you', 'Use the -es ending with tu']
-      },
-      {
-        id: 'ex-9-11',
-        type: 'vocabulary_match',
-        question: 'Match the French words with their English meanings:',
-        pairs: [
-          { french: 'regarder', english: 'to watch' },
-          { french: 'la musique', english: 'music' },
-          { french: 'nager', english: 'to swim' },
-          { french: 'le musée', english: 'museum' },
-          { french: 'préférer', english: 'to prefer' }
-        ],
-        correct_answer: ['regarder-to watch', 'la musique-music', 'nager-to swim', 'le musée-museum', 'préférer-to prefer'],
-        explanation: 'Match the French words with their English meanings.',
-        hints: ['Look for cognates (similar words)', 'Remember the -er ending means "to" for verbs']
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 7,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  },
-  {
-    id: 'beginner-10',
-    title: 'Completing Regular Verbs & Daily Life',
-    subtitle: 'Master more negation forms, expand family/profession vocabulary, learn nationalities, and review all regular -er verbs',
-    level: 'beginner',
-    order: 10,
-    estimated_time: 30,
-    learning_objectives: [
-      'Master advanced negation forms (ne...jamais, ne...plus, ne...que)',
-      'Conjugate essential -er verbs for daily activities and work',
-      'Learn family and profession vocabulary with proper gender agreement',
-      'Understand nationality adjectives and country names',
-      'Practice comprehensive -er verb patterns and applications'
-    ],
-    is_free: false,
-    difficulty: 1,
-    tags: ['negation', 'conjugation', 'family', 'professions', 'nationalities', 'daily-life'],
-    
-    dialogue: {
-      title: 'International Family Dinner',
-      context: 'Grandmère hosts a family dinner where Lisa, an American student, discusses her French studies and family background with Antoine.',
-      exchanges: [
-        {
-          speaker: 'Grandmère',
-          french: 'Bonsoir mes enfants ! Lisa, tu n\'es pas française, n\'est-ce pas ?',
-          english: 'Good evening my children! Lisa, you\'re not French, are you?',
-          pronunciation: 'bon-SWAHR may zahn-FAHN! LEE-zah, tu nay pah frahn-SAYZ, nay pah?',
-          cultural_note: 'French family dinners often include discussions about cultural background and language learning.'
-        },
-        {
-          speaker: 'Lisa',
-          french: 'Non, je suis américaine. Je ne parle jamais français chez moi.',
-          english: 'No, I\'m American. I never speak French at home.',
-          pronunciation: 'nohn, zhuh swee ah-may-ree-KEN. zhuh nuh parl zhah-MAY frahn-SAY shay MWAH'
-        },
-        {
-          speaker: 'Antoine',
-          french: 'Mais tu parles très bien ! Tu étudies depuis longtemps ?',
-          english: 'But you speak very well! Have you been studying for a long time?',
-          pronunciation: 'may tu parl tray bee-AHN! tu ay-tu-dee duh-PEE lohn-TAHN?'
-        },
-        {
-          speaker: 'Lisa',
-          french: 'Je commence seulement cette année. Ma sœur travaille comme professeure d\'anglais ici.',
-          english: 'I\'m just starting this year. My sister works as an English teacher here.',
-          pronunciation: 'zhuh ko-MAHNS suhl-MAHN set ah-NAY. mah SUR trah-VY kom pro-fuh-SUR dahn-GLAY ee-SEE'
-        },
-        {
-          speaker: 'Grandmère',
-          french: 'Formidable ! Et tes parents ? Ils ne visitent jamais la France ?',
-          english: 'Wonderful! And your parents? Don\'t they ever visit France?',
-          pronunciation: 'for-mee-DAHBL! ay tay pah-RAHN? eel nuh vee-ZEET zhah-MAY lah FRAHNSS?'
-        },
-        {
-          speaker: 'Lisa',
-          french: 'Mon père ne voyage plus maintenant, mais ma mère adore voyager.',
-          english: 'My father doesn\'t travel anymore now, but my mother loves to travel.',
-          pronunciation: 'mohn PAIR nuh voy-AZH plu man-tuh-NAHN, may mah MAIR ah-DOR voy-ah-ZHAY'
-        },
-        {
-          speaker: 'Antoine',
-          french: 'Elle parle français aussi ?',
-          english: 'Does she speak French too?',
-          pronunciation: 'el parl frahn-SAY oh-SEE?'
-        },
-        {
-          speaker: 'Lisa',
-          french: 'Non, elle ne parle que anglais et espagnol. Elle enseigne l\'espagnol.',
-          english: 'No, she only speaks English and Spanish. She teaches Spanish.',
-          pronunciation: 'nohn, el nuh parl kuh ahn-GLAY ay es-pah-NYOHL. el ahn-SAYN les-pah-NYOHL'
-        }
-      ],
-      cultural_notes: [
-        'Family meals are central to French culture. Grandmère (grandmother) often holds a special place in family gatherings, and it\'s common to discuss work, studies, and travel during dinner conversations.',
-        'France has strong traditions in language education. Many French people are multilingual, and there\'s great respect for those learning French as a foreign language. Language exchange is very popular.'
-      ],
-      vocabulary_highlights: ['bonsoir', 'américaine', 'jamais', 'depuis', 'seulement', 'professeure', 'visitent', 'voyage', 'enseigne']
-    },
-
-    grammar: {
-      topic: 'Advanced Negation Forms & Essential -er Verbs',
-      explanation: 'Beyond basic negation, French offers specific negation patterns for different meanings. Combined with essential -er verbs, these patterns allow for precise expression of daily activities, work, and family life.',
-      patterns: [
-        'ne...jamais = never: Je ne voyage jamais (I never travel)',
-        'ne...plus = no longer/no more: Il ne travaille plus (He doesn\'t work anymore)',
-        'ne...que = only: Elle ne parle que français (She only speaks French)',
-        'WORD ORDER: Ne + verb + jamais/plus/que + rest of sentence',
-        'Regular -er verbs follow consistent conjugation patterns across all subjects'
-      ],
-      examples: [
-        {
-          french: 'Je ne regarde jamais la télé',
-          english: 'I never watch TV',
-          pronunciation: 'Zhuh nuh ruh-gard zha-may la tay-LAY',
-          highlight: 'ne...jamais = never'
-        },
-        {
-          french: 'Il ne travaille plus le weekend',
-          english: 'He doesn\'t work on weekends anymore',
-          pronunciation: 'Eel nuh tra-vai PLOO luh week-END',
-          highlight: 'ne...plus = no longer'
-        },
-        {
-          french: 'Elle ne parle que français',
-          english: 'She only speaks French',
-          pronunciation: 'El nuh parl kuh fron-SEH',
-          highlight: 'ne...que = only'
-        }
-      ],
-      conjugation_table: [
-        {
-          pronoun: 'je',
-          form: 'commence',
-          pronunciation: 'zhuh ko-MAHNS'
-        },
-        {
-          pronoun: 'tu',
-          form: 'commences',
-          pronunciation: 'tu ko-MAHNS'
-        },
-        {
-          pronoun: 'il/elle',
-          form: 'commence',
-          pronunciation: 'eel/el ko-MAHNS'
-        },
-        {
-          pronoun: 'nous',
-          form: 'commençons',
-          pronunciation: 'noo ko-mahn-SOHN'
-        },
-        {
-          pronoun: 'vous',
-          form: 'commencez',
-          pronunciation: 'voo ko-mahn-SAY'
-        },
-        {
-          pronoun: 'ils/elles',
-          form: 'commencent',
-          pronunciation: 'eel/el ko-MAHNS'
-        }
-      ],
-      additional_conjugation_tables: [
-                 {
-           verb: 'voyager',
-           forms: [
-             { pronoun: 'je', form: 'voyage', pronunciation: 'zhuh voy-AZH' },
-             { pronoun: 'tu', form: 'voyages', pronunciation: 'tu voy-AZH' },
-             { pronoun: 'il/elle', form: 'voyage', pronunciation: 'eel/el voy-AZH' },
-             { pronoun: 'nous', form: 'voyageons', pronunciation: 'noo voy-ah-ZHOHN' },
-             { pronoun: 'vous', form: 'voyagez', pronunciation: 'voo voy-ah-ZHAY' },
-             { pronoun: 'ils/elles', form: 'voyagent', pronunciation: 'eel/el voy-AZH' }
-           ]
-         },
-                 {
-           verb: 'enseigner',
-           forms: [
-             { pronoun: 'je', form: 'enseigne', pronunciation: 'zhuh ahn-SAYN' },
-             { pronoun: 'tu', form: 'enseignes', pronunciation: 'tu ahn-SAYN' },
-             { pronoun: 'il/elle', form: 'enseigne', pronunciation: 'eel/el ahn-SAYN' },
-             { pronoun: 'nous', form: 'enseignons', pronunciation: 'noo ahn-say-NOHN' },
-             { pronoun: 'vous', form: 'enseignez', pronunciation: 'voo ahn-say-NAY' },
-             { pronoun: 'ils/elles', form: 'enseignent', pronunciation: 'eel/el ahn-SAYN' }
-           ]
-         },
-                 {
-           verb: 'visiter',
-           forms: [
-             { pronoun: 'je', form: 'visite', pronunciation: 'zhuh vee-ZEET' },
-             { pronoun: 'tu', form: 'visites', pronunciation: 'tu vee-ZEET' },
-             { pronoun: 'il/elle', form: 'visite', pronunciation: 'eel/el vee-ZEET' },
-             { pronoun: 'nous', form: 'visitons', pronunciation: 'noo vee-zee-TOHN' },
-             { pronoun: 'vous', form: 'visitez', pronunciation: 'voo vee-zee-TAY' },
-             { pronoun: 'ils/elles', form: 'visitent', pronunciation: 'eel/el vee-ZEET' }
-           ]
-         }
-      ]
-    },
-
-    vocabulary: [
-      {
-        word: 'commencer',
-        translation: 'to start/begin',
-        category: 'verbs',
-        example_sentence: 'Je commence mes études en septembre.',
-        example_translation: 'I start my studies in September.'
-      },
-      {
-        word: 'terminer',
-        translation: 'to finish/end',
-        category: 'verbs',
-        example_sentence: 'Tu termines le travail à 17h.',
-        example_translation: 'You finish work at 5pm.'
-      },
-      {
-        word: 'voyager',
-        translation: 'to travel',
-        category: 'verbs',
-        example_sentence: 'Elle voyage souvent en Europe.',
-        example_translation: 'She travels often in Europe.'
-      },
-      {
-        word: 'enseigner',
-        translation: 'to teach',
-        category: 'verbs',
-        example_sentence: 'Mon père enseigne les mathématiques.',
-        example_translation: 'My father teaches mathematics.'
-      },
-      {
-        word: 'visiter',
-        translation: 'to visit',
-        category: 'verbs',
-        example_sentence: 'Nous visitons Paris ce weekend.',
-        example_translation: 'We are visiting Paris this weekend.'
-      },
-      {
-        word: 'inviter',
-        translation: 'to invite',
-        category: 'verbs',
-        example_sentence: 'Ils invitent leurs amis à dîner.',
-        example_translation: 'They invite their friends to dinner.'
-      },
-      {
-        word: 'aider',
-        translation: 'to help',
-        category: 'verbs',
-        example_sentence: 'Je t\'aide avec tes devoirs.',
-        example_translation: 'I help you with your homework.'
-      },
-      {
-        word: 'chercher',
-        translation: 'to look for',
-        category: 'verbs',
-        example_sentence: 'Tu cherches tes clés ?',
-        example_translation: 'Are you looking for your keys?'
-      },
-      {
-        word: 'depuis',
-        translation: 'since/for',
-        category: 'time',
-        example_sentence: 'J\'étudie le français depuis deux ans.',
-        example_translation: 'I have been studying French for two years.'
-      },
-      {
-        word: 'seulement',
-        translation: 'only',
-        category: 'adverbs',
-        example_sentence: 'Il parle seulement anglais.',
-        example_translation: 'He only speaks English.'
-      },
-      {
-        word: 'maintenant',
-        translation: 'now',
-        category: 'time',
-        example_sentence: 'Je travaille maintenant.',
-        example_translation: 'I work now.'
-      },
-      {
-        word: 'longtemps',
-        translation: 'long time',
-        category: 'time',
-        example_sentence: 'Ça fait longtemps qu\'on ne s\'est pas vus.',
-        example_translation: 'It\'s been a long time since we last saw each other.'
-      },
-      {
-        word: 'la sœur',
-        translation: 'sister',
-        category: 'family',
-        example_sentence: 'Ma sœur habite à Lyon.',
-        example_translation: 'My sister lives in Lyon.'
-      },
-      {
-        word: 'le frère',
-        translation: 'brother',
-        category: 'family',
-        example_sentence: 'Mon frère travaille à Paris.',
-        example_translation: 'My brother works in Paris.'
-      },
-      {
-        word: 'les enfants',
-        translation: 'children',
-        category: 'family',
-        example_sentence: 'Les enfants jouent dans le jardin.',
-        example_translation: 'The children play in the garden.'
-      },
-      {
-        word: 'la grand-mère',
-        translation: 'grandmother',
-        category: 'family',
-        example_sentence: 'Ma grand-mère cuisine très bien.',
-        example_translation: 'My grandmother cooks very well.'
-      },
-      {
-        word: 'le professeur',
-        translation: 'teacher/professor',
-        category: 'professions',
-        example_sentence: 'Le professeur explique la leçon.',
-        example_translation: 'The teacher explains the lesson.'
-      },
-      {
-        word: 'français(e)',
-        translation: 'French',
-        category: 'nationalities',
-        example_sentence: 'Elle est française.',
-        example_translation: 'She is French.'
-      },
-      {
-        word: 'américain(e)',
-        translation: 'American',
-        category: 'nationalities',
-        example_sentence: 'Il est américain.',
-        example_translation: 'He is American.'
-      },
-      {
-        word: 'espagnol(e)',
-        translation: 'Spanish',
-        category: 'nationalities',
-        example_sentence: 'Mon ami est espagnol.',
-        example_translation: 'My friend is Spanish.'
-      },
-      {
-        word: 'italien(ne)',
-        translation: 'Italian',
-        category: 'nationalities',
-        example_sentence: 'La cuisine italienne est délicieuse.',
-        example_translation: 'Italian cuisine is delicious.'
-      },
-      {
-        word: 'allemand(e)',
-        translation: 'German',
-        category: 'nationalities',
-        example_sentence: 'Il parle allemand couramment.',
-        example_translation: 'He speaks German fluently.'
-      },
-      {
-        word: 'la France',
-        translation: 'France',
-        category: 'countries',
-        example_sentence: 'La France est un beau pays.',
-        example_translation: 'France is a beautiful country.'
-      },
-      {
-        word: 'les États-Unis',
-        translation: 'United States',
-        category: 'countries',
-        example_sentence: 'Les États-Unis sont très grands.',
-        example_translation: 'The United States is very large.'
-      }
-    ],
-
-    exercises: [
-      {
-        id: 'ex-10-1',
-        type: 'multiple_choice',
-        question: 'How do you say "She never watches television" in French?',
-        options: [
-          'Elle ne regarde jamais la télévision',
-          'Elle ne jamais regarde la télévision', 
-          'Elle jamais ne regarde la télévision',
-          'Elle ne regarde plus la télévision'
-        ],
-        correct_answer: ['Elle ne regarde jamais la télévision'],
-        explanation: 'Use \'ne...jamais\' for \'never\': Elle ne regarde jamais la télévision.',
-        hints: ['ne comes before the verb', 'jamais comes after the verb', 'Use ne...jamais for never']
-      },
-      {
-        id: 'ex-10-2',
-        type: 'conjugation',
-        question: 'Conjugate the verb "commencer" (to start):',
-        verb: 'commencer',
-        translations: {
-          'je': 'I start',
-          'tu': 'you start',
-          'il/elle': 'he/she starts', 
-          'nous': 'we start',
-          'vous': 'you start (formal/plural)',
-          'ils/elles': 'they start'
-        },
-        correct_answer: ['je commence', 'tu commences', 'il/elle commence', 'nous commençons', 'vous commencez', 'ils/elles commencent'],
-        explanation: 'Regular -er verb conjugation: je -e, tu -es, il/elle -e, nous -ons, vous -ez, ils/elles -ent'
-      },
-      {
-        id: 'ex-10-3',
-        type: 'conjugation',
-        question: 'Conjugate the verb "voyager" (to travel):',
-        verb: 'voyager',
-        translations: {
-          'je': 'I travel',
-          'tu': 'you travel',
-          'il/elle': 'he/she travels',
-          'nous': 'we travel', 
-          'vous': 'you travel (formal/plural)',
-          'ils/elles': 'they travel'
-        },
-        correct_answer: ['je voyage', 'tu voyages', 'il/elle voyage', 'nous voyageons', 'vous voyagez', 'ils/elles voyagent'],
-        explanation: 'Regular -er verb conjugation: je -e, tu -es, il/elle -e, nous -ons, vous -ez, ils/elles -ent'
-      },
-      {
-        id: 'ex-10-4',
-        type: 'multiple_choice',
-        question: 'Choose the correct negation for each sentence:',
-        options: ['ne...jamais', 'ne...pas', 'ne...plus', 'ne...que'],
-
-        correct_answer: ['ne...jamais', 'ne...plus', 'ne...que'],
-        explanation: 'ne...jamais = never, ne...plus = no longer, ne...que = only',
-        hints: ['Look at the meaning: never, no longer, only']
-      },
-      {
-        id: 'ex-10-5',
-        type: 'multiple_choice',
-        question: 'Choose the correct nationality form:',
-        options: ['français', 'française', 'france', 'italien', 'italienne', 'italie', 'espagnol', 'espagnole', 'espagne'],
-
-        correct_answer: ['française', 'italien', 'espagnole'],
-        explanation: 'Nationality adjectives agree with gender: français/française, italien/italienne, espagnol/espagnole',
-        hints: ['Look at the gender: Marie (feminine), Paolo (masculine), Sofia (feminine)']
-      },
-      {
-        id: 'ex-10-6',
-        type: 'translation',
-        question: 'Translate: "My sister teaches Spanish, but she never travels to Spain"',
-        correct_answer: ['ma sœur enseigne l\'espagnol, mais elle ne voyage jamais en Espagne'],
-        explanation: 'ma sœur (my sister) + enseigne (teaches) + l\'espagnol (Spanish) + mais (but) + elle ne voyage jamais (she never travels) + en Espagne (to Spain).',
-        hints: ['ma sœur = my sister', 'enseigne = teaches', 'ne...jamais = never', 'voyage = travels']
-      },
-      {
-        id: 'ex-10-7',
-        type: 'fill_blank',
-        question: 'Complete the sentence: Je _____ le français depuis deux ans.',
-        options: ['commence', 'commences', 'commençons', 'étudie'],
-        correct_answer: ['étudie'],
-        explanation: 'Je (I) + étudie (study) + le français (French) + depuis deux ans (for two years).',
-        hints: ['Je = I (first person)', 'Use the -e ending for je with -er verbs', 'depuis = for/since']
-      },
-      {
-        id: 'ex-10-8',
-        type: 'fill_blank',
-        question: 'Complete this conversation with appropriate -er verbs: Tu _____ souvent tes grands-parents ? (visit) Non, je ne _____ jamais le temps. (have/find) Ils _____ encore dans la même maison ? (live)',
-        correct_answer: ['visites', 'trouve', 'habitent'],
-        explanation: 'visites (you visit), trouve (I find), habitent (they live) - all regular -er verb forms.',
-        hints: ['Look at the subject: tu = -es ending, je = -e ending, ils = -ent ending']
-      },
-      {
-        id: 'ex-10-9',
-        type: 'vocabulary_match',
-        question: 'Sort these words into categories:',
-        pairs: [
-          { french: 'française', english: 'French (feminine)' },
-          { french: 'commencer', english: 'to start' },
-          { french: 'la sœur', english: 'sister' },
-          { french: 'voyager', english: 'to travel' },
-          { french: 'américain', english: 'American (masculine)' },
-          { french: 'le professeur', english: 'teacher' },
-          { french: 'terminer', english: 'to finish' },
-          { french: 'espagnole', english: 'Spanish (feminine)' }
-        ],
-        correct_answer: ['française-French (feminine)', 'commencer-to start', 'la sœur-sister', 'voyager-to travel', 'américain-American (masculine)', 'le professeur-teacher', 'terminer-to finish', 'espagnole-Spanish (feminine)'],
-        explanation: 'Organize words by category: nationalities, verbs, family, professions.',
-        hints: ['Look at word endings: -er = verbs, -e = feminine, -ain = masculine']
-      },
-      {
-        id: 'ex-10-10',
-        type: 'fill_blank',
-        question: 'Complete the missing verb forms: enseigner: tu _____ (you teach), nous enseignons (we teach), ils _____ (they teach) | chercher: je _____ (I look for), tu cherches (you look for), elle _____ (she looks for)',
-        correct_answer: ['enseignes', 'enseignent', 'cherche', 'cherche'],
-        explanation: 'Regular -er verbs follow the pattern: je -e, tu -es, il/elle -e, nous -ons, vous -ez, ils/elles -ent.',
-        hints: ['Remember the pattern: -e, -es, -e, -ons, -ez, -ent', 'Look at the existing forms to see the pattern']
-      }
-    ],
-
-    completion_criteria: {
-      min_exercises_correct: 8,
-      required_sections: ['dialogue', 'grammar', 'vocabulary', 'exercises']
-    }
-  }
+import { BeginnerLesson, ConjugationRow, VocabularyItem } from './lessonTypes'
+
+const requiredSections: BeginnerLesson['completion_criteria']['required_sections'] = ['dialogue', 'grammar', 'vocabulary', 'exercises']
+
+const criteria = {
+  min_exercises_correct: 6,
+  required_sections: requiredSections,
+}
+
+const skills: BeginnerLesson['cefr_skills'] = ['listening', 'speaking', 'reading', 'writing']
+
+const v = (
+  word: string,
+  translation: string,
+  pronunciation: string,
+  example_sentence: string,
+  example_translation: string,
+  category: string,
+  gender?: VocabularyItem['gender'],
+): VocabularyItem => ({
+  word,
+  translation,
+  pronunciation,
+  example_sentence,
+  example_translation,
+  category,
+  ...(gender ? { gender } : {}),
+})
+
+const row = (pronoun: string, form: string, pronunciation: string): ConjugationRow => ({
+  pronoun,
+  form,
+  pronunciation,
+})
+
+const etre = [
+  row('je', 'suis', 'swee'),
+  row('tu', 'es', 'ay'),
+  row('il/elle/on', 'est', 'ay'),
+  row('nous', 'sommes', 'sum'),
+  row('vous', 'êtes', 'zet'),
+  row('ils/elles', 'sont', 'sohn'),
 ]
 
-export const getLessonById = (id: string): BeginnerLesson | undefined => {
-  return beginnerLessons.find(lesson => lesson.id === id)
-}
+const avoir = [
+  row("j'", 'ai', 'ay'),
+  row('tu', 'as', 'ah'),
+  row('il/elle/on', 'a', 'ah'),
+  row('nous', 'avons', 'ah-VOHN'),
+  row('vous', 'avez', 'ah-VAY'),
+  row('ils/elles', 'ont', 'ohn'),
+]
 
-export const getBeginnerLessons = (): BeginnerLesson[] => {
-  return beginnerLessons.sort((a, b) => a.order - b.order)
-}
+const parler = [
+  row('je', 'parle', 'parl'),
+  row('tu', 'parles', 'parl'),
+  row('il/elle/on', 'parle', 'parl'),
+  row('nous', 'parlons', 'par-LOHN'),
+  row('vous', 'parlez', 'par-LAY'),
+  row('ils/elles', 'parlent', 'parl'),
+]
 
-export const getFreeLessons = (): BeginnerLesson[] => {
-  return beginnerLessons.filter(lesson => lesson.is_free)
-}
+const makeBase = (
+  order: number,
+  title: string,
+  title_fr: string,
+  subtitle: string,
+  difficulty: BeginnerLesson['difficulty'],
+  tags: string[],
+  partial: Omit<BeginnerLesson, 'id' | 'title' | 'title_fr' | 'subtitle' | 'level' | 'cefr_skills' | 'order' | 'estimated_time' | 'tags' | 'difficulty' | 'is_free' | 'completion_criteria'>,
+): BeginnerLesson => ({
+  id: `beginner-${order}`,
+  title,
+  title_fr,
+  subtitle,
+  level: 'A1',
+  cefr_skills: skills,
+  order,
+  estimated_time: order <= 2 ? 30 : order <= 8 ? 40 : 45,
+  tags,
+  difficulty,
+  is_free: order <= 6,
+  completion_criteria: criteria,
+  ...partial,
+})
+
+export const beginnerLessons: BeginnerLesson[] = [
+  makeBase(1, 'First Contacts', 'Premiers Contacts', 'Use être, polite greetings, and tu/vous in a short café encounter.', 1, ['être', 'greetings', 'tu-vous'], {
+    learning_objectives: [
+      'Use formal greetings in a public setting',
+      'Conjugate être in the present tense',
+      'Choose vous for a stranger and tu for a familiar person',
+      'Say who you are and where you are from',
+    ],
+    dialogue: {
+      title: 'Une place au café',
+      context: 'Two strangers meet briefly at a Parisian café and keep the exchange formal.',
+      exchanges: [
+        { speaker: 'Claire', french: 'Bonjour, monsieur.', english: 'Hello, sir.', pronunciation: 'bon-ZHOOR muh-SYUH' },
+        { speaker: 'Marc', french: 'Bonjour, madame.', english: 'Hello, ma’am.', pronunciation: 'bon-ZHOOR ma-DAM' },
+        { speaker: 'Claire', french: 'Merci. Vous êtes ici?', english: 'Thank you. Are you here?', pronunciation: 'mer-SEE voo zet zee-SEE' },
+        { speaker: 'Marc', french: 'De rien. Vous êtes française?', english: 'You’re welcome. Are you French?', pronunciation: 'duh ree-AHN voo zet frahn-SEZ' },
+        { speaker: 'Claire', french: 'Oui, je suis française. Et vous?', english: 'Yes, I am French. And you?', pronunciation: 'wee zhuh swee frahn-SEZ ay voo' },
+        { speaker: 'Marc', french: 'Moi, je suis canadien. Je suis ici.', english: 'Me, I am Canadian. I am here.', pronunciation: 'mwah zhuh swee ka-na-DYEN zhuh swee zee-SEE' },
+        { speaker: 'Claire', french: 'Très bien. Au revoir, monsieur.', english: 'Very good. Goodbye, sir.', pronunciation: 'tray byahn oh ruh-VWAHR muh-SYUH' },
+        { speaker: 'Marc', french: 'Au revoir, madame.', english: 'Goodbye, ma’am.', pronunciation: 'oh ruh-VWAHR ma-DAM' },
+      ],
+      cultural_notes: [
+        'In France, bonjour is expected before asking a question in a café, shop, or office.',
+        'Vous is the normal choice with adult strangers; switching to tu usually happens only by invitation or shared context.',
+        'Madame and monsieur are still common in service encounters, though many younger speakers avoid overly formal titles among peers.',
+      ],
+      vocabulary_highlights: ['bonjour', 'merci', 'vous', 'je suis'],
+    },
+    grammar: {
+      topic: 'Être and Tu/Vous',
+      explanation: 'Être means “to be,” but in French it is not just a vocabulary word. It is the verb you need for identity, nationality, location, and simple descriptions: je suis étudiant, elle est française, nous sommes ici.\n\nThe forms are irregular, so do not try to build them from a rule yet. Memorize each subject with its verb form. Also notice that French has two “you” forms: tu for one familiar person, and vous for a stranger, a formal situation, or more than one person.',
+      examples: [
+        { french: 'Je suis française.', english: 'I am French.', pronunciation: 'zhuh swee frahn-SEZ', highlight: 'suis' },
+        { french: 'Vous êtes ici.', english: 'You are here.', pronunciation: 'voo zet zee-SEE', highlight: 'êtes' },
+        { french: 'Ils sont canadiens.', english: 'They are Canadian.', pronunciation: 'eel sohn ka-na-DYEN', highlight: 'sont' },
+      ],
+      patterns: ['je suis', 'tu es', 'il/elle est', 'nous sommes', 'vous êtes', 'ils/elles sont'],
+      conjugation_tables: [{ verb: 'être', rows: etre }],
+      tip: "In French, you don't say “I am well” with être. Learn fixed phrases like Ça va and Je vais bien separately; they do not follow this pattern.",
+    },
+    vocabulary: [
+      v('bonjour', 'hello / good day', 'bon-ZHOOR', 'Bonjour, madame.', 'Hello, ma’am.', 'greetings'),
+      v('bonsoir', 'good evening', 'bon-SWAHR', 'Bonsoir, monsieur.', 'Good evening, sir.', 'greetings'),
+      v('salut', 'hi / bye', 'sa-LOO', 'Salut, tu es ici.', 'Hi, you are here.', 'greetings'),
+      v('au revoir', 'goodbye', 'oh ruh-VWAHR', 'Au revoir, madame.', 'Goodbye, ma’am.', 'farewells'),
+      v('merci', 'thank you', 'mer-SEE', 'Merci, monsieur.', 'Thank you, sir.', 'politeness'),
+      v("s'il vous plaît", 'please', 'seel voo PLEH', "S'il vous plaît, monsieur.", 'Please, sir.', 'politeness'),
+      v('de rien', "you're welcome", 'duh ree-AHN', 'De rien, madame.', 'You’re welcome, ma’am.', 'politeness'),
+      v('excusez-moi', 'excuse me', 'ex-koo-zay MWAH', 'Excusez-moi, monsieur.', 'Excuse me, sir.', 'politeness'),
+      v('pardon', 'sorry / pardon', 'par-DOHN', 'Pardon, madame.', 'Sorry, ma’am.', 'politeness'),
+      v('ici', 'here', 'ee-SEE', 'Je suis ici.', 'I am here.', 'place'),
+      v('bien', 'well / good', 'byahn', 'Très bien.', 'Very good.', 'basic'),
+      v('très bien', 'very well', 'tray byahn', 'Je suis très bien.', 'I am very well.', 'basic'),
+      v('français', 'French', 'frahn-SAY', 'Vous êtes français.', 'You are French.', 'nationality'),
+      v('française', 'French', 'frahn-SEZ', 'Je suis française.', 'I am French.', 'nationality'),
+      v('canadien', 'Canadian', 'ka-na-DYEN', 'Je suis canadien.', 'I am Canadian.', 'nationality'),
+      v('belge', 'Belgian', 'belzh', 'Elle est belge.', 'She is Belgian.', 'nationality'),
+    ],
+    exercises: [
+      { id: 'l1-e1', type: 'conjugation', question: 'Conjugate être in the present tense.', verb: 'être', correct_answer: etre, explanation: 'Être is irregular, so each form must be memorized.' },
+      { id: 'l1-e2', type: 'multiple_choice', question: 'You meet an adult stranger. Which “you” is safest?', options: ['tu', 'vous', 'toi'], correct_answer: 'vous', explanation: 'Use vous with adult strangers.' },
+      { id: 'l1-e3', type: 'fill_blank', question: 'Je ___ française.', correct_answer: 'suis', explanation: 'Je takes suis.' },
+      { id: 'l1-e4', type: 'fill_blank', question: 'Vous ___ ici.', correct_answer: 'êtes', explanation: 'Vous takes êtes.' },
+      { id: 'l1-e5', type: 'matching', question: 'Match each greeting or farewell.', pairs: [{ french: 'bonjour', english: 'hello / good day' }, { french: 'bonsoir', english: 'good evening' }, { french: 'au revoir', english: 'goodbye' }, { french: 'merci', english: 'thank you' }], explanation: 'These fixed phrases carry the social opening of many French interactions.' },
+      { id: 'l1-e6', type: 'translation', question: 'EN→FR: I am Canadian.', direction: 'en_to_fr', correct_answer: ['Je suis canadien.', 'Je suis canadienne.'], explanation: 'Use je suis plus nationality.' },
+      { id: 'l1-e7', type: 'translation', question: 'EN→FR: You are here.', direction: 'en_to_fr', correct_answer: 'Vous êtes ici.', explanation: 'Use vous êtes for formal “you are.”' },
+      { id: 'l1-e8', type: 'speaking_prompt', question: 'Say hello formally and say who you are.', model_answer: 'Bonjour. Je suis Claire.', translation: 'Hello. I am Claire.', tip: 'Keep bonjour clear before your introduction.' },
+    ],
+  }),
+
+  makeBase(2, 'Introducing Yourself', 'Se Présenter', 'Use avoir, ages, numbers 1-20, professions, and nationality complements.', 1, ['avoir', 'numbers', 'age'], {
+    learning_objectives: [
+      'Conjugate avoir in the present tense',
+      'Say your age with j’ai X ans',
+      'Recognize numbers from 1 to 20',
+      'Use basic professions and nationalities after être',
+    ],
+    prerequisite_lessons: ['beginner-1'],
+    dialogue: {
+      title: 'Dans le TGV',
+      context: 'Two travellers share a train compartment from Paris to Lyon and introduce themselves formally.',
+      exchanges: [
+        { speaker: 'Nadia', french: 'Bonjour, monsieur. Vous êtes de Lyon?', english: 'Hello, sir. Are you from Lyon?', pronunciation: 'bon-ZHOOR muh-SYUH voo zet duh lee-OHN' },
+        { speaker: 'Paul', french: 'Bonjour. Oui, je suis lyonnais.', english: 'Hello. Yes, I am from Lyon.', pronunciation: 'bon-ZHOOR wee zhuh swee lee-oh-NEH' },
+        { speaker: 'Nadia', french: 'Moi, je suis de Paris.', english: 'Me, I am from Paris.', pronunciation: 'mwah zhuh swee duh pa-REE' },
+        { speaker: 'Paul', french: 'Vous êtes étudiante?', english: 'Are you a student?', pronunciation: 'voo zet ay-too-DYAHNT' },
+        { speaker: 'Nadia', french: 'Oui, je suis étudiante. J’ai vingt ans.', english: 'Yes, I am a student. I am twenty.', pronunciation: 'wee zhuh swee ay-too-DYAHNT zhay van tahn' },
+        { speaker: 'Paul', french: 'Moi, je suis ingénieur. J’ai trente ans.', english: 'Me, I am an engineer. I am thirty.', pronunciation: 'mwah zhuh swee an-zhay-NYUHR zhay trahnt ahn' },
+        { speaker: 'Nadia', french: 'Vous avez chaud?', english: 'Are you hot?', pronunciation: 'voo zah-VAY shoh' },
+        { speaker: 'Paul', french: 'Non, j’ai froid.', english: 'No, I am cold.', pronunciation: 'nohn zhay frwah' },
+      ],
+      cultural_notes: [
+        'TGV train tickets identify carriage and seat numbers, so polite negotiation happens mostly when luggage or seats are confusing.',
+        'French uses “I have X years” for age; this is not optional in standard French.',
+        'Professions after être often appear without an article: Je suis ingénieur, not je suis un ingénieur in basic identification.',
+      ],
+    },
+    grammar: {
+      topic: 'Avoir, Age, and Numbers 1-20',
+      explanation: 'Avoir means “to have.” French uses it for possession, but also for several ideas where English uses “to be.” The most important beginner pattern is age: j’ai vingt ans, literally “I have twenty years.”\n\nAvoir also appears in fixed everyday expressions such as j’ai faim, j’ai soif, j’ai chaud, and j’ai froid. Learn these as French patterns, not as word-for-word translations from English.',
+      examples: [
+        { french: 'J’ai vingt ans.', english: 'I am twenty years old.', pronunciation: 'zhay van tahn', highlight: 'J’ai' },
+        { french: 'Vous avez froid.', english: 'You are cold.', pronunciation: 'voo zah-VAY frwah', highlight: 'avez' },
+        { french: 'Elle a raison.', english: 'She is right.', pronunciation: 'el ah reh-ZOHN', highlight: 'a' },
+      ],
+      patterns: ['j’ai', 'tu as', 'il/elle a', 'nous avons', 'vous avez', 'ils/elles ont'],
+      conjugation_tables: [{ verb: 'avoir', rows: avoir }],
+      tip: 'Avoir means “to have” but French uses it where English uses “to be” for age and sensations. Never say je suis 25 ans; always say j’ai 25 ans.',
+    },
+    vocabulary: [
+      v('un', 'one', 'uhn', 'J’ai un an.', 'I am one year old.', 'numbers'),
+      v('deux', 'two', 'duh', 'J’ai deux ans.', 'I am two years old.', 'numbers'),
+      v('trois', 'three', 'trwah', 'J’ai trois ans.', 'I am three years old.', 'numbers'),
+      v('quatre', 'four', 'katr', 'J’ai quatre ans.', 'I am four.', 'numbers'),
+      v('cinq', 'five', 'sank', 'J’ai cinq ans.', 'I am five years old.', 'numbers'),
+      v('dix', 'ten', 'dees', 'J’ai dix ans.', 'I am ten.', 'numbers'),
+      v('quinze', 'fifteen', 'kanz', 'J’ai quinze ans.', 'I am fifteen.', 'numbers'),
+      v('vingt', 'twenty', 'van', 'J’ai vingt ans.', 'I am twenty.', 'numbers'),
+      v('faim', 'hunger', 'fam', 'J’ai faim.', 'I am hungry.', 'avoir expression'),
+      v('soif', 'thirst', 'swaf', 'J’ai soif.', 'I am thirsty.', 'avoir expression'),
+      v('chaud', 'hot', 'shoh', 'J’ai chaud.', 'I am hot.', 'avoir expression'),
+      v('froid', 'cold', 'frwah', 'J’ai froid.', 'I am cold.', 'avoir expression'),
+      v('raison', 'right', 'reh-ZOHN', 'Vous avez raison.', 'You are right.', 'avoir expression'),
+      v('étudiant', 'student', 'ay-too-DYAHN', 'Je suis étudiant.', 'I am a student.', 'profession'),
+      v('professeur', 'teacher', 'pro-feh-SUHR', 'Elle est professeur.', 'She is a teacher.', 'profession'),
+      v('ingénieur', 'engineer', 'an-zhay-NYUHR', 'Il est ingénieur.', 'He is an engineer.', 'profession'),
+      v('médecin', 'doctor', 'mayd-SAN', 'Vous êtes médecin.', 'You are a doctor.', 'profession'),
+      v('lyonnais', 'from Lyon', 'lee-oh-NEH', 'Je suis lyonnais.', 'I am from Lyon.', 'nationality'),
+    ],
+    exercises: [
+      { id: 'l2-e1', type: 'conjugation', question: 'Conjugate avoir in the present tense.', verb: 'avoir', correct_answer: avoir, explanation: 'Avoir is irregular and required for age.' },
+      { id: 'l2-e2', type: 'matching', question: 'Match numbers to digits.', pairs: [{ french: 'un', english: '1' }, { french: 'deux', english: '2' }, { french: 'quinze', english: '15' }, { french: 'vingt', english: '20' }], explanation: 'Numbers 1-20 are the base for age.' },
+      { id: 'l2-e3', type: 'fill_blank', question: 'J’___ vingt ans.', correct_answer: 'ai', explanation: 'Age uses avoir: j’ai vingt ans.' },
+      { id: 'l2-e4', type: 'multiple_choice', question: 'Which sentence is correct?', options: ['Je suis vingt ans.', 'J’ai vingt ans.', 'Je est vingt ans.'], correct_answer: 'J’ai vingt ans.', explanation: 'French uses avoir for age.' },
+      { id: 'l2-e5', type: 'fill_blank', question: 'Vous ___ froid.', correct_answer: 'avez', explanation: 'Vous takes avez.' },
+      { id: 'l2-e6', type: 'multiple_choice', question: 'Which profession phrase is standard?', options: ['Je suis professeur.', 'Je suis un professeur toujours.', 'J’ai professeur.'], correct_answer: 'Je suis professeur.', explanation: 'Basic profession complements usually use être without an article.' },
+      { id: 'l2-e7', type: 'translation', question: 'EN→FR: I am thirsty.', direction: 'en_to_fr', correct_answer: 'J’ai soif.', explanation: 'Thirst uses avoir in French.' },
+      { id: 'l2-e8', type: 'translation', question: 'EN→FR: You are a student.', direction: 'en_to_fr', correct_answer: ['Vous êtes étudiant.', 'Vous êtes étudiante.'], explanation: 'Use être for profession or student identity.' },
+    ],
+  }),
+
+  makeBase(3, 'Regular -er Verbs', 'Les Verbes en -er', 'Conjugate core regular verbs to talk about study, work, hobbies, and home.', 2, ['-er verbs', 'infinitive', 'campus'], {
+    learning_objectives: [
+      'Recognize the infinitive form of regular -er verbs',
+      'Conjugate parler and habiter for all six pronouns',
+      'Describe where you live and what you study',
+      'Use common adverbs such as souvent and maintenant',
+    ],
+    prerequisite_lessons: ['beginner-2'],
+    dialogue: {
+      title: 'Sur le campus',
+      context: 'Two students meet on a university campus and move from formal vous to friendly tu.',
+      exchanges: [
+        { speaker: 'Emma', french: 'Bonjour, vous êtes étudiante ici?', english: 'Hello, are you a student here?', pronunciation: 'bon-ZHOOR voo zet ay-too-DYAHNT ee-SEE' },
+        { speaker: 'Lucas', french: 'Oui, je suis étudiant. J’étudie ici.', english: 'Yes, I am a student. I study here.', pronunciation: 'wee zhuh swee ay-too-DYAHN zhay-too-DEE ee-SEE' },
+        { speaker: 'Emma', french: 'Moi aussi. J’habite à Paris.', english: 'Me too. I live in Paris.', pronunciation: 'mwah oh-SEE zha-BEET ah pa-REE' },
+        { speaker: 'Lucas', french: 'Moi, j’habite ici. Tu parles anglais?', english: 'Me, I live here. Do you speak English?', pronunciation: 'mwah zha-BEET ee-SEE too parl ahn-GLEH' },
+        { speaker: 'Emma', french: 'Oui, je parle anglais et français.', english: 'Yes, I speak English and French.', pronunciation: 'wee zhuh parl ahn-GLEH ay frahn-SAY' },
+        { speaker: 'Lucas', french: 'Nous travaillons beaucoup maintenant.', english: 'We work a lot now.', pronunciation: 'noo tra-vah-YOHN bo-KOO man-tuh-NAHN' },
+        { speaker: 'Emma', french: 'Oui, et nous écoutons souvent Emma.', english: 'Yes, and we often listen to Emma.', pronunciation: 'wee ay noo zay-koo-TOHN soo-VAHN em-MAH' },
+        { speaker: 'Lucas', french: 'Après, tu marches avec moi?', english: 'Afterward, do you walk with me?', pronunciation: 'ah-PREH too marsh ah-VEK mwah' },
+      ],
+      cultural_notes: [
+        'Students of similar age often switch to tu quickly once they recognize a shared peer context.',
+        'French university life is usually less campus-residential than in North America; many students commute from apartments or family homes.',
+        'À plus a city is introduced as a fixed location pattern here: J’habite à Paris.',
+      ],
+    },
+    grammar: {
+      topic: 'Regular -er Verbs',
+      explanation: 'Regular -er verbs are the largest verb family in French. Start with the infinitive, remove -er, and attach the present-tense ending for the subject: je parle, nous parlons, vous parlez.\n\nIn writing the endings differ, but in speech several forms sound the same: parle, parles, and parlent are pronounced alike. That means the subject pronoun does a lot of work, so keep it clear.',
+      examples: [
+        { french: 'Je parle français.', english: 'I speak French.', pronunciation: 'zhuh parl frahn-SAY', highlight: 'parle' },
+        { french: 'Nous habitons ici.', english: 'We live here.', pronunciation: 'noo zah-bee-TOHN ee-SEE', highlight: 'habitons' },
+        { french: 'Vous travaillez beaucoup.', english: 'You work a lot.', pronunciation: 'voo tra-vah-YAY bo-KOO', highlight: 'travaillez' },
+      ],
+      patterns: ['infinitive: parler', 'stem: parl-', 'je/tu/il forms sound alike', 'nous adds -ons', 'vous adds -ez', 'ils/elles add silent -ent'],
+      conjugation_tables: [{ verb: 'parler', rows: parler }],
+      tip: "The -e, -es, and -e forms all sound identical. In speech, you already sound natural if you know the stem.",
+    },
+    vocabulary: [
+      v('parler', 'to speak', 'par-LAY', 'Je parle français.', 'I speak French.', 'verbs'),
+      v('habiter', 'to live', 'ah-bee-TAY', 'J’habite à Paris.', 'I live in Paris.', 'verbs'),
+      v('travailler', 'to work', 'tra-vah-YAY', 'Nous travaillons beaucoup.', 'We work a lot.', 'verbs'),
+      v('aimer', 'to like / love', 'eh-MAY', 'Tu aimes Paris.', 'You like Paris.', 'verbs'),
+      v('écouter', 'to listen', 'ay-koo-TAY', 'Nous écoutons Emma.', 'We listen to Emma.', 'verbs'),
+      v('regarder', 'to watch / look at', 'ruh-gar-DAY', 'Tu regardes Marie.', 'You look at Marie.', 'verbs'),
+      v('étudier', 'to study', 'ay-too-DYAY', 'J’étudie ici.', 'I study here.', 'verbs'),
+      v('marcher', 'to walk', 'mar-SHAY', 'Elle marche ici.', 'She walks here.', 'verbs'),
+      v('chanter', 'to sing', 'shahn-TAY', 'Ils chantent souvent.', 'They often sing.', 'verbs'),
+      v('danser', 'to dance', 'dahn-SAY', 'Elles dansent beaucoup.', 'They dance a lot.', 'verbs'),
+      v('jouer', 'to play', 'zhoo-AY', 'Nous jouons ici.', 'We play here.', 'verbs'),
+      v('beaucoup', 'a lot', 'bo-KOO', 'Nous travaillons beaucoup.', 'We work a lot.', 'adverbs'),
+      v('souvent', 'often', 'soo-VAHN', 'Tu écoutes souvent.', 'You often listen.', 'adverbs'),
+      v('toujours', 'always', 'too-ZHOOR', 'Je parle toujours.', 'I always speak.', 'adverbs'),
+      v('jamais', 'never', 'zha-MEH', 'Je chante jamais.', 'I never sing.', 'adverbs'),
+      v('aussi', 'also / too', 'oh-SEE', 'Moi aussi.', 'Me too.', 'adverbs'),
+      v('maintenant', 'now', 'man-tuh-NAHN', 'Nous travaillons maintenant.', 'We work now.', 'time'),
+      v('avec', 'with', 'ah-VEK', 'Je travaille avec Emma.', 'I work with Emma.', 'connectors'),
+    ],
+    exercises: [
+      { id: 'l3-e1', type: 'conjugation', question: 'Conjugate parler for all six pronouns.', verb: 'parler', correct_answer: parler, explanation: 'Parler uses the regular -er endings.' },
+      { id: 'l3-e2', type: 'conjugation', question: 'Conjugate habiter for all six pronouns.', verb: 'habiter', correct_answer: [row('je', 'habite', 'ah-BEET'), row('tu', 'habites', 'ah-BEET'), row('il/elle/on', 'habite', 'ah-BEET'), row('nous', 'habitons', 'ah-bee-TOHN'), row('vous', 'habitez', 'ah-bee-TAY'), row('ils/elles', 'habitent', 'ah-BEET')], explanation: 'Habiter follows the same endings as parler.' },
+      { id: 'l3-e3', type: 'matching', question: 'Match infinitives to meanings.', pairs: [{ french: 'parler', english: 'to speak' }, { french: 'habiter', english: 'to live' }, { french: 'travailler', english: 'to work' }, { french: 'écouter', english: 'to listen' }], explanation: 'The infinitive is the dictionary form.' },
+      { id: 'l3-e4', type: 'multiple_choice', question: 'Choose the correct form: nous ___ français.', options: ['parle', 'parlez', 'parlons'], correct_answer: 'parlons', explanation: 'Nous takes -ons.' },
+      { id: 'l3-e5', type: 'fill_blank', question: 'Tu ___ à Paris.', correct_answer: 'habites', explanation: 'Tu takes -es in writing.' },
+      { id: 'l3-e6', type: 'translation', question: 'EN→FR: I study French.', direction: 'en_to_fr', correct_answer: 'J’étudie le français.', explanation: 'Étudier becomes j’étudie.' },
+      { id: 'l3-e7', type: 'translation', question: 'EN→FR: We work a lot.', direction: 'en_to_fr', correct_answer: 'Nous travaillons beaucoup.', explanation: 'Nous takes travaillons.' },
+      { id: 'l3-e8', type: 'speaking_prompt', question: 'Introduce yourself with three -er verbs.', model_answer: 'Je parle français, j’habite à Paris et j’étudie beaucoup.', translation: 'I speak French, I live in Paris, and I study a lot.', tip: 'Moi and toi are emphatic pronouns you can use now; you will study the full set later.' },
+    ],
+  }),
+
+  makeBase(4, 'Articles and Gender', 'Les Articles et le Genre', 'Use le, la, l’, les, un, une, des, noun gender, plurals, and article contractions.', 2, ['articles', 'gender', 'market'], {
+    learning_objectives: [
+      'Choose definite and indefinite articles',
+      'Identify common masculine and feminine noun patterns',
+      'Make regular nouns plural',
+      'Recognize au, du, aux, and des as contractions',
+    ],
+    prerequisite_lessons: ['beginner-3'],
+    dialogue: {
+      title: 'Au marché',
+      context: 'Two friends at an outdoor market choose items using indefinite articles only.',
+      exchanges: [
+        { speaker: 'Sofia', french: 'Le marché est grand.', english: 'The market is big.', pronunciation: 'luh mar-SHAY ay grahn' },
+        { speaker: 'Hugo', french: 'Oui, il est très animé.', english: 'Yes, it is very lively.', pronunciation: 'wee eel ay tray ah-nee-MAY' },
+        { speaker: 'Sofia', french: 'J’achète une baguette et un fromage.', english: 'I am buying a baguette and a cheese.', pronunciation: 'zah-SHET oon ba-GET ay uhn fro-MAZH' },
+        { speaker: 'Hugo', french: 'Moi, j’achète des légumes.', english: 'Me, I am buying vegetables.', pronunciation: 'mwah zah-SHET day lay-GOOM' },
+        { speaker: 'Sofia', french: 'La fromagerie est là.', english: 'The cheese shop is there.', pronunciation: 'lah fro-mah-zhuh-REE ay lah' },
+        { speaker: 'Hugo', french: 'Et la boulangerie est ici.', english: 'And the bakery is here.', pronunciation: 'ay lah boo-lahn-zhuh-REE ay ee-SEE' },
+        { speaker: 'Sofia', french: 'Un sac est utile.', english: 'A bag is useful.', pronunciation: 'uhn sak ay oo-TEEL' },
+        { speaker: 'Hugo', french: 'Oui, les sacs sont ici.', english: 'Yes, the bags are here.', pronunciation: 'wee lay sak sohn ee-SEE' },
+      ],
+      cultural_notes: [
+        'Outdoor markets in French cities usually happen on set mornings rather than all day every day.',
+        'Many French food shops are specialized: boulangerie for bread, fromagerie for cheese, boucherie for meat.',
+        'Learning nouns with articles is practical because gender affects adjectives, possessives, and later pronouns.',
+      ],
+    },
+    grammar: {
+      topic: 'Definite and Indefinite Articles',
+      explanation: 'Every French noun is grammatically masculine or feminine. This is a property of the word, not the real-world object. Learn nouns with an article from the beginning: le marché, la table, l’école.\n\nDefinite articles point to a known or general noun: le, la, l’, les. Indefinite articles introduce one item or an unspecified plural amount: un, une, des. These article choices matter because they control later adjective and possessive forms.',
+      examples: [
+        { french: 'le marché', english: 'the market', pronunciation: 'luh mar-SHAY', highlight: 'le' },
+        { french: 'une baguette', english: 'a baguette', pronunciation: 'oon ba-GET', highlight: 'une' },
+        { french: 'des légumes', english: 'some vegetables', pronunciation: 'day lay-GOOM', highlight: 'des' },
+      ],
+      patterns: ['le masculine singular', 'la feminine singular', "l’ before vowel or silent h", 'les plural', 'un masculine / une feminine', 'plural usually adds -s'],
+      tip: 'You cannot always predict gender from endings. Learn every noun with its article: le pain, la maison.',
+    },
+    vocabulary: [
+      v('le marché', 'market', 'luh mar-SHAY', 'Le marché est grand.', 'The market is big.', 'market', 'masculine'),
+      v('la boulangerie', 'bakery', 'lah boo-lahn-zhuh-REE', 'La boulangerie est ici.', 'The bakery is here.', 'shops', 'feminine'),
+      v('la boucherie', 'butcher shop', 'lah boosh-REE', 'La boucherie est petite.', 'The butcher shop is small.', 'shops', 'feminine'),
+      v('la fromagerie', 'cheese shop', 'lah fro-mah-zhuh-REE', 'La fromagerie est là.', 'The cheese shop is there.', 'shops', 'feminine'),
+      v("l'épicerie", 'grocery shop', 'lay-pees-REE', "L'épicerie est utile.", 'The grocery shop is useful.', 'shops', 'feminine'),
+      v('le pain', 'bread', 'luh pan', 'Un pain est ici.', 'A loaf is here.', 'food', 'masculine'),
+      v('la baguette', 'baguette', 'lah ba-GET', 'Une baguette est petite.', 'A baguette is small.', 'food', 'feminine'),
+      v('le fromage', 'cheese', 'luh fro-MAZH', 'Un fromage est bon.', 'A cheese is good.', 'food', 'masculine'),
+      v('la viande', 'meat', 'lah vee-AHND', 'Une viande est chère.', 'A meat is expensive.', 'food', 'feminine'),
+      v('le légume', 'vegetable', 'luh lay-GOOM', 'Des légumes sont ici.', 'Vegetables are here.', 'food', 'masculine'),
+      v('le fruit', 'fruit', 'luh frwee', 'Un fruit est bon.', 'A fruit is good.', 'food', 'masculine'),
+      v('le poisson', 'fish', 'luh pwah-SOHN', 'Un poisson est là.', 'A fish is there.', 'food', 'masculine'),
+      v('le livre', 'book', 'luh LEE-vruh', 'Le livre est utile.', 'The book is useful.', 'objects', 'masculine'),
+      v('le stylo', 'pen', 'luh stee-LOH', 'Un stylo est ici.', 'A pen is here.', 'objects', 'masculine'),
+      v('le sac', 'bag', 'luh sak', 'Le sac est grand.', 'The bag is big.', 'objects', 'masculine'),
+      v('la table', 'table', 'lah TAHBL', 'La table est libre.', 'The table is free.', 'objects', 'feminine'),
+      v('la chaise', 'chair', 'lah shez', 'Une chaise est libre.', 'A chair is free.', 'objects', 'feminine'),
+      v('la fenêtre', 'window', 'lah fuh-NETR', 'La fenêtre est grande.', 'The window is big.', 'objects', 'feminine'),
+      v('la maison', 'house', 'lah meh-ZOHN', 'La maison est grande.', 'The house is big.', 'places', 'feminine'),
+      v("l'école", 'school', 'lay-KOL', "L'école est ici.", 'The school is here.', 'places', 'feminine'),
+    ],
+    exercises: [
+      { id: 'l4-e1', type: 'gender_sort', question: 'Sort these nouns by gender.', items: [{ word: 'marché', gender: 'masculine', article: 'le' }, { word: 'boulangerie', gender: 'feminine', article: 'la' }, { word: 'fromage', gender: 'masculine', article: 'le' }, { word: 'table', gender: 'feminine', article: 'la' }, { word: 'sac', gender: 'masculine', article: 'le' }, { word: 'maison', gender: 'feminine', article: 'la' }], explanation: 'Gender must be learned with the noun.' },
+      { id: 'l4-e2', type: 'fill_blank', question: '___ marché est grand.', correct_answer: 'Le', explanation: 'Marché is masculine singular.' },
+      { id: 'l4-e3', type: 'fill_blank', question: 'J’achète ___ baguette.', correct_answer: 'une', explanation: 'Baguette is feminine singular.' },
+      { id: 'l4-e4', type: 'matching', question: 'Match contractions.', pairs: [{ french: 'de + le', english: 'du' }, { french: 'à + le', english: 'au' }, { french: 'de + les', english: 'des' }, { french: 'à + les', english: 'aux' }], explanation: 'These are contractions, not optional spellings.' },
+      { id: 'l4-e5', type: 'multiple_choice', question: 'What is the regular plural of livre?', options: ['livres', 'livreaux', 'livrent'], correct_answer: 'livres', explanation: 'Most nouns add -s in writing.' },
+      { id: 'l4-e6', type: 'matching', question: 'Match nouns to articles.', pairs: [{ french: 'le', english: 'marché' }, { french: 'la', english: 'table' }, { french: "l'", english: 'école' }, { french: 'les', english: 'sacs' }], explanation: 'Choose by gender, number, and first sound.' },
+      { id: 'l4-e7', type: 'translation', question: 'EN→FR: The bakery is here.', direction: 'en_to_fr', correct_answer: 'La boulangerie est ici.', explanation: 'Boulangerie is feminine.' },
+      { id: 'l4-e8', type: 'fill_blank', question: 'J’achète ___ légumes.', correct_answer: 'des', explanation: 'Use des for plural indefinite nouns.' },
+    ],
+  }),
+
+  makeBase(5, 'Adjectives', 'Les Adjectifs', 'Make adjectives agree in gender and number, and place common adjectives correctly.', 3, ['adjectives', 'agreement', 'apartment'], {
+    learning_objectives: [
+      'Make regular adjectives feminine and plural',
+      'Recognize common irregular adjective forms',
+      'Place BAGS adjectives before the noun',
+      'Describe apartments with accurate agreement',
+    ],
+    prerequisite_lessons: ['beginner-4'],
+    dialogue: {
+      title: 'Un appartement à louer',
+      context: 'Two flatmates compare apartment listings and describe what they see.',
+      exchanges: [
+        { speaker: 'Inès', french: 'Le nouvel appartement est grand.', english: 'The new apartment is big.', pronunciation: 'luh noo-VEL ah-part-mahn ay grahn' },
+        { speaker: 'Tom', french: 'Oui, mais la cuisine est petite.', english: 'Yes, but the kitchen is small.', pronunciation: 'wee meh lah kwee-ZEEN ay puh-TEET' },
+        { speaker: 'Inès', french: 'Les chambres sont belles.', english: 'The bedrooms are beautiful.', pronunciation: 'lay SHAHM-bruh sohn bel' },
+        { speaker: 'Tom', french: 'Et le salon est très lumineux.', english: 'And the living room is very bright.', pronunciation: 'ay luh sa-LOHN ay tray loo-mee-NUH' },
+        { speaker: 'Inès', french: 'Le vieux quartier est intéressant.', english: 'The old neighborhood is interesting.', pronunciation: 'luh vyuh kar-TYAY ay an-tay-ray-SAHN' },
+        { speaker: 'Tom', french: 'Mais les loyers sont chers.', english: 'But the rents are expensive.', pronunciation: 'meh lay lwa-YAY sohn shehr' },
+        { speaker: 'Inès', french: 'Une bonne adresse est rare.', english: 'A good address is rare.', pronunciation: 'oon bun ah-DRES ay rahr' },
+        { speaker: 'Tom', french: 'Alors, nous regardons une autre annonce.', english: 'So, we look at another listing.', pronunciation: 'ah-LOR noo ruh-gar-DOHN oon ohtr ah-NOHNS' },
+      ],
+      cultural_notes: [
+        'French rental ads often abbreviate room counts: T1, T2, T3 indicate the number of main rooms, excluding kitchen and bathroom.',
+        'In large cities, “lumineux” is a practical selling point because many older apartments have small windows or interior courtyards.',
+        'Listings commonly mention the étage and whether there is an ascenseur, especially in older Parisian buildings.',
+      ],
+    },
+    grammar: {
+      topic: 'Adjective Agreement and Placement',
+      explanation: 'French adjectives usually agree with the noun they describe. If the noun is feminine, many adjectives add -e; if it is plural, many add -s. This agreement is visible in writing even when the pronunciation barely changes.\n\nMost descriptive adjectives come after the noun, but a small group of very common adjectives usually comes before it: beauty, age, goodness, and size. That is why you see une petite cuisine but une cuisine lumineuse.',
+      examples: [
+        { french: 'un appartement cher', english: 'an expensive apartment', pronunciation: 'uhn ah-part-mahn shehr', highlight: 'cher' },
+        { french: 'une petite cuisine', english: 'a small kitchen', pronunciation: 'oon puh-TEET kwee-ZEEN', highlight: 'petite' },
+        { french: 'des chambres belles', english: 'beautiful bedrooms', pronunciation: 'day SHAHM-bruh bel', highlight: 'belles' },
+      ],
+      patterns: ['masculine: grand', 'feminine: grande', 'plural: grands/grandes', 'most adjectives follow the noun', 'BAGS adjectives usually precede the noun', 'beau/nouveau/vieux have special vowel forms'],
+      tip: 'Remember BAGS: Beauty, Age, Goodness, Size. These frequent adjectives usually go before the noun.',
+    },
+    vocabulary: [
+      v('grand / grande', 'big / tall', 'grahn / grahnd', 'Le salon est grand.', 'The living room is big.', 'adjectives'),
+      v('petit / petite', 'small', 'puh-TEE / puh-TEET', 'La cuisine est petite.', 'The kitchen is small.', 'adjectives'),
+      v('beau / belle', 'beautiful', 'boh / bel', 'Les chambres sont belles.', 'The bedrooms are beautiful.', 'adjectives'),
+      v('bon / bonne', 'good', 'bohn / bun', 'Une bonne adresse est rare.', 'A good address is rare.', 'adjectives'),
+      v('mauvais / mauvaise', 'bad', 'moh-VEH / moh-VEZ', 'Le quartier est mauvais.', 'The neighborhood is bad.', 'adjectives'),
+      v('nouveau / nouvelle', 'new', 'noo-VOH / noo-VEL', 'Le nouvel appartement est grand.', 'The new apartment is big.', 'adjectives'),
+      v('vieux / vieille', 'old', 'vyuh / vyeh-yuh', 'Le vieux quartier est intéressant.', 'The old neighborhood is interesting.', 'adjectives'),
+      v('jeune', 'young', 'zhuhn', 'La jeune voisine est ici.', 'The young neighbor is here.', 'adjectives'),
+      v('long / longue', 'long', 'lohn / long', 'La rue est longue.', 'The street is long.', 'adjectives'),
+      v('court / courte', 'short', 'koor / koort', 'La visite est courte.', 'The visit is short.', 'adjectives'),
+      v('chaud / chaude', 'warm / hot', 'shoh / shohd', 'La chambre est chaude.', 'The bedroom is warm.', 'adjectives'),
+      v('froid / froide', 'cold', 'frwah / frwahd', 'La pièce est froide.', 'The room is cold.', 'adjectives'),
+      v('rapide', 'fast', 'rah-PEED', 'La visite est rapide.', 'The visit is fast.', 'adjectives'),
+      v('lent / lente', 'slow', 'lahn / lahnt', 'Le bus est lent.', 'The bus is slow.', 'adjectives'),
+      v('cher / chère', 'expensive', 'shehr', 'Les loyers sont chers.', 'The rents are expensive.', 'adjectives'),
+      v('facile', 'easy', 'fah-SEEL', 'La décision est facile.', 'The decision is easy.', 'adjectives'),
+      v('difficile', 'difficult', 'dee-fee-SEEL', 'Le choix est difficile.', 'The choice is difficult.', 'adjectives'),
+      v('intéressant / intéressante', 'interesting', 'an-tay-ray-SAHN / an-tay-ray-SAHNT', 'Le quartier est intéressant.', 'The neighborhood is interesting.', 'adjectives'),
+      v('ennuyeux / ennuyeuse', 'boring', 'ahn-nwee-YUH / ahn-nwee-YUHZ', 'La visite est ennuyeuse.', 'The visit is boring.', 'adjectives'),
+      v('lumineux / lumineuse', 'bright', 'loo-mee-NUH / loo-mee-NUHZ', 'La pièce est lumineuse.', 'The room is bright.', 'adjectives'),
+    ],
+    exercises: [
+      { id: 'l5-e1', type: 'transformation', question: 'Change masculine adjectives to feminine.', instruction: 'masculine_to_feminine', items: [{ original: 'grand', transformed: 'grande', translation: 'big' }, { original: 'petit', transformed: 'petite', translation: 'small' }, { original: 'cher', transformed: 'chère', translation: 'expensive' }], explanation: 'Most feminine adjective forms add -e, with spelling or accent changes when needed.' },
+      { id: 'l5-e2', type: 'transformation', question: 'Change singular phrases to plural.', instruction: 'singular_to_plural', items: [{ original: 'un grand salon', transformed: 'des grands salons', translation: 'big living rooms' }, { original: 'une petite chambre', transformed: 'des petites chambres', translation: 'small bedrooms' }], explanation: 'Plural nouns and adjectives usually add -s.' },
+      { id: 'l5-e3', type: 'fill_blank', question: 'La cuisine est ___.', correct_answer: 'petite', explanation: 'Cuisine is feminine, so petit becomes petite.' },
+      { id: 'l5-e4', type: 'multiple_choice', question: 'Which adjective usually goes before the noun?', options: ['rouge', 'petit', 'intéressant'], correct_answer: 'petit', explanation: 'Size adjectives are BAGS adjectives.' },
+      { id: 'l5-e5', type: 'matching', question: 'Match adjectives to antonyms.', pairs: [{ french: 'grand', english: 'petit' }, { french: 'bon', english: 'mauvais' }, { french: 'rapide', english: 'lent' }, { french: 'facile', english: 'difficile' }], explanation: 'Learning adjective pairs builds useful contrast.' },
+      { id: 'l5-e6', type: 'translation', question: 'EN→FR: The new apartment is big.', direction: 'en_to_fr', correct_answer: "Le nouvel appartement est grand.", explanation: 'Use nouvel before a masculine vowel-starting noun.' },
+      { id: 'l5-e7', type: 'translation', question: 'EN→FR: The rooms are beautiful.', direction: 'en_to_fr', correct_answer: 'Les chambres sont belles.', explanation: 'Chambres is feminine plural, so belles.' },
+      { id: 'l5-e8', type: 'fill_blank', question: 'Les loyers sont ___.', correct_answer: 'chers', explanation: 'Loyers is masculine plural, so cher becomes chers.' },
+    ],
+  }),
+
+  makeBase(6, 'Possessive Adjectives', 'Les Adjectifs Possessifs', 'Use mon, ma, mes and the full possessive adjective system with family vocabulary.', 3, ['possessives', 'family'], {
+    learning_objectives: [
+      'Choose the correct possessive adjective for a noun',
+      'Explain why possessives agree with the noun, not the owner',
+      'Use family vocabulary in short descriptions',
+      'Use mon before feminine nouns that begin with a vowel sound',
+    ],
+    prerequisite_lessons: ['beginner-5'],
+    dialogue: {
+      title: 'Un dîner en famille',
+      context: 'At a family dinner, relatives introduce people around the table.',
+      exchanges: [
+        { speaker: 'Camille', french: 'Voici mon père et ma mère.', english: 'Here are my father and my mother.', pronunciation: 'vwah-SEE mohn pehr ay mah mehr' },
+        { speaker: 'Noah', french: 'Votre père est très sympa.', english: 'Your father is very nice.', pronunciation: 'votr pehr ay tray sam-PAH' },
+        { speaker: 'Camille', french: 'Merci. Ma sœur habite à Lyon.', english: 'Thanks. My sister lives in Lyon.', pronunciation: 'mer-SEE mah suhr ah-BEET ah lee-OHN' },
+        { speaker: 'Noah', french: 'Et ton frère?', english: 'And your brother?', pronunciation: 'ay tohn frehr' },
+        { speaker: 'Camille', french: 'Mon frère travaille ici.', english: 'My brother works here.', pronunciation: 'mohn frehr tra-VIE ee-SEE' },
+        { speaker: 'Noah', french: 'Leur maison est belle.', english: 'Their house is beautiful.', pronunciation: 'luhr meh-ZOHN ay bel' },
+        { speaker: 'Camille', french: 'Oui, et nos cousins sont jeunes.', english: 'Yes, and our cousins are young.', pronunciation: 'wee ay noh koo-ZAN sohn zhuhn' },
+        { speaker: 'Noah', french: 'Votre famille est grande.', english: 'Your family is big.', pronunciation: 'votr fa-MEE ay grahnd' },
+      ],
+      cultural_notes: [
+        'Family meals in France often keep several generations in one conversation, especially on Sundays and holidays.',
+        'Voici is a fixed presentation word meaning “here is / here are”; it is useful before you formally study demonstratives.',
+        'Possessives are frequent because French avoids repeating “de + person” once ownership is clear.',
+      ],
+    },
+    grammar: {
+      topic: 'Possessive Adjectives',
+      explanation: 'Possessive adjectives tell whose noun it is: my, your, his, her, our, their. In French, the form agrees with the noun being owned, not with the owner. Mon frère uses mon because frère is masculine; ma mère uses ma because mère is feminine.\n\nThis is why son père can mean his father or her father. Son agrees with père. Context tells you who the owner is.',
+      examples: [
+        { french: 'mon père', english: 'my father', pronunciation: 'mohn pehr', highlight: 'mon' },
+        { french: 'ma sœur', english: 'my sister', pronunciation: 'mah suhr', highlight: 'ma' },
+        { french: 'leurs enfants', english: 'their children', pronunciation: 'luhr zahn-FAHN', highlight: 'leurs' },
+      ],
+      patterns: ['mon/ma/mes', 'ton/ta/tes', 'son/sa/ses', 'notre/nos', 'votre/vos', 'leur/leurs'],
+      tip: 'The biggest mistake is matching the possessor. Sa mère can be his mother or her mother because mère is feminine.',
+    },
+    vocabulary: [
+      v('le père', 'father', 'luh pehr', 'Mon père est ici.', 'My father is here.', 'family', 'masculine'),
+      v('la mère', 'mother', 'lah mehr', 'Ma mère est ici.', 'My mother is here.', 'family', 'feminine'),
+      v('le frère', 'brother', 'luh frehr', 'Ton frère travaille.', 'Your brother works.', 'family', 'masculine'),
+      v('la sœur', 'sister', 'lah suhr', 'Ma sœur habite à Lyon.', 'My sister lives in Lyon.', 'family', 'feminine'),
+      v('le fils', 'son', 'luh fees', 'Son fils est jeune.', 'His son is young.', 'family', 'masculine'),
+      v('la fille', 'daughter / girl', 'lah fee', 'Sa fille est étudiante.', 'Her daughter is a student.', 'family', 'feminine'),
+      v('le grand-père', 'grandfather', 'luh grahn-pehr', 'Mon grand-père est français.', 'My grandfather is French.', 'family', 'masculine'),
+      v('la grand-mère', 'grandmother', 'lah grahn-mehr', 'Ma grand-mère est française.', 'My grandmother is French.', 'family', 'feminine'),
+      v("l'oncle", 'uncle', 'lohnkl', 'Mon oncle est professeur.', 'My uncle is a teacher.', 'family', 'masculine'),
+      v('la tante', 'aunt', 'lah tahnt', 'Ta tante est aimable.', 'Your aunt is kind.', 'family', 'feminine'),
+      v('le cousin', 'male cousin', 'luh koo-ZAN', 'Notre cousin est jeune.', 'Our cousin is young.', 'family', 'masculine'),
+      v('la cousine', 'female cousin', 'lah koo-ZEEN', 'Notre cousine est jeune.', 'Our cousin is young.', 'family', 'feminine'),
+      v('le mari', 'husband', 'luh ma-REE', 'Son mari est médecin.', 'Her husband is a doctor.', 'family', 'masculine'),
+      v('la femme', 'wife / woman', 'lah fam', 'Sa femme est ingénieure.', 'His wife is an engineer.', 'family', 'feminine'),
+      v("l'enfant", 'child', 'lahn-FAHN', 'Mon enfant est ici.', 'My child is here.', 'family', 'masculine'),
+      v('la maison', 'house', 'lah meh-ZOHN', 'Leur maison est belle.', 'Their house is beautiful.', 'objects', 'feminine'),
+      v("l'appartement", 'apartment', 'lah-part-mahn', 'Votre appartement est grand.', 'Your apartment is big.', 'objects', 'masculine'),
+      v('la voiture', 'car', 'lah vwah-TOOR', 'Sa voiture est rapide.', 'His car is fast.', 'objects', 'feminine'),
+      v('la chambre', 'bedroom', 'lah SHAHM-bruh', 'Ma chambre est petite.', 'My room is small.', 'objects', 'feminine'),
+      v('le travail', 'work / job', 'luh tra-VIE', 'Son travail est intéressant.', 'Her work is interesting.', 'objects', 'masculine'),
+    ],
+    exercises: [
+      { id: 'l6-e1', type: 'fill_blank', question: '___ mère est française. (my)', correct_answer: 'Ma', explanation: 'Mère is feminine singular.' },
+      { id: 'l6-e2', type: 'fill_blank', question: '___ enfants sont ici. (their)', correct_answer: 'Leurs', explanation: 'Enfants is plural, so use leurs.' },
+      { id: 'l6-e3', type: 'transformation', question: 'Replace “de Marie” with a possessive adjective.', instruction: 'informal_to_formal', items: [{ original: 'le père de Marie', transformed: 'son père', translation: 'her father' }, { original: 'la maison de Marie', transformed: 'sa maison', translation: 'her house' }], explanation: 'Son/sa/ses agree with the noun.' },
+      { id: 'l6-e4', type: 'multiple_choice', question: 'Which one fits voiture?', options: ['son', 'sa', 'ses'], correct_answer: 'sa', explanation: 'Voiture is feminine singular.' },
+      { id: 'l6-e5', type: 'translation', question: 'EN→FR: My brother works here.', direction: 'en_to_fr', correct_answer: 'Mon frère travaille ici.', explanation: 'Frère is masculine, so mon.' },
+      { id: 'l6-e6', type: 'gender_sort', question: 'Choose mon or ma by noun gender.', items: [{ word: 'père', gender: 'masculine', article: 'mon' }, { word: 'mère', gender: 'feminine', article: 'ma' }, { word: 'frère', gender: 'masculine', article: 'mon' }, { word: 'sœur', gender: 'feminine', article: 'ma' }], explanation: 'The possessive changes with the noun.' },
+      { id: 'l6-e7', type: 'matching', question: 'Match possessive forms.', pairs: [{ french: 'mon', english: 'my + masculine singular' }, { french: 'ma', english: 'my + feminine singular' }, { french: 'mes', english: 'my + plural' }, { french: 'notre', english: 'our + singular' }], explanation: 'Person and noun form both matter.' },
+      { id: 'l6-e8', type: 'speaking_prompt', question: 'Describe your family with possessives.', model_answer: 'Mon père est gentil, ma mère est française et mes cousins sont jeunes.', translation: 'My father is kind, my mother is French, and my cousins are young.', tip: 'Say the noun silently first, then choose the possessive.' },
+    ],
+  }),
+
+  makeBase(7, 'Numbers and Time', "Les Nombres et l'Heure", 'Use numbers 1-69 and tell time for daily schedules.', 2, ['time', 'numbers', 'schedule'], {
+    learning_objectives: [
+      'Build numbers from 1 to 69',
+      'Tell clock time with heures, et demie, and et quart',
+      'Ask à quelle heure',
+      'Describe a simple daily work schedule',
+    ],
+    prerequisite_lessons: ['beginner-6'],
+    dialogue: {
+      title: 'La journée au bureau',
+      context: 'Colleagues coordinate meetings, lunch, and a train time during the workday.',
+      exchanges: [
+        { speaker: 'Maya', french: 'À quelle heure est votre réunion?', english: 'What time is your meeting?', pronunciation: 'ah kel uhr ay votr ray-oo-NYOHN' },
+        { speaker: 'Éric', french: 'Elle est à neuf heures.', english: 'It is at nine o’clock.', pronunciation: 'el ay ah nuhf uhr' },
+        { speaker: 'Maya', french: 'Mon rendez-vous est à onze heures et demie.', english: 'My appointment is at eleven thirty.', pronunciation: 'mohn rahn-day-VOO ay ah onz uhr ay duh-MEE' },
+        { speaker: 'Éric', french: 'Nous avons le déjeuner à midi.', english: 'We have lunch at noon.', pronunciation: 'noo zah-VOHN luh day-zhuh-NAY ah mee-DEE' },
+        { speaker: 'Maya', french: 'Le train est à dix-huit heures quinze.', english: 'The train is at 18:15.', pronunciation: 'luh tran ay ah deez-weet uhr kanz' },
+        { speaker: 'Éric', french: 'Très bien. Je travaille maintenant.', english: 'Very good. I am working now.', pronunciation: 'tray byahn zhuh tra-VIE man-tuh-NAHN' },
+        { speaker: 'Maya', french: 'Vous êtes en avance.', english: 'You are early.', pronunciation: 'voo zet ahn nah-VAHNS' },
+        { speaker: 'Éric', french: 'Oui, je suis toujours à l’heure.', english: 'Yes, I am always on time.', pronunciation: 'wee zhuh swee too-ZHOOR ah luhr' },
+      ],
+      cultural_notes: [
+        'Transport, office schedules, and television listings in France commonly use the 24-hour clock.',
+        'Midi is noon; minuit is midnight. They are common words, not just formal clock labels.',
+        'Être à l’heure is valued in professional settings, while social dinners can allow more flexibility.',
+      ],
+    },
+    grammar: {
+      topic: 'Numbers 1-69 and Telling Time',
+      explanation: 'French numbers from 1 to 69 are the base for time, schedules, prices, and addresses. For the clock, use il est plus the hour: il est neuf heures. For scheduled events, use à: la réunion est à neuf heures.\n\nOfficial timetables often use the 24-hour clock, especially trains, appointments, and public information. In casual speech, people also use context such as du matin, de l’après-midi, or du soir.',
+      examples: [
+        { french: 'Il est neuf heures.', english: 'It is nine o’clock.', pronunciation: 'eel ay nuhf uhr', highlight: 'heures' },
+        { french: 'Il est dix heures et demie.', english: 'It is ten thirty.', pronunciation: 'eel ay deez uhr ay duh-MEE', highlight: 'et demie' },
+        { french: 'À quelle heure est la réunion?', english: 'What time is the meeting?', pronunciation: 'ah kel uhr ay lah ray-oo-NYOHN', highlight: 'À quelle heure' },
+      ],
+      patterns: ['1-16 have special forms', '17-19 combine dix plus number', '20-69 use tens plus units', 'Il est X heures', 'et demie = half past', 'et quart = quarter past'],
+      tip: 'Official French times use 24-hour format. Dix-huit heures trente is normal for 18:30.',
+    },
+    vocabulary: [
+      v('vingt et un', 'twenty-one', 'van tay uhn', 'Il est vingt et une heures.', 'It is 21:00.', 'numbers'),
+      v('trente', 'thirty', 'trahnt', 'J’ai trente ans.', 'I am thirty.', 'numbers'),
+      v('quarante', 'forty', 'kah-RAHNT', 'Il est quarante minutes.', 'It is forty minutes.', 'numbers'),
+      v('cinquante', 'fifty', 'san-KAHNT', 'J’ai cinquante euros.', 'I have fifty euros.', 'numbers'),
+      v('soixante', 'sixty', 'swah-SAHNT', 'Le rendez-vous est à soixante minutes.', 'The appointment is in sixty minutes.', 'numbers'),
+      v('heure', 'hour / o’clock', 'uhr', 'Il est neuf heures.', 'It is nine o’clock.', 'time', 'feminine'),
+      v('et demie', 'half past', 'ay duh-MEE', 'Il est dix heures et demie.', 'It is ten thirty.', 'time'),
+      v('et quart', 'quarter past', 'ay kar', 'Il est huit heures et quart.', 'It is quarter past eight.', 'time'),
+      v('moins le quart', 'quarter to', 'mwahn luh kar', 'Il est neuf heures moins le quart.', 'It is quarter to nine.', 'time'),
+      v('matin', 'morning', 'mah-TAN', 'Le matin est froid.', 'The morning is cold.', 'time', 'masculine'),
+      v('après-midi', 'afternoon', 'ah-preh mee-DEE', "L'après-midi est long.", 'The afternoon is long.', 'time', 'masculine'),
+      v('soir', 'evening', 'swahr', 'Le soir est calme.', 'The evening is calm.', 'time', 'masculine'),
+      v('nuit', 'night', 'nwee', 'La nuit est froide.', 'The night is cold.', 'time', 'feminine'),
+      v('tôt', 'early', 'toh', 'Je suis tôt.', 'I am early.', 'time'),
+      v('tard', 'late', 'tar', 'Vous êtes tard.', 'You are late.', 'time'),
+      v('en avance', 'early / ahead of time', 'ahn nah-VAHNS', 'Vous êtes en avance.', 'You are early.', 'time'),
+      v('en retard', 'late', 'ahn ruh-TAR', 'Nous sommes en retard.', 'We are late.', 'time'),
+      v("à l'heure", 'on time', 'ah luhr', "Je suis à l'heure.", 'I am on time.', 'time'),
+      v('lundi', 'Monday', 'luhn-DEE', 'Lundi est utile.', 'Monday is useful.', 'days'),
+      v('vendredi', 'Friday', 'vahn-druh-DEE', 'Vendredi est ici.', 'Friday is here.', 'days'),
+    ],
+    exercises: [
+      { id: 'l7-e1', type: 'matching', question: 'Match written numbers to digits.', pairs: [{ french: 'trente', english: '30' }, { french: 'quarante', english: '40' }, { french: 'cinquante', english: '50' }, { french: 'soixante', english: '60' }], explanation: 'Tens build the 20-69 range.' },
+      { id: 'l7-e2', type: 'fill_blank', question: '42 = quarante-___.', correct_answer: 'deux', explanation: '42 is forty-two.' },
+      { id: 'l7-e3', type: 'multiple_choice', question: 'Which means 9:30?', options: ['neuf heures et demie', 'neuf heures et quart', 'neuf heures moins le quart'], correct_answer: 'neuf heures et demie', explanation: 'Et demie means half past.' },
+      { id: 'l7-e4', type: 'fill_blank', question: 'Il est dix ___ et ___.', correct_answer: ['heures et demie', 'heures et demie.'], explanation: 'The common phrase is dix heures et demie.' },
+      { id: 'l7-e5', type: 'translation', question: 'EN→FR: The meeting is at nine o’clock.', direction: 'en_to_fr', correct_answer: 'La réunion est à neuf heures.', explanation: 'Use à for scheduled time.' },
+      { id: 'l7-e6', type: 'translation', question: 'EN→FR: I am on time.', direction: 'en_to_fr', correct_answer: "Je suis à l’heure.", explanation: 'Être à l’heure is the fixed phrase.' },
+      { id: 'l7-e7', type: 'multiple_choice', question: 'Which format is common for French transport?', options: ['24-hour clock', 'only 12-hour clock', 'Roman numerals'], correct_answer: '24-hour clock', explanation: 'Transport schedules normally use 24-hour time.' },
+      { id: 'l7-e8', type: 'speaking_prompt', question: 'Say one work appointment time.', model_answer: 'Mon rendez-vous est à quatorze heures trente.', translation: 'My appointment is at 14:30.', tip: 'Use à before the scheduled time.' },
+    ],
+  }),
+
+  makeBase(8, 'Partitives and Food', 'Les Articles Partitifs et la Nourriture', 'Use du, de la, de l’, des for food and switch to de after negation or quantity.', 3, ['partitives', 'food', 'shopping'], {
+    learning_objectives: [
+      'Choose partitive articles for portions and uncountable food',
+      'Contrast un/une/des with du/de la/de l’',
+      'Use de after negation and quantities',
+      'Use common grocery vocabulary',
+    ],
+    prerequisite_lessons: ['beginner-7'],
+    dialogue: {
+      title: 'Les courses',
+      context: 'Flatmates plan grocery shopping and talk about what they have and do not have.',
+      exchanges: [
+        { speaker: 'Lina', french: 'Nous achetons du pain et du fromage?', english: 'Are we buying bread and cheese?', pronunciation: 'noo zahsh-TOHN doo pan ay doo fro-MAZH' },
+        { speaker: 'Samir', french: 'Oui, et de la viande pour ce soir.', english: 'Yes, and some meat for tonight.', pronunciation: 'wee ay duh lah vee-AHND poor suh swahr' },
+        { speaker: 'Lina', french: 'Je mange des légumes, mais pas de viande.', english: 'I eat vegetables, but no meat.', pronunciation: 'zhuh mahnzh day lay-GOOM meh pah duh vee-AHND' },
+        { speaker: 'Samir', french: 'Alors, des tomates et des carottes.', english: 'So, tomatoes and carrots.', pronunciation: 'ah-LOR day toh-MAT ay day kah-ROT' },
+        { speaker: 'Lina', french: 'Nous avons de l’eau?', english: 'Do we have water?', pronunciation: 'noo zah-VOHN duh loh' },
+        { speaker: 'Samir', french: 'Non, nous n’avons pas d’eau.', english: 'No, we do not have water.', pronunciation: 'nohn noo nah-VOHN pah doh' },
+        { speaker: 'Lina', french: 'Je prends du café.', english: 'I’ll take coffee.', pronunciation: 'zhuh prahn doo kah-FAY' },
+        { speaker: 'Samir', french: 'Et moi, je voudrais du thé.', english: 'And I would like tea.', pronunciation: 'ay mwah zhuh voo-DREH doo tay' },
+      ],
+      cultural_notes: [
+        'French grocery shopping often combines supermarkets with specialized shops and weekly markets depending on neighborhood access.',
+        'Je prends is a practical fixed phrase for selecting food or drinks; it is common at counters and cafés.',
+        'Je voudrais is presented here only as a polite ordering phrase. The conditional grammar behind it is B1-level.',
+      ],
+    },
+    grammar: {
+      topic: 'Partitive Articles',
+      explanation: 'Partitive articles are used when you mean an unspecified amount of something, especially food and drink. English often says “some” or uses no article at all, but French needs one: du pain, de la viande, de l’eau.\n\nThe form depends on gender and sound: du for masculine, de la for feminine, de l’ before a vowel sound, and des for plural. After a negative or after quantity expressions, the article usually reduces to de or d’: pas de pain, beaucoup d’eau.',
+      examples: [
+        { french: 'Je mange du pain.', english: 'I eat bread.', pronunciation: 'zhuh mahnzh doo pan', highlight: 'du' },
+        { french: 'Nous avons de l’eau.', english: 'We have water.', pronunciation: 'noo zah-VOHN duh loh', highlight: "de l’" },
+        { french: 'Je ne mange pas de viande.', english: 'I do not eat meat.', pronunciation: 'zhuh nuh mahnzh pah duh vee-AHND', highlight: 'pas de' },
+      ],
+      patterns: ['du masculine', 'de la feminine', "de l’ before vowel or silent h", 'des plural portions', 'after negation use de/d’', 'after quantities use de/d’'],
+      tip: 'After ne...pas and expressions of quantity, the partitive shrinks to de: Je bois du café, but Je ne bois pas de café.',
+    },
+    vocabulary: [
+      v('le pain', 'bread', 'luh pan', 'Je mange du pain.', 'I eat bread.', 'food', 'masculine'),
+      v('le beurre', 'butter', 'luh buhr', 'Nous avons du beurre.', 'We have butter.', 'food', 'masculine'),
+      v('le fromage', 'cheese', 'luh fro-MAZH', 'Je mange du fromage.', 'I eat cheese.', 'food', 'masculine'),
+      v('la viande', 'meat', 'lah vee-AHND', 'Je ne mange pas de viande.', 'I do not eat meat.', 'food', 'feminine'),
+      v('le poulet', 'chicken', 'luh poo-LEH', 'Nous achetons du poulet.', 'We buy chicken.', 'food', 'masculine'),
+      v('le poisson', 'fish', 'luh pwah-SOHN', 'Elle mange du poisson.', 'She eats fish.', 'food', 'masculine'),
+      v('la tomate', 'tomato', 'lah toh-MAT', 'J’achète des tomates.', 'I buy tomatoes.', 'food', 'feminine'),
+      v('la carotte', 'carrot', 'lah kah-ROT', 'Tu manges des carottes.', 'You eat carrots.', 'food', 'feminine'),
+      v('le haricot', 'bean', 'luh ah-ree-KOH', 'Nous avons des haricots.', 'We have beans.', 'food', 'masculine'),
+      v('la pomme', 'apple', 'lah pum', 'Je mange une pomme.', 'I eat an apple.', 'food', 'feminine'),
+      v('la banane', 'banana', 'lah ba-NAN', 'Elle achète des bananes.', 'She buys bananas.', 'food', 'feminine'),
+      v('le raisin', 'grapes', 'luh reh-ZAN', 'Nous avons du raisin.', 'We have grapes.', 'food', 'masculine'),
+      v("l'eau", 'water', 'loh', 'Je bois de l’eau.', 'I drink water.', 'drinks', 'feminine'),
+      v('le lait', 'milk', 'luh leh', 'Tu prends du lait.', 'You take milk.', 'drinks', 'masculine'),
+      v('le jus', 'juice', 'luh zhoo', 'Il prend du jus.', 'He takes juice.', 'drinks', 'masculine'),
+      v('le café', 'coffee', 'luh kah-FAY', 'Je prends du café.', 'I take coffee.', 'drinks', 'masculine'),
+      v('le thé', 'tea', 'luh tay', 'Je voudrais du thé.', 'I would like tea.', 'drinks', 'masculine'),
+      v('le sucre', 'sugar', 'luh SOO-kruh', 'Je prends du sucre.', 'I take sugar.', 'food', 'masculine'),
+      v('le sel', 'salt', 'luh sel', 'Nous avons du sel.', 'We have salt.', 'food', 'masculine'),
+      v("l'huile", 'oil', 'lweel', 'J’achète de l’huile.', 'I buy oil.', 'food', 'feminine'),
+    ],
+    exercises: [
+      { id: 'l8-e1', type: 'fill_blank', question: 'Je mange ___ pain.', correct_answer: 'du', explanation: 'Pain is masculine and used as an unspecified amount.' },
+      { id: 'l8-e2', type: 'transformation', question: 'Make the partitive sentence negative.', instruction: 'affirmative_to_negative', items: [{ original: 'Je mange du pain.', transformed: 'Je ne mange pas de pain.', translation: 'I do not eat bread.' }, { original: 'Nous avons de l’eau.', transformed: 'Nous n’avons pas d’eau.', translation: 'We do not have water.' }], explanation: 'Partitives become de/d’ after negation.' },
+      { id: 'l8-e3', type: 'multiple_choice', question: 'Which fits an unspecified amount of meat?', options: ['un viande', 'de la viande', 'du viande'], correct_answer: 'de la viande', explanation: 'Viande is feminine and uncountable in this context.' },
+      { id: 'l8-e4', type: 'matching', question: 'Match food categories.', pairs: [{ french: 'pomme', english: 'fruit' }, { french: 'carotte', english: 'vegetable' }, { french: 'café', english: 'drink' }, { french: 'poulet', english: 'meat' }], explanation: 'Food categories help anticipate articles.' },
+      { id: 'l8-e5', type: 'translation', question: 'EN→FR: We do not have water.', direction: 'en_to_fr', correct_answer: "Nous n’avons pas d’eau.", explanation: 'Use d’ before a vowel after pas.' },
+      { id: 'l8-e6', type: 'gender_sort', question: 'Sort food nouns by gender.', items: [{ word: 'pain', gender: 'masculine', article: 'le' }, { word: 'viande', gender: 'feminine', article: 'la' }, { word: 'tomate', gender: 'feminine', article: 'la' }, { word: 'café', gender: 'masculine', article: 'le' }], explanation: 'Gender determines du or de la.' },
+      { id: 'l8-e7', type: 'fill_blank', question: 'Je voudrais ___ thé.', correct_answer: 'du', explanation: 'Thé is masculine; je voudrais is a fixed polite phrase here.' },
+      { id: 'l8-e8', type: 'speaking_prompt', question: 'Say three grocery items you need.', model_answer: 'J’achète du pain, de la viande et des tomates.', translation: 'I buy bread, meat, and tomatoes.', tip: 'Use partitives for unspecified amounts.' },
+    ],
+  }),
+
+  makeBase(9, 'Negation and Questions', 'La Négation et les Questions', 'Build negative sentences and ask questions with intonation, est-ce que, inversion, and question words.', 3, ['negation', 'questions'], {
+    learning_objectives: [
+      'Place ne and pas around a conjugated verb',
+      'Use n’ before vowel sounds',
+      'Ask questions with intonation and est-ce que',
+      'Choose common interrogative words',
+    ],
+    prerequisite_lessons: ['beginner-8'],
+    dialogue: {
+      title: 'Dans le couloir',
+      context: 'Two neighbours chat in the building hallway, asking questions and giving negative answers.',
+      exchanges: [
+        { speaker: 'Julie', french: 'Tu travailles aujourd’hui?', english: 'Are you working today?', pronunciation: 'too tra-VIE oh-zhoor-DWEE' },
+        { speaker: 'Karim', french: 'Non, je ne travaille pas.', english: 'No, I am not working.', pronunciation: 'nohn zhuh nuh tra-VIE pah' },
+        { speaker: 'Julie', french: 'Est-ce que tu regardes le match ce soir?', english: 'Are you watching the match tonight?', pronunciation: 'es-kuh too ruh-GARD luh match suh swahr' },
+        { speaker: 'Karim', french: 'Non, je n’aime pas le football.', english: 'No, I do not like football.', pronunciation: 'nohn zhuh nem pah luh foot-BOL' },
+        { speaker: 'Julie', french: 'Qu’est-ce que tu aimes?', english: 'What do you like?', pronunciation: 'kes-kuh too zem' },
+        { speaker: 'Karim', french: 'J’aime le cinéma et la musique.', english: 'I like cinema and music.', pronunciation: 'zhem luh see-nay-MAH ay lah moo-ZEEK' },
+        { speaker: 'Julie', french: 'Où habites-tu exactement?', english: 'Where do you live exactly?', pronunciation: 'oo ah-beet TOO egz-ak-tuh-MAHN' },
+        { speaker: 'Karim', french: 'J’habite au troisième étage.', english: 'I live on the third floor.', pronunciation: 'zha-BEET oh trwah-ZYEM ay-TAHZH' },
+        { speaker: 'Julie', french: 'Pourquoi tu ne marches pas?', english: 'Why aren’t you walking?', pronunciation: 'poor-KWAH too nuh marsh pah' },
+        { speaker: 'Karim', french: 'Parce que j’ai froid.', english: 'Because I am cold.', pronunciation: 'pars-kuh zhay frwah' },
+      ],
+      cultural_notes: [
+        'In spoken French, intonation questions are very common in casual neighbourly conversations.',
+        'The written ne is often dropped in speech, but learners should write both ne and pas.',
+        'Inversion such as habites-tu is formal and useful for recognition, even when est-ce que is safer for beginners.',
+      ],
+    },
+    grammar: {
+      topic: 'Negation and Question Forms',
+      explanation: 'The basic French negative wraps around the conjugated verb: ne before it and pas after it. Before a vowel sound, ne becomes n’: je n’aime pas. In informal speech people often drop ne, but careful written French keeps both parts.\n\nFrench questions have three common forms. Intonation keeps statement order, est-ce que adds a question marker, and inversion switches the subject and verb in more formal French.',
+      examples: [
+        { french: 'Je ne travaille pas.', english: 'I do not work.', pronunciation: 'zhuh nuh tra-VIE pah', highlight: 'ne...pas' },
+        { french: 'Est-ce que tu parles français?', english: 'Do you speak French?', pronunciation: 'es-kuh too parl frahn-SAY', highlight: 'Est-ce que' },
+        { french: 'Où habitez-vous?', english: 'Where do you live?', pronunciation: 'oo ah-bee-TAY voo', highlight: 'Où' },
+      ],
+      patterns: ['ne + verb + pas', "ne becomes n’ before a vowel", 'intonation: Tu parles français?', 'est-ce que + statement order', 'inversion is more formal', 'question word + question form'],
+      tip: 'In casual speech, natives often drop ne. Write both parts, but expect to hear Je sais pas instead of Je ne sais pas.',
+    },
+    vocabulary: [
+      v('où', 'where', 'oo', 'Où habitez-vous?', 'Where do you live?', 'questions'),
+      v('quand', 'when', 'kahn', 'Quand travaillez-vous?', 'When do you work?', 'questions'),
+      v('pourquoi', 'why', 'poor-KWAH', 'Pourquoi tu ne travailles pas?', 'Why aren’t you working?', 'questions'),
+      v('comment', 'how', 'koh-MAHN', 'Comment allez-vous?', 'How are you?', 'questions'),
+      v('qui', 'who', 'kee', 'Qui est ici?', 'Who is here?', 'questions'),
+      v('que', 'what', 'kuh', 'Que regardes-tu?', 'What are you watching?', 'questions'),
+      v('combien', 'how much / how many', 'kohm-BYAN', 'Combien de livres avez-vous?', 'How many books do you have?', 'questions'),
+      v('est-ce que', 'question marker', 'es-kuh', 'Est-ce que tu parles français?', 'Do you speak French?', 'questions'),
+      v('ne...pas', 'not', 'nuh pah', 'Je ne travaille pas.', 'I do not work.', 'negation'),
+      v("n'...pas", 'not before vowel', 'n pah', 'Je n’aime pas le football.', 'I do not like football.', 'negation'),
+      v('ne...jamais', 'never', 'nuh zha-MEH', 'Je ne chante jamais.', 'I never sing.', 'negative preview'),
+      v('ne...plus', 'no longer', 'nuh ploo', 'Je ne travaille plus ici.', 'I no longer work here.', 'negative preview'),
+      v('ne...rien', 'nothing', 'nuh ree-AHN', 'Je ne regarde rien.', 'I watch nothing.', 'negative preview'),
+      v('aussi', 'also', 'oh-SEE', 'J’aime aussi le cinéma.', 'I also like cinema.', 'connectors'),
+      v('non plus', 'not either', 'nohn ploo', 'Moi non plus.', 'Me neither.', 'connectors'),
+      v('si', 'yes, contrary to a negative', 'see', 'Si, je travaille.', 'Yes, I do work.', 'answers'),
+    ],
+    exercises: [
+      { id: 'l9-e1', type: 'transformation', question: 'Make these sentences negative.', instruction: 'affirmative_to_negative', items: [{ original: 'Je travaille.', transformed: 'Je ne travaille pas.', translation: 'I do not work.' }, { original: 'Tu aimes le café.', transformed: 'Tu n’aimes pas le café.', translation: 'You do not like coffee.' }, { original: 'Nous regardons le film.', transformed: 'Nous ne regardons pas le film.', translation: 'We do not watch the film.' }], explanation: 'Put ne/n’ before the verb and pas after it.' },
+      { id: 'l9-e2', type: 'fill_blank', question: 'Je ___ travaille ___ aujourd’hui.', correct_answer: ['ne pas', 'ne, pas'], explanation: 'The two negation words surround the verb.' },
+      { id: 'l9-e3', type: 'multiple_choice', question: 'Which question word fits: ___ habites-tu? À Lyon.', options: ['Où', 'Quand', 'Pourquoi'], correct_answer: 'Où', explanation: 'À Lyon answers where.' },
+      { id: 'l9-e4', type: 'matching', question: 'Match questions to answers.', pairs: [{ french: 'Où habites-tu?', english: 'À Paris.' }, { french: 'Quand travailles-tu?', english: 'Aujourd’hui.' }, { french: 'Combien de livres?', english: 'Trois.' }, { french: 'Pourquoi?', english: 'Parce que j’ai froid.' }], explanation: 'Question words predict answer type.' },
+      { id: 'l9-e5', type: 'translation', question: 'EN→FR: Do you speak French?', direction: 'en_to_fr', correct_answer: ['Tu parles français?', 'Est-ce que tu parles français?', 'Parles-tu français?'], explanation: 'All three forms are possible.' },
+      { id: 'l9-e6', type: 'translation', question: 'EN→FR: I do not like coffee.', direction: 'en_to_fr', correct_answer: 'Je n’aime pas le café.', explanation: 'Use n’ before aime.' },
+      { id: 'l9-e7', type: 'fill_blank', question: '___ tu aimes le cinéma?', correct_answer: 'Est-ce que', explanation: 'Est-ce que turns statement order into a question.' },
+      { id: 'l9-e8', type: 'speaking_prompt', question: 'Ask and answer one negative question.', model_answer: 'Tu travailles ce soir? Non, je ne travaille pas.', translation: 'Are you working tonight? No, I am not working.', tip: 'In speech, keep the rhythm light, but write both ne and pas.' },
+    ],
+  }),
+
+  makeBase(10, 'Prepositions and Places', 'Les Prépositions et les Lieux', 'Describe location, city places, aller destinations, and il y a.', 3, ['places', 'prepositions', 'directions'], {
+    learning_objectives: [
+      'Use common prepositions of place',
+      'Choose à, en, au, and aux for destinations',
+      'Use il y a as a fixed there is / there are structure',
+      'Give simple directions in a city',
+    ],
+    prerequisite_lessons: ['beginner-9'],
+    dialogue: {
+      title: 'Directions à Lyon',
+      context: 'A tourist asks a local for directions to the station, a pharmacy, and a museum.',
+      exchanges: [
+        { speaker: 'Touriste', french: 'Bonjour, où est la gare?', english: 'Hello, where is the station?', pronunciation: 'bon-ZHOOR oo ay lah gar' },
+        { speaker: 'Locale', french: 'La gare est près du musée.', english: 'The station is near the museum.', pronunciation: 'lah gar ay preh doo moo-ZAY' },
+        { speaker: 'Touriste', french: 'Je vais à la gare maintenant.', english: 'I am going to the station now.', pronunciation: 'zhuh veh ah lah gar man-tuh-NAHN' },
+        { speaker: 'Locale', french: 'Tournez à droite et traversez la rue.', english: 'Turn right and cross the street.', pronunciation: 'toor-NAY ah drwaht ay tra-vehr-SAY lah roo' },
+        { speaker: 'Touriste', french: 'Il y a une pharmacie ici?', english: 'Is there a pharmacy here?', pronunciation: 'eel yah oon far-mah-SEE ee-SEE' },
+        { speaker: 'Locale', french: 'Oui, il y a une pharmacie derrière la banque.', english: 'Yes, there is a pharmacy behind the bank.', pronunciation: 'wee eel yah oon far-mah-SEE deh-RYEHR lah bahnk' },
+        { speaker: 'Touriste', french: 'Et le parc?', english: 'And the park?', pronunciation: 'ay luh park' },
+        { speaker: 'Locale', french: 'Le parc est entre la mairie et la bibliothèque.', english: 'The park is between city hall and the library.', pronunciation: 'luh park ay ahntr lah meh-REE ay lah bee-blee-oh-TEK' },
+        { speaker: 'Touriste', french: 'Merci, je continue tout droit.', english: 'Thanks, I continue straight ahead.', pronunciation: 'mer-SEE zhuh kon-tee-NOO too drwah' },
+        { speaker: 'Locale', french: 'Oui, et vous allez au musée après.', english: 'Yes, and you go to the museum afterward.', pronunciation: 'wee ay voo zah-LAY oh moo-ZAY ah-PREH' },
+      ],
+      cultural_notes: [
+        'French city centers often use landmarks such as mairie, gare, and pharmacie for directions.',
+        'Pharmacies in France are highly visible because of their green cross signs and can give basic medical advice.',
+        'À droite and à gauche are essential street-direction phrases; locals often combine them with landmarks.',
+      ],
+    },
+    grammar: {
+      topic: 'Prepositions, Aller, and Il y a',
+      explanation: 'Prepositions show where something is in relation to something else: sur, sous, devant, derrière, entre, près de. They let you describe rooms, streets, landmarks, and directions without needing long sentences.\n\nFor destinations, aller combines with different forms: à for cities, au for masculine singular places with le, aux for plural places with les, and en for many feminine countries. Il y a is a fixed expression meaning “there is” or “there are.”',
+      examples: [
+        { french: 'La pharmacie est derrière la banque.', english: 'The pharmacy is behind the bank.', pronunciation: 'lah far-mah-SEE ay deh-RYEHR lah bahnk', highlight: 'derrière' },
+        { french: 'Je vais au musée.', english: 'I am going to the museum.', pronunciation: 'zhuh veh oh moo-ZAY', highlight: 'au' },
+        { french: 'Il y a une gare.', english: 'There is a station.', pronunciation: 'eel yah oon gar', highlight: 'Il y a' },
+      ],
+      patterns: ['à / dans / sur / sous', 'devant / derrière / entre', 'près de / loin de', 'à + city', 'au = à + le and aux = à + les', 'il y a is fixed'],
+      conjugation_tables: [{ verb: 'aller', rows: [row('je', 'vais', 'veh'), row('tu', 'vas', 'vah'), row('il/elle/on', 'va', 'vah'), row('nous', 'allons', 'ah-LOHN'), row('vous', 'allez', 'ah-LAY'), row('ils/elles', 'vont', 'vohn')] }],
+      tip: 'Cities never take an article: Je vais à Paris, not Je vais au Paris.',
+    },
+    vocabulary: [
+      v('la gare', 'train station', 'lah gar', 'La gare est près du musée.', 'The station is near the museum.', 'city', 'feminine'),
+      v("l'aéroport", 'airport', 'leh-roh-POR', "L'aéroport est loin.", 'The airport is far.', 'city', 'masculine'),
+      v('le musée', 'museum', 'luh moo-ZAY', 'Je vais au musée.', 'I am going to the museum.', 'city', 'masculine'),
+      v('la bibliothèque', 'library', 'lah bee-blee-oh-TEK', 'La bibliothèque est grande.', 'The library is big.', 'city', 'feminine'),
+      v("l'hôpital", 'hospital', 'loh-pee-TAL', "L'hôpital est ici.", 'The hospital is here.', 'city', 'masculine'),
+      v('la pharmacie', 'pharmacy', 'lah far-mah-SEE', 'Il y a une pharmacie.', 'There is a pharmacy.', 'city', 'feminine'),
+      v('la banque', 'bank', 'lah bahnk', 'La pharmacie est derrière la banque.', 'The pharmacy is behind the bank.', 'city', 'feminine'),
+      v('la poste', 'post office', 'lah post', 'La poste est près de la mairie.', 'The post office is near city hall.', 'city', 'feminine'),
+      v('la mairie', 'city hall', 'lah meh-REE', 'La mairie est ancienne.', 'City hall is old.', 'city', 'feminine'),
+      v("l'église", 'church', 'lay-GLEEZ', "L'église est devant le parc.", 'The church is in front of the park.', 'city', 'feminine'),
+      v('le parc', 'park', 'luh park', 'Le parc est entre deux rues.', 'The park is between two streets.', 'city', 'masculine'),
+      v('la rue', 'street', 'lah roo', 'Traversez la rue.', 'Cross the street.', 'directions', 'feminine'),
+      v("l'avenue", 'avenue', 'lah-vuh-NOO', "L'avenue est longue.", 'The avenue is long.', 'directions', 'feminine'),
+      v('le quartier', 'neighborhood', 'luh kar-TYAY', 'Le quartier est calme.', 'The neighborhood is quiet.', 'city', 'masculine'),
+      v('tourner', 'to turn', 'toor-NAY', 'Tournez à droite.', 'Turn right.', 'directions'),
+      v('traverser', 'to cross', 'tra-vehr-SAY', 'Traversez la rue.', 'Cross the street.', 'directions'),
+      v('continuer', 'to continue', 'kon-tee-NWAY', 'Continuez tout droit.', 'Continue straight ahead.', 'directions'),
+      v('près de', 'near', 'preh duh', 'La gare est près du musée.', 'The station is near the museum.', 'prepositions'),
+      v('derrière', 'behind', 'deh-RYEHR', 'La banque est derrière la poste.', 'The bank is behind the post office.', 'prepositions'),
+      v('entre', 'between', 'AHN-truh', 'Le parc est entre deux rues.', 'The park is between two streets.', 'prepositions'),
+    ],
+    exercises: [
+      { id: 'l10-e1', type: 'fill_blank', question: 'La pharmacie est ___ la banque. (behind)', correct_answer: 'derrière', explanation: 'Derrière means behind.' },
+      { id: 'l10-e2', type: 'multiple_choice', question: 'Choose the destination phrase: Je vais ___ musée.', options: ['à le', 'au', 'en'], correct_answer: 'au', explanation: 'Au is à + le.' },
+      { id: 'l10-e3', type: 'matching', question: 'Match places to categories.', pairs: [{ french: 'gare', english: 'transport' }, { french: 'pharmacie', english: 'health' }, { french: 'banque', english: 'money' }, { french: 'bibliothèque', english: 'books' }], explanation: 'Landmarks help with directions.' },
+      { id: 'l10-e4', type: 'fill_blank', question: '___ une pharmacie ici.', correct_answer: 'Il y a', explanation: 'Il y a is the fixed structure for there is/there are.' },
+      { id: 'l10-e5', type: 'translation', question: 'EN→FR: Turn right and cross the street.', direction: 'en_to_fr', correct_answer: 'Tournez à droite et traversez la rue.', explanation: 'Use the vous command form for polite directions.' },
+      { id: 'l10-e6', type: 'translation', question: 'EN→FR: There is a park near the library.', direction: 'en_to_fr', correct_answer: 'Il y a un parc près de la bibliothèque.', explanation: 'Il y a introduces what exists nearby.' },
+      { id: 'l10-e7', type: 'multiple_choice', question: 'Which is correct for a city?', options: ['Je vais à Lyon.', 'Je vais au Lyon.', 'Je vais en Lyon.'], correct_answer: 'Je vais à Lyon.', explanation: 'Cities use à.' },
+      { id: 'l10-e8', type: 'speaking_prompt', question: 'Describe where you live using four prepositions.', model_answer: 'Il y a une pharmacie près de ma maison. La banque est devant le parc, et la gare est derrière la mairie.', translation: 'There is a pharmacy near my house. The bank is in front of the park, and the station is behind city hall.', tip: 'Use il y a once, then place nouns with prepositions.' },
+    ],
+  }),
+
+  makeBase(11, 'Numbers 70-1000 and Dates', 'Les Nombres 70-1000 et les Dates', 'Use larger French numbers, months, seasons, ordinals, and dates.', 3, ['dates', 'calendar', 'numbers'], {
+    learning_objectives: [
+      'Understand the logic of 70-99',
+      'Read and write dates with le plus day and month',
+      'Name months and seasons',
+      'Use ordinal numbers for dates and rankings',
+    ],
+    prerequisite_lessons: ['beginner-10'],
+    dialogue: {
+      title: 'Préparer un voyage',
+      context: 'Two colleagues plan trip dates and train tickets.',
+      exchanges: [
+        { speaker: 'Alice', french: 'Quelle date sommes-nous aujourd’hui?', english: 'What date is it today?', pronunciation: 'kel dat sum noo oh-zhoor-DWEE' },
+        { speaker: 'Benoît', french: 'Nous sommes le douze mars.', english: 'It is March twelfth.', pronunciation: 'noo sum luh dooz mars' },
+        { speaker: 'Alice', french: 'Le voyage est le premier avril?', english: 'Is the trip on April first?', pronunciation: 'luh vwah-YAZH ay luh pruh-MYAY ah-VREEL' },
+        { speaker: 'Benoît', french: 'Oui, et le train est à quatre-vingt-dix euros.', english: 'Yes, and the train is ninety euros.', pronunciation: 'wee ay luh tran ay ah katr-van-DEEZ uh-ROH' },
+        { speaker: 'Alice', french: 'C’est cher, mais les vacances sont importantes.', english: 'It’s expensive, but vacations are important.', pronunciation: 'say shehr meh lay vah-KAHNS sohn an-por-TAHNT' },
+        { speaker: 'Benoît', french: 'En été, les billets sont souvent chers.', english: 'In summer, tickets are often expensive.', pronunciation: 'ahn nay-TAY lay bee-YEH sohn soo-VAHN shehr' },
+        { speaker: 'Alice', french: 'Alors, nous partons en mai.', english: 'So, we leave in May.', pronunciation: 'ah-LOR noo par-TOHN ahn meh' },
+        { speaker: 'Benoît', french: 'D’accord. Le rendez-vous est lundi prochain.', english: 'Agreed. The appointment is next Monday.', pronunciation: 'dah-KOR luh rahn-day-VOO ay luhn-DEE pro-SHAN' },
+        { speaker: 'Alice', french: 'Je réserve deux billets demain.', english: 'I reserve two tickets tomorrow.', pronunciation: 'zhuh ray-ZERV duh bee-YEH duh-MAN' },
+        { speaker: 'Benoît', french: 'Parfait, merci.', english: 'Perfect, thank you.', pronunciation: 'par-FEH mer-SEE' },
+      ],
+      cultural_notes: [
+        'French dates use day-month-year order: 12/03 means March 12, not December 3.',
+        'Train prices in France can vary sharply by season, demand, and how early tickets are booked.',
+        'Le premier is the only ordinal normally used for calendar dates; other dates use cardinal numbers.',
+      ],
+    },
+    grammar: {
+      topic: 'Large Numbers and Dates',
+      explanation: 'French numbers from 70 to 99 look strange until you see the arithmetic. Soixante-dix is 60 + 10, quatre-vingts is 4 x 20, and quatre-vingt-dix is 4 x 20 + 10.\n\nDates use a compact pattern: le plus day plus month. Say le douze mars for March twelfth. The first day of a month is special: le premier avril, not le un avril.',
+      examples: [
+        { french: 'soixante-dix', english: 'seventy', pronunciation: 'swah-sahnt-DEES', highlight: '60 + 10' },
+        { french: 'quatre-vingts', english: 'eighty', pronunciation: 'katr-VAN', highlight: '4 x 20' },
+        { french: 'le premier avril', english: 'April first', pronunciation: 'luh pruh-MYAY ah-VREEL', highlight: 'premier' },
+      ],
+      patterns: ['70 = soixante-dix', '80 = quatre-vingts', '90 = quatre-vingt-dix', 'le + date + month', 'en + year', 'en + season for most seasons'],
+      tip: 'A useful mnemonic: quatre-vingts is 4 x 20, like counting in groups of twenty.',
+    },
+    vocabulary: [
+      v('soixante-dix', 'seventy', 'swah-sahnt-DEES', 'Le billet est à soixante-dix euros.', 'The ticket is seventy euros.', 'numbers'),
+      v('quatre-vingts', 'eighty', 'katr-VAN', 'Il y a quatre-vingts places.', 'There are eighty seats.', 'numbers'),
+      v('quatre-vingt-dix', 'ninety', 'katr-van-DEES', 'Le train est à quatre-vingt-dix euros.', 'The train is ninety euros.', 'numbers'),
+      v('cent', 'one hundred', 'sahn', 'Cent euros, c’est cher.', 'One hundred euros is expensive.', 'numbers'),
+      v('deux cents', 'two hundred', 'duh sahn', 'Deux cents billets sont ici.', 'Two hundred tickets are here.', 'numbers'),
+      v('mille', 'one thousand', 'meel', 'Mille ans, c’est long.', 'One thousand years is long.', 'numbers'),
+      v('janvier', 'January', 'zhahn-VYAY', 'Mon anniversaire est en janvier.', 'My birthday is in January.', 'months'),
+      v('février', 'February', 'fay-vree-YAY', 'Le rendez-vous est en février.', 'The appointment is in February.', 'months'),
+      v('mars', 'March', 'mars', 'Nous sommes le douze mars.', 'It is March twelfth.', 'months'),
+      v('avril', 'April', 'ah-VREEL', 'Le voyage est le premier avril.', 'The trip is April first.', 'months'),
+      v('mai', 'May', 'meh', 'Nous partons en mai.', 'We leave in May.', 'months'),
+      v('juin', 'June', 'zhwan', 'La fête est en juin.', 'The party is in June.', 'months'),
+      v('juillet', 'July', 'zhwee-YEH', 'Les vacances sont en juillet.', 'Vacation is in July.', 'months'),
+      v('août', 'August', 'oot', 'Août est chaud.', 'August is hot.', 'months'),
+      v('septembre', 'September', 'sep-TAHMBR', 'La rentrée est en septembre.', 'The return to school is in September.', 'months'),
+      v('octobre', 'October', 'ok-TOHBR', 'Octobre est en automne.', 'October is in autumn.', 'months'),
+      v('novembre', 'November', 'noh-VAHMBR', 'Novembre est froid.', 'November is cold.', 'months'),
+      v('décembre', 'December', 'day-SAHMBR', 'Décembre est important.', 'December is important.', 'months'),
+      v('printemps', 'spring', 'pran-TAHN', 'Le printemps est agréable.', 'Spring is pleasant.', 'seasons'),
+      v('été', 'summer', 'ay-TAY', 'En été, les billets sont chers.', 'In summer, tickets are expensive.', 'seasons'),
+    ],
+    exercises: [
+      { id: 'l11-e1', type: 'fill_blank', question: '90 = quatre-vingt-___.', correct_answer: 'dix', explanation: '90 is four-twenties-ten.' },
+      { id: 'l11-e2', type: 'multiple_choice', question: 'Which number is quatre-vingts?', options: ['70', '80', '90'], correct_answer: '80', explanation: 'Quatre-vingts is 4 x 20.' },
+      { id: 'l11-e3', type: 'matching', question: 'Match number logic.', pairs: [{ french: 'soixante-dix', english: '60 + 10' }, { french: 'quatre-vingts', english: '4 x 20' }, { french: 'quatre-vingt-dix', english: '4 x 20 + 10' }, { french: 'cent', english: '100' }], explanation: 'The logic makes 70-99 easier to decode.' },
+      { id: 'l11-e4', type: 'fill_blank', question: 'April first = le ___ avril.', correct_answer: 'premier', explanation: 'Use premier for the first day of the month.' },
+      { id: 'l11-e5', type: 'translation', question: 'EN→FR: The trip is on May 12.', direction: 'en_to_fr', correct_answer: 'Le voyage est le douze mai.', explanation: 'Dates use le plus number plus month.' },
+      { id: 'l11-e6', type: 'matching', question: 'Match seasons.', pairs: [{ french: 'printemps', english: 'spring' }, { french: 'été', english: 'summer' }, { french: 'automne', english: 'autumn' }, { french: 'hiver', english: 'winter' }], explanation: 'Seasons often use en, except au printemps.' },
+      { id: 'l11-e7', type: 'multiple_choice', question: 'French date order is usually:', options: ['day-month-year', 'month-day-year', 'year-day-month'], correct_answer: 'day-month-year', explanation: 'French dates put the day first.' },
+      { id: 'l11-e8', type: 'speaking_prompt', question: 'Say today’s date and a future travel month.', model_answer: 'Nous sommes le douze mars. Je voyage en mai.', translation: 'It is March twelfth. I travel in May.', tip: 'Use le for the date and en for most months.' },
+    ],
+  }),
+
+  makeBase(12, 'Essential Irregular Verbs', 'Verbes Irréguliers Essentiels', 'Use faire, venir, pouvoir, vouloir, and futur proche for weekend plans.', 4, ['irregular verbs', 'future proche', 'plans'], {
+    learning_objectives: [
+      'Conjugate faire, venir, pouvoir, and vouloir',
+      'Use pouvoir and vouloir plus infinitive',
+      'Form futur proche with aller plus infinitive',
+      'Discuss weekend plans with common faire expressions',
+    ],
+    prerequisite_lessons: ['beginner-11'],
+    dialogue: {
+      title: 'Plans du week-end',
+      context: 'Friends make weekend plans and discuss what they want, can, and are going to do.',
+      exchanges: [
+        { speaker: 'Manon', french: 'Qu’est-ce que tu veux faire samedi?', english: 'What do you want to do Saturday?', pronunciation: 'kes-kuh too vuh fehr sam-DEE' },
+        { speaker: 'Théo', french: 'Je veux faire du sport le matin.', english: 'I want to exercise in the morning.', pronunciation: 'zhuh vuh fehr doo spor luh mah-TAN' },
+        { speaker: 'Manon', french: 'Je peux venir avec toi?', english: 'Can I come with you?', pronunciation: 'zhuh puh vuh-NEER ah-VEK twah' },
+        { speaker: 'Théo', french: 'Oui, tu peux venir.', english: 'Yes, you can come.', pronunciation: 'wee too puh vuh-NEER' },
+        { speaker: 'Manon', french: 'Après, nous allons faire les courses.', english: 'Afterward, we are going to do the shopping.', pronunciation: 'ah-PREH noo zah-LOHN fehr lay koors' },
+        { speaker: 'Théo', french: 'Je ne peux pas. Je viens de réserver un billet.', english: 'I can’t. I have just reserved a ticket.', pronunciation: 'zhuh nuh puh pah zhuh vyahn duh ray-zehr-VAY uhn bee-YEH' },
+        { speaker: 'Manon', french: 'Tu vas faire un voyage?', english: 'Are you going to take a trip?', pronunciation: 'too vah fehr uhn vwah-YAZH' },
+        { speaker: 'Théo', french: 'Oui, je vais venir à Lyon dimanche.', english: 'Yes, I am going to come to Lyon Sunday.', pronunciation: 'wee zhuh veh vuh-NEER ah lee-OHN dee-MAHNSH' },
+        { speaker: 'Manon', french: 'Je veux faire la cuisine ce soir.', english: 'I want to cook tonight.', pronunciation: 'zhuh vuh fehr lah kwee-ZEEN suh swahr' },
+        { speaker: 'Théo', french: 'Parfait, nous pouvons manger ensemble.', english: 'Perfect, we can eat together.', pronunciation: 'par-FEH noo poo-VOHN mahn-ZHAY ahn-SAHMBL' },
+      ],
+      cultural_notes: [
+        'Faire is used in many everyday expressions where English uses “do,” “make,” or a specific activity verb.',
+        'Weekend planning often uses futur proche in speech because it is simple and immediate.',
+        'Venir de plus infinitive is introduced here as a fixed “just did” preview; its full tense system comes later.',
+      ],
+    },
+    grammar: {
+      topic: 'Faire, Venir, Pouvoir, Vouloir, and Futur Proche',
+      explanation: 'These irregular verbs are high-frequency because they let you talk about action, movement, ability, and intention. Faire appears in many everyday expressions; venir means to come; pouvoir means can or be able to; vouloir means want.\n\nPouvoir and vouloir are usually followed by an infinitive: je peux venir, je veux manger. To talk about near future plans, use aller in the present plus an infinitive: je vais réserver, nous allons partir.',
+      examples: [
+        { french: 'Je veux faire du sport.', english: 'I want to exercise.', pronunciation: 'zhuh vuh fehr doo spor', highlight: 'veux faire' },
+        { french: 'Nous pouvons venir.', english: 'We can come.', pronunciation: 'noo poo-VOHN vuh-NEER', highlight: 'pouvons venir' },
+        { french: 'Je vais réserver un billet.', english: 'I am going to reserve a ticket.', pronunciation: 'zhuh veh ray-zehr-VAY uhn bee-YEH', highlight: 'vais réserver' },
+      ],
+      patterns: ['faire: fais, fais, fait, faisons, faites, font', 'venir: viens, viens, vient, venons, venez, viennent', 'pouvoir: peux, peux, peut, pouvons, pouvez, peuvent', 'vouloir: veux, veux, veut, voulons, voulez, veulent', 'futur proche = aller + infinitive'],
+      conjugation_tables: [
+        { verb: 'faire', rows: [row('je', 'fais', 'feh'), row('tu', 'fais', 'feh'), row('il/elle/on', 'fait', 'feh'), row('nous', 'faisons', 'fuh-ZOHN'), row('vous', 'faites', 'fet'), row('ils/elles', 'font', 'fohn')] },
+        { verb: 'venir', rows: [row('je', 'viens', 'vyahn'), row('tu', 'viens', 'vyahn'), row('il/elle/on', 'vient', 'vyahn'), row('nous', 'venons', 'vuh-NOHN'), row('vous', 'venez', 'vuh-NAY'), row('ils/elles', 'viennent', 'vyen')] },
+        { verb: 'pouvoir', rows: [row('je', 'peux', 'puh'), row('tu', 'peux', 'puh'), row('il/elle/on', 'peut', 'puh'), row('nous', 'pouvons', 'poo-VOHN'), row('vous', 'pouvez', 'poo-VAY'), row('ils/elles', 'peuvent', 'puhv')] },
+        { verb: 'vouloir', rows: [row('je', 'veux', 'vuh'), row('tu', 'veux', 'vuh'), row('il/elle/on', 'veut', 'vuh'), row('nous', 'voulons', 'voo-LOHN'), row('vous', 'voulez', 'voo-LAY'), row('ils/elles', 'veulent', 'vuhl')] },
+      ],
+      tip: 'Vouloir and pouvoir are boot verbs: je/tu/il and ils change stems, while nous/vous stay closer to the infinitive.',
+    },
+    vocabulary: [
+      v('faire', 'to do / make', 'fehr', 'Je veux faire du sport.', 'I want to exercise.', 'verbs'),
+      v('venir', 'to come', 'vuh-NEER', 'Je peux venir.', 'I can come.', 'verbs'),
+      v('pouvoir', 'to be able to / can', 'poo-VWAHR', 'Nous pouvons manger.', 'We can eat.', 'verbs'),
+      v('vouloir', 'to want', 'voo-LWAHR', 'Je veux faire la cuisine.', 'I want to cook.', 'verbs'),
+      v('faire du sport', 'to exercise / play sports', 'fehr doo spor', 'Je fais du sport.', 'I exercise.', 'faire expressions'),
+      v('faire la cuisine', 'to cook', 'fehr lah kwee-ZEEN', 'Elle fait la cuisine.', 'She cooks.', 'faire expressions'),
+      v('faire les courses', 'to do grocery shopping', 'fehr lay koors', 'Nous faisons les courses.', 'We do the grocery shopping.', 'faire expressions'),
+      v('faire un voyage', 'to take a trip', 'fehr uhn vwah-YAZH', 'Tu vas faire un voyage.', 'You are going to take a trip.', 'faire expressions'),
+      v('faire une promenade', 'to take a walk', 'fehr oon prohm-NAD', 'Je veux faire une promenade.', 'I want to take a walk.', 'faire expressions'),
+      v('faire attention', 'to pay attention', 'fehr ah-tahn-SYOHN', 'Vous faites attention.', 'You pay attention.', 'faire expressions'),
+      v('venir de réserver', 'to have just reserved', 'vuh-NEER duh ray-zehr-VAY', 'Je viens de réserver un billet.', 'I have just reserved a ticket.', 'fixed phrase'),
+      v('pouvoir manger', 'to be able to eat', 'poo-VWAHR mahn-ZHAY', 'Nous pouvons manger.', 'We can eat.', 'modal phrase'),
+      v('vouloir étudier', 'to want to study', 'voo-LWAHR ay-too-DYAY', 'Je veux étudier.', 'I want to study.', 'modal phrase'),
+      v('pouvoir partir', 'to be able to leave', 'poo-VWAHR par-TEER', 'Tu peux partir.', 'You can leave.', 'modal phrase'),
+      v('vouloir regarder', 'to want to watch', 'voo-LWAHR ruh-gar-DAY', 'Elle veut regarder un film.', 'She wants to watch a film.', 'modal phrase'),
+      v('samedi', 'Saturday', 'sam-DEE', 'Samedi est libre.', 'Saturday is free.', 'time'),
+      v('dimanche', 'Sunday', 'dee-MAHNSH', 'Je vais venir dimanche.', 'I am going to come Sunday.', 'time'),
+      v('week-end', 'weekend', 'week-END', 'Le week-end est important.', 'The weekend is important.', 'time'),
+    ],
+    exercises: [
+      { id: 'l12-e1', type: 'conjugation', question: 'Conjugate faire.', verb: 'faire', correct_answer: [row('je', 'fais', 'feh'), row('tu', 'fais', 'feh'), row('il/elle/on', 'fait', 'feh'), row('nous', 'faisons', 'fuh-ZOHN'), row('vous', 'faites', 'fet'), row('ils/elles', 'font', 'fohn')], explanation: 'Faire has irregular written and spoken forms.' },
+      { id: 'l12-e2', type: 'conjugation', question: 'Conjugate venir.', verb: 'venir', correct_answer: [row('je', 'viens', 'vyahn'), row('tu', 'viens', 'vyahn'), row('il/elle/on', 'vient', 'vyahn'), row('nous', 'venons', 'vuh-NOHN'), row('vous', 'venez', 'vuh-NAY'), row('ils/elles', 'viennent', 'vyen')], explanation: 'Venir changes stem in the singular and ils/elles forms.' },
+      { id: 'l12-e3', type: 'multiple_choice', question: 'Choose the correct form: nous ___ venir.', options: ['peut', 'pouvons', 'peuvent'], correct_answer: 'pouvons', explanation: 'Nous takes pouvons.' },
+      { id: 'l12-e4', type: 'transformation', question: 'Change present plans to futur proche.', instruction: 'affirmative_to_negative', items: [{ original: 'Je réserve un billet.', transformed: 'Je vais réserver un billet.', translation: 'I am going to reserve a ticket.' }, { original: 'Nous faisons les courses.', transformed: 'Nous allons faire les courses.', translation: 'We are going to do the shopping.' }], explanation: 'Use aller plus infinitive.' },
+      { id: 'l12-e5', type: 'fill_blank', question: 'Je ___ faire du sport.', correct_answer: 'veux', explanation: 'Je takes veux.' },
+      { id: 'l12-e6', type: 'matching', question: 'Match faire expressions.', pairs: [{ french: 'faire du sport', english: 'to exercise' }, { french: 'faire la cuisine', english: 'to cook' }, { french: 'faire les courses', english: 'to do grocery shopping' }, { french: 'faire un voyage', english: 'to take a trip' }], explanation: 'Faire expressions are learned as chunks.' },
+      { id: 'l12-e7', type: 'translation', question: 'EN→FR: We can eat together.', direction: 'en_to_fr', correct_answer: 'Nous pouvons manger ensemble.', explanation: 'Pouvoir is followed by an infinitive.' },
+      { id: 'l12-e8', type: 'speaking_prompt', question: 'Describe your weekend with futur proche and two irregular verbs.', model_answer: 'Samedi, je vais faire du sport. Dimanche, je veux venir à Lyon et je peux manger avec mes amis.', translation: 'Saturday, I am going to exercise. Sunday, I want to come to Lyon and I can eat with my friends.', tip: 'Keep modal verbs conjugated and the next verb in the infinitive.' },
+    ],
+  }),
+]
+
+export const getBeginnerLessons = () => beginnerLessons
+export const getBeginnerLesson = (id: string) => beginnerLessons.find((lesson) => lesson.id === id)

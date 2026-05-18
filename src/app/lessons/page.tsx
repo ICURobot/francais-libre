@@ -2,428 +2,232 @@
 
 import Link from 'next/link'
 import { getBeginnerLessons } from '../../../lib/lessons/lessonData'
+import { intermediateLessonSummaries } from '../../../components/lessons/intermediateLessons'
+import { advancedLessonSummaries } from '../../../components/lessons/advancedLessons'
+
+const elementaryLessons = [
+  { order: 13, title: 'Le Passé Composé I', subtitle: 'Passé composé avec avoir — verbes réguliers en -er.', time: '35' },
+  { order: 14, title: 'Le Passé Composé II', subtitle: 'Participes passés irréguliers et négation.', time: '35' },
+  { order: 15, title: 'Le Passé Composé III', subtitle: 'Auxiliaire être et accords du participe passé.', time: '40' },
+  { order: 16, title: 'Les Verbes en -ir et -re', subtitle: 'Conjugaisons régulières au présent et au passé composé.', time: '35' },
+  { order: 17, title: 'Les Verbes Pronominaux', subtitle: 'Routine quotidienne et verbes réfléchis au présent.', time: '35' },
+  { order: 18, title: 'Les Pronominaux au Passé', subtitle: 'Passé composé des verbes pronominaux.', time: '40' },
+  { order: 19, title: "L'Imparfait", subtitle: 'Descriptions, habitudes et états dans le passé.', time: '40' },
+  { order: 20, title: 'Passé Composé vs Imparfait', subtitle: 'Raconter avec contexte et événements.', time: '45' },
+  { order: 21, title: 'Le Futur Simple', subtitle: 'Former et utiliser le futur simple.', time: '40' },
+  { order: 22, title: 'Les Pronoms COD', subtitle: 'Le, la, les et accords au passé composé.', time: '40' },
+  { order: 23, title: 'Les Pronoms COI, Y et EN', subtitle: 'Lui, leur, y, en pour éviter les répétitions.', time: '45' },
+  { order: 24, title: 'La Négation et la Comparaison', subtitle: 'Négations étendues et comparatifs/superlatifs.', time: '40' },
+  { order: 25, title: 'Les Irréguliers Essentiels', subtitle: 'Savoir/connaître, partir/sortir/dormir, lire/écrire/dire.', time: '45' },
+  { order: 26, title: 'Consolidation A2', subtitle: 'Capstone — tous les acquis A2 en un dialogue.', time: '50' },
+]
 
 export default function LessonsPage() {
   const beginnerLessons = getBeginnerLessons()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-50 py-16 relative overflow-hidden">
-      {/* Soft background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-48 h-48 bg-blue-200/10 rounded-[48px] blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-green-200/10 rounded-[40px] blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-200/10 rounded-[32px] blur-3xl"></div>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold text-gray-900 mb-6">
-            🇫🇷 French Lessons by Level
-          </h1>
-          <p className="text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Start your French learning journey with our structured curriculum designed with proven methods
-          </p>
-        </div>
-
-        {/* A1 Level - Beginner */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 px-6 py-3 rounded-[20px] font-medium border border-blue-200/50 mb-4">
-              <span className="mr-2">🌱</span>
-              A1 Level - Beginner
+    <div className="bg-surface text-on-surface min-h-screen pb-32">
+      {/* TopAppBar */}
+      <header className="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,35,149,0.06)]">
+        <div className="flex justify-between items-center px-6 py-4 w-full max-w-screen-xl mx-auto">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white overflow-hidden">
+              <img className="w-full h-full object-cover" alt="portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6l7Dp06fOBl41MJazMF4sAUBzBNEY2oiNP1QDGKyvW43cppVC3v6xzuYh_MbnRXe26Zrrlko7svXK1evMiyMuW63NesOni-4gDNdNe-fxePQBHdPPEgKKIwqmFdBqv9XWDlTDlH_ruomoepdHwu3fFd2B-6OxJskshm-FTd6AUyqaKvKoA6DaYHgjl8yAg98_k0v9Bv_dQb4DHURLqsk8KdDAeTFLEkYHS8LGtxArnwueUO8aIu3ZnSV4UCVXknV4CSFDsXXJtg"/>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Complete Beginner Foundation</h2>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              Master the basics: greetings, regular verbs, articles, and essential vocabulary. 
-              Perfect for absolute beginners with no prior French experience.
+            <span className="font-['Epilogue'] text-xl font-black tracking-tight text-[#002395] dark:text-white">Français<span className="text-[#ff9f1c]">Libre</span></span>
+          </Link>
+          <div className="flex items-center gap-4">
+            <button className="material-symbols-outlined text-stone-500 hover:opacity-80 transition-opacity">settings</button>
+          </div>
+        </div>
+      </header>
+
+      <main className="pt-28 px-6 max-w-screen-xl mx-auto">
+        {/* Hero Section */}
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-20 items-end">
+          <div className="md:col-span-7">
+            <h1 className="font-display text-5xl md:text-7xl font-black text-primary leading-none tracking-tighter mb-6">
+              Votre Parcours
+            </h1>
+            <p className="font-body italic text-xl md:text-2xl text-on-surface-variant max-w-2xl border-l-2 border-secondary pl-6 py-2">
+              &quot;La grammaire est l&apos;art de lever les difficultés de la langue.&quot; — <span className="font-bold not-italic text-primary">FrançaisLibre.</span>
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            {beginnerLessons.map((lesson) => (
-              <Link
-                key={lesson.id}
-                href={`/lessons/beginner/${lesson.order}`}
-                className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-              >
-                <div className="bg-gradient-to-br from-blue-100 to-blue-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(59,130,246,0.2)] group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-3xl">📚</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                  {lesson.title}
-                </h3>
-                <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                  {lesson.subtitle}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 px-4 py-2 rounded-[16px] font-medium border border-blue-200/50">
-                    {lesson.level}
-                  </span>
-                  <span className="text-gray-600 font-medium">⏱️ {lesson.estimated_time} min</span>
-                </div>
-              </Link>
-            ))}
+          <div className="md:col-span-5 hidden md:block">
+            <div className="h-[300px] w-full rounded-xl overflow-hidden shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+              <img className="w-full h-full object-cover" alt="vintage library" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuC-8BHHRnQtKDRM5HsCXp7DZNNPb1dUtUxonU59aOZl4VJB_3edDEE2x44e-LDirPvvuUlgLnxNmx8LUXso0QegfrbJnkVs_EUuHEOpMC2v2FipUQBrBal5naACYqcJ7w_70b5o_LjgWNv17EhgkIADa-9vPl_q_UeMmpvQHQQM-PMx8e5T7-GSC1BekpmT22ti0-f93w9mG-N82au5bm_7Izlq6Mn-VWuoDCrCfSv6an5XNVYjAS_4oXlF1OlMzVIeHlni4R4w"/>
+            </div>
           </div>
+        </section>
 
-          <div className="text-center">
-            <Link
-              href="/lessons/beginner"
-              className="inline-flex items-center bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-[20px] hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-semibold text-lg shadow-[0_8px_24px_rgba(59,130,246,0.3)] hover:shadow-[0_12px_32px_rgba(59,130,246,0.4)] hover:scale-105"
-            >
-              View All A1 Lessons →
-            </Link>
-          </div>
+        {/* Curriculum Grid */}
+        <div className="space-y-24">
+          {/* Section A1 */}
+          <section>
+            <div className="flex items-baseline gap-4 mb-10 overflow-hidden">
+              <h2 className="font-display text-4xl font-black text-primary-container">A1</h2>
+              <span className="font-label uppercase tracking-[0.3em] text-sm text-secondary font-bold">Débutant</span>
+              <div className="flex-grow h-px bg-surface-container-highest"></div>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {beginnerLessons.map((lesson) => (
+                <Link key={lesson.id} href={`/lessons/beginner/${lesson.order}`} className="flex h-48 bg-surface-container-lowest shadow-[0_15px_45px_rgba(0,35,149,0.04)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(0,35,149,0.08)] transition-all">
+                  <div className="w-1/4 bg-primary flex flex-col items-center justify-center text-on-primary">
+                    <span className="font-label text-[10px] tracking-widest opacity-70 mb-1">UNITÉ</span>
+                    <span className="font-display text-3xl font-black">L{lesson.order.toString().padStart(2, '0')}</span>
+                  </div>
+                  <div className="w-3/4 p-8 flex flex-col justify-between relative">
+                    <div>
+                      <h3 className="font-body text-2xl font-bold text-primary mb-1">{lesson.title}</h3>
+                      <p className="font-label text-sm text-on-surface-variant">{lesson.subtitle}</p>
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <div className="flex gap-2">
+                        <span className="font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 bg-surface-container-low rounded">{lesson.estimated_time} MIN</span>
+                        <span className="font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 bg-surface-container-low rounded">{lesson.is_free ? 'Free' : 'Premium'}</span>
+                      </div>
+                      <button className="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform">arrow_forward</button>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Section A2 */}
+          <section>
+            <div className="flex items-baseline gap-4 mb-10 overflow-hidden">
+              <h2 className="font-display text-4xl font-black text-primary-container">A2</h2>
+              <span className="font-label uppercase tracking-[0.3em] text-sm text-secondary font-bold">Élémentaire</span>
+              <div className="flex-grow h-px bg-surface-container-highest"></div>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {elementaryLessons.map((lesson) => (
+                <Link key={lesson.order} href={`/lessons/elementary/${lesson.order}`} className="flex h-48 bg-surface-container-lowest shadow-[0_15px_45px_rgba(0,35,149,0.04)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(0,35,149,0.08)] transition-all">
+                  <div className="w-1/4 bg-secondary flex flex-col items-center justify-center text-on-primary">
+                    <span className="font-label text-[10px] tracking-widest opacity-70 mb-1">UNITÉ</span>
+                    <span className="font-display text-3xl font-black">L{lesson.order}</span>
+                  </div>
+                  <div className="w-3/4 p-8 flex flex-col justify-between relative">
+                    <div>
+                      <h3 className="font-body text-2xl font-bold text-primary mb-1">{lesson.title}</h3>
+                      <p className="font-label text-sm text-on-surface-variant">{lesson.subtitle}</p>
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <span className="font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 bg-surface-container-low rounded">{lesson.time} MIN</span>
+                      <span className="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Section B1 */}
+          <section>
+            <div className="flex items-baseline gap-4 mb-10 overflow-hidden">
+              <h2 className="font-display text-4xl font-black text-primary-container">B1</h2>
+              <span className="font-label uppercase tracking-[0.3em] text-sm text-secondary font-bold">Intermédiaire</span>
+              <div className="flex-grow h-px bg-surface-container-highest"></div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {intermediateLessonSummaries.map((lesson) => (
+                <Link key={lesson.order} href={`/lessons/intermediate/${lesson.order}`} className="flex h-48 bg-surface-container-lowest shadow-[0_15px_45px_rgba(0,35,149,0.04)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(0,35,149,0.08)] transition-all">
+                  <div className="w-1/4 bg-primary flex flex-col items-center justify-center text-on-primary">
+                    <span className="font-label text-[10px] tracking-widest opacity-70 mb-1">UNITÉ</span>
+                    <span className="font-display text-3xl font-black">L{lesson.order.toString().padStart(2, '0')}</span>
+                  </div>
+                  <div className="w-3/4 p-8 flex flex-col justify-between relative">
+                    <div>
+                      <h3 className="font-body text-2xl font-bold text-primary mb-1">{lesson.title_fr}</h3>
+                      <p className="font-label text-sm text-on-surface-variant">{lesson.subtitle}</p>
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <div className="flex gap-2">
+                        <span className="font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 bg-surface-container-low rounded">{lesson.time} MIN</span>
+                        <span className="font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 bg-surface-container-low rounded flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[13px]">lock</span>
+                          Premium
+                        </span>
+                      </div>
+                      <span className="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Section B2 */}
+          <section>
+            <div className="flex items-baseline gap-4 mb-10 overflow-hidden">
+              <h2 className="font-display text-4xl font-black text-primary-container">B2</h2>
+              <span className="font-label uppercase tracking-[0.3em] text-sm text-secondary font-bold">Avancé</span>
+              <div className="flex-grow h-px bg-surface-container-highest"></div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {advancedLessonSummaries.map((lesson) => (
+                <Link key={lesson.order} href={`/lessons/advanced/${lesson.order}`} className="flex h-48 bg-surface-container-lowest shadow-[0_15px_45px_rgba(0,35,149,0.04)] overflow-hidden group hover:shadow-[0_20px_50px_rgba(0,35,149,0.08)] transition-all">
+                  <div className="w-1/4 bg-primary flex flex-col items-center justify-center text-on-primary">
+                    <span className="font-label text-[10px] tracking-widest opacity-70 mb-1">UNITÉ</span>
+                    <span className="font-display text-3xl font-black">L{lesson.order}</span>
+                  </div>
+                  <div className="w-3/4 p-8 flex flex-col justify-between relative">
+                    <div>
+                      <h3 className="font-body text-2xl font-bold text-primary mb-1">{lesson.title_fr}</h3>
+                      <p className="font-label text-sm text-on-surface-variant">{lesson.subtitle}</p>
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <div className="flex gap-2">
+                        <span className="font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 bg-surface-container-low rounded">{lesson.time} MIN</span>
+                        <span className="font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 bg-surface-container-low rounded flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[13px]">lock</span>
+                          Premium
+                        </span>
+                      </div>
+                      <span className="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
         </div>
 
-        {/* A2 Level - Elementary */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-6 py-3 rounded-[20px] font-medium border border-green-200/50 mb-4">
-              <span className="mr-2">📚</span>
-              A2 Level - Elementary
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Intermediate Grammar & Conversation</h2>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              Build on your foundation with irregular verbs, past tenses, and more complex conversations. 
-              For learners who have completed the A1 level.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            <Link
-              href="/lessons/elementary/11"
-              className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-            >
-              <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                <span className="text-3xl">🔤</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                Essential Irregular Verbs
-              </h3>
-              <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                Master the most important irregular verbs: aller, faire, venir, pouvoir, and vouloir
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                  A2
-                </span>
-                <span className="text-gray-600 font-medium">⏱️ 30 min</span>
-              </div>
-            </Link>
-
-            <Link
-              href="/lessons/elementary/12"
-              className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-            >
-              <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                <span className="text-3xl">📚</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                More Essential Irregular Verbs
-              </h3>
-              <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                Learn additional crucial irregular verbs: avoir, être, savoir, connaître, and prendre
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                  A2
-                </span>
-                <span className="text-gray-600 font-medium">⏱️ 35 min</span>
-              </div>
-            </Link>
-
-            <Link
-              href="/lessons/elementary/13"
-              className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-            >
-              <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                <span className="text-3xl">🎯</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                Completing Essential Irregular Verbs
-              </h3>
-              <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                Master the final essential irregular verbs: voir, dire, partir, sortir, and dormir
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                  A2
-                </span>
-                <span className="text-gray-600 font-medium">⏱️ 40 min</span>
-              </div>
-            </Link>
-
-                         <Link
-               href="/lessons/elementary/14"
-               className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-             >
-               <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                 <span className="text-3xl">⏰</span>
-               </div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                 Introduction to Past Tense (Passé Composé)
-               </h3>
-               <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                 Learn to talk about completed past actions using passé composé with avoir - the most important past tense in French.
-               </p>
-               <div className="flex items-center justify-between">
-                 <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                   A2
-                 </span>
-                 <span className="text-gray-600 font-medium">⏱️ 45 min</span>
-               </div>
-             </Link>
-
-             <Link
-               href="/lessons/elementary/15"
-               className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-             >
-               <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                 <span className="text-3xl">🚶</span>
-               </div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                 Passé Composé with Être
-               </h3>
-               <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                 Learn verbs that use être as helper verb in passé composé, including movement verbs and agreement rules.
-               </p>
-               <div className="flex items-center justify-between">
-                 <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                   A2
-                 </span>
-                 <span className="text-gray-600 font-medium">⏱️ 50 min</span>
-               </div>
-             </Link>
-
-             <Link
-               href="/lessons/elementary/16"
-               className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-             >
-               <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                 <span className="text-3xl">📚</span>
-               </div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                 Mastering Past Tense (Passé Composé Review & Advanced Usage)
-               </h3>
-               <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                 Master both avoir and être verbs in passé composé, learn time expressions, and practice complex past narratives.
-               </p>
-               <div className="flex items-center justify-between">
-                 <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                   A2
-                 </span>
-                 <span className="text-gray-600 font-medium">⏱️ 55 min</span>
-               </div>
-             </Link>
-
-             <Link
-               href="/lessons/elementary/17"
-               className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-             >
-               <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                 <span className="text-3xl">🔮</span>
-               </div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                 Future Plans (Futur Proche)
-               </h3>
-               <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                 Learn to talk about future plans and intentions using futur proche (aller + infinitive) and essential planning vocabulary.
-               </p>
-               <div className="flex items-center justify-between">
-                 <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                   A2
-                 </span>
-                 <span className="text-gray-600 font-medium">⏱️ 45 min</span>
-               </div>
-             </Link>
-
-             <Link
-               href="/lessons/elementary/18"
-               className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-             >
-               <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                 <span className="text-3xl">⏰</span>
-               </div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                 Advanced Future Planning & Time Expressions
-               </h3>
-               <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                 Master complex future planning with detailed time expressions, conditional plans, and professional/personal goal setting.
-               </p>
-               <div className="flex items-center justify-between">
-                 <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                   A2
-                 </span>
-                 <span className="text-gray-600 font-medium">⏱️ 50 min</span>
-               </div>
-             </Link>
-
-             <Link
-               href="/lessons/elementary/19"
-               className="group bg-white/90 backdrop-blur-sm rounded-[24px] shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_24px_80px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 p-8"
-             >
-               <div className="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-[20px] flex items-center justify-center mb-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)] group-hover:scale-110 transition-transform duration-300">
-                 <span className="text-3xl">📚</span>
-               </div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                 A2 Review & Future Mastery
-               </h3>
-               <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                 Complete A2 Skills Review
-               </p>
-               <div className="flex items-center justify-between">
-                 <span className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                   A2
-                 </span>
-                 <span className="text-gray-600 font-medium">⏱️ 60 min</span>
-               </div>
-             </Link>
-          </div>
-
-          <div className="text-center">
-            <Link
-              href="/lessons/elementary"
-              className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-[20px] hover:from-green-600 hover:to-green-700 transition-all duration-300 font-semibold text-lg shadow-[0_8px_24px_rgba(34,197,94,0.3)] hover:shadow-[0_12px_32px_rgba(34,197,94,0.4)] hover:scale-105"
-            >
-              View All A2 Lessons →
-            </Link>
+        {/* Phonetic Accent Signature */}
+        <div className="mt-32 mb-16 flex flex-col items-center">
+          <div className="w-0.5 h-16 bg-secondary mb-8 opacity-40"></div>
+          <div className="font-label text-sm tracking-widest text-on-tertiary-container uppercase">
+            Établi à Paris — MMXXIV
           </div>
         </div>
+      </main>
 
-        {/* B1 Level - Intermediate */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 px-6 py-3 rounded-[20px] font-medium border border-purple-200/50 mb-4">
-              <span className="mr-2">🎯</span>
-              B1 Level - Intermediate
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Advanced Grammar & Fluency</h2>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              Master complex tenses, subjunctive mood, and express opinions fluently. 
-              For learners who have completed the A2 level.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div className="bg-white/60 backdrop-blur-sm rounded-[24px] border-2 border-dashed border-purple-300 p-8 flex items-center justify-center">
-              <div className="text-center text-purple-600">
-                <div className="text-4xl mb-3">🚧</div>
-                <p className="font-medium">B1 Lessons</p>
-                <p className="text-sm opacity-75">Coming Soon</p>
-              </div>
-            </div>
-
-            <div className="bg-white/60 backdrop-blur-sm rounded-[24px] border-2 border-dashed border-purple-300 p-8 flex items-center justify-center">
-              <div className="text-center text-purple-600">
-                <div className="text-4xl mb-3">🚧</div>
-                <p className="font-medium">B1 Lessons</p>
-                <p className="text-sm opacity-75">Coming Soon</p>
-              </div>
-            </div>
-
-            <div className="bg-white/60 backdrop-blur-sm rounded-[24px] border-2 border-dashed border-purple-300 p-8 flex items-center justify-center">
-              <div className="text-center text-purple-600">
-                <div className="text-4xl mb-3">🚧</div>
-                <p className="font-medium">B1 Lessons</p>
-                <p className="text-sm opacity-75">Coming Soon</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <div className="inline-flex items-center bg-gray-100 text-gray-500 px-8 py-4 rounded-[20px] font-semibold text-lg cursor-not-allowed">
-              🔒 B1 Level - Coming Soon
-            </div>
-          </div>
-        </div>
-
-        {/* B2 Level - Upper Intermediate */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center bg-gradient-to-r from-orange-100 to-orange-200 text-orange-800 px-6 py-3 rounded-[20px] font-medium border border-orange-200/50 mb-4">
-              <span className="mr-2">🏆</span>
-              B2 Level - Upper Intermediate
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Professional & Academic French</h2>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              Master academic writing, professional communication, and complex literary texts. 
-              For learners who have completed the B1 level.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div className="bg-white/60 backdrop-blur-sm rounded-[24px] border-2 border-dashed border-orange-300 p-8 flex items-center justify-center">
-              <div className="text-center text-orange-600">
-                <div className="text-4xl mb-3">🚧</div>
-                <p className="font-medium">B2 Lessons</p>
-                <p className="text-sm opacity-75">Coming Soon</p>
-              </div>
-            </div>
-
-            <div className="bg-white/60 backdrop-blur-sm rounded-[24px] border-2 border-dashed border-orange-300 p-8 flex items-center justify-center">
-              <div className="text-center text-orange-600">
-                <div className="text-4xl mb-3">🚧</div>
-                <p className="font-medium">B2 Lessons</p>
-                <p className="text-sm opacity-75">Coming Soon</p>
-              </div>
-            </div>
-
-            <div className="bg-white/60 backdrop-blur-sm rounded-[24px] border-2 border-dashed border-orange-300 p-8 flex items-center justify-center">
-              <div className="text-center text-orange-600">
-                <div className="text-4xl mb-3">🚧</div>
-                <p className="font-medium">B2 Lessons</p>
-                <p className="text-sm opacity-75">Coming Soon</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <div className="inline-flex items-center bg-gray-100 text-gray-500 px-8 py-4 rounded-[20px] font-semibold text-lg cursor-not-allowed">
-              🔒 B2 Level - Coming Soon
-            </div>
-          </div>
-        </div>
-
-        {/* Learning Path Info */}
-        <div className="text-center">
-          <div className="bg-white/80 backdrop-blur-sm rounded-[24px] p-8 shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_16px_48px_rgba(0,0,0,0.1)] border border-white/40 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Your French Learning Journey</h3>
-            <p className="text-gray-700 mb-6 text-lg">
-              Follow our structured curriculum from complete beginner to advanced fluency. 
-              Each level builds upon the previous one, ensuring steady progress.
-            </p>
-            <div className="grid md:grid-cols-4 gap-4 text-sm">
-              <div className="bg-blue-50 p-3 rounded-[12px] border border-blue-200">
-                <div className="font-bold text-blue-800">A1 - Beginner</div>
-                <div className="text-blue-600">0-6 months</div>
-              </div>
-              <div className="bg-green-50 p-3 rounded-[12px] border border-green-200">
-                <div className="font-bold text-green-800">A2 - Elementary</div>
-                <div className="text-green-600">6-12 months</div>
-              </div>
-              <div className="bg-purple-50 p-3 rounded-[12px] border border-purple-200">
-                <div className="font-bold text-purple-800">B1 - Intermediate</div>
-                <div className="text-purple-600">12-18 months</div>
-              </div>
-              <div className="bg-orange-50 p-3 rounded-[12px] border border-orange-200">
-                <div className="font-bold text-orange-800">B2 - Upper Intermediate</div>
-                <div className="text-orange-600">18-24 months</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Navigation Footer */}
-        <div className="text-center mt-16">
-          <Link
-            href="/"
-            className="inline-flex items-center bg-gradient-to-r from-gray-500 to-gray-600 text-white px-8 py-4 rounded-[20px] hover:from-gray-600 hover:to-gray-700 transition-all duration-300 font-semibold text-lg shadow-[0_8px_24px_rgba(107,114,128,0.3)] hover:shadow-[0_12px_32px_rgba(107,114,128,0.4)] hover:scale-105"
-          >
-            ← Back to Home
+      {/* BottomNavBar */}
+      <nav className="fixed bottom-0 left-0 w-full z-50 bg-stone-50/90 dark:bg-slate-950/90 backdrop-blur-lg rounded-t-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.04)]">
+        <div className="max-w-screen-xl mx-auto flex justify-around items-center px-4 pt-3 pb-6">
+          <Link href="/lessons" className="flex flex-col items-center justify-center text-[#bb0021] dark:text-[#ff4d4d] relative scale-105 transition-transform duration-300 after:content-[''] after:absolute after:-bottom-2 after:w-1.5 after:h-1.5 after:bg-[#bb0021] after:rounded-full after:left-1/2 after:-translate-x-1/2">
+            <span className="material-symbols-outlined mb-1" style={{ fontVariationSettings: "'FILL' 1" }}>school</span>
+            <span className="font-['Public_Sans'] text-[10px] uppercase font-semibold tracking-wider">Leçons</span>
+          </Link>
+          <Link href="#" className="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 hover:text-[#002395] dark:hover:text-white transition-colors">
+            <span className="material-symbols-outlined mb-1">history_edu</span>
+            <span className="font-['Public_Sans'] text-[10px] uppercase font-semibold tracking-wider">Révision</span>
+          </Link>
+          <Link href="#" className="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 hover:text-[#002395] dark:hover:text-white transition-colors">
+            <span className="material-symbols-outlined mb-1">menu_book</span>
+            <span className="font-['Public_Sans'] text-[10px] uppercase font-semibold tracking-wider">Glossaire</span>
+          </Link>
+          <Link href="#" className="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 hover:text-[#002395] dark:hover:text-white transition-colors">
+            <span className="material-symbols-outlined mb-1">person</span>
+            <span className="font-['Public_Sans'] text-[10px] uppercase font-semibold tracking-wider">Profil</span>
           </Link>
         </div>
-      </div>
+      </nav>
     </div>
   )
 }
-

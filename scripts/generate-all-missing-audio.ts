@@ -99,8 +99,8 @@ function collectAllText(): Array<{ text: string; category: 'dialogue' | 'vocabul
     }
     
     // Add conjugation forms
-    if (lesson.grammar && lesson.grammar.conjugation_table) {
-      lesson.grammar.conjugation_table.forEach((conj, index) => {
+    if (lesson.grammar && lesson.grammar.conjugation_tables) {
+      lesson.grammar.conjugation_tables.flatMap((table) => table.rows).forEach((conj, index) => {
         allText.push({
           text: conj.form,
           category: 'grammar',

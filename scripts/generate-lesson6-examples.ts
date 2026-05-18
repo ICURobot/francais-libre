@@ -48,11 +48,13 @@ async function generateLesson6Examples() {
   }
 
   // Generate audio for conjugation table
-  if (lesson.grammar && lesson.grammar.conjugation_table) {
-    console.log(`\n🔊 Generating audio for ${lesson.grammar.conjugation_table.length} conjugation forms...`)
+  const conjugationRows = lesson.grammar?.conjugation_tables?.flatMap((table) => table.rows) ?? []
+
+  if (conjugationRows.length > 0) {
+    console.log(`\n🔊 Generating audio for ${conjugationRows.length} conjugation forms...`)
     
-    for (let i = 0; i < lesson.grammar.conjugation_table.length; i++) {
-      const conjugation = lesson.grammar.conjugation_table[i]
+    for (let i = 0; i < conjugationRows.length; i++) {
+      const conjugation = conjugationRows[i]
       console.log(`\n${i + 1}. Processing: "${conjugation.form}"`)
       
       try {

@@ -28,16 +28,24 @@ const AnimatedProgressBar = ({ progress, color = "blue", delay = 0, showPercenta
     return () => clearTimeout(timer)
   }, [progress, delay])
   
+  // Stitch styling mapping
+  const bgColors: Record<string, string> = {
+    blue: "bg-[var(--color-primary)]",
+    green: "bg-[var(--color-tertiary)]",
+    gray: "bg-[var(--color-surface-container-high)]"
+  }
+  const selectedBg = bgColors[color] || bgColors.blue;
+
   return (
     <div className="flex items-center space-x-2">
-      <div className="w-32 bg-gray-200 rounded-full h-2">
+      <div className="w-32 bg-[var(--color-surface-container-lowest)] rounded-full h-2 overflow-hidden">
         <div 
-          className={`bg-${color}-600 h-2 rounded-full transition-all duration-1000 ease-out`}
+          className={`${selectedBg} h-2 rounded-full transition-all duration-1000 ease-out`}
           style={{ width: `${currentProgress}%` }}
         />
       </div>
       {showPercentage && (
-        <span className="text-sm text-gray-600 min-w-[3rem]">{currentProgress}%</span>
+        <span className="text-sm font-label text-[var(--color-on-surface-variant)] min-w-[3rem]">{currentProgress}%</span>
       )}
     </div>
   )
@@ -97,45 +105,48 @@ const InteractiveExample = () => {
   }, [examples.length])
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm p-6 rounded-[20px] border-l-4 border-blue-400 shadow-[inset_0_8px_32px_rgba(59,130,246,0.1),0_8px_32px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.15),0_12px_40px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02]">
-      <div className="flex items-center justify-between mb-3">
-        <div className="font-bold text-gray-900 text-lg">
-          {examples[currentExample].verb} ({examples[currentExample].translation})
+    <div className="bg-[var(--color-surface)] p-6 md:p-8 rounded-3xl border border-[var(--color-outline-variant)]/50 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10 transition-all duration-300 relative overflow-hidden group">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-primary)]/5 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-[var(--color-primary)]/10"></div>
+      <div className="flex items-center justify-between mb-5 pb-4 border-b border-[var(--color-outline-variant)]/30 relative z-10">
+        <div className="font-display font-bold text-[var(--color-on-surface)] text-xl flex items-center">
+          <span className="bg-[var(--color-primary)] text-[var(--color-on-primary)] text-[10px] uppercase px-2 py-1 rounded mr-3 font-label tracking-wider">Verb</span>
+          {examples[currentExample].verb} 
+          <span className="text-[var(--color-on-surface-variant)] font-body text-base ml-2 font-normal italic">({examples[currentExample].translation})</span>
         </div>
         <button
           onClick={() => playPronunciation(examples[currentExample].verb)}
           disabled={isPlaying}
-          className="text-blue-500 hover:text-blue-600 transition-colors p-2 rounded-[16px] hover:bg-blue-50"
+          className="text-[var(--color-primary)] hover:text-[var(--color-tertiary)] bg-[var(--color-surface-container-lowest)] hover:bg-[var(--color-surface-container-low)] transition-colors p-2.5 rounded-full border border-[var(--color-outline-variant)]/50 flex items-center justify-center"
           title="Play pronunciation"
         >
-          {isPlaying ? '🔊' : '🔈'}
+          <span className="material-symbols-outlined text-[20px]">{isPlaying ? 'volume_up' : 'volume_down'}</span>
         </button>
       </div>
-      <div className="space-y-2">
+      <div className="space-y-4 relative z-10">
         {examples[currentExample].forms.map((form, index) => (
-          <div key={index} className="animate-fade-in flex items-center justify-between">
-            <div>
-              <span className="text-blue-600 font-semibold">{form.french}</span>
-              <span className="text-gray-800 ml-2">{form.english}</span>
+          <div key={index} className="animate-fade-in flex items-center justify-between bg-[var(--color-surface-container-lowest)] p-3 rounded-xl border border-[var(--color-outline-variant)]/50 hover:border-[var(--color-primary)]/30 transition-colors group/item">
+            <div className="font-body text-lg">
+              <span className="text-[var(--color-on-surface)] font-semibold">{form.french}</span>
+              <span className="text-[var(--color-on-surface-variant)] ml-4 italic text-base">{form.english}</span>
             </div>
             <button
               onClick={() => playPronunciation(form.french)}
               disabled={isPlaying}
-              className="text-gray-400 hover:text-blue-500 transition-colors text-sm p-1 rounded-[12px] hover:bg-blue-50"
+              className="text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors text-sm p-2 rounded-full opacity-0 group-hover/item:opacity-100 focus:opacity-100 bg-[var(--color-surface)] shadow-sm border border-[var(--color-outline-variant)] flex items-center justify-center"
               title="Play pronunciation"
             >
-              🔊
+              <span className="material-symbols-outlined text-[16px]">volume_up</span>
             </button>
           </div>
         ))}
       </div>
-      <div className="mt-3 flex space-x-2">
+      <div className="mt-6 flex space-x-3 justify-center relative z-10">
         {examples.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentExample(index)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentExample ? 'bg-blue-500' : 'bg-gray-300'
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              index === currentExample ? 'w-6 bg-[var(--color-primary)]' : 'w-2 bg-[var(--color-surface-container-highest)] hover:bg-[var(--color-outline-variant)]'
             }`}
           />
         ))}
@@ -218,62 +229,66 @@ const MiniLesson = () => {
   }
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-[24px] shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_20px_60px_rgba(0,0,0,0.12)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.12),0_24px_80px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-[1.02] max-w-md mx-auto">
-      <div className="flex items-center justify-between mb-4">
-        <h4 className="font-bold text-gray-900 text-xl">Try a Quick Lesson</h4>
-        <div className="flex items-center space-x-2">
-          <div className="text-sm text-gray-700 bg-gray-100 px-3 py-1 rounded-[16px]">
-            {currentStep + 1}/{steps.length}
+    <div className="bg-[var(--color-surface)] p-8 md:p-10 rounded-3xl shadow-xl shadow-black/5 border border-[var(--color-outline-variant)]/50 hover:shadow-2xl hover:shadow-black/10 transition-all duration-500 max-w-lg mx-auto relative overflow-hidden group">
+      {/* Decorative top border */}
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-tertiary)] to-[var(--color-primary)]"></div>
+      <div className="absolute -top-24 -right-24 w-48 h-48 bg-[var(--color-tertiary)]/10 rounded-full blur-3xl group-hover:bg-[var(--color-tertiary)]/20 transition-all duration-500"></div>
+      
+      <div className="flex items-center justify-between mb-8 pt-2 relative z-10">
+        <h4 className="font-display font-bold text-[var(--color-on-surface)] text-2xl">Try a Quick Lesson</h4>
+        <div className="flex items-center space-x-3">
+          <div className="text-xs font-label font-bold text-[var(--color-primary)] bg-[var(--color-primary)]/10 px-3 py-1.5 rounded-full border border-[var(--color-primary)]/20">
+            {currentStep + 1} / {steps.length}
           </div>
           <button
             onClick={() => playAudio(steps[currentStep].audio)}
-            className="text-blue-500 hover:text-blue-600 transition-colors p-2 rounded-[16px] hover:bg-blue-50"
+            className="text-[var(--color-primary)] bg-[var(--color-surface-container-lowest)] hover:bg-[var(--color-surface-container-low)] transition-colors p-2 rounded-full border border-[var(--color-outline-variant)]/50 shadow-sm flex items-center justify-center"
             title="Play pronunciation"
           >
-            🔊
+            <span className="material-symbols-outlined text-[20px]">volume_up</span>
           </button>
         </div>
       </div>
       
       {/* Progress indicator */}
-      <div className="mb-6">
+      <div className="mb-8 relative z-10">
         <div className="flex space-x-2">
           {steps.map((_, index) => (
             <div
               key={index}
-              className={`h-3 flex-1 rounded-[12px] transition-all duration-300 ${
+              className={`h-2 flex-1 rounded-full transition-all duration-500 ${
                 completedSteps.includes(index) 
-                  ? 'bg-green-400 shadow-[inset_0_2px_8px_rgba(34,197,94,0.3)]' 
+                  ? 'bg-[var(--color-tertiary)] shadow-sm shadow-[var(--color-tertiary)]/20' 
                   : index === currentStep 
-                    ? 'bg-blue-400 shadow-[inset_0_2px_8px_rgba(59,130,246,0.3)]' 
-                    : 'bg-gray-200'
+                    ? 'bg-[var(--color-primary)] shadow-sm shadow-[var(--color-primary)]/20' 
+                    : 'bg-[var(--color-surface-container-high)]'
               }`}
             />
           ))}
         </div>
       </div>
 
-      <div className="space-y-4">
-        <p className="font-medium text-gray-800 text-lg">{steps[currentStep].question}</p>
+      <div className="space-y-6 relative z-10">
+        <p className="font-body font-medium text-[var(--color-on-surface)] text-xl leading-relaxed">{steps[currentStep].question}</p>
         <div className="space-y-3">
           {steps[currentStep].options.map((option, index) => (
             <button
               key={index}
               disabled={showFeedback}
-              className={`w-full text-left p-4 border-2 rounded-[16px] transition-all duration-300 ${
+              className={`w-full text-left p-4 md:p-5 border-2 rounded-2xl font-body transition-all duration-200 shadow-sm hover:shadow-md ${
                 selectedAnswer === option
                   ? isCorrect
-                    ? 'bg-green-100 border-green-400 text-green-800 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)]'
-                    : 'bg-red-100 border-red-400 text-red-800 shadow-[inset_0_4px_16px_rgba(239,68,68,0.2)]'
-                  : 'hover:bg-blue-50 hover:border-blue-300 hover:shadow-[inset_0_4px_16px_rgba(59,130,246,0.1)]'
+                    ? 'bg-[var(--color-tertiary)]/10 border-[var(--color-tertiary)] text-[var(--color-on-surface)] font-bold transform scale-[1.02]'
+                    : 'bg-[var(--color-error)]/10 border-[var(--color-error)]/50 text-[var(--color-error)] transform scale-[0.98]'
+                  : 'bg-[var(--color-surface)] border-[var(--color-outline-variant)] text-[var(--color-on-surface-variant)] hover:border-[var(--color-primary)]/30 hover:bg-[var(--color-surface-container-lowest)] hover:-translate-y-0.5'
               } ${showFeedback ? 'cursor-not-allowed' : 'cursor-pointer'}`}
               onClick={() => handleAnswer(option)}
             >
               <div className="flex items-center justify-between">
-                <span className="font-medium">{option}</span>
+                <span className="text-lg">{option}</span>
                 {selectedAnswer === option && (
-                  <span className="text-xl">
-                    {isCorrect ? '✓' : '✗'}
+                  <span className={`text-xl flex items-center justify-center w-8 h-8 rounded-full ${isCorrect ? 'bg-[var(--color-tertiary)] text-[var(--color-on-tertiary)]' : 'bg-[var(--color-error)] text-[var(--color-on-error)]'}`}>
+                    <span className="material-symbols-outlined text-[20px]">{isCorrect ? 'check' : 'close'}</span>
                   </span>
                 )}
               </div>
@@ -282,29 +297,38 @@ const MiniLesson = () => {
         </div>
         
         {showFeedback && isCorrect && (
-          <div className="bg-green-50 border-2 border-green-200 rounded-[16px] p-4 shadow-[inset_0_4px_16px_rgba(34,197,94,0.1)]">
-            <p className="text-green-800 text-sm">{steps[currentStep].feedback}</p>
+          <div className="bg-[var(--color-tertiary)]/10 border-l-4 border-[var(--color-tertiary)] rounded-r-xl p-5 animate-fade-in shadow-sm">
+            <div className="flex items-start">
+              <span className="material-symbols-outlined text-[var(--color-tertiary)] text-2xl mr-3">celebration</span>
+              <p className="text-[var(--color-on-surface)] text-base font-body leading-relaxed font-medium pt-1">{steps[currentStep].feedback}</p>
+            </div>
           </div>
         )}
         
         {showFeedback && !isCorrect && (
-          <div className="bg-orange-50 border-2 border-orange-200 rounded-[16px] p-4 shadow-[inset_0_4px_16px_rgba(249,115,22,0.1)]">
-            <p className="text-orange-800 text-sm">
-              Try again! The correct answer is "{steps[currentStep].answer}".
-            </p>
+          <div className="bg-[var(--color-error)]/10 border-l-4 border-[var(--color-error)] rounded-r-xl p-5 animate-fade-in shadow-sm">
+            <div className="flex items-start">
+              <span className="material-symbols-outlined text-[var(--color-error)] text-2xl mr-3">lightbulb</span>
+              <p className="text-[var(--color-on-surface)] text-base font-body leading-relaxed font-medium pt-1">
+                Try again! The correct answer is <span className="font-bold">"{steps[currentStep].answer}"</span>.
+              </p>
+            </div>
           </div>
         )}
 
         {completedSteps.length === steps.length && (
-          <div className="bg-blue-50 border-2 border-blue-200 rounded-[16px] p-6 text-center shadow-[inset_0_4px_16px_rgba(59,130,246,0.1)]">
-            <p className="text-blue-800 font-medium mb-2 text-lg">🎉 Congratulations!</p>
-            <p className="text-blue-700 text-sm mb-4">You've completed the mini lesson!</p>
-            <Link 
+          <div className="bg-[var(--color-surface-container-highest)] text-[var(--color-on-surface)] rounded-2xl p-8 md:p-10 text-center animate-fade-in shadow-xl relative overflow-hidden mt-6">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-tertiary)]/20 rounded-full blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-[var(--color-primary)]/20 rounded-full blur-2xl"></div>
+            <p className="font-display font-bold mb-3 text-3xl text-[var(--color-tertiary)] relative z-10">Bravo ! 👏</p>
+            <p className="font-body text-base mb-8 text-[var(--color-on-surface-variant)] relative z-10">You've completed the mini lesson and earned your first XP.</p>
+            <EnhancedCTA 
               href="/lessons/beginner/1"
-              className="inline-flex items-center bg-blue-500 text-white px-6 py-3 rounded-[16px] hover:bg-blue-600 transition-all duration-300 text-sm font-medium shadow-[0_8px_24px_rgba(59,130,246,0.3)] hover:shadow-[0_12px_32px_rgba(59,130,246,0.4)] hover:scale-105"
+              variant="primary"
+              className="w-full relative z-10"
             >
-              Start Full Lessons →
-            </Link>
+              Continue Your Journey <span className="material-symbols-outlined ml-2 text-[20px]">arrow_forward</span>
+            </EnhancedCTA>
           </div>
         )}
       </div>
@@ -312,7 +336,7 @@ const MiniLesson = () => {
   )
 }
 
-// Enhanced CTA Button Component with Claymorphism
+// Enhanced CTA Button Component with Stitch styling
 const EnhancedCTA = ({ 
   children, 
   variant = "primary", 
@@ -330,11 +354,11 @@ const EnhancedCTA = ({
   href?: string
   disabled?: boolean
 }) => {
-  const baseClasses = "px-8 py-4 rounded-[20px] font-semibold text-lg transition-all duration-300 transform hover:scale-105 relative inline-block text-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-[0_8px_32px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.2)]"
+  const baseClasses = "px-6 py-3.5 rounded-xl font-sans font-semibold text-[15px] transition-all duration-200 relative inline-flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
   const variants = {
-    primary: "bg-gradient-to-br from-yellow-300 to-yellow-400 text-gray-900 hover:from-yellow-400 hover:to-yellow-500 shadow-[0_8px_32px_rgba(234,179,8,0.3)] hover:shadow-[0_12px_40px_rgba(234,179,8,0.4)]",
-    secondary: "border-2 border-white text-white hover:bg-white hover:text-gray-900 bg-white/10 backdrop-blur-sm",
-    blue: "bg-gradient-to-br from-blue-400 to-blue-500 text-white hover:from-blue-500 hover:to-blue-600 shadow-[0_8px_32px_rgba(59,130,246,0.3)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.4)]"
+    primary: "bg-[var(--color-primary)] text-[var(--color-on-primary)] hover:opacity-90 hover:shadow-md",
+    secondary: "bg-[var(--color-surface-container-lowest)] border border-[var(--color-outline-variant)]/50 text-[var(--color-on-surface)] hover:bg-[var(--color-surface-container-low)]",
+    blue: "bg-[var(--color-tertiary)] text-[var(--color-on-tertiary)] hover:opacity-90 hover:shadow-md"
   }
 
   if (href) {
@@ -345,8 +369,8 @@ const EnhancedCTA = ({
       >
         {children}
         {showUrgency && (
-          <div className="absolute -top-2 -right-2 bg-red-400 text-white text-xs px-3 py-1 rounded-[16px] animate-pulse shadow-[0_4px_16px_rgba(239,68,68,0.4)]">
-            Limited Time
+          <div className="absolute -top-2.5 -right-2.5 bg-red-500 text-white text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full shadow-sm">
+            Popular
           </div>
         )}
       </Link>
@@ -361,8 +385,8 @@ const EnhancedCTA = ({
     >
       {children}
       {showUrgency && (
-        <div className="absolute -top-2 -right-2 bg-red-400 text-white text-xs px-3 py-1 rounded-[16px] animate-pulse shadow-[0_4px_16px_rgba(239,68,68,0.4)]">
-          Limited Time
+        <div className="absolute -top-2.5 -right-2.5 bg-red-500 text-white text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full shadow-sm">
+          Popular
         </div>
       )}
     </button>
@@ -372,48 +396,53 @@ const EnhancedCTA = ({
 // Pricing Section Component
 function PricingSection() {
   return (
-    <section id="pricing" className="bg-gray-50 py-20">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Choose Your Learning Plan</h2>
-          <p className="text-xl text-gray-900 max-w-3xl mx-auto">
+    <section id="pricing" className="bg-[var(--color-surface-container-lowest)] py-24 border-t border-[var(--color-outline-variant)]/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <span className="inline-block bg-[var(--color-surface-container-high)] px-4 py-1.5 rounded-full font-label text-[10px] font-bold tracking-widest uppercase text-[var(--color-on-surface-variant)] mb-4">
+            Plans
+          </span>
+          <h2 className="text-3xl md:text-5xl font-display font-black text-[var(--color-primary)] mb-6">Choose Your Learning Plan</h2>
+          <p className="text-lg text-[var(--color-on-surface-variant)] font-body">
             Start with our free plan and upgrade when you're ready for AI-powered acceleration
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-start">
           {/* Free Plan */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Free</h3>
-              <div className="text-4xl font-bold text-gray-900 mb-2">$0</div>
-              <div className="text-gray-900">Forever</div>
+          <div className="bg-[var(--color-surface)] rounded-3xl p-8 shadow-md border border-[var(--color-outline-variant)]/20 hover:shadow-lg transition-shadow">
+            <div className="text-center mb-8 border-b border-[var(--color-outline-variant)]/20 pb-8">
+              <h3 className="text-xl font-label font-bold text-[var(--color-on-surface-variant)] uppercase tracking-widest mb-4">Free</h3>
+              <div className="flex justify-center items-baseline">
+                <span className="text-5xl font-display font-black text-[var(--color-primary)]">$0</span>
+                <span className="text-[var(--color-on-surface-variant)] ml-2 font-body font-medium">/ forever</span>
+              </div>
             </div>
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">First 10 Beginner Lessons</span>
+            <ul className="space-y-4 mb-10 font-body text-[var(--color-on-surface)]">
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>First 10 Beginner Lessons</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">100+ Grammar Exercises</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>100+ Grammar Exercises</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Basic Audio Pronunciation</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Basic Audio Pronunciation</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Progress Tracking</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Progress Tracking</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Community Access</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Community Access</span>
               </li>
             </ul>
             <EnhancedCTA 
-              variant="blue" 
-              className="w-full"
+              variant="secondary" 
+              className="w-full font-label tracking-widest text-xs"
               href="/lessons/beginner/1"
               onClick={() => trackEvent('pricing_click', { plan: 'free' })}
             >
@@ -422,43 +451,44 @@ function PricingSection() {
           </div>
 
           {/* Premium Plan */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border-2 border-blue-200 relative">
-            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-              <div className="bg-blue-100 text-blue-600 text-sm px-3 py-1 rounded-full">
+          <div className="bg-[var(--color-primary)] rounded-3xl p-8 shadow-xl relative transform md:-translate-y-4 border border-[var(--color-primary)]">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="bg-[var(--color-tertiary)] text-[var(--color-on-tertiary)] text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md font-label">
                 Most Popular
               </div>
             </div>
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-2">$4.99</div>
-              <div className="text-gray-900">per month</div>
+            <div className="text-center mb-8 border-b border-white/20 pb-8 mt-2">
+              <h3 className="text-xl font-label font-bold text-white/80 uppercase tracking-widest mb-4">Premium</h3>
+              <div className="flex justify-center items-baseline">
+                <span className="text-5xl font-display font-black text-white">$4.99</span>
+                <span className="text-white/70 ml-2 font-body font-medium">/ month</span>
+              </div>
             </div>
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Everything in Free</span>
+            <ul className="space-y-4 mb-10 font-body text-white/90">
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span className="text-white font-bold">Everything in Free</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Unlimited Lessons Access</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Unlimited Lessons Access</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">AI Exercise Generation</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>AI Exercise Generation</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Advanced Speech Analysis</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Advanced Speech Analysis</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Offline Content Download</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Offline Content Download</span>
               </li>
             </ul>
             <EnhancedCTA 
               variant="blue" 
-              className="w-full"
-              showUrgency
+              className="w-full font-label tracking-widest text-xs"
               onClick={() => trackEvent('pricing_click', { plan: 'premium' })}
             >
               Start 7-Day Free Trial
@@ -466,43 +496,43 @@ function PricingSection() {
           </div>
 
           {/* Pro Plan */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border-2 border-purple-200">
-            <div className="text-center mb-8">
-              <div className="bg-purple-100 text-purple-600 text-sm px-3 py-1 rounded-full inline-block mb-3">
-                Best Value
+          <div className="bg-[var(--color-surface)] rounded-3xl p-8 shadow-md border border-[var(--color-outline-variant)]/20 hover:shadow-lg transition-shadow">
+            <div className="text-center mb-8 border-b border-[var(--color-outline-variant)]/20 pb-8">
+              <h3 className="text-xl font-label font-bold text-[var(--color-on-surface-variant)] uppercase tracking-widest mb-4">Pro</h3>
+              <div className="flex justify-center items-baseline">
+                <span className="text-5xl font-display font-black text-[var(--color-primary)]">$9.99</span>
+                <span className="text-[var(--color-on-surface-variant)] ml-2 font-body font-medium">/ month</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
-              <div className="text-4xl font-bold text-purple-600 mb-2">$9.99</div>
-              <div className="text-gray-900">per month</div>
             </div>
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Everything in Premium</span>
+            <ul className="space-y-4 mb-10 font-body text-[var(--color-on-surface)]">
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-primary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span className="font-bold">Everything in Premium</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">24/7 AI Conversation Partner</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-primary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>24/7 AI Conversation Partner</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Personalized Learning Path</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-primary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Personalized Learning Path</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Cultural Deep-Dive Content</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-primary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Cultural Deep-Dive Content</span>
               </li>
-              <li className="flex items-center">
-                <span className="text-green-600 mr-3">✓</span>
-                <span className="text-gray-900">Conversation Certification</span>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-[var(--color-primary)] mr-3" data-icon="check_circle">check_circle</span>
+                <span>Conversation Certification</span>
               </li>
             </ul>
-            <button 
-              className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition"
+            <EnhancedCTA 
+              variant="primary" 
+              className="w-full font-label tracking-widest text-xs"
               onClick={() => trackEvent('pricing_click', { plan: 'pro' })}
             >
               Start 14-Day Free Trial
-            </button>
+            </EnhancedCTA>
           </div>
         </div>
       </div>
@@ -513,127 +543,142 @@ function PricingSection() {
 // Community Section Component
 function CommunitySection() {
   return (
-    <section id="community" className="bg-gray-900 text-white py-20">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Join the FrançaisLibre Community</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+    <section id="community" className="bg-[var(--color-surface-container)] text-[var(--color-on-surface)] py-24 border-t border-[var(--color-outline-variant)]/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <span className="inline-block bg-[var(--color-primary)] text-[var(--color-on-primary)] px-4 py-1.5 rounded-full font-label text-[10px] font-bold tracking-widest uppercase mb-4">
+            Community
+          </span>
+          <h2 className="text-3xl md:text-5xl font-display font-black text-[var(--color-primary)] mb-6">Join the FrançaisLibre Community</h2>
+          <p className="text-lg text-[var(--color-on-surface-variant)] font-body">
             Connect with fellow learners, practice with native speakers, and share your French learning journey
           </p>
         </div>
         
         {/* Community Image */}
-        <div className="mb-16">
-          <div className="relative h-[400px] rounded-[24px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
+        <div className="mb-20">
+          <div className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl group border border-[var(--color-outline-variant)]/20">
             <Image
               src="/community-group.png"
               alt="French learning community members"
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
+            <div className="absolute inset-0 bg-[var(--color-primary)]/10 group-hover:bg-transparent transition-colors duration-500"></div>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          <div className="bg-gray-800 rounded-2xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                <span className="text-white">👥</span>
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-outline-variant)]/20 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 shadow-md">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-[var(--color-tertiary)] rounded-xl flex items-center justify-center mr-4 text-[var(--color-on-tertiary)] shadow-sm">
+                <span className="material-symbols-outlined text-2xl" data-icon="groups">groups</span>
               </div>
               <div>
-                <h3 className="text-lg font-bold">Study Groups</h3>
-                <p className="text-gray-400">50,000+ active learners</p>
+                <h3 className="text-lg font-display font-bold text-[var(--color-primary)]">Study Groups</h3>
+                <p className="text-[var(--color-on-surface-variant)] font-label text-[10px] tracking-widest uppercase font-bold mt-1">50,000+ active</p>
               </div>
             </div>
-            <p className="text-gray-300 mb-6">Join topic-specific study groups and practice with learners at your level.</p>
+            <p className="text-[var(--color-on-surface-variant)] mb-8 font-body leading-relaxed">Join topic-specific study groups and practice with learners at your exact level.</p>
             <button 
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+              className="text-[var(--color-secondary)] font-label text-xs uppercase tracking-widest font-bold hover:text-[var(--color-tertiary)] transition-colors flex items-center gap-1"
               onClick={() => trackEvent('community_click', { section: 'study_groups' })}
             >
-              Browse Groups
+              Browse Groups <span className="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
             </button>
           </div>
 
-          <div className="bg-gray-800 rounded-2xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-4">
-                <span className="text-white">🤝</span>
+          <div className="bg-[var(--color-surface)] border border-[var(--color-outline-variant)]/20 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 shadow-md">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-[var(--color-secondary)] rounded-xl flex items-center justify-center mr-4 text-[var(--color-on-secondary)] shadow-sm">
+                <span className="material-symbols-outlined text-2xl" data-icon="handshake">handshake</span>
               </div>
               <div>
-                <h3 className="text-lg font-bold">Language Exchange</h3>
-                <p className="text-gray-400">5,000+ native speakers</p>
+                <h3 className="text-lg font-display font-bold text-[var(--color-primary)]">Language Exchange</h3>
+                <p className="text-[var(--color-on-surface-variant)] font-label text-[10px] tracking-widest uppercase font-bold mt-1">5,000+ natives</p>
               </div>
             </div>
-            <p className="text-gray-300 mb-6">Practice with native French speakers who want to learn English.</p>
+            <p className="text-[var(--color-on-surface-variant)] mb-8 font-body leading-relaxed">Practice directly with native French speakers who want to learn English.</p>
             <button 
-              className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
+              className="text-[var(--color-secondary)] font-label text-xs uppercase tracking-widest font-bold hover:text-[var(--color-tertiary)] transition-colors flex items-center gap-1"
               onClick={() => trackEvent('community_click', { section: 'language_exchange' })}
             >
-              Find Partners
+              Find Partners <span className="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
             </button>
           </div>
 
-          <div className="bg-gray-800 rounded-2xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mr-4">
-                <span className="text-white">📅</span>
+          <div className="bg-[var(--color-surface)] border border-[var(--color-outline-variant)]/20 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 shadow-md">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-[var(--color-primary)] rounded-xl flex items-center justify-center mr-4 text-[var(--color-on-primary)] shadow-sm">
+                <span className="material-symbols-outlined text-2xl" data-icon="event">event</span>
               </div>
               <div>
-                <h3 className="text-lg font-bold">Live Events</h3>
-                <p className="text-gray-400">Weekly sessions</p>
+                <h3 className="text-lg font-display font-bold text-[var(--color-primary)]">Live Events</h3>
+                <p className="text-[var(--color-on-surface-variant)] font-label text-[10px] tracking-widest uppercase font-bold mt-1">Weekly sessions</p>
               </div>
             </div>
-            <p className="text-gray-300 mb-6">Join live conversation sessions, cultural workshops, and Q&A with experts.</p>
+            <p className="text-[var(--color-on-surface-variant)] mb-8 font-body leading-relaxed">Join live conversation sessions, cultural workshops, and Q&A with language experts.</p>
             <button 
-              className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:purple-700 transition"
+              className="text-[var(--color-secondary)] font-label text-xs uppercase tracking-widest font-bold hover:text-[var(--color-tertiary)] transition-colors flex items-center gap-1"
               onClick={() => trackEvent('community_click', { section: 'live_events' })}
             >
-              View Schedule
+              View Schedule <span className="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
             </button>
           </div>
         </div>
 
         {/* Testimonials */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-gray-800 rounded-2xl p-8">
-            <div className="flex items-center mb-4">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
-                <Image
-                  src="/testimonial-woman.png"
-                  alt="Sarah Mitchell"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h4 className="font-bold">Sarah Mitchell</h4>
-                <p className="text-gray-400">Student, University of Toronto</p>
-              </div>
-            </div>
-            <p className="text-gray-300 mb-4">"FrançaisLibre made learning French actually enjoyable! The progressive lessons from basic dialogues to grammar mastery helped me go from complete beginner to conversational in just 6 months."</p>
-            <div className="flex text-yellow-400">
-              ⭐⭐⭐⭐⭐
-            </div>
+        <div className="border-t border-[var(--color-outline-variant)]/20 pt-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-display font-black text-[var(--color-primary)] mb-2">Student Success Stories</h3>
           </div>
-
-          <div className="bg-gray-800 rounded-2xl p-8">
-            <div className="flex items-center mb-4">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
-                <Image
-                  src="/testimonial-man.png"
-                  alt="Marcus Johnson"
-                  fill
-                  className="object-cover"
-                />
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-[var(--color-surface)] text-[var(--color-on-surface)] rounded-3xl p-8 shadow-xl relative border border-[var(--color-outline-variant)]/20">
+              <div className="text-[var(--color-tertiary)] text-6xl font-display absolute top-4 right-8 opacity-20 leading-none">"</div>
+              <div className="flex items-center mb-6">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden mr-4 border-2 border-[var(--color-tertiary)]">
+                  <Image
+                    src="/testimonial-woman.png"
+                    alt="Sarah Mitchell"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-[var(--color-primary)]">Sarah Mitchell</h4>
+                  <p className="text-[var(--color-on-surface-variant)] font-label text-[10px] uppercase tracking-widest font-bold mt-1">Student, University of Toronto</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold">Marcus Johnson</h4>
-                <p className="text-gray-400">Software Engineer, Google</p>
+              <p className="text-[var(--color-on-surface)] font-body leading-relaxed mb-6 relative z-10 text-lg">
+                FrançaisLibre made learning French actually enjoyable! The progressive lessons from basic dialogues to grammar mastery helped me go from complete beginner to conversational in just 6 months.
+              </p>
+              <div className="flex text-[var(--color-tertiary)] text-sm">
+                ★★★★★
               </div>
             </div>
-            <p className="text-gray-300 mb-4">"The combination of Assimil-style dialogues and structured grammar exercises is perfect. I love how the free lessons gave me a solid foundation before upgrading to premium features."</p>
-            <div className="flex text-yellow-400">
-              ⭐⭐⭐⭐⭐
+
+            <div className="bg-[var(--color-surface)] text-[var(--color-on-surface)] rounded-3xl p-8 shadow-xl relative border border-[var(--color-outline-variant)]/20 md:translate-y-6">
+              <div className="text-[var(--color-tertiary)] text-6xl font-display absolute top-4 right-8 opacity-20 leading-none">"</div>
+              <div className="flex items-center mb-6">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden mr-4 border-2 border-[var(--color-primary)]">
+                  <Image
+                    src="/testimonial-man.png"
+                    alt="Marcus Johnson"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-[var(--color-primary)]">Marcus Johnson</h4>
+                  <p className="text-[var(--color-on-surface-variant)] font-label text-[10px] uppercase tracking-widest font-bold mt-1">Software Engineer</p>
+                </div>
+              </div>
+              <p className="text-[var(--color-on-surface)] font-body leading-relaxed mb-6 relative z-10 text-lg">
+                The combination of Assimil-style dialogues and structured grammar exercises is perfect. I love how the free lessons gave me a solid foundation before upgrading to premium features.
+              </p>
+              <div className="flex text-[var(--color-tertiary)] text-sm">
+                ★★★★★
+              </div>
             </div>
           </div>
         </div>
@@ -651,8 +696,15 @@ export default function Home() {
     vocabulary: 85,
     pronunciation: 45
   })
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
+    // Handle scroll for nav styling
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
@@ -663,7 +715,10 @@ export default function Home() {
       setUser(session?.user ?? null)
     })
 
-    return () => subscription.unsubscribe()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      subscription.unsubscribe()
+    }
   }, [])
 
   const handleAuthAction = (action: string) => {
@@ -676,160 +731,162 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-gray-50 min-h-screen">
+    <div className="bg-[var(--color-surface)] min-h-screen text-[var(--color-on-surface)] font-body selection:bg-[var(--color-primary)] selection:text-[var(--color-on-primary)]">
       {/* Skip Navigation for Accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-500 text-white p-3 z-50 rounded-[16px] shadow-[0_8px_24px_rgba(59,130,246,0.3)]">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[var(--color-primary)] text-[var(--color-on-primary)] px-4 py-2 z-50 rounded-lg font-label font-medium">
         Skip to main content
       </a>
 
       {/* Navigation */}
-      <nav className="bg-white/90 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.1)] fixed w-full top-0 z-50 border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="flex items-center space-x-2 group">
-              <div className="text-2xl group-hover:scale-110 transition-transform duration-300">🎓</div>
-              <span className="text-2xl font-bold text-gray-900">
-                Français<span className="text-blue-500 font-semibold">Libre</span>
+      <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[var(--color-surface)]/95 backdrop-blur-md shadow-[0_20px_40px_rgba(10,25,47,0.04)] py-4' : 'bg-[var(--color-surface)] py-6'}`}>
+        <nav className="flex justify-between items-center w-full px-4 sm:px-6 lg:px-12 max-w-screen-2xl mx-auto">
+          <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center space-x-3 group">
+              <span className="material-symbols-outlined text-[var(--color-primary)]" data-icon="menu_book">menu_book</span>
+              <span className="text-xl md:text-2xl font-display font-black tracking-tight text-[var(--color-primary)]">
+                Français<span className="text-[var(--color-tertiary)]">Libre</span>
               </span>
             </Link>
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/lessons" className="text-gray-900 hover:text-blue-500 transition-colors duration-300 px-3 py-2 rounded-[16px] hover:bg-blue-50">
-                Lessons
-              </Link>
-              <a href="#features" className="text-gray-900 hover:text-blue-500 transition-colors duration-300 px-3 py-2 rounded-[16px] hover:bg-blue-50">AI Features</a>
-              <a href="#pricing" className="text-gray-900 hover:text-blue-500 transition-colors duration-300 px-3 py-2 rounded-[16px] hover:bg-blue-50">Pricing</a>
-              <a href="#community" className="text-gray-900 hover:text-blue-500 transition-colors duration-300 px-3 py-2 rounded-[16px] hover:bg-blue-50">Community</a>
+          </div>
+          
+          <div className="hidden md:flex items-center gap-8 lg:gap-10">
+            <Link href="/lessons" className="text-[var(--color-primary)]/70 font-label uppercase tracking-widest text-xs hover:text-[var(--color-tertiary)] transition-all duration-300 font-bold">Lessons</Link>
+            <a href="#features" className="text-[var(--color-primary)]/70 font-label uppercase tracking-widest text-xs hover:text-[var(--color-tertiary)] transition-all duration-300 font-bold">Features</a>
+            <a href="#pricing" className="text-[var(--color-primary)]/70 font-label uppercase tracking-widest text-xs hover:text-[var(--color-tertiary)] transition-all duration-300 font-bold">Pricing</a>
+            <a href="#community" className="text-[var(--color-primary)]/70 font-label uppercase tracking-widest text-xs hover:text-[var(--color-tertiary)] transition-all duration-300 font-bold">Community</a>
+            
+            <div className="pl-6 border-l border-[var(--color-outline-variant)]/30">
               {user ? (
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-4">
                   <Link 
                     href="/dashboard" 
-                    className="text-sm text-gray-900 hover:text-blue-500 transition-colors duration-300 px-3 py-2 rounded-[16px] hover:bg-blue-50"
+                    className="text-[var(--color-primary)] font-label uppercase tracking-widest text-xs hover:text-[var(--color-tertiary)] transition-colors font-bold"
                   >
                     Dashboard
                   </Link>
                   <button 
                     onClick={() => handleAuthAction('signout')}
-                    className="bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded-[16px] text-sm transition-all duration-300 shadow-[0_4px_16px_rgba(239,68,68,0.3)] hover:shadow-[0_8px_24px_rgba(239,68,68,0.4)] hover:scale-105"
+                    className="text-[var(--color-secondary)] hover:text-[var(--color-error)] transition-colors font-label uppercase tracking-widest text-xs font-bold"
                   >
                     Sign Out
                   </button>
                 </div>
               ) : (
-                <EnhancedCTA 
-                  variant="blue"
-                  className="text-sm px-6 py-2"
-                  href="/lessons/beginner/1"
+                <button 
                   onClick={() => handleAuthAction('signin')}
+                  className="bg-[var(--color-primary)] text-[var(--color-on-primary)] px-6 py-2.5 rounded-xl font-label text-xs font-bold tracking-widest uppercase hover:scale-105 active:scale-95 transition-transform shadow-lg shadow-black/10"
                 >
-                  ▶️ Start Learning Free
-                </EnhancedCTA>
+                  Start Free
+                </button>
               )}
             </div>
-            <div className="md:hidden">
-              <button 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-gray-900 p-2"
-                aria-label="Toggle mobile menu"
-              >
-                <div className="text-xl">{isMobileMenuOpen ? '✕' : '☰'}</div>
-              </button>
-            </div>
           </div>
-        </div>
+          
+          <div className="md:hidden">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-[var(--color-primary)] p-2 focus:outline-none"
+              aria-label="Toggle mobile menu"
+            >
+              <span className="material-symbols-outlined text-2xl" data-icon={isMobileMenuOpen ? "close" : "menu"}>
+                {isMobileMenuOpen ? "close" : "menu"}
+              </span>
+            </button>
+          </div>
+        </nav>
         
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.15)]">
-            <div className="px-6 py-4 space-y-3">
+          <div className="md:hidden absolute top-full left-0 w-full bg-[var(--color-surface-container-lowest)] border-t border-[var(--color-outline-variant)]/20 shadow-xl font-label">
+            <div className="px-6 py-8 flex flex-col gap-6">
               <Link 
                 href="/lessons" 
-                className="block py-3 px-4 text-gray-900 hover:text-blue-500 transition-colors duration-300 rounded-[16px] hover:bg-blue-50"
+                className="text-sm font-bold uppercase tracking-widest text-[var(--color-primary)] hover:text-[var(--color-tertiary)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Lessons
               </Link>
               <a 
                 href="#features" 
-                className="block py-3 px-4 text-gray-900 hover:text-blue-500 transition-colors duration-300 rounded-[16px] hover:bg-blue-50"
+                className="text-sm font-bold uppercase tracking-widest text-[var(--color-primary)] hover:text-[var(--color-tertiary)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                AI Features
+                Features
               </a>
               <a 
                 href="#pricing" 
-                className="block py-3 px-4 text-gray-900 hover:text-blue-500 transition-colors duration-300 rounded-[16px] hover:bg-blue-50"
+                className="text-sm font-bold uppercase tracking-widest text-[var(--color-primary)] hover:text-[var(--color-tertiary)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Pricing
               </a>
               <a 
                 href="#community" 
-                className="block py-3 px-4 text-gray-900 hover:text-blue-500 transition-colors duration-300 rounded-[16px] hover:bg-blue-50"
+                className="text-sm font-bold uppercase tracking-widest text-[var(--color-primary)] hover:text-[var(--color-tertiary)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Community
               </a>
-              {user ? (
-                <>
-                  <Link 
-                    href="/dashboard"
-                    className="block py-3 px-4 text-gray-900 hover:text-blue-500 transition-colors duration-300 rounded-[16px] hover:bg-blue-50"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                  <button 
+              <div className="pt-6 border-t border-[var(--color-outline-variant)]/20 flex flex-col gap-4">
+                {user ? (
+                  <>
+                    <Link 
+                      href="/dashboard"
+                      className="text-sm font-bold uppercase tracking-widest text-[var(--color-primary)]"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                    <button 
+                      onClick={() => {
+                        handleAuthAction('signout')
+                        setIsMobileMenuOpen(false)
+                      }}
+                      className="text-left text-sm font-bold uppercase tracking-widest text-[var(--color-error)]"
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <button
                     onClick={() => {
-                      handleAuthAction('signout')
+                      handleAuthAction('signin')
                       setIsMobileMenuOpen(false)
                     }}
-                    className="w-full text-left py-3 px-4 text-red-500 hover:text-red-600 transition-colors duration-300 rounded-[16px] hover:bg-red-50"
+                    className="w-full bg-[var(--color-primary)] text-[var(--color-on-primary)] py-4 rounded-xl text-center font-label text-xs font-bold tracking-widest uppercase shadow-md mt-2"
                   >
-                    Sign Out
+                    Start Learning Free
                   </button>
-                </>
-              ) : (
-                <Link
-                  href="/lessons/beginner/1"
-                  onClick={() => {
-                    handleAuthAction('signin')
-                    setIsMobileMenuOpen(false)
-                  }}
-                  className="block w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-[16px] hover:from-blue-600 hover:to-blue-700 transition-all duration-300 mt-4 text-center font-medium shadow-[0_8px_24px_rgba(59,130,246,0.3)]"
-                >
-                  Start Learning Free
-                </Link>
-              )}
+                )}
+              </div>
             </div>
           </div>
         )}
-      </nav>
+      </header>
 
-      <main role="main" id="main-content">
-        {/* Hero Section */}
-        <section aria-labelledby="hero-heading" className="bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 text-white pt-24 pb-20 relative overflow-hidden">
-          {/* Soft floating elements for depth */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-[32px] blur-xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-10 w-24 h-24 bg-white/10 rounded-[24px] blur-xl animate-pulse delay-1000"></div>
-            <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/10 rounded-[16px] blur-xl animate-pulse delay-500"></div>
-          </div>
-          
-          <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
-            <div className="max-w-4xl mx-auto">
-              <h1 id="hero-heading" className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                Master French with <span className="text-yellow-300 drop-shadow-lg">Smart</span> Learning
+      <main role="main" id="main-content" className="pt-20">
+        {/* Hero Split-Panel Section */}
+        <section aria-labelledby="hero-heading" className="flex flex-col lg:flex-row min-h-[795px] bg-[var(--color-surface)]">
+          {/* Content Panel */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-20 bg-[var(--color-surface)]">
+            <div className="max-w-2xl">
+              <span className="inline-block bg-[var(--color-surface-container-high)] px-4 py-1.5 rounded-full font-label text-[10px] font-bold tracking-widest uppercase text-[var(--color-on-surface-variant)] mb-8">
+                Master French the smart way
+              </span>
+              <h1 id="hero-heading" className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.05] text-[var(--color-primary)] mb-8">
+                Speak French <span className="block mt-2">with Confidence.</span>
               </h1>
-              <p className="text-xl md:text-2xl mb-8 opacity-95">
-                Learn French through proven dialogue-based lessons and structured grammar practice. Start with 10 free A1 lessons and progress to A2 level!
+              <p className="font-body text-xl text-[var(--color-on-surface-variant)] leading-relaxed mb-12 italic">
+                Learn French through proven dialogue-based lessons and structured grammar practice. Start with 10 free A1 lessons and progress to fluency.
               </p>
-              <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <EnhancedCTA 
-                  showUrgency
                   href="/lessons/beginner/1"
                   onClick={() => trackEvent('hero_cta_click', { location: 'primary' })}
+                  className="bg-[var(--color-primary)] text-[var(--color-on-primary)] px-8 py-4 rounded-xl font-label text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-3 shadow-xl hover:-translate-y-1 transition-all duration-300"
                 >
-                  🚀 Start First Lesson Free
+                  Start First Lesson Free
+                  <span className="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
                 </EnhancedCTA>
                 <EnhancedCTA 
                   variant="secondary"
@@ -837,77 +894,89 @@ export default function Home() {
                     document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })
                     trackEvent('demo_click', { location: 'hero' })
                   }}
+                  className="px-8 py-4 bg-[var(--color-surface-container-high)] border-none text-[var(--color-on-surface)]"
                 >
-                  ▶️ Try Demo Below
+                  Try Interactive Demo
                 </EnhancedCTA>
               </div>
-              <div className="flex justify-center items-center space-x-8 text-sm opacity-90">
-                <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
-                  <span className="text-green-300 mr-2">✓</span>
-                  10 Free A1 Lessons + A2 Level
+              
+              <div className="flex items-center gap-6 text-sm font-sans text-[var(--color-on-surface)] font-medium border-t border-[var(--color-outline-variant)]/30 pt-8 mt-4">
+                <div className="flex items-center">
+                  <div className="flex -space-x-3 mr-4">
+                    <div className="w-10 h-10 rounded-full border-2 border-[var(--color-surface)] bg-gray-200 overflow-hidden relative"><Image src="/testimonial-woman.png" alt="Student" fill className="object-cover" /></div>
+                    <div className="w-10 h-10 rounded-full border-2 border-[var(--color-surface)] bg-gray-300 overflow-hidden relative"><Image src="/testimonial-man.png" alt="Student" fill className="object-cover" /></div>
+                    <div className="w-10 h-10 rounded-full border-2 border-[var(--color-surface)] bg-[var(--color-primary)] flex items-center justify-center text-[var(--color-on-primary)] text-xs font-bold">+10k</div>
+                  </div>
+                  <span className="font-label">Active Learners</span>
                 </div>
-                <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
-                  <span className="text-blue-200 mr-2">🎵</span>
-                  Audio Pronunciation
+                <div className="h-6 w-px bg-[var(--color-outline-variant)]/30"></div>
+                <div className="flex items-center text-[var(--color-tertiary)] text-lg">
+                  ★★★★★ <span className="text-[var(--color-on-surface)] font-label ml-2 text-sm">4.9/5 Rating</span>
                 </div>
-                <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
-                  <span className="text-purple-200 mr-2">📚</span>
-                  Proven Book Methods
+              </div>
+            </div>
+          </div>
+          
+          {/* Image Panel */}
+          <div className="w-full lg:w-1/2 relative p-4 md:p-6 lg:p-10 bg-[var(--color-surface)]">
+            <div className="relative w-full h-full min-h-[500px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-[var(--color-outline-variant)]/30">
+              <Image 
+                src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2946&auto=format&fit=crop"
+                alt="High-end editorial lifestyle in Paris" 
+                fill
+                className="object-cover" 
+                unoptimized
+              />
+              
+              {/* Floating Feature Badges */}
+              <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end gap-4 pointer-events-none">
+                <div className="bg-[var(--color-surface)]/90 backdrop-blur-md self-start px-6 py-4 rounded-xl shadow-2xl border border-white/20 transform -rotate-2 hidden sm:block">
+                  <div className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-[var(--color-tertiary)] text-2xl" data-icon="graphic_eq">graphic_eq</span>
+                    <div>
+                      <p className="font-label text-[10px] tracking-widest font-bold text-[var(--color-on-surface-variant)] uppercase">PRONUNCIATION</p>
+                      <p className="font-display font-bold text-[var(--color-primary)]">Native Audio</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-[var(--color-surface)]/90 backdrop-blur-md self-end px-6 py-4 rounded-xl shadow-2xl border border-white/20 transform rotate-1">
+                  <div className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-[var(--color-tertiary)] text-2xl" data-icon="menu_book">menu_book</span>
+                    <div>
+                      <p className="font-label text-[10px] tracking-widest font-bold text-[var(--color-on-surface-variant)] uppercase">VOCABULARY</p>
+                      <p className="font-display font-bold text-[var(--color-primary)]">1000+ Words</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Hero Image Section - Full Width */}
-        <section className="py-20">
-          <div className="relative h-[500px] overflow-hidden">
-            <Image
-              src="/hero-students.png"
-              alt="Students learning French together"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div className="absolute bottom-8 left-8 right-8 text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Join Thousands of Successful Learners
-              </h2>
-              <p className="text-lg text-gray-200 mb-6">
-                Our proven method combines traditional language learning with modern technology to help you achieve fluency faster.
-              </p>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                  <span className="text-green-300 mr-2">✓</span>
-                  10,000+ active students
-                </div>
-                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                  <span className="text-green-300 mr-2">✓</span>
-                  95% success rate
-                </div>
-                <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-[12px]">
-                  <span className="text-green-300 mr-2">✓</span>
-                  Native French speakers
-                </div>
-              </div>
-            </div>
+        {/* Caption Section */}
+        <section className="bg-[var(--color-surface)] py-24 px-6 md:px-12">
+          <div className="max-w-screen-xl mx-auto border-t border-[var(--color-outline-variant)]/20 pt-16 flex flex-col md:flex-row items-baseline gap-8">
+            <span className="font-label text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-tertiary)] whitespace-nowrap">The Methodology</span>
+            <p className="font-body text-lg md:text-xl lg:text-2xl text-[var(--color-on-surface)] italic leading-relaxed max-w-3xl">
+              OUR PROVEN METHOD: Combines traditional learning with modern AI technology for rapid fluency.
+            </p>
           </div>
         </section>
 
         {/* Interactive Demo Section */}
-        <section id="demo" className="bg-gradient-to-br from-blue-100 to-blue-200 py-20 relative overflow-hidden">
-          {/* Soft background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-10 right-20 w-40 h-40 bg-blue-300/20 rounded-[40px] blur-2xl"></div>
-            <div className="absolute bottom-10 left-20 w-32 h-32 bg-blue-400/20 rounded-[32px] blur-2xl"></div>
+        <section id="demo" className="py-32 bg-[var(--color-surface-container-lowest)] border-y border-[var(--color-outline-variant)]/30 relative overflow-hidden">
+          {/* Decorative background elements */}
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div className="absolute top-1/4 -left-64 w-[500px] h-[500px] border-[40px] border-[var(--color-surface)] rounded-full opacity-50"></div>
+            <div className="absolute bottom-1/4 -right-64 w-[600px] h-[600px] border-[60px] border-[var(--color-surface)] rounded-full opacity-50"></div>
           </div>
           
-          <div className="max-w-7xl mx-auto px-4 relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Experience Learning Right Now</h2>
-              <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-                Try our interactive lesson format - no signup required
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-[var(--color-on-surface)] mb-6 tracking-tight">Experience Learning <span className="text-[var(--color-tertiary)]">Right Now</span></h2>
+              <p className="text-xl text-[var(--color-on-surface-variant)] font-body leading-relaxed">
+                Try our interactive lesson format - no signup required. Just dive in and start learning.
               </p>
             </div>
             <MiniLesson />
@@ -915,24 +984,18 @@ export default function Home() {
         </section>
 
         {/* Learning Path Section */}
-        <section id="courses" className="bg-gradient-to-br from-gray-50 to-gray-100 py-24 relative overflow-hidden">
-          {/* Soft background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-20 right-10 w-48 h-48 bg-blue-200/10 rounded-[48px] blur-3xl"></div>
-            <div className="absolute bottom-20 left-10 w-40 h-40 bg-green-200/10 rounded-[40px] blur-3xl"></div>
-          </div>
-          
-          <div className="max-w-7xl mx-auto px-4 relative z-10">
-            <div className="text-center mb-20">
-              <h2 className="text-5xl font-bold text-gray-900 mb-6">Complete French Learning Journey</h2>
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+        <section id="courses" className="py-24 bg-[var(--color-surface)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-20 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-[var(--color-on-surface)] mb-6 tracking-tight">Complete French Learning Journey</h2>
+              <p className="text-lg text-[var(--color-on-surface-variant)] font-body">
                 Master French through our comprehensive curriculum combining dialogue immersion and grammar mastery
               </p>
             </div>
             
             {/* Learning Image */}
-            <div className="mb-16">
-              <div className="relative h-[400px] rounded-[24px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
+            <div className="mb-20 max-w-5xl mx-auto">
+              <div className="relative h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-lg border border-[var(--color-outline-variant)]">
                 <Image
                   src="/learning-study.png"
                   alt="Students studying French together"
@@ -943,49 +1006,50 @@ export default function Home() {
             </div>
 
             {/* Learning Tracks */}
-            <div className="grid md:grid-cols-2 gap-10 mb-20">
+            <div className="grid lg:grid-cols-2 gap-8 mb-24 max-w-6xl mx-auto">
               {/* Grammar Track */}
-              <div className="bg-white/90 backdrop-blur-sm rounded-[28px] p-10 shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_20px_60px_rgba(0,0,0,0.12)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.12),0_28px_80px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-[1.02] border border-white/40">
-                <div className="flex items-center mb-8">
-                  <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-4 rounded-[20px] mr-6 shadow-[inset_0_4px_16px_rgba(59,130,246,0.2)]">
-                    <div className="text-3xl text-blue-600">📚</div>
+              <div className="bg-[var(--color-surface-container-lowest)] rounded-3xl p-8 md:p-10 shadow-sm border border-[var(--color-outline-variant)]/50 hover:shadow-md transition-shadow">
+                <div className="flex items-start mb-8">
+                  <div className="bg-[var(--color-primary)] w-14 h-14 rounded-xl flex items-center justify-center mr-5 shrink-0 text-[var(--color-on-primary)] shadow-sm">
+                    <span className="material-symbols-outlined text-2xl">book_4</span>
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-gray-900">Grammar Mastery Track</h3>
-                    <p className="text-gray-700 text-lg">Systematic French Grammar Foundation</p>
+                    <h3 className="text-2xl font-display font-bold text-[var(--color-on-surface)] mb-1">Grammar Mastery</h3>
+                    <p className="text-[var(--color-on-surface-variant)] font-body text-sm">Systematic French Grammar Foundation</p>
                   </div>
                 </div>
-                <div className="space-y-5">
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
-                    <span className="font-medium text-gray-900">Present Tense & Regular Verbs</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={100} color="blue" showPercentage />
-                      <span className="text-green-500 ml-3 text-lg">✓</span>
+                <div className="space-y-4 mb-10">
+                  <div className="p-5 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)]">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="font-body font-semibold text-[var(--color-on-surface)]">Present Tense & Regular Verbs</span>
+                      <span className="material-symbols-outlined text-[var(--color-tertiary)] font-bold text-[20px]">check</span>
                     </div>
+                    <AnimatedProgressBar progress={100} color="blue" />
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
-                    <span className="font-medium text-gray-900">Irregular Verbs & Conjugation</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={userProgress.grammar} color="blue" delay={200} showPercentage />
+                  <div className="p-5 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)]">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="font-body font-semibold text-[var(--color-on-surface)]">Irregular Verbs & Conjugation</span>
                     </div>
+                    <AnimatedProgressBar progress={userProgress.grammar} color="blue" delay={200} />
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
-                    <span className="font-medium text-gray-900">Past Tenses (Passé Composé, Imparfait)</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={40} color="blue" delay={400} showPercentage />
+                  <div className="p-5 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)] opacity-70">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="font-body font-medium text-[var(--color-on-surface)]">Past Tenses</span>
                     </div>
+                    <AnimatedProgressBar progress={40} color="blue" delay={400} />
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-[16px] border border-blue-200/50">
-                    <span className="font-medium text-gray-900">Future & Conditional Tenses</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={0} color="gray" delay={600} />
-                      <span className="text-gray-700 ml-3 bg-gray-100 px-3 py-1 rounded-[12px]">🔒 Premium</span>
+                  <div className="p-5 bg-[var(--color-surface-container-lowest)] border border-dashed border-[var(--color-outline-variant)] rounded-2xl opacity-50">
+                    <div className="flex justify-between items-center">
+                      <span className="font-body text-[var(--color-on-surface-variant)]">Future Tenses</span>
+                      <span className="flex items-center text-xs font-label font-bold bg-[var(--color-surface-container-high)] text-[var(--color-on-surface-variant)] px-2.5 py-1 rounded-md">
+                        <span className="material-symbols-outlined text-[14px] mr-1">lock</span> Premium
+                      </span>
                     </div>
                   </div>
                 </div>
                 <EnhancedCTA 
-                  variant="blue" 
-                  className="w-full mt-8 py-4 text-lg"
+                  variant="primary" 
+                  className="w-full py-4"
                   href="/lessons/beginner/1"
                   onClick={() => trackEvent('track_click', { track: 'grammar' })}
                 >
@@ -994,47 +1058,48 @@ export default function Home() {
               </div>
 
               {/* Conversation Track */}
-              <div className="bg-white/90 backdrop-blur-sm rounded-[28px] p-10 shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_20px_60px_rgba(0,0,0,0.12)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_28px_80px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-[1.02] border border-white/40">
-                <div className="flex items-center mb-8">
-                  <div className="bg-gradient-to-br from-green-100 to-green-200 p-4 rounded-[20px] mr-6 shadow-[inset_0_4px_16px_rgba(34,197,94,0.2)]">
-                    <div className="text-3xl text-green-600">💬</div>
+              <div className="bg-[var(--color-surface-container-lowest)] rounded-3xl p-8 md:p-10 shadow-sm border border-[var(--color-outline-variant)]/50 hover:shadow-md transition-shadow">
+                <div className="flex items-start mb-8">
+                  <div className="bg-[var(--color-tertiary)] w-14 h-14 rounded-xl flex items-center justify-center mr-5 shrink-0 text-[var(--color-on-tertiary)] shadow-sm">
+                    <span className="material-symbols-outlined text-2xl">forum</span>
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-gray-900">Dialogue Practice</h3>
-                    <p className="text-gray-700 text-lg">Real-world French Communication</p>
+                    <h3 className="text-2xl font-display font-bold text-[var(--color-on-surface)] mb-1">Dialogue Practice</h3>
+                    <p className="text-[var(--color-on-surface-variant)] font-body text-sm">Real-world French Communication</p>
                   </div>
                 </div>
-                <div className="space-y-5">
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
-                    <span className="font-medium text-gray-900">Greetings & Basic Introductions</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={100} color="green" showPercentage />
-                      <span className="text-green-500 ml-3 text-lg">✓</span>
+                <div className="space-y-4 mb-10">
+                  <div className="p-5 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)]">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="font-body font-semibold text-[var(--color-on-surface)]">Greetings & Intros</span>
+                      <span className="material-symbols-outlined text-[var(--color-tertiary)] font-bold text-[20px]">check</span>
                     </div>
+                    <AnimatedProgressBar progress={100} color="blue" />
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
-                    <span className="font-medium text-gray-900">Restaurant & Dining Situations</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={80} color="green" delay={200} showPercentage />
+                  <div className="p-5 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)]">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="font-body font-semibold text-[var(--color-on-surface)]">Restaurant & Dining</span>
                     </div>
+                    <AnimatedProgressBar progress={80} color="blue" delay={200} />
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
-                    <span className="font-medium text-gray-900">Shopping & Daily Errands</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={userProgress.conversation} color="green" delay={400} showPercentage />
+                  <div className="p-5 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)] opacity-70">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="font-body font-medium text-[var(--color-on-surface)]">Shopping & Errands</span>
                     </div>
+                    <AnimatedProgressBar progress={userProgress.conversation} color="blue" delay={400} />
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-[16px] border border-green-200/50">
-                    <span className="font-medium text-gray-900">Travel & Accommodation</span>
-                    <div className="flex items-center">
-                      <AnimatedProgressBar progress={0} color="gray" delay={600} />
-                      <span className="text-gray-700 ml-3 bg-gray-100 px-3 py-1 rounded-[12px]">🔒 Premium</span>
+                  <div className="p-5 bg-[var(--color-surface-container-lowest)] border border-dashed border-[var(--color-outline-variant)] rounded-2xl opacity-50">
+                    <div className="flex justify-between items-center">
+                      <span className="font-body text-[var(--color-on-surface-variant)]">Travel & Accommodation</span>
+                      <span className="flex items-center text-xs font-label font-bold bg-[var(--color-surface-container-high)] text-[var(--color-on-surface-variant)] px-2.5 py-1 rounded-md">
+                        <span className="material-symbols-outlined text-[14px] mr-1">lock</span> Premium
+                      </span>
                     </div>
                   </div>
                 </div>
                 <EnhancedCTA
                   variant="blue"
-                  className="w-full mt-8 py-4 text-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+                  className="w-full py-4"
                   href="/lessons/beginner/1"
                   onClick={() => trackEvent('track_click', { track: 'conversation' })}
                 >
@@ -1044,141 +1109,181 @@ export default function Home() {
             </div>
 
             {/* Sample Lessons Preview */}
+            <div className="text-center mb-12">
+              <h3 className="text-2xl font-display font-semibold text-[var(--color-on-surface)]">Preview the Experience</h3>
+            </div>
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white/90 backdrop-blur-sm rounded-[20px] p-8 shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.12),0_20px_60px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40">
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-[16px] mb-6 border border-blue-200/50">
-                  <h4 className="font-bold text-gray-900 mb-3 text-lg">Lesson 1: Greetings & Introductions</h4>
-                  <div className="text-gray-700 mb-4">Learn essential French greetings</div>
-                  <InteractiveExample />
+              <div className="bg-[var(--color-surface)] rounded-2xl p-6 md:p-8 shadow-sm border border-[var(--color-outline-variant)]/50 hover:shadow-md transition-all flex flex-col h-full">
+                <div className="flex-grow">
+                  <h4 className="font-display font-bold text-[var(--color-primary)] mb-2 text-lg">Lesson 1: Greetings</h4>
+                  <p className="text-[var(--color-on-surface-variant)] font-body text-sm mb-6">Learn essential French greetings</p>
+                  <div className="mb-8">
+                    <InteractiveExample />
+                  </div>
                 </div>
                 <EnhancedCTA 
-                  variant="blue" 
-                  className="w-full py-3 text-base"
+                  variant="secondary" 
+                  className="w-full py-3 font-label text-xs tracking-widest uppercase"
                   href="/lessons/beginner/1"
                   onClick={() => trackEvent('lesson_preview_click', { lesson: 'greetings' })}
                 >
-                  ▶️ Start This Lesson
+                  Start This Lesson
                 </EnhancedCTA>
               </div>
 
-              <div className="bg-white/90 backdrop-blur-sm rounded-[20px] p-8 shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_20px_60px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40">
-                <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-[16px] mb-6 border border-green-200/50">
-                  <h4 className="font-bold text-gray-900 mb-3 text-lg">Dialogue: Meeting Someone New</h4>
-                  <div className="text-gray-700 mb-4">Practice natural conversation</div>
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-[16px] border-l-4 border-green-400 shadow-[inset_0_4px_16px_rgba(34,197,94,0.1)]">
-                    <div className="space-y-3">
+              <div className="bg-[var(--color-surface)] rounded-2xl p-6 md:p-8 shadow-sm border border-[var(--color-outline-variant)]/50 hover:shadow-md transition-all flex flex-col h-full">
+                <div className="flex-grow">
+                  <h4 className="font-display font-bold text-[var(--color-primary)] mb-2 text-lg">Dialogue Practice</h4>
+                  <p className="text-[var(--color-on-surface-variant)] font-body text-sm mb-6">Practice natural conversation</p>
+                  <div className="bg-[var(--color-surface-container-lowest)] p-5 rounded-2xl border border-[var(--color-outline-variant)]/50 mb-8">
+                    <div className="space-y-4 font-body">
                       <div>
-                        <span className="font-bold text-green-700">Marie:</span> 
-                        <span className="text-green-600 ml-2">"Bonjour! Je m'appelle Marie."</span>
-                        <div className="text-gray-600 italic text-sm mt-1">"Hello! My name is Marie."</div>
+                        <span className="font-bold text-[var(--color-primary)]">Marie:</span> 
+                        <span className="text-[var(--color-on-surface)] ml-2">"Bonjour! Je m'appelle Marie."</span>
+                        <div className="text-[var(--color-on-surface-variant)] italic text-sm mt-1">"Hello! My name is Marie."</div>
                       </div>
-                      <div>
-                        <span className="font-bold text-green-700">Vous:</span> 
-                        <span className="text-green-600 ml-2">"Enchanté! Moi, c'est..."</span>
-                        <div className="text-gray-600 italic text-sm mt-1">"Nice to meet you! I'm..."</div>
+                      <div className="pt-4 border-t border-[var(--color-outline-variant)]/30">
+                        <span className="font-bold text-[var(--color-primary)]">Vous:</span> 
+                        <span className="text-[var(--color-on-surface)] ml-2">"Enchanté! Moi, c'est..."</span>
+                        <div className="text-[var(--color-on-surface-variant)] italic text-sm mt-1">"Nice to meet you! I'm..."</div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <EnhancedCTA
-                  variant="blue"
-                  className="w-full py-3 text-base bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+                  variant="primary"
+                  className="w-full py-3 font-label text-xs tracking-widest uppercase"
                   href="/lessons/beginner/2"
                   onClick={() => trackEvent('lesson_preview_click', { lesson: 'dialogue_intro' })}
                 >
-                  🎤 Practice Speaking
+                  Practice Speaking
                 </EnhancedCTA>
               </div>
 
-              <div className="bg-white/90 backdrop-blur-sm rounded-[20px] p-8 shadow-[inset_0_8px_32px_rgba(168,85,247,0.08),0_16px_48px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_8px_32px_rgba(168,85,247,0.12),0_20px_60px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02] border border-white/40 border-2 border-purple-200/50">
-                <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-[16px] mb-6 border border-purple-200/50">
-                  <h4 className="font-bold text-gray-900 mb-3 text-lg">Premium: AI Conversation</h4>
-                  <div className="text-gray-700 mb-4">Chat with AI tutor in French</div>
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-[16px] border-l-4 border-purple-400 shadow-[inset_0_4px_16px_rgba(168,85,247,0.1)]">
-                    <div className="flex items-center mb-3">
-                      <span className="text-purple-500 mr-2 text-lg">🤖</span>
-                      <span className="font-bold text-purple-700">Marie (AI Tutor)</span>
+              <div className="bg-[var(--color-primary)] text-[var(--color-on-primary)] rounded-2xl p-6 md:p-8 shadow-md border border-[var(--color-primary)] hover:shadow-lg transition-all flex flex-col h-full relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-tertiary)]/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+                <div className="flex-grow relative z-10">
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="font-display font-bold text-[var(--color-on-primary)] text-lg">AI Conversation</h4>
+                    <span className="bg-[var(--color-tertiary)] text-[var(--color-on-tertiary)] text-[10px] uppercase font-bold px-2 py-0.5 rounded-sm font-label tracking-wider">Premium</span>
+                  </div>
+                  <p className="text-[var(--color-on-primary)]/80 font-body text-sm mb-6">Chat with AI tutor in French</p>
+                  <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10 mb-8">
+                    <div className="flex items-center mb-4 pb-3 border-b border-white/10">
+                      <span className="text-2xl mr-3">🤖</span>
+                      <span className="font-display font-bold text-[var(--color-tertiary)]">Marie (AI Tutor)</span>
                     </div>
-                    <div>
-                      <span className="text-purple-600 font-semibold">"Bonjour! Voulez-vous pratiquer?"</span>
-                      <div className="text-gray-600 italic text-sm mt-1">"Hello! Would you like to practice?"</div>
+                    <div className="font-body">
+                      <span className="text-white font-medium">"Bonjour! Voulez-vous pratiquer?"</span>
+                      <div className="text-white/70 italic text-sm mt-2">"Hello! Would you like to practice?"</div>
                     </div>
                   </div>
                 </div>
                 <button 
-                  className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 rounded-[16px] hover:from-purple-600 hover:to-blue-600 transition-all duration-300 text-base font-medium shadow-[0_8px_24px_rgba(168,85,247,0.3)] hover:shadow-[0_12px_32px_rgba(168,85,247,0.4)] hover:scale-105"
+                  className="w-full bg-[var(--color-surface)] text-[var(--color-primary)] py-3 rounded-xl hover:bg-[var(--color-surface-container-lowest)] transition-colors duration-200 font-label font-bold text-xs uppercase tracking-widest relative z-10"
                   onClick={() => trackEvent('ai_chat_preview_click', { location: 'lesson_preview' })}
                 >
-                  🧠 Try AI Chat (Premium)
+                  Try AI Chat
                 </button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* AI Features Section */}
-        <section id="features" className="bg-gradient-to-br from-white to-gray-50 py-24 relative overflow-hidden">
-          {/* Soft background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-20 left-20 w-56 h-56 bg-blue-200/10 rounded-[56px] blur-3xl"></div>
-            <div className="absolute bottom-20 right-20 w-48 h-48 bg-green-200/10 rounded-[48px] blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-purple-200/10 rounded-[40px] blur-3xl"></div>
-          </div>
+        {/* AI Features Section - Bento Grid */}
+        <section id="features" className="py-32 bg-[var(--color-primary)] text-[var(--color-on-primary)] relative overflow-hidden border-y border-[var(--color-primary)]">
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[var(--color-tertiary)]/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[var(--color-secondary)]/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
           
-          <div className="max-w-7xl mx-auto px-4 relative z-10">
-            <div className="text-center mb-20">
-              <h2 className="text-5xl font-bold text-gray-900 mb-6">Smart Learning Features</h2>
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-                Experience personalized French learning with modern technology and proven teaching methods
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-20 max-w-3xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-[var(--color-on-primary)] mb-6 tracking-tight">Everything you need to <span className="text-[var(--color-tertiary)] relative inline-block">master French<svg className="absolute w-full h-3 -bottom-1 left-0 text-[var(--color-tertiary)] opacity-50" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="transparent"/></svg></span></h2>
+              <p className="text-xl text-[var(--color-on-primary)]/80 font-body">
+                Experience personalized French learning with modern technology and proven teaching methods.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {/* Audio Pronunciation */}
-              <div className="bg-white/90 backdrop-blur-sm rounded-[28px] p-10 shadow-[inset_0_8px_32px_rgba(59,130,246,0.08),0_20px_60px_rgba(0,0,0,0.12)] hover:shadow-[inset_0_8px_32px_rgba(59,130,246,0.12),0_28px_80px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-[1.02] border border-white/40 group">
-                <div className="bg-gradient-to-br from-blue-400 to-blue-500 w-20 h-20 rounded-[20px] flex items-center justify-center mb-8 shadow-[0_8px_32px_rgba(59,130,246,0.3)] group-hover:shadow-[0_12px_40px_rgba(59,130,246,0.4)] transition-all duration-300">
-                  <span className="text-3xl text-white">🔊</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Audio Pronunciation</h3>
-                <p className="text-gray-700 mb-8 text-lg leading-relaxed">Listen to native pronunciation for every dialogue and vocabulary word. Practice speaking with immediate audio feedback.</p>
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-[16px] mb-6 border border-blue-200/50">
-                  <div className="text-gray-900 mb-3 font-medium">Available in Free Plan:</div>
-                  <div className="font-semibold text-blue-600 text-lg">Basic TTS for all lessons</div>
-                </div>
-                <span className="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm px-4 py-2 rounded-[16px] font-medium shadow-[0_4px_16px_rgba(59,130,246,0.3)]">Free Feature</span>
-              </div>
-
-              {/* Dialogue-Based Learning */}
-              <div className="bg-white/90 backdrop-blur-sm rounded-[28px] p-10 shadow-[inset_0_8px_32px_rgba(34,197,94,0.08),0_20px_60px_rgba(0,0,0,0.12)] hover:shadow-[inset_0_8px_32px_rgba(34,197,94,0.12),0_28px_80px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-[1.02] border border-white/40 group">
-                <div className="bg-gradient-to-br from-green-400 to-green-500 w-20 h-20 rounded-[20px] flex items-center justify-center mb-8 shadow-[0_8px_32px_rgba(34,197,94,0.3)] group-hover:shadow-[0_12px_40px_rgba(34,197,94,0.4)] transition-all duration-300">
-                  <span className="text-3xl text-white">💬</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Proven Teaching Method</h3>
-                <p className="text-gray-700 mb-8 text-lg leading-relaxed">Learn through real conversations first, then understand the grammar. Based on successful language learning books used by millions.</p>
-                <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-[16px] mb-6 border border-green-200/50">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-gray-900 font-medium">Method Effectiveness</span>
-                    <span className="text-green-600 font-bold text-xl">95%</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {/* Feature 1 - Large spanning 2 cols */}
+              <div className="md:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 hover:bg-white/10 transition-colors group relative overflow-hidden shadow-lg">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-tertiary)]/10 rounded-full blur-3xl group-hover:bg-[var(--color-tertiary)]/20 transition-colors pointer-events-none"></div>
+                <div className="relative z-10 h-full flex flex-col justify-between">
+                  <div className="w-16 h-16 bg-[var(--color-tertiary)] rounded-2xl flex items-center justify-center mb-8 text-3xl shadow-lg shadow-[var(--color-tertiary)]/20 transform group-hover:scale-110 transition-transform duration-300">
+                    💬
                   </div>
-                  <AnimatedProgressBar progress={95} color="green" />
-                </div>
-                <span className="inline-block bg-gradient-to-r from-green-500 to-green-600 text-white text-sm px-4 py-2 rounded-[16px] font-medium shadow-[0_4px_16px_rgba(34,197,94,0.3)]">Core Method</span>
-              </div>
-
-              {/* AI-Powered Features */}
-              <div className="bg-white/90 backdrop-blur-sm rounded-[28px] p-10 shadow-[inset_0_8px_32px_rgba(168,85,247,0.08),0_20px_60px_rgba(0,0,0,0.12)] hover:shadow-[inset_0_8px_32px_rgba(168,85,247,0.12),0_28px_80px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-[1.02] border border-white/40 group">
-                <div className="bg-gradient-to-br from-purple-400 to-purple-500 w-20 h-20 rounded-[20px] flex items-center justify-center mb-8 shadow-[0_8px_32px_rgba(168,85,247,0.3)] group-hover:shadow-[0_12px_40px_rgba(168,85,247,0.4)] transition-all duration-300">
-                  <span className="text-3xl text-white">🤖</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">AI Enhancement</h3>
-                <p className="text-gray-700 mb-8 text-lg leading-relaxed">Get personalized exercise generation, advanced speech analysis, and 24/7 conversation practice with premium features.</p>
-                <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-[16px] mb-6 border border-purple-200/50">
-                  <div className="text-gray-900">
-                    <div className="font-medium mb-2">Premium AI Features:</div>
-                    <div className="text-gray-700">Speech Analysis, Exercise Generation, AI Chat</div>
+                  <div>
+                    <h3 className="text-3xl font-display font-bold text-white mb-4">Proven Dialogue Method</h3>
+                    <p className="text-white/80 font-body text-lg leading-relaxed max-w-lg mb-8">
+                      Learn through real conversations first, then understand the grammar. Based on successful language learning techniques used by millions worldwide.
+                    </p>
+                    <div className="inline-flex items-center text-xs font-label font-bold text-[var(--color-tertiary)] tracking-widest uppercase bg-[var(--color-tertiary)]/10 px-4 py-2 rounded-lg">
+                      ★ Core Methodology
+                    </div>
                   </div>
                 </div>
-                <span className="inline-block bg-gradient-to-r from-purple-500 to-purple-600 text-white text-sm px-4 py-2 rounded-[16px] font-medium shadow-[0_4px_16px_rgba(168,85,247,0.3)]">Premium Feature</span>
+              </div>
+
+              {/* Feature 2 - Small */}
+              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-10 hover:bg-white/10 transition-colors flex flex-col justify-between group shadow-lg">
+                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-8 text-2xl transform group-hover:rotate-12 transition-transform duration-300">
+                  🔊
+                </div>
+                <div>
+                  <h3 className="text-2xl font-display font-bold text-white mb-3">Native Audio</h3>
+                  <p className="text-white/70 font-body leading-relaxed mb-8">
+                    Listen to native pronunciation for every dialogue and vocabulary word.
+                  </p>
+                  <div className="inline-flex items-center text-xs font-label font-bold tracking-widest uppercase bg-white/10 text-white px-3 py-2 rounded-lg border border-white/5">
+                    <span className="w-2 h-2 rounded-full bg-[var(--color-secondary)] mr-2"></span>
+                    Included in Free
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature 3 - Small */}
+              <div className="bg-[var(--color-tertiary)] rounded-3xl p-8 md:p-10 text-[var(--color-on-tertiary)] shadow-xl flex flex-col justify-between group transform hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-2xl pointer-events-none"></div>
+                <div className="relative z-10 w-14 h-14 bg-white/30 rounded-2xl flex items-center justify-center mb-8 text-2xl shadow-sm transform group-hover:scale-110 transition-transform">
+                  🤖
+                </div>
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-display font-bold mb-3 text-[var(--color-on-tertiary)]">AI Enhancement</h3>
+                  <p className="text-[var(--color-on-tertiary)]/90 font-body leading-relaxed mb-8 font-medium">
+                    24/7 conversation practice with our intelligent French tutor.
+                  </p>
+                  <div className="inline-flex items-center text-[10px] font-label font-bold bg-[var(--color-on-tertiary)] text-[var(--color-tertiary)] px-4 py-2 rounded-lg shadow-sm uppercase tracking-widest">
+                    Premium Exclusive
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature 4 - Large spanning 2 cols */}
+              <div className="md:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 hover:bg-white/10 transition-colors flex flex-col md:flex-row items-center gap-10 group shadow-lg">
+                <div className="flex-1">
+                  <div className="w-16 h-16 bg-[var(--color-secondary)]/20 text-[var(--color-secondary)] border border-[var(--color-secondary)]/30 rounded-2xl flex items-center justify-center mb-8 text-3xl transform group-hover:rotate-12 transition-transform duration-300">
+                    📈
+                  </div>
+                  <h3 className="text-3xl font-display font-bold text-[var(--color-on-primary)] mb-4">Track Your Progress</h3>
+                  <p className="text-white/80 font-body text-lg leading-relaxed mb-8 md:mb-0">
+                    Watch your skills grow with detailed analytics on your grammar, vocabulary, and speaking progress.
+                  </p>
+                </div>
+                <div className="flex-1 w-full bg-[var(--color-surface)]/10 rounded-2xl p-6 border border-white/10 shadow-inner backdrop-blur-sm">
+                  <div className="space-y-5">
+                    <div>
+                      <div className="flex justify-between text-sm mb-2 text-white/90 font-label font-bold uppercase tracking-wider"><span>Vocabulary Mastery</span><span className="text-[var(--color-tertiary)]">85%</span></div>
+                      <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden"><div className="bg-[var(--color-tertiary)] h-full rounded-full w-[85%]"></div></div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-2 text-white/90 font-label font-bold uppercase tracking-wider"><span>Grammar Rules</span><span className="text-[var(--color-tertiary)]">60%</span></div>
+                      <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden"><div className="bg-[var(--color-tertiary)] h-full rounded-full w-[60%]"></div></div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-2 text-white/90 font-label font-bold uppercase tracking-wider"><span>Speaking Confidence</span><span className="text-[var(--color-tertiary)]">40%</span></div>
+                      <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden"><div className="bg-[var(--color-tertiary)] h-full rounded-full w-[40%]"></div></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1186,10 +1291,15 @@ export default function Home() {
 
         {/* Lazy Loaded Sections */}
         <Suspense fallback={
-          <div className="py-20 text-center bg-gray-50">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4"></div>
-              <div className="h-4 bg-gray-300 rounded w-96 mx-auto"></div>
+          <div className="py-24 text-center bg-[var(--color-surface-container-lowest)]">
+            <div className="animate-pulse max-w-7xl mx-auto px-4">
+              <div className="h-10 bg-[var(--color-surface-container-highest)] rounded-lg w-64 mx-auto mb-6"></div>
+              <div className="h-4 bg-[var(--color-surface-container-highest)] rounded w-96 mx-auto mb-16"></div>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="h-[400px] bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)]/30"></div>
+                <div className="h-[450px] bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)]/30"></div>
+                <div className="h-[400px] bg-[var(--color-surface)] rounded-2xl border border-[var(--color-outline-variant)]/30"></div>
+              </div>
             </div>
           </div>
         }>
@@ -1197,10 +1307,10 @@ export default function Home() {
         </Suspense>
 
         <Suspense fallback={
-          <div className="py-20 text-center bg-gray-900">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-700 rounded w-64 mx-auto mb-4"></div>
-              <div className="h-4 bg-gray-700 rounded w-96 mx-auto"></div>
+          <div className="py-24 text-center bg-[var(--color-surface-container)]">
+            <div className="animate-pulse max-w-7xl mx-auto px-4">
+              <div className="h-10 bg-[var(--color-outline-variant)]/20 rounded-lg w-64 mx-auto mb-6"></div>
+              <div className="h-4 bg-[var(--color-outline-variant)]/20 rounded w-96 mx-auto"></div>
             </div>
           </div>
         }>
@@ -1208,45 +1318,41 @@ export default function Home() {
         </Suspense>
 
         {/* Call to Action */}
-        <section className="bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 text-white py-24 relative overflow-hidden">
-          {/* Soft floating elements for depth */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-10 left-10 w-48 h-48 bg-white/10 rounded-[48px] blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/10 rounded-[40px] blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-white/10 rounded-[32px] blur-3xl animate-pulse delay-500"></div>
-          </div>
-          
+        <section className="bg-[var(--color-primary)] text-[var(--color-on-primary)] py-24 relative overflow-hidden border-t border-[var(--color-primary)]">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-tertiary)]/10 rounded-full blur-[120px] pointer-events-none"></div>
           <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <h2 className="text-5xl md:text-6xl font-bold mb-8">Ready to Start Your French Journey?</h2>
-            <p className="text-xl mb-10 opacity-95">
-              Begin with our first 10 free A1 lessons and progress to A2 level for intermediate French skills
+            <h2 className="text-4xl md:text-6xl font-display font-bold mb-8 tracking-tight">Ready to Start Your French Journey?</h2>
+            <p className="text-xl font-body text-[var(--color-on-primary)]/80 mb-12 max-w-2xl mx-auto leading-relaxed">
+              Begin with our first 10 free A1 lessons and progress to A2 level for intermediate French skills.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-8 mb-12">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
               <EnhancedCTA 
-                showUrgency
+                variant="blue"
                 href="/lessons/beginner/1"
                 onClick={() => trackEvent('final_cta_click', { location: 'bottom' })}
+                className="w-full sm:w-auto px-10 py-4 text-sm font-label font-bold tracking-widest uppercase shadow-xl"
               >
-                🚀 Start Lesson 1 Now
+                Start Lesson 1 Now
               </EnhancedCTA>
               <EnhancedCTA 
                 variant="secondary"
                 onClick={() => trackEvent('premium_trial_click', { location: 'cta' })}
+                className="w-full sm:w-auto px-10 py-4 text-sm font-label font-bold tracking-widest uppercase !text-white !bg-white/10 !border-white/30 hover:!bg-white/20 hover:!border-white"
               >
-                🎁 Try Premium Features
+                Try Premium Features
               </EnhancedCTA>
             </div>
-            <div className="flex justify-center items-center space-x-8 text-sm opacity-90">
-              <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
-                <span className="text-green-300 mr-2">✓</span>
+            <div className="flex flex-wrap justify-center items-center gap-6 text-sm font-label uppercase tracking-wider font-bold text-[var(--color-on-primary)]/70">
+              <div className="flex items-center">
+                <span className="text-[var(--color-tertiary)] mr-2 material-symbols-outlined text-[18px]">check_circle</span>
                 No credit card required
               </div>
-                              <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
-                  <span className="text-blue-200 mr-2">✓</span>
-                  10 A1 lessons + A2 level free
-                </div>
-              <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-[16px] border border-white/20">
-                <span className="text-purple-200 mr-2">✓</span>
+              <div className="flex items-center">
+                <span className="text-[var(--color-tertiary)] mr-2 material-symbols-outlined text-[18px]">check_circle</span>
+                10 A1 lessons + A2 level free
+              </div>
+              <div className="flex items-center">
+                <span className="text-[var(--color-tertiary)] mr-2 material-symbols-outlined text-[18px]">check_circle</span>
                 Start learning in 30 seconds
               </div>
             </div>
@@ -1255,78 +1361,81 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-br from-gray-800 to-gray-900 text-white py-20 relative overflow-hidden">
-        {/* Soft background elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 left-10 w-40 h-40 bg-blue-500/10 rounded-[40px] blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-32 h-32 bg-green-500/10 rounded-[32px] blur-3xl"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-4 gap-10 mb-16">
-            <div>
-              <Link href="/" className="flex items-center space-x-2 mb-6 group">
-                <span className="text-3xl group-hover:scale-110 transition-transform duration-300">🎓</span>
-                <span className="text-3xl font-bold">Français<span className="text-blue-400">Libre</span></span>
+      <footer className="bg-[var(--color-surface-container-highest)] text-[var(--color-on-surface)] py-16 border-t border-[var(--color-outline-variant)]/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-12 mb-16">
+            <div className="col-span-1 md:col-span-1">
+              <Link href="/" className="flex items-center space-x-3 mb-6 group">
+                <div className="w-10 h-10 bg-[var(--color-primary)] text-[var(--color-on-primary)] rounded-xl flex items-center justify-center font-display font-bold text-xl transition-colors duration-300 shadow-md">
+                  FL
+                </div>
+                <span className="text-xl font-display font-bold tracking-tight text-[var(--color-primary)]">
+                  Français<span className="text-[var(--color-tertiary)]">Libre</span>
+                </span>
               </Link>
-              <p className="text-gray-300 mb-6 text-lg leading-relaxed">Making French learning accessible through proven methods and modern technology.</p>
+              <p className="text-[var(--color-on-surface-variant)] font-body mb-8 leading-relaxed">
+                Making French learning accessible through proven methods and modern technology.
+              </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 text-2xl hover:scale-110" aria-label="Facebook">📘</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 text-2xl hover:scale-110" aria-label="Twitter">🐦</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 text-2xl hover:scale-110" aria-label="Instagram">📷</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 text-2xl hover:scale-110" aria-label="YouTube">📺</a>
+                <a href="#" className="w-10 h-10 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline-variant)] flex items-center justify-center hover:bg-[var(--color-tertiary)] hover:text-[var(--color-on-tertiary)] hover:border-[var(--color-tertiary)] transition-all" aria-label="Facebook">
+                  <span className="font-label font-bold text-xs">FB</span>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline-variant)] flex items-center justify-center hover:bg-[var(--color-tertiary)] hover:text-[var(--color-on-tertiary)] hover:border-[var(--color-tertiary)] transition-all" aria-label="Twitter">
+                  <span className="font-label font-bold text-xs">TW</span>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline-variant)] flex items-center justify-center hover:bg-[var(--color-tertiary)] hover:text-[var(--color-on-tertiary)] hover:border-[var(--color-tertiary)] transition-all" aria-label="Instagram">
+                  <span className="font-label font-bold text-xs">IG</span>
+                </a>
               </div>
             </div>
 
             <div>
-              <h4 className="font-bold mb-6 text-lg">Learning</h4>
-              <ul className="space-y-3 text-gray-300">
-                <li><Link href="/lessons/beginner" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">A1 Beginner Lessons</Link></li>
-                <li><Link href="/lessons/elementary" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">A2 Elementary Lessons</Link></li>
-                <li><Link href="/lessons" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">All Lessons by Level</Link></li>
-                <li><Link href="/grammar-guide" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Grammar Guide</Link></li>
-                <li><Link href="/vocabulary-builder" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Vocabulary Builder</Link></li>
-                <li><Link href="/pronunciation-guide" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Pronunciation Guide</Link></li>
+              <h4 className="font-label font-bold text-[var(--color-primary)] mb-6 uppercase tracking-widest text-xs">Learning</h4>
+              <ul className="space-y-4 font-body text-[var(--color-on-surface-variant)]">
+                <li><Link href="/lessons/beginner" className="hover:text-[var(--color-tertiary)] transition-colors">A1 Beginner Lessons</Link></li>
+                <li><Link href="/lessons/elementary" className="hover:text-[var(--color-tertiary)] transition-colors">A2 Elementary Lessons</Link></li>
+                <li><Link href="/lessons" className="hover:text-[var(--color-tertiary)] transition-colors">All Lessons by Level</Link></li>
+                <li><Link href="/grammar-guide" className="hover:text-[var(--color-tertiary)] transition-colors">Grammar Guide</Link></li>
+                <li><Link href="/vocabulary-builder" className="hover:text-[var(--color-tertiary)] transition-colors">Vocabulary Builder</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold mb-6 text-lg">Community</h4>
-              <ul className="space-y-3 text-gray-300">
-                <li><Link href="/community/study-groups" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Study Groups</Link></li>
-                <li><Link href="/community" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Language Exchange</Link></li>
-                <li><Link href="/community" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Live Events</Link></li>
-                <li><Link href="/community" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Success Stories</Link></li>
-                <li><Link href="/community" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Forum</Link></li>
+              <h4 className="font-label font-bold text-[var(--color-primary)] mb-6 uppercase tracking-widest text-xs">Community</h4>
+              <ul className="space-y-4 font-body text-[var(--color-on-surface-variant)]">
+                <li><Link href="/community/study-groups" className="hover:text-[var(--color-tertiary)] transition-colors">Study Groups</Link></li>
+                <li><Link href="/community" className="hover:text-[var(--color-tertiary)] transition-colors">Language Exchange</Link></li>
+                <li><Link href="/community" className="hover:text-[var(--color-tertiary)] transition-colors">Live Events</Link></li>
+                <li><Link href="/community" className="hover:text-[var(--color-tertiary)] transition-colors">Success Stories</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold mb-6 text-lg">Support</h4>
-              <ul className="space-y-3 text-gray-300">
-                <li><Link href="/support/help-center" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Help Center</Link></li>
-                <li><Link href="/support" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Contact Us</Link></li>
-                <li><Link href="/support" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Privacy Policy</Link></li>
-                <li><Link href="/support" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Terms of Service</Link></li>
-                <li><Link href="/support" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Feedback</Link></li>
+              <h4 className="font-label font-bold text-[var(--color-primary)] mb-6 uppercase tracking-widest text-xs">Support</h4>
+              <ul className="space-y-4 font-body text-[var(--color-on-surface-variant)]">
+                <li><Link href="/support/help-center" className="hover:text-[var(--color-tertiary)] transition-colors">Help Center</Link></li>
+                <li><Link href="/support" className="hover:text-[var(--color-tertiary)] transition-colors">Contact Us</Link></li>
+                <li><Link href="/support" className="hover:text-[var(--color-tertiary)] transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/support" className="hover:text-[var(--color-tertiary)] transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-gray-700 pt-10 text-center text-gray-400">
-            <p className="text-lg">&copy; 2025 FrançaisLibre. All rights reserved. Made with ❤️ for French learners worldwide.</p>
+          <div className="border-t border-[var(--color-outline-variant)]/30 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-label font-bold tracking-wider uppercase text-[var(--color-on-surface-variant)]">
+            <p>&copy; {new Date().getFullYear()} FrançaisLibre. All rights reserved.</p>
+            <p className="mt-4 md:mt-0">Made with 💛 for French learners worldwide.</p>
           </div>
         </div>
       </footer>
 
       {/* Custom CSS for animations */}
-      <style jsx>{`
+      <style jsx global>{`
         @keyframes fade-in {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in {
-          animation: fade-in 0.5s ease-out;
+          animation: fade-in 0.5s ease-out forwards;
         }
       `}</style>
     </div>

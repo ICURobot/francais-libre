@@ -1,480 +1,134 @@
 'use client'
 
-import { useState } from 'react'
-import { DialogueSection } from '../../../../../components/lessons/DialogueSection'
-import InteractiveExercise from '../../../../../components/lessons/InteractiveExercise'
-import ExerciseProgress from '../../../../../components/lessons/ExerciseProgress'
-import { AudioPlayer } from '../../../../../components/lessons/AudioPlayer'
-import Link from 'next/link'
+import ElementaryLessonLayout, { ElementaryLessonData } from '../../../../../components/lessons/ElementaryLessonLayout'
 
-type Section = 'dialogue' | 'grammar' | 'vocabulary' | 'exercises'
-
-const lessonData = {
+const lessonData: ElementaryLessonData = {
   id: 17,
-  title: "Future Plans (Futur Proche)",
+  title: "Les Verbes Pronominaux",
   level: "A2",
-  description: "Learn to talk about future plans and intentions using futur proche (aller + infinitive) and essential planning vocabulary",
-  
+  description: "Learn present-tense reflexive verbs for daily routines, including pronoun placement, negation, and the difference between reflexive and non-reflexive meaning.",
+
   dialogue: {
-    title: "Making Summer Plans",
-    context: "Claire and Julien discuss their summer plans using futur proche to express future intentions",
-    speakers: ["Claire", "Julien"],
+    title: "Les routines du matin",
+    context: "Deux colocataires, Chloé et Hugo, discutent de leurs routines matinales et de la salle de bains.",
     exchanges: [
-      {
-        speaker: "Claire",
-        french: "Salut Julien ! Qu'est-ce que tu vas faire cet été ?",
-        english: "Hi Julien! What are you going to do this summer?",
-        pronunciation: "sah-LU zhul-ee-AHN! kes-kuh tu vah fair set ay-TAY?"
-      },
-      {
-        speaker: "Julien",
-        french: "Je vais voyager en Espagne avec ma famille. Nous allons partir en juillet.",
-        english: "I'm going to travel to Spain with my family. We're going to leave in July.",
-        pronunciation: "zhuh vah voy-ah-ZHAY ahn es-PAHN-yuh ah-VEK mah fah-MEEL. noo zah-LOHN par-TEER ahn zhwee-YEH"
-      },
-      {
-        speaker: "Claire",
-        french: "Génial ! Vous allez rester combien de temps ?",
-        english: "Great! How long are you going to stay?",
-        pronunciation: "zhay-nee-AHL! voo zah-LAY res-TAY kom-bee-AHN duh TAHN?"
-      },
-      {
-        speaker: "Julien",
-        french: "Nous allons passer deux semaines à Barcelone. Et toi, tu as des projets ?",
-        english: "We're going to spend two weeks in Barcelona. And you, do you have plans?",
-        pronunciation: "noo zah-LOHN pah-SAY duh suh-MEN ah bar-suh-LOHN. ay TWAH, tu ah day pro-ZHEH?"
-      },
-      {
-        speaker: "Claire",
-        french: "Oui ! Je vais commencer un nouveau travail en août. Je suis très excitée !",
-        english: "Yes! I'm going to start a new job in August. I'm very excited!",
-        pronunciation: "wee! zhuh vah ko-mahn-SAY uhn noo-VOH trah-VY ahn OOT. zhuh swee tray ek-see-TAY!"
-      },
-      {
-        speaker: "Julien",
-        french: "Félicitations ! Qu'est-ce que tu vas faire comme travail ?",
-        english: "Congratulations! What kind of work are you going to do?",
-        pronunciation: "fay-lee-see-tah-see-OHN! kes-kuh tu vah fair kom trah-VY?"
-      },
-      {
-        speaker: "Claire",
-        french: "Je vais travailler dans une agence de marketing. Je vais apprendre beaucoup de choses nouvelles.",
-        english: "I'm going to work at a marketing agency. I'm going to learn many new things.",
-        pronunciation: "zhuh vah trah-vah-YAY dahn zun ah-ZHAHNS duh mar-kuh-TING. zhuh vah zah-PRAHN-druh bo-KOO duh SHOHS noo-VEL"
-      },
-      {
-        speaker: "Julien",
-        french: "Et avant août ? Tu vas prendre des vacances ?",
-        english: "And before August? Are you going to take vacation?",
-        pronunciation: "ay ah-VAHN OOT? tu vah PRAHN-druh day vah-KAHNS?"
-      },
-      {
-        speaker: "Claire",
-        french: "Bien sûr ! Je vais aller à la mer en juin. Je vais me détendre avant de commencer.",
-        english: "Of course! I'm going to go to the sea in June. I'm going to relax before starting.",
-        pronunciation: "bee-AHN SUR! zhuh vay zah-LAY ah lah MAIR ahn zhwahn. zhuh vay muh day-TAHN-druh ah-VAHN duh ko-mahn-SAY"
-      }
+      { speaker: "Chloé", french: "Hugo, tu te lèves à quelle heure le matin ?", english: "Hugo, what time do you get up in the morning?", pronunciation: "ew-GOH, tu tuh LEV ah kel UR luh mah-TAN?" },
+      { speaker: "Hugo", french: "Je me lève à 6h30. Et toi ?", english: "I get up at 6:30. And you?", pronunciation: "zhuh muh LEV ah see-zur-uh-TRAHNT. ay TWAH?" },
+      { speaker: "Chloé", french: "Moi, je me réveille à 7h mais je me lève à 7h30. Je me prépare lentement.", english: "I wake up at 7 but I get up at 7:30. I get ready slowly.", pronunciation: "MWAH, zhuh muh ray-VAY ah set-ur may zhuh muh LEV ah set-ur-uh-TRAHNT. zhuh muh pray-PAHR lahn-TMAHN." },
+      { speaker: "Hugo", french: "Tu te laves le visage à l'eau froide ou chaude ?", english: "Do you wash your face with cold or hot water?", pronunciation: "tu tuh LAHV luh vee-ZAHZH ah loh FRWAHD oo SHOHD?" },
+      { speaker: "Chloé", french: "Je me lave le visage à l'eau froide. Ça me réveille ! Et toi, tu te rases ?", english: "I wash my face with cold water. It wakes me up! And you, do you shave?", pronunciation: "zhuh muh LAHV luh vee-ZAHZH ah loh FRWAHD. sah muh ray-VAY! ay TWAH, tu tuh RAHZ?" },
+      { speaker: "Hugo", french: "Oui, je me rase tous les deux jours. Ensuite je me douche et je m'habille.", english: "Yes, I shave every two days. Then I shower and I get dressed.", pronunciation: "WEE, zhuh muh RAHZ too lay duh ZHOOR. ahn-SWEET zhuh muh DOOSH ay zhuh mah-BEEY." },
+      { speaker: "Chloé", french: "Tu te dépêches ou tu prends ton temps ?", english: "Do you hurry or do you take your time?", pronunciation: "tu tuh day-PESH oo tu PRAHN tohn TAHN?" },
+      { speaker: "Hugo", french: "Je me dépêche toujours ! Et toi, tu te maquilles ?", english: "I always hurry! And you, do you put on makeup?", pronunciation: "zhuh muh day-PESH too-ZHOOR! ay TWAH, tu tuh mah-KEEY?" },
+      { speaker: "Chloé", french: "Oui, je me maquille un peu. Et je me coiffe. Après, je me brosse les dents.", english: "Yes, I put on a little makeup. And I do my hair. Then I brush my teeth.", pronunciation: "WEE, zhuh muh mah-KEEY uh(n) PUH. ay zhuh muh KWAHF. ah-PRAY, zhuh muh BROHS lay DAHN." },
+      { speaker: "Hugo", french: "Moi aussi. Ensuite je m'en vais. Je me souviens : tu te couches à quelle heure ?", english: "Me too. Then I leave. I remember: what time do you go to bed?", pronunciation: "MWAH oh-SEE. ahn-SWEET zhuh mahn VAY. zhuh muh soo-VYAHN: tu tuh KOOSH ah kel UR?" },
+      { speaker: "Chloé", french: "Je me couche vers 23h. Je m'endors rapidement. Toi ?", english: "I go to bed around 11pm. I fall asleep quickly. You?", pronunciation: "zhuh muh KOOSH vair vahnt-trwah-ZUR. zhuh mahn-DOR rah-peed-MAHN. TWAH?" },
+      { speaker: "Hugo", french: "Je me couche à minuit et je me réveille fatigué. Il faut me reposer plus.", english: "I go to bed at midnight and I wake up tired. I need to rest more.", pronunciation: "zhuh muh KOOSH ah meen-WEE ay zhuh muh ray-VAY fah-tee-GAY. eel FOH muh ruh-poh-ZAY plews." },
     ]
   },
 
   grammarPoints: [
     {
-      title: "What Is Futur Proche (Near Future)?",
-      explanation: "Futur proche is the most common way to talk about future plans in French. It's much easier than the formal future tense and is used for plans, intentions, and things that are going to happen soon. The name means 'near future' but it's used for any future plans, not just immediate ones:",
+      title: "Structure des Verbes Pronominaux",
+      explanation: "A pronominal verb includes a reflexive pronoun that refers back to the subject: je me, tu te, il/elle se, nous nous, vous vous, ils/elles se.",
       examples: [
-        "STRUCTURE: Subject + aller (conjugated) + infinitive verb",
-        "ENGLISH EQUIVALENT: 'going to' + verb",
-        "Je vais manger = I'm going to eat (immediate or planned)",
-        "Nous allons voyager = We're going to travel (any future time)",
-        "KEY POINT: Use present tense of 'aller' + any verb in infinitive form"
+        "SE LEVER : je me lève, tu te lèves, il/elle se lève, nous nous levons, vous vous levez, ils/elles se lèvent",
+        "SE LAVER : je me lave, tu te laves, il se lave, nous nous lavons, vous vous lavez, ils se lavent",
+        "S'HABILLER : je m'habille, tu t'habilles, il s'habille, nous nous habillons, vous vous habillez, ils s'habillent",
+        "SE RÉVEILLER : je me réveille, tu te réveilles, elle se réveille, nous nous réveillons, vous vous réveillez",
+        "Attention : me/te/se → m'/t'/s' devant une voyelle ou un h muet (je m'habille, tu t'endors, il s'appelle)",
+        "Depuis + présent = action commencée dans le passé qui continue : Je me lève à 7h depuis un an."
       ]
     },
     {
-      title: "Conjugating Futur Proche - Complete Pattern",
-      explanation: "Since futur proche uses 'aller' + infinitive, you just need to conjugate 'aller' (which you know from Lesson 11) and add any verb in its infinitive form. The infinitive verb never changes, making this very simple to use:",
+      title: "Catégories de Verbes Pronominaux",
+      explanation: "Pronominal verbs can describe reflexive actions, reciprocal actions, or idiomatic meanings where the pronoun is part of the verb.",
       examples: [
-        "ALLER conjugation: je vais, tu vas, il/elle va, nous allons, vous allez, ils/elles vont",
-        "EXAMPLE with 'travailler': je vais travailler, tu vas travailler, il/elle va travailler",
-        "nous allons travailler, vous allez travailler, ils/elles vont travailler",
-        "ANY VERB: Je vais partir, Tu vas étudier, Elle va faire, Nous allons voir",
-        "PRONUNCIATION: The infinitive keeps its normal pronunciation"
+        "RÉFLÉCHIS (action sur soi) : se laver, se raser, se maquiller, se coiffer, se brosser, se doucher",
+        "RÉCIPROQUES (action mutuelle) : se retrouver (to meet each other), se parler (to talk to each other)",
+        "IDIOMATIQUES (sens spécial) : se souvenir (to remember), se dépêcher (to hurry), s'endormir (to fall asleep), s'en aller (to leave)",
+        "NON-PRONOMINAL vs PRONOMINAL : laver (to wash something) vs se laver (to wash oneself)",
+        "Certains verbes n'existent qu'à la forme pronominale : s'envoler (to fly away), s'évanouir (to faint)"
       ]
     },
     {
-      title: "Time Expressions for Future Plans",
-      explanation: "To talk about when your future plans will happen, you need specific time expressions. French has particular ways to express future time that are essential for making plans and discussing intentions:",
+      title: "La Négation des Verbes Pronominaux",
+      explanation: "With pronominal verbs, ne comes before the reflexive pronoun and pas comes after the conjugated verb: je ne me lève pas.",
       examples: [
-        "MONTHS: en juin (in June), en juillet (in July), en août (in August)",
-        "SEASONS: cet été (this summer), cet hiver (this winter), ce printemps (this spring)",
-        "GENERAL: demain (tomorrow), la semaine prochaine (next week), l'année prochaine (next year)",
-        "SPECIFIC: dans deux jours (in two days), dans un mois (in a month)",
-        "BEFORE/AFTER: avant (before), après (after), avant de + infinitive (before doing)"
+        "Je ne me lève pas tôt le dimanche. (I don't get up early on Sundays.)",
+        "Tu ne te dépêches pas. (You do not hurry.)",
+        "Il ne se souvient pas de son nom. (He doesn't remember his name.)",
+        "Nous ne nous couchons pas avant minuit. (We don't go to bed before midnight.)",
+        "Elles ne s'habillent pas encore. (They don't get dressed yet.)"
       ]
     },
     {
-      title: "Expressing Plans and Intentions",
-      explanation: "Beyond just futur proche, French has several ways to talk about plans, projects, and intentions. These expressions make your French sound more natural and varied when discussing future activities:",
+      title: "Pronominal vs Non-Pronominal — Quand le Sens Change",
+      explanation: "Some verbs change meaning when used pronominally, so learn the pronominal form as its own expression when needed.",
       examples: [
-        "avoir des projets = to have plans: Tu as des projets ? (Do you have plans?)",
-        "avoir l'intention de = to intend to: J'ai l'intention de partir (I intend to leave)",
-        "prévoir de = to plan to: Nous prévoyons de voyager (We plan to travel)",
-        "espérer = to hope: J'espère voir mes amis (I hope to see my friends)",
-        "CASUAL: Je pense + infinitive = I'm thinking of doing"
-      ]
-    },
-    {
-      title: "Negative and Question Forms in Futur Proche",
-      explanation: "To make futur proche negative or ask questions, you work with the conjugated form of 'aller' (the helper verb), not the infinitive. The infinitive always stays at the end of the sentence:",
-      examples: [
-        "NEGATIVE: ne + aller + pas + infinitive",
-        "Je ne vais pas travailler demain (I'm not going to work tomorrow)",
-        "Tu ne vas pas partir ? (Aren't you going to leave?)",
-        "QUESTIONS: (Est-ce que) + subject + aller + infinitive + ?",
-        "Qu'est-ce que tu vas faire ? (What are you going to do?)",
-        "Où allez-vous aller ? (Where are you going to go?)"
+        "LAVER vs SE LAVER : Je lave la voiture. (I wash the car) → Je me lave. (I wash myself)",
+        "LEVER vs SE LEVER : Il lève la main. (He raises his hand) → Il se lève. (He gets up / stands up)",
+        "APPELER vs S'APPELER : J'appelle mon ami. (I call my friend) → Je m'appelle Paul. (My name is Paul — lit. 'I call myself')",
+        "OCCUPER vs S'OCCUPER DE : Il occupe un grand bureau. (He occupies a big office) → Il s'occupe des enfants. (He looks after the children)",
+        "PASSER vs SE PASSER : Le bus passe devant chez moi. (The bus goes past) → Qu'est-ce qui se passe ? (What's happening?)",
+        "ALLER vs S'EN ALLER : Je vais au marché. (I go to the market) → Je m'en vais. (I'm leaving / going away)",
+        "PIÈGE — ennuyer vs s'ennuyer : Ce film ennuie tout le monde. (it bores everyone) vs Je m'ennuie ici. (I am bored here)"
       ]
     }
   ],
 
   vocabulary: [
-    { french: "cet été", english: "this summer", category: "seasons", example: "Cet été, je vais voyager en Espagne." },
-    { french: "voyager", english: "to travel", category: "verbs", example: "J'aime voyager dans différents pays." },
-    { french: "en juillet", english: "in July", category: "months", example: "En juillet, il fait très chaud en France." },
-    { french: "en août", english: "in August", category: "months", example: "En août, beaucoup de Français partent en vacances." },
-    { french: "en juin", english: "in June", category: "months", example: "En juin, les étudiants passent leurs examens." },
-    { french: "génial", english: "great/awesome", category: "exclamations", example: "C'est génial de partir en vacances !" },
-    { french: "passer", english: "to spend (time)", category: "verbs", example: "Je vais passer deux semaines à la mer." },
-    { french: "deux semaines", english: "two weeks", category: "time", example: "J'ai deux semaines de vacances en été." },
-    { french: "des projets", english: "plans", category: "planning", example: "J'ai des projets intéressants pour l'avenir." },
-    { french: "commencer", english: "to start/begin", category: "verbs", example: "Je vais commencer un nouveau travail en septembre." },
-    { french: "nouveau/nouvelle", english: "new", category: "adjectives", example: "C'est une nouvelle opportunité passionnante." },
-    { french: "excité(e)", english: "excited", category: "emotions", example: "Je suis très excité de commencer ce nouveau projet." },
-    { french: "félicitations", english: "congratulations", category: "expressions", example: "Félicitations pour ton nouveau poste !" },
-    { french: "une agence", english: "agency", category: "business", example: "Je travaille dans une agence de marketing." },
-    { french: "le marketing", english: "marketing", category: "business", example: "Le marketing est un domaine très créatif." },
-    { french: "apprendre", english: "to learn", category: "verbs", example: "J'apprends beaucoup dans ce nouveau travail." },
-    { french: "avant", english: "before", category: "time-expressions", example: "Avant de partir, je dois finir mon travail." },
-    { french: "prendre des vacances", english: "to take vacation", category: "expressions", example: "Je vais prendre des vacances en juillet." },
-    { french: "la mer", english: "sea", category: "nature", example: "J'aime nager dans la mer Méditerranée." },
-    { french: "se détendre", english: "to relax", category: "reflexive-verbs", example: "Pendant les vacances, je me détends complètement." }
+    { french: "se réveiller", english: "to wake up", category: "Routine", example: "Je me réveille à 7h. (zhuh muh ray-VAY ah set-ur)" },
+    { french: "se lever", english: "to get up", category: "Routine", example: "Tu te lèves tôt ? (tu tuh LEV TOH?)" },
+    { french: "se laver", english: "to wash (oneself)", category: "Routine", example: "Il se lave les mains. (eel suh LAHV lay MAN)" },
+    { french: "se doucher", english: "to shower", category: "Routine", example: "Je me douche le matin. (zhuh muh DOOSH luh mah-TAN)" },
+    { french: "se brosser", english: "to brush", category: "Routine", example: "Elle se brosse les dents. (el suh BROHS lay DAHN)" },
+    { french: "se coiffer", english: "to do one's hair", category: "Routine", example: "Tu te coiffes vite ! (tu tuh KWAHF veet!)" },
+    { french: "s'habiller", english: "to get dressed", category: "Routine", example: "Nous nous habillons chaudement. (noo noo zah-bee-YOHN shohd-MAHN)" },
+    { french: "se maquiller", english: "to put on makeup", category: "Routine", example: "Elle se maquille tous les matins. (el suh mah-KEEY too lay mah-TAN)" },
+    { french: "se raser", english: "to shave", category: "Routine", example: "Il se rase avant le travail. (eel suh RAHZ ah-VAHN luh trav-EYE)" },
+    { french: "se coucher", english: "to go to bed", category: "Routine", example: "Je me couche vers 22h. (zhuh muh KOOSH vair vahnt-duh-ZUR)" },
+    { french: "s'endormir", english: "to fall asleep", category: "Routine", example: "Elle s'endort rapidement. (el sahn-DOR rah-peed-MAHN)" },
+    { french: "se reposer", english: "to rest", category: "Routine", example: "Tu te reposes le week-end ? (tu tuh ruh-POHZ luh wee-KEHND?)" },
+    { french: "se dépêcher", english: "to hurry", category: "Idiomatique", example: "Dépêche-toi ! On est en retard. (day-PESH-TWAH! ohn ay ahn ruh-TAHR)" },
+    { french: "s'appeler", english: "to be called / named", category: "Idiomatique", example: "Je m'appelle Marie. (zhuh mah-PEL mah-REE)" },
+    { french: "se souvenir", english: "to remember", category: "Idiomatique", example: "Tu te souviens de moi ? (tu tuh soo-VYAHN duh MWAH?)" },
+    { french: "s'en aller", english: "to leave / go away", category: "Idiomatique", example: "Je m'en vais. Bonne journée ! (zhuh mahn VAY. bun zhoor-NAY!)" },
+    { french: "d'abord", english: "first (of all)", category: "Expression", example: "D'abord, je me réveille. (dah-BOR, zhuh muh ray-VAY)" },
+    { french: "ensuite", english: "then / next", category: "Expression", example: "Ensuite, je me douche. (ahn-SWEET, zhuh muh DOOSH)" },
+    { french: "enfin", english: "finally", category: "Expression", example: "Enfin, je m'habille. (ahn-FAN, zhuh mah-BEEY)" },
+    { french: "le réveil", english: "the alarm clock", category: "Nom", example: "Mon réveil sonne à 7h. (mohn ray-VAY sun ah set-ur)" },
   ],
 
   culturalNotes: [
-    {
-      title: "French Summer Vacation Culture",
-      content: "Summer vacations ('les vacances d'été') are sacred in France. Many people take 2-4 weeks off in July or August. Spain is a popular destination for French tourists. The phrase 'prendre des vacances' is standard for taking time off work."
-    },
-    {
-      title: "French Work Culture and Career Changes",
-      content: "Starting a new job is often celebrated with 'Félicitations!' French people commonly plan career changes around vacation periods, often starting new positions in September after summer break or in January after the holidays."
-    }
+    { title: "La routine matinale en France", content: "Le petit déjeuner français typique est léger : tartine (pain beurré) ou croissant avec un café ou un chocolat chaud. Beaucoup de Français prennent leur douche le matin plutôt que le soir, contrairement à d'autres cultures." },
+    { title: "La salle de bains en colocation", content: "Dans les grandes villes françaises, la colocation est très répandue chez les jeunes. La salle de bains est souvent un sujet de négociation : planning pour la douche, temps passé, produits partagés ou non." },
+    { title: "Se maquiller en France", content: "Le maquillage en France est généralement sobre et naturel — on privilégie le teint unifié et les lèvres discrètes. Le rouge à lèvres rouge vif reste cependant un classique parisien, popularisé par des marques comme Chanel et Guerlain." },
   ],
 
   exercises: [
-    {
-      id: "ex1",
-      type: "multiple_choice" as const,
-      question: "How do you say 'We are going to travel to Spain' in French?",
-      options: [
-        "Nous allons voyager en Espagne",
-        "Nous sommes voyager en Espagne",
-        "Nous avons voyager en Espagne",
-        "Nous voyageons en Espagne"
-      ],
-      correct_answer: "Nous allons voyager en Espagne",
-      explanation: "Use futur proche: nous allons (aller conjugated) + voyager (infinitive)."
-    },
-
-    {
-      id: "ex2",
-      type: "conjugation" as const,
-      question: "Practice the conjugation of 'aller + travailler' (to be going to work)",
-      verb: "aller + travailler",
-      translations: {
-        "je": "I am going to work (vais travailler)",
-        "tu": "you are going to work (vas travailler)",
-        "il/elle": "he/she is going to work (va travailler)",
-        "nous": "we are going to work (allons travailler)",
-        "vous": "you are going to work (allez travailler)",
-        "ils/elles": "they are going to work (vont travailler)"
-      },
-      correct_answer: "conjugation",
-      explanation: "Practice the complete conjugation pattern with aller + travailler."
-    },
-
-    {
-      id: "ex3",
-      type: "conjugation" as const,
-      question: "Practice the conjugation of 'aller + partir' (to be going to leave)",
-      verb: "aller + partir",
-      translations: {
-        "je": "I am going to leave (vais partir)",
-        "tu": "you are going to leave (vas partir)",
-        "il/elle": "he/she is going to leave (va partir)",
-        "nous": "we are going to leave (allons partir)",
-        "vous": "you are going to leave (allez partir)",
-        "ils/elles": "they are going to leave (vont partir)"
-      },
-      correct_answer: "conjugation",
-      explanation: "Practice the complete conjugation pattern with aller + partir."
-    },
-
-    {
-      id: "ex4",
-      type: "matching" as const,
-      question: "Match future time expressions with appropriate plans:",
-      pairs: [
-        { french: "cet été", english: "je vais voyager en Espagne" },
-        { french: "demain", english: "tu vas commencer ton travail" },
-        { french: "la semaine prochaine", english: "nous allons voir nos amis" },
-        { french: "en juillet", english: "elle va prendre des vacances" },
-        { french: "l'année prochaine", english: "ils vont déménager" }
-      ],
-      correct_answer: "matching",
-      explanation: "Learn to match time expressions with appropriate future plans."
-    },
-
-    {
-      id: "ex5",
-      type: "fill_blank" as const,
-      question: "Complete with the correct futur proche form: Demain, je _____ _____ mes amis. (visit)",
-      correct_answer: ["vais", "voir"],
-      explanation: "Use futur proche: je vais (aller conjugated) + voir (infinitive)."
-    },
-
-    {
-      id: "ex6",
-      type: "translation" as const,
-      question: "Translate: 'I'm going to start a new job in August. I'm very excited!'",
-      correct_answer: "je vais commencer un nouveau travail en août. je suis très excité(e) !",
-      explanation: "Use futur proche for future plans and present tense for current state.",
-      hints: ["je vais commencer = I'm going to start", "nouveau = new", "en août = in August", "excité(e) = excited"]
-    },
-
-    {
-      id: "ex7",
-      type: "speaking" as const,
-      question: "Practice saying: 'Je vais voyager cet été' (I'm going to travel this summer)",
-      correct_answer: "speaking",
-      explanation: "Focus on the pronunciation: 'zhuh vah voy-ah-ZHAY set ay-TAY'",
-      audio_prompt: "Je vais voyager cet été"
-    },
-
-    {
-      id: "ex8",
-      type: "matching" as const,
-      question: "Match the French futur proche expressions with their English meanings:",
-      pairs: [
-        { french: "je vais partir", english: "I'm going to leave" },
-        { french: "tu vas faire", english: "you're going to do" },
-        { french: "il va voir", english: "he's going to see" },
-        { french: "nous allons manger", english: "we're going to eat" },
-        { french: "elles vont étudier", english: "they're going to study" }
-      ],
-      correct_answer: "matching",
-      explanation: "Practice recognizing futur proche forms in context."
-    }
+    { id: "l17-e1", type: "conjugation", question: "Conjuguez le verbe SE LEVER au présent.", verb: "se lever", correct_answer: [{ pronoun: "je", form: "me lève", pronunciation: "muh LEV" }, { pronoun: "tu", form: "te lèves", pronunciation: "tuh LEV" }, { pronoun: "il/elle/on", form: "se lève", pronunciation: "suh LEV" }, { pronoun: "nous", form: "nous levons", pronunciation: "noo luh-VOHN" }, { pronoun: "vous", form: "vous levez", pronunciation: "voo luh-VAY" }, { pronoun: "ils/elles", form: "se lèvent", pronunciation: "suh LEV" }], explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." },
+    { id: "l17-e2", type: "fill_blank", question: "Complétez avec le pronom réfléchi : Nous ____ lavons les mains.", correct_answer: "nous", explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." },
+    { id: "l17-e3", type: "fill_blank", question: "Complétez avec le pronom réfléchi : Tu ____ appelles comment ?", correct_answer: "t'", explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." },
+    { id: "l17-e4", type: "multiple_choice", question: "Quel verbe pronominal signifie 'to remember' ?", options: ["se laver", "se souvenir", "se dépêcher", "se lever"], correct_answer: "se souvenir", explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." },
+    { id: "l17-e5", type: "transformation", question: "Mettez ces phrases à la forme négative.", instruction: "affirmative_to_negative", items: [{ original: "Je me lève à 6h.", transformed: "Je ne me lève pas à 6h.", translation: "I don't get up at 6." }, { original: "Il se souvient de moi.", transformed: "Il ne se souvient pas de moi.", translation: "He doesn't remember me." }, { original: "Nous nous dépêchons.", transformed: "Nous ne nous dépêchons pas.", translation: "We don't hurry." }], explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." },
+    { id: "l17-e6", type: "matching", question: "Associez le verbe pronominal à sa signification.", pairs: [{ french: "se réveiller", english: "to wake up" }, { french: "se lever", english: "to get up" }, { french: "se coucher", english: "to go to bed" }, { french: "s'endormir", english: "to fall asleep" }, { french: "se dépêcher", english: "to hurry" }, { french: "s'habiller", english: "to get dressed" }], explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." },
+    { id: "l17-e7", type: "fill_blank", question: "Complétez avec la forme correcte : Elles ____ ____ (se coucher) à minuit.", correct_answer: "se couchent", explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." },
+    { id: "l17-e8", type: "translation", question: "Traduisez : 'I get up at 7, I shower, I get dressed and I leave.'", direction: "en_to_fr", correct_answer: ["Je me lève à 7h, je me douche, je m'habille et je m'en vais.", "Je me lève à sept heures, je me douche, je m'habille et je pars."], explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." },
+    { id: "l17-e9", type: "speaking_prompt", question: "Décrivez votre routine du matin en utilisant 5 verbes pronominaux.", model_answer: "D'abord, je me réveille à 7h. Ensuite, je me lève. Je me douche et je m'habille. Enfin, je me brosse les dents.", translation: "First, I wake up at 7. Then, I get up. I shower and I get dressed. Finally, I brush my teeth.", tip: "Keep the reflexive pronoun attached to the subject: je me, tu te, il/elle se, nous nous, vous vous, ils/elles se." },
+    { id: "l17-e10", type: "error_correction", question: "Corrigez les erreurs (pronom réfléchi absent, superflu ou mal placé).", items: [{ incorrect: "Je appelle Thomas, c'est mon prénom.", correct: "Je m'appelle Thomas, c'est mon prénom.", explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." }, { incorrect: "Qu'est-ce qui passe ici ?", correct: "Qu'est-ce qui se passe ici ?", explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." }, { incorrect: "Il occupe très bien des enfants.", correct: "Il s'occupe très bien des enfants.", explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." }, { incorrect: "Je vais. À demain !", correct: "Je m'en vais. À demain !", explanation: "Pronominal verbs use a reflexive pronoun that refers back to the subject. The pronoun goes before the conjugated verb, and ne...pas surrounds the pronoun plus verb group." }] },
   ]
 }
 
-export default function Lesson17() {
-  const [currentSection, setCurrentSection] = useState<Section>('dialogue')
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
-  const [correctAnswers, setCorrectAnswers] = useState<number>(0)
-
-  const sections = [
-    { id: 'dialogue', label: 'Dialogue', icon: '💬' },
-    { id: 'grammar', label: 'Grammar', icon: '📚' },
-    { id: 'vocabulary', label: 'Vocabulary', icon: '📖' },
-    { id: 'exercises', label: 'Exercises', icon: '✏️' }
-  ]
-
-  const handleExerciseComplete = (exerciseId: string) => {
-    setCompletedExercises(prev => new Set(prev).add(exerciseId))
-    setCorrectAnswers(prev => prev + 1)
-  }
-
-  const handleReset = () => {
-    setCompletedExercises(new Set())
-    setCorrectAnswers(0)
-  }
-
-  const renderGrammarSection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Grammar Points</h2>
-        <p className="text-lg text-gray-600">Master the essential concepts of futur proche and future planning</p>
-      </div>
-      
-      {lessonData.grammarPoints.map((point, index) => (
-        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{point.title}</h3>
-          <p className="text-gray-700 mb-4 leading-relaxed">{point.explanation}</p>
-          <div className="space-y-2">
-            {point.examples.map((example, idx) => (
-              <div key={idx} className="bg-green-50 rounded-lg p-3 border-l-4 border-green-300">
-                <p className="text-gray-800 font-medium">{example}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-
-  const renderVocabularySection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Vocabulary</h2>
-        <p className="text-lg text-gray-600">Essential words and expressions for this lesson</p>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-6">
-        {lessonData.vocabulary.map((item, index) => (
-          <div key={index} className="bg-white/80 backdrop-blur-sm p-6 rounded-[16px] border border-gray-200 shadow-[inset_0_4px_16px_rgba(0,0,0,0.05),0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[inset_0_4px_16px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-[1.02]">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xl font-bold text-gray-900">{item.french}</h3>
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-[12px] text-sm font-medium">
-                {item.category}
-              </span>
-            </div>
-            <p className="text-gray-700 text-lg mb-2">{item.english}</p>
-            {item.example && (
-              <div className="bg-blue-50 rounded-lg p-3 mb-3 border-l-4 border-blue-300">
-                <div className="flex items-center justify-between">
-                  <p className="text-gray-800 font-medium text-sm italic flex-1">&ldquo;{item.example}&rdquo;</p>
-                  <button 
-                    onClick={() => {
-                      if ('speechSynthesis' in window) {
-                        const utterance = new SpeechSynthesisUtterance(item.example);
-                        utterance.lang = 'fr-FR';
-                        utterance.rate = 0.8;
-                        speechSynthesis.speak(utterance);
-                      }
-                    }}
-                    className="ml-3 p-2 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-full transition-colors duration-200 hover:scale-110"
-                    title="Listen to example sentence"
-                  >
-                    <span className="text-lg">🎹</span>
-                  </button>
-                </div>
-              </div>
-            )}
-            <AudioPlayer 
-              text={item.french}
-              className="mt-3"
-              
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
-  const renderCulturalNotesSection = () => (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Cultural Notes</h2>
-        <p className="text-lg text-gray-600">Understanding French culture and daily life</p>
-      </div>
-      
-      {lessonData.culturalNotes.map((note, index) => (
-        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{note.title}</h3>
-          <p className="text-gray-700 leading-relaxed">{note.content}</p>
-        </div>
-      ))}
-    </div>
-  )
-
-  const renderExercisesSection = () => (
-    <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Exercises</h2>
-        <p className="text-lg text-gray-600">Practice your futur proche skills</p>
-      </div>
-      
-      <ExerciseProgress
-        totalExercises={lessonData.exercises.length}
-        completedExercises={completedExercises.size}
-        correctAnswers={correctAnswers}
-        onReset={handleReset}
-      />
-      
-      <div className="space-y-6">
-        {lessonData.exercises.map((exercise, index) => (
-          <InteractiveExercise
-            key={exercise.id}
-            exercise={exercise}
-            onComplete={() => handleExerciseComplete(exercise.id)}
-            exerciseNumber={index + 1}
-          />
-        ))}
-      </div>
-    </div>
-  )
-
+export default function Lesson17Page() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-green-200 sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <Link href="/lessons/elementary" className="text-green-600 hover:text-green-700 transition-colors mb-2 inline-block">
-                ← Back to A2 Lessons
-              </Link>
-              <h1 className="text-4xl font-bold text-gray-900">{lessonData.title}</h1>
-              <p className="text-xl text-gray-600 mt-2">{lessonData.description}</p>
-            </div>
-            <div className="text-right">
-              <div className="bg-gradient-to-r from-green-100 to-green-200 text-green-800 px-4 py-2 rounded-[16px] font-medium border border-green-200/50">
-                {lessonData.level}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Tabs */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-green-200 sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex justify-center space-x-1 py-4">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setCurrentSection(section.id as Section)}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-[16px] font-medium transition-all duration-300 ${
-                  currentSection === section.id
-                    ? 'bg-green-500 text-white shadow-lg scale-105'
-                    : 'bg-white/60 text-gray-700 hover:bg-white/80 hover:scale-105'
-                }`}
-              >
-                <span>{section.icon}</span>
-                <span>{section.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        {currentSection === 'dialogue' && (
-          <div className="space-y-8">
-            <DialogueSection dialogue={lessonData.dialogue} />
-            <div className="bg-white/80 backdrop-blur-sm rounded-[20px] p-6 shadow-lg border border-green-200">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Practice Speaking</h3>
-              <AudioPlayer  text="Practice the dialogue with the audio player" />
-            </div>
-            {renderCulturalNotesSection()}
-          </div>
-        )}
-        
-        {currentSection === 'grammar' && renderGrammarSection()}
-        {currentSection === 'vocabulary' && renderVocabularySection()}
-        {currentSection === 'exercises' && renderExercisesSection()}
-      </div>
-    </div>
+    <ElementaryLessonLayout
+      lessonData={lessonData}
+      lessonNumber={17}
+      prevHref="/lessons/elementary/16"
+      prevLabel="Verbes en -ir et -re"
+      nextHref="/lessons/elementary/18"
+      nextLabel="Les Pronominaux au Passé"
+    />
   )
 }

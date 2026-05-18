@@ -40,3 +40,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 supabase/functions/
+
+# local scratch / tooling output / reference material (not for version control)
+/FrenchBooks/
+/temp/
+/.playwright-mcp/
+/stitch_output.html
+/stitch_page.html
+/landing.html
+/methodology-font-check.png

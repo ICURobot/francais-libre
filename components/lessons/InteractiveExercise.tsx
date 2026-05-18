@@ -1,8 +1,7 @@
 'use client'
 
-import React, { useState, useCallback } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Exercise } from '../../lib/lessons/lessonTypes'
-import { audioService } from '../../lib/services/audioService'
 
 interface InteractiveExerciseProps {
   exercise: Exercise
@@ -10,334 +9,307 @@ interface InteractiveExerciseProps {
   exerciseNumber: number
 }
 
+const normalize = (value: string) =>
+  value
+    .trim()
+    .toLowerCase()
+    .replace(/[’']/g, "'")
+    .replace(/[.!?]+$/g, '')
+
+const isAnswerCorrect = (answer: string, correctAnswer: string | string[]) => {
+  const accepted = Array.isArray(correctAnswer) ? correctAnswer : [correctAnswer]
+  return accepted.some((correct) => normalize(answer) === normalize(correct))
+}
+
 export default function InteractiveExercise({ exercise, onComplete, exerciseNumber }: InteractiveExerciseProps) {
-  const [userAnswer, setUserAnswer] = useState<string>('')
-  const [selectedOption, setSelectedOption] = useState<string>('')
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  const [textAnswer, setTextAnswer] = useState('')
+  const [selectedOption, setSelectedOption] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [correct, setCorrect] = useState(false)
   const [showHint, setShowHint] = useState(false)
-  const [showExplanation, setShowExplanation] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [matchedPairs, setMatchedPairs] = useState<Set<number>>(new Set())
+  const [genderAnswers, setGenderAnswers] = useState<Record<number, 'masculine' | 'feminine'>>({})
+  const [transformationAnswers, setTransformationAnswers] = useState<Record<number, string>>({})
+  const [conjugationAnswers, setConjugationAnswers] = useState<Record<number, string>>({})
+  const [selectedFrench, setSelectedFrench] = useState<number | null>(null)
+  const [matches, setMatches] = useState<Record<number, number>>({})
+  const [speakingRevealed, setSpeakingRevealed] = useState(false)
+  const [errorCorrectionAnswers, setErrorCorrectionAnswers] = useState<Record<number, string>>({})
+  const [tenseChoices, setTenseChoices] = useState<Record<number, string>>({})
+  const [moodChoices, setMoodChoices] = useState<Record<number, 'indicative' | 'subjunctive'>>({})
+  const [rewriteAnswers, setRewriteAnswers] = useState<Record<number, string>>({})
+  const [registerAssignments, setRegisterAssignments] = useState<Record<number, string>>({})
+  const [argumentationDrafts, setArgumentationDrafts] = useState<Record<number, string>>({})
+  const [argumentationRevealed, setArgumentationRevealed] = useState(false)
 
-  const handleSubmit = useCallback(() => {
-    if (!userAnswer.trim() && !selectedOption) return
+  const matchingEnglishOrder = useMemo(() => {
+    if (exercise.type !== 'matching') return []
+    return exercise.pairs.map((_, index) => index).sort((a, b) => {
+      const left = exercise.pairs[a]?.english ?? ''
+      const right = exercise.pairs[b]?.english ?? ''
+      return left.localeCompare(right)
+    })
+  }, [exercise])
 
-    let correct = false
-    const answer = selectedOption || userAnswer.trim()
+  const submitResult = (isCorrect: boolean) => {
+    setCorrect(isCorrect)
+    setSubmitted(true)
+    onComplete(isCorrect)
+  }
 
-    if (exercise.type === 'multiple_choice') {
-      correct = answer === exercise.correct_answer
-    } else if (exercise.type === 'fill_blank') {
-      const correctAnswers = Array.isArray(exercise.correct_answer) 
-        ? exercise.correct_answer 
-        : [exercise.correct_answer]
-      correct = correctAnswers.some(correct => 
-        answer.toLowerCase() === correct.toLowerCase()
-      )
-    } else if (exercise.type === 'translation') {
-      const correctAnswers = Array.isArray(exercise.correct_answer) 
-        ? exercise.correct_answer 
-        : [exercise.correct_answer]
-      correct = correctAnswers.some(correct => 
-        answer.toLowerCase() === correct.toLowerCase()
-      )
-    } else if (exercise.type === 'speaking') {
-      // For speaking exercises, we'll consider them correct if attempted
-      correct = true
-    }
-
-    setIsCorrect(correct)
-    setIsSubmitted(true)
-    setShowExplanation(true)
-    onComplete(correct)
-  }, [userAnswer, selectedOption, exercise, onComplete])
-
-  const handleReset = useCallback(() => {
-    setUserAnswer('')
+  const reset = () => {
+    setTextAnswer('')
     setSelectedOption('')
-    setIsSubmitted(false)
-    setIsCorrect(false)
+    setSubmitted(false)
+    setCorrect(false)
     setShowHint(false)
-    setShowExplanation(false)
-  }, [])
+    setGenderAnswers({})
+    setTransformationAnswers({})
+    setConjugationAnswers({})
+    setSelectedFrench(null)
+    setMatches({})
+    setSpeakingRevealed(false)
+    setErrorCorrectionAnswers({})
+    setTenseChoices({})
+    setMoodChoices({})
+    setRewriteAnswers({})
+    setRegisterAssignments({})
+    setArgumentationDrafts({})
+    setArgumentationRevealed(false)
+  }
 
-  const handleSpeak = useCallback(async (text: string) => {
-    setIsLoading(true)
-    try {
-      await audioService.playAudio(text)
-    } catch (error) {
-      console.error('TTS error:', error)
-    } finally {
-      setIsLoading(false)
+  const handleSimpleSubmit = () => {
+    if (exercise.type === 'multiple_choice') {
+      if (!selectedOption) return
+      submitResult(selectedOption === exercise.correct_answer)
+      return
     }
-  }, [])
 
-  const renderExerciseContent = () => {
+    if (exercise.type === 'fill_blank' || exercise.type === 'translation') {
+      if (!textAnswer.trim()) return
+      submitResult(isAnswerCorrect(textAnswer, exercise.correct_answer))
+    }
+  }
+
+  const renderResult = () => {
+    if (!submitted) return null
+
+    return (
+      <div className={`mt-4 rounded-lg border p-4 ${correct ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'}`}>
+        <div className="font-semibold">{correct ? 'Correct' : 'Review this one'}</div>
+        {'explanation' in exercise && (
+          <p className="mt-2 text-sm leading-relaxed">{exercise.explanation}</p>
+        )}
+      </div>
+    )
+  }
+
+  const renderHints = () => {
+    if (!('hints' in exercise) || !exercise.hints?.length || !showHint) return null
+
+    return (
+      <div className="mt-4 rounded-lg border border-yellow-200 bg-yellow-50 p-4">
+        <h5 className="mb-2 font-semibold text-yellow-900">Hint</h5>
+        <ul className="space-y-1 text-sm text-yellow-800">
+          {exercise.hints.map((hint, index) => (
+            <li key={index}>{hint}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  const renderContent = () => {
     switch (exercise.type) {
       case 'multiple_choice':
         return (
-          <div className="space-y-4">
-            {/* Answer Options */}
-            <div className="space-y-3">
-              {exercise.options?.map((option, index) => (
-                <label key={index} className="flex items-center space-x-3 cursor-pointer group">
-                  <input
-                    type="radio"
-                    name={`exercise-${exercise.id}`}
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                    className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                    disabled={isSubmitted}
-                  />
-                  <span className={`text-lg group-hover:text-blue-600 transition-colors ${
-                    isSubmitted && option === exercise.correct_answer 
-                      ? 'text-green-600 font-semibold' 
-                      : isSubmitted && option === selectedOption && !isCorrect
-                      ? 'text-red-600 font-semibold'
-                      : 'text-gray-700'
-                  }`}>
-                    {option}
-                  </span>
-                </label>
-              ))}
-            </div>
+          <div className="space-y-3">
+            {exercise.options.map((option) => (
+              <label key={option} className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors ${selectedOption === option ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'}`}>
+                <input
+                  type="radio"
+                  name={exercise.id}
+                  value={option}
+                  checked={selectedOption === option}
+                  onChange={(event) => setSelectedOption(event.target.value)}
+                  disabled={submitted}
+                  className="h-4 w-4 text-blue-600"
+                />
+                <span className="text-gray-800">{option}</span>
+              </label>
+            ))}
           </div>
         )
 
       case 'fill_blank':
-        return (
-          <div className="space-y-4">
-            {/* Question Display */}
-            <div className="text-lg text-gray-700 leading-relaxed mb-4">
-              {exercise.question}
-            </div>
-            {/* Single Input Field for Complete Answer */}
-            <div className="text-center">
-              <input
-                type="text"
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                placeholder="Type your complete answer..."
-                className="w-full max-w-md px-4 py-3 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-medium text-black text-center"
-                disabled={isSubmitted}
-              />
-            </div>
-            {/* Show the expected format for multiple blanks */}
-            {exercise.question.split('_____').length > 2 && (
-              <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
-                <p className="text-sm text-blue-800">
-                  <strong>Note:</strong> This exercise has multiple blanks. Type your complete answer in the input field above.
-                </p>
-              </div>
-            )}
-          </div>
-        )
-
       case 'translation':
         return (
-          <div className="space-y-4">
-            {/* Translation Input */}
-            <input
-              type="text"
-              value={userAnswer}
-              onChange={(e) => setUserAnswer(e.target.value)}
-              placeholder="Type your French translation..."
-              className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-medium text-black"
-              disabled={isSubmitted}
-            />
-          </div>
+          <input
+            type="text"
+            value={textAnswer}
+            onChange={(event) => setTextAnswer(event.target.value)}
+            placeholder={exercise.type === 'translation' ? 'Type your translation...' : 'Type the missing word or phrase...'}
+            className="w-full rounded-lg border-2 border-blue-200 px-4 py-3 text-lg text-gray-900 outline-none focus:border-blue-500"
+            disabled={submitted}
+          />
         )
 
-      case 'speaking':
+      case 'gender_sort': {
+        const answeredCount = Object.keys(genderAnswers).length
         return (
           <div className="space-y-4">
-            {/* Audio Example */}
-            {exercise.audio_prompt && (
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={() => handleSpeak(exercise.audio_prompt!)}
-                  disabled={isLoading}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50"
-                >
-                  <span>🔊</span>
-                  <span>{isLoading ? 'Playing...' : 'Listen to Example'}</span>
-                </button>
-                <span className="text-sm text-gray-500">Click to hear the pronunciation</span>
+            {exercise.items.map((item, index) => {
+              const answer = genderAnswers[index]
+              return (
+                <div key={item.word} className="flex flex-col gap-3 rounded-lg border border-gray-200 p-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <div className="text-lg font-semibold text-gray-900">{item.word}</div>
+                    {submitted && (
+                      <div className="text-sm text-gray-600">Correct article: {item.article}</div>
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    {(['masculine', 'feminine'] as const).map((gender) => (
+                      <button
+                        key={gender}
+                        type="button"
+                        onClick={() => setGenderAnswers((prev) => ({ ...prev, [index]: gender }))}
+                        disabled={submitted}
+                        className={`rounded-lg border px-4 py-2 text-sm font-semibold transition-colors ${
+                          answer === gender ? 'border-blue-600 bg-blue-600 text-white' : 'border-gray-300 bg-white text-gray-700 hover:border-blue-400'
+                        }`}
+                      >
+                        {gender === 'masculine' ? 'Masculin' : 'Féminin'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+            <button
+              type="button"
+              onClick={() => {
+                const isCorrect = exercise.items.every((item, index) => genderAnswers[index] === item.gender)
+                submitResult(isCorrect)
+              }}
+              disabled={submitted || answeredCount !== exercise.items.length}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Check Sort
+            </button>
+          </div>
+        )
+      }
+
+      case 'transformation':
+        return (
+          <div className="space-y-4">
+            {exercise.items.map((item, index) => (
+              <div key={`${item.original}-${index}`} className="rounded-lg border border-gray-200 p-4">
+                <div className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Original</div>
+                <div className="mb-3 text-lg text-gray-900">{item.original}</div>
+                <input
+                  type="text"
+                  value={transformationAnswers[index] ?? ''}
+                  onChange={(event) => setTransformationAnswers((prev) => ({ ...prev, [index]: event.target.value }))}
+                  disabled={submitted}
+                  placeholder="Type the transformed version..."
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 outline-none focus:border-blue-500"
+                />
+                {submitted && (
+                  <div className="mt-3 text-sm text-gray-700">
+                    Expected: <span className="font-semibold">{item.transformed}</span>
+                  </div>
+                )}
               </div>
-            )}
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <p className="text-sm text-blue-800">
-                <strong>Practice Tip:</strong> Try speaking the phrase out loud. You can record yourself and compare with the example above!
-              </p>
-            </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => {
+                const isCorrect = exercise.items.every((item, index) => normalize(transformationAnswers[index] ?? '') === normalize(item.transformed))
+                submitResult(isCorrect)
+              }}
+              disabled={submitted || exercise.items.some((_, index) => !transformationAnswers[index]?.trim())}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Check Transformations
+            </button>
           </div>
         )
 
       case 'conjugation':
-        return (
-          <div className="space-y-4">
-            <div className="bg-gray-50 rounded-lg p-4 mb-4">
-              <h5 className="font-semibold text-gray-800 mb-3">Conjugate: <span className="text-blue-600">{exercise.verb}</span></h5>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {exercise.translations && Object.entries(exercise.translations).map(([pronoun, translation]) => (
-                  <div key={pronoun} className="flex items-center justify-between p-3 bg-white rounded border">
-                    <span className="font-medium text-gray-700">{pronoun}</span>
-                    <span className="text-gray-600">{translation}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="text-center">
-              <p className="text-gray-600 mb-3">This is a practice exercise. Review the conjugation patterns above.</p>
-              <button
-                onClick={() => onComplete(true)}
-                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
-              >
-                Mark as Complete
-              </button>
-            </div>
-          </div>
-        )
-
-      case 'negation_transformation':
-        return (
-          <div className="space-y-4">
-            {exercise.exercises && exercise.exercises.map((negEx, index) => (
-              <div key={index} className="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-                  <div>
-                    <p className="text-sm font-medium text-blue-800 mb-1">Positive:</p>
-                    <p className="text-gray-700">{negEx.positive}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-green-800 mb-1">Negative:</p>
-                    <p className="text-gray-700 font-semibold">{negEx.negative}</p>
-                  </div>
+        if (typeof exercise.correct_answer === 'string') {
+          const expectedAnswer = exercise.correct_answer
+          return (
+            <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-5">
+              <div className="font-semibold text-gray-900">Verb: {exercise.verb}</div>
+              {exercise.translations && (
+                <div className="grid gap-3 md:grid-cols-2">
+                  {Object.entries(exercise.translations).map(([pronoun, translation]) => (
+                    <div key={pronoun} className="rounded border border-gray-200 bg-white p-3">
+                      <span className="font-medium text-gray-800">{pronoun}</span>
+                      <span className="ml-2 text-gray-600">{translation}</span>
+                    </div>
+                  ))}
                 </div>
-                <p className="text-sm text-gray-600 italic">{negEx.translation}</p>
-              </div>
-            ))}
-            <div className="text-center">
-              <p className="text-gray-600 mb-3">Practice transforming positive to negative sentences.</p>
-              <button
-                onClick={() => onComplete(true)}
-                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
-              >
-                Mark as Complete
-              </button>
-            </div>
-          </div>
-        )
-
-      case 'fill_blank_negation':
-        return (
-          <div className="space-y-4">
-            {exercise.sentences && exercise.sentences.map((sentence, index) => (
-              <div key={index} className="bg-green-50 rounded-lg p-4 border border-green-200">
-                <p className="text-sm font-medium text-green-800 mb-1">Sentence:</p>
-                <p className="text-gray-700 mb-2">{sentence.sentence}</p>
-                <p className="text-sm text-gray-600 italic">{sentence.translation}</p>
-                <div className="mt-2 text-sm text-green-700">
-                  <strong>Answer:</strong> {sentence.blanks.join(' and ')}
-                </div>
-              </div>
-            ))}
-            <div className="text-center">
-              <p className="text-gray-600 mb-3">Practice filling in negation words.</p>
-              <button
-                onClick={() => onComplete(true)}
-                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
-              >
-                Mark as Complete
-              </button>
-            </div>
-          </div>
-        )
-
-      case 'vocabulary_match':
-        return (
-          <div className="space-y-4">
-            <div className="text-center mb-4">
-              <p className="text-gray-600">Click on the French words to match them with their English meanings.</p>
-            </div>
-            
-            {/* French words (clickable) */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              {exercise.pairs && exercise.pairs.map((pair, index) => (
-                <button
-                  key={`french-${index}`}
-                  onClick={() => {
-                    const newMatchedPairs = new Set(matchedPairs)
-                    if (newMatchedPairs.has(index)) {
-                      newMatchedPairs.delete(index)
-                    } else {
-                      newMatchedPairs.add(index)
-                    }
-                    setMatchedPairs(newMatchedPairs)
-                  }}
-                  className={`p-3 rounded-lg border-2 transition-all duration-200 text-center ${
-                    matchedPairs.has(index)
-                      ? 'bg-green-100 border-green-500 ring-2 ring-green-500'
-                      : 'bg-blue-100 hover:bg-blue-200 border-blue-300'
-                  }`}
-                >
-                  <p className={`font-medium ${
-                    matchedPairs.has(index) ? 'text-green-800' : 'text-blue-800'
-                  }`}>{pair.french}</p>
-                </button>
-              ))}
-            </div>
-
-            {/* English translations (clickable) */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {exercise.pairs && exercise.pairs.map((pair, index) => (
-                <button
-                  key={`english-${index}`}
-                  onClick={() => {
-                    const newMatchedPairs = new Set(matchedPairs)
-                    if (newMatchedPairs.has(index)) {
-                      newMatchedPairs.delete(index)
-                    } else {
-                      newMatchedPairs.add(index)
-                    }
-                    setMatchedPairs(newMatchedPairs)
-                  }}
-                  className={`p-3 rounded-lg border-2 transition-all duration-200 text-center ${
-                    matchedPairs.has(index)
-                      ? 'bg-green-100 border-green-500 ring-2 ring-green-500'
-                      : 'bg-purple-100 hover:bg-purple-200 border-purple-300'
-                  }`}
-                >
-                  <p className={`font-medium ${
-                    matchedPairs.has(index) ? 'text-green-800' : 'text-purple-800'
-                  }`}>{pair.english}</p>
-                </button>
-              ))}
-            </div>
-
-            {/* Progress and Instructions */}
-            <div className="text-center mt-4 space-y-3">
-              <div className="flex justify-center items-center space-x-2">
-                <span className="text-sm text-gray-600">Progress:</span>
-                <span className="text-sm font-medium text-blue-600">
-                  {matchedPairs.size} / {exercise.pairs?.length || 0} pairs matched
-                </span>
-              </div>
-              
-              <p className="text-sm text-gray-500">
-                💡 <strong>How to play:</strong> Click on a French word and its matching English translation to highlight them as a pair.
-              </p>
-              
-              {matchedPairs.size > 0 && (
-                <button
-                  onClick={() => onComplete(true)}
-                  className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
-                >
-                  Submit Matches
-                </button>
               )}
+              <input
+                type="text"
+                value={textAnswer}
+                onChange={(event) => setTextAnswer(event.target.value)}
+                disabled={submitted}
+                placeholder="Type the conjugation sequence..."
+                className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 outline-none focus:border-blue-500"
+              />
+              <button
+                type="button"
+                onClick={() => submitResult(isAnswerCorrect(textAnswer, expectedAnswer))}
+                disabled={submitted || !textAnswer.trim()}
+                className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Check Conjugation
+              </button>
+              {submitted && <div className="text-sm text-gray-700">Expected: {expectedAnswer}</div>}
+            </div>
+          )
+        }
+
+        const conjugationRows = exercise.correct_answer
+        return (
+          <div className="overflow-hidden rounded-lg border border-gray-200">
+            <div className="bg-gray-50 px-4 py-3 font-semibold text-gray-900">Verb: {exercise.verb}</div>
+            <div className="divide-y divide-gray-200">
+              {conjugationRows.map((row, index) => (
+                <div key={row.pronoun} className="grid grid-cols-1 gap-3 p-4 md:grid-cols-[160px_1fr] md:items-center">
+                  <div className="font-medium text-gray-700">{row.pronoun}</div>
+                  <div>
+                    <input
+                      type="text"
+                      value={conjugationAnswers[index] ?? ''}
+                      onChange={(event) => setConjugationAnswers((prev) => ({ ...prev, [index]: event.target.value }))}
+                      disabled={submitted}
+                      className="w-full rounded-lg border border-blue-200 px-4 py-2 text-gray-900 outline-none focus:border-blue-500"
+                    />
+                    {submitted && (
+                      <div className={`mt-1 text-sm ${normalize(conjugationAnswers[index] ?? '') === normalize(row.form) ? 'text-green-700' : 'text-red-700'}`}>
+                        {row.form} <span className="text-gray-500">({row.pronunciation})</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="bg-gray-50 p-4">
+              <button
+                type="button"
+                onClick={() => {
+                  const isCorrect = conjugationRows.every((item, index) => normalize(conjugationAnswers[index] ?? '') === normalize(item.form))
+                  submitResult(isCorrect)
+                }}
+                disabled={submitted || conjugationRows.some((_, index) => !conjugationAnswers[index]?.trim())}
+                className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Check Conjugation
+              </button>
             </div>
           </div>
         )
@@ -345,145 +317,457 @@ export default function InteractiveExercise({ exercise, onComplete, exerciseNumb
       case 'matching':
         return (
           <div className="space-y-4">
-            <div className="text-center mb-4">
-              <p className="text-gray-600">Match the irregular verb forms with their infinitives.</p>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                {exercise.pairs.map((pair, index) => (
+                  <button
+                    key={pair.french}
+                    type="button"
+                    onClick={() => !submitted && setSelectedFrench(index)}
+                    className={`w-full rounded-lg border p-3 text-left font-semibold transition-colors ${
+                      selectedFrench === index ? 'border-blue-600 bg-blue-50 text-blue-900' : 'border-gray-200 bg-white text-gray-900 hover:border-blue-300'
+                    }`}
+                  >
+                    {pair.french}
+                    {matches[index] !== undefined && (
+                      <span className="ml-2 text-sm font-normal text-gray-500">→ {exercise.pairs[matches[index]]?.english}</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+              <div className="space-y-2">
+                {matchingEnglishOrder.map((pairIndex) => (
+                  <button
+                    key={exercise.pairs[pairIndex].english}
+                    type="button"
+                    onClick={() => {
+                      if (submitted || selectedFrench === null) return
+                      setMatches((prev) => ({ ...prev, [selectedFrench]: pairIndex }))
+                      setSelectedFrench(null)
+                    }}
+                    className="w-full rounded-lg border border-gray-200 bg-white p-3 text-left text-gray-900 transition-colors hover:border-green-400"
+                  >
+                    {exercise.pairs[pairIndex].english}
+                  </button>
+                ))}
+              </div>
             </div>
-            
-            {/* Matching pairs display */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {exercise.pairs && exercise.pairs.map((pair, index) => (
-                <div key={index} className="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                  <div className="text-center">
-                    <p className="font-medium text-blue-800 mb-2">{pair.french}</p>
-                    <p className="text-gray-600 text-sm">→</p>
-                    <p className="font-medium text-green-800">{pair.english}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="text-center">
-              <p className="text-gray-600 mb-3">Review the irregular verb forms above.</p>
-              <button
-                onClick={() => onComplete(true)}
-                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
-              >
-                Mark as Complete
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => {
+                const isCorrect = exercise.pairs.every((_, index) => matches[index] === index)
+                submitResult(isCorrect)
+              }}
+              disabled={submitted || Object.keys(matches).length !== exercise.pairs.length}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Check Matches
+            </button>
           </div>
         )
 
-      default:
-        return <p className="text-gray-600">Exercise type not supported</p>
+      case 'error_correction': {
+        const allAnswered = exercise.items.every((_, index) => (errorCorrectionAnswers[index] ?? '').trim().length > 0)
+        return (
+          <div className="space-y-4">
+            {exercise.items.map((item, index) => (
+              <div key={index} className="rounded-lg border border-gray-200 p-4">
+                <div className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Incorrect Sentence</div>
+                <div className="mb-3 text-lg text-red-700 line-through">{item.incorrect}</div>
+                <input
+                  type="text"
+                  value={errorCorrectionAnswers[index] ?? ''}
+                  onChange={(event) => setErrorCorrectionAnswers((prev) => ({ ...prev, [index]: event.target.value }))}
+                  disabled={submitted}
+                  placeholder="Type the corrected sentence..."
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 outline-none focus:border-blue-500"
+                />
+                {submitted && (
+                  <div className="mt-3 text-sm text-green-700">
+                    Correct: <span className="font-semibold">{item.correct}</span>
+                    <div className="text-gray-600 mt-1">{item.explanation}</div>
+                  </div>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => {
+                const isCorrect = exercise.items.every((item, index) => normalize(errorCorrectionAnswers[index] ?? '') === normalize(item.correct))
+                submitResult(isCorrect)
+              }}
+              disabled={submitted || !allAnswered}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Check Corrections
+            </button>
+          </div>
+        )
+      }
+
+      case 'tense_choice': {
+        const allAnswered = exercise.items.every((_, index) => !!tenseChoices[index])
+        return (
+          <div className="space-y-4">
+            {exercise.items.map((item, index) => (
+              <div key={index} className="rounded-lg border border-gray-200 p-4">
+                <div className="mb-2 text-lg font-semibold text-gray-900">{item.sentence}</div>
+                <div className="mb-2 text-sm text-gray-500">Verb: <span className="font-semibold">{item.verb}</span></div>
+                <div className="flex gap-3 flex-wrap">
+                  {item.options.map((option) => (
+                    <label key={option} className={`flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 transition-colors ${tenseChoices[index] === option ? 'border-blue-600 bg-blue-50 text-blue-900' : 'border-gray-300 bg-white text-gray-700 hover:border-blue-400'}`}>
+                      <input
+                        type="radio"
+                        name={`tense-${exercise.id}-${index}`}
+                        value={option}
+                        checked={tenseChoices[index] === option}
+                        onChange={() => setTenseChoices((prev) => ({ ...prev, [index]: option }))}
+                        disabled={submitted}
+                        className="h-4 w-4 text-blue-600"
+                      />
+                      <span className="font-semibold">{option}</span>
+                    </label>
+                  ))}
+                </div>
+                {submitted && (
+                  <div className={`mt-3 text-sm ${tenseChoices[index] === item.correct_answer ? 'text-green-700' : 'text-red-700'}`}>
+                    Correct: <span className="font-semibold">{item.correct_answer}</span>
+                    <div className="text-gray-600 mt-1">{item.explanation}</div>
+                  </div>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => {
+                const isCorrect = exercise.items.every((item, index) => tenseChoices[index] === item.correct_answer)
+                submitResult(isCorrect)
+              }}
+              disabled={submitted || !allAnswered}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Check Answers
+            </button>
+          </div>
+        )
+      }
+
+      case 'mood_choice': {
+        const allAnswered = exercise.items.every((_, index) => !!moodChoices[index])
+        return (
+          <div className="space-y-4">
+            {exercise.items.map((item, index) => {
+              const options = [
+                { mood: 'indicative' as const, label: item.indicative_form },
+                { mood: 'subjunctive' as const, label: item.subjunctive_form },
+              ]
+              return (
+                <div key={index} className="rounded-lg border border-gray-200 p-4">
+                  <div className="mb-2 text-lg font-semibold text-gray-900">{item.sentence}</div>
+                  <div className="mb-3 text-sm text-gray-500">Verb: <span className="font-semibold">{item.verb}</span></div>
+                  <div className="flex flex-wrap gap-3">
+                    {options.map((option) => (
+                      <label key={option.mood} className={`flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 transition-colors ${moodChoices[index] === option.mood ? 'border-blue-600 bg-blue-50 text-blue-900' : 'border-gray-300 bg-white text-gray-700 hover:border-blue-400'}`}>
+                        <input
+                          type="radio"
+                          name={`mood-${exercise.id}-${index}`}
+                          value={option.mood}
+                          checked={moodChoices[index] === option.mood}
+                          onChange={() => setMoodChoices((prev) => ({ ...prev, [index]: option.mood }))}
+                          disabled={submitted}
+                          className="h-4 w-4 text-blue-600"
+                        />
+                        <span className="font-semibold">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {submitted && (
+                    <div className={`mt-3 text-sm ${moodChoices[index] === item.correct_answer ? 'text-green-700' : 'text-red-700'}`}>
+                      Correct: <span className="font-semibold">{item.correct_answer === 'indicative' ? item.indicative_form : item.subjunctive_form}</span>
+                      {item.trigger && (
+                        <div className="mt-1 text-gray-700">
+                          Trigger: <mark className="rounded bg-yellow-100 px-1">{item.trigger}</mark>
+                        </div>
+                      )}
+                      <div className="mt-1 text-gray-600">{item.explanation}</div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+            <button
+              type="button"
+              onClick={() => {
+                const isCorrect = exercise.items.every((item, index) => moodChoices[index] === item.correct_answer)
+                submitResult(isCorrect)
+              }}
+              disabled={submitted || !allAnswered}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Check Moods
+            </button>
+          </div>
+        )
+      }
+
+      case 'rewrite': {
+        const allAnswered = exercise.items.every((_, index) => (rewriteAnswers[index] ?? '').trim().length > 0)
+        return (
+          <div className="space-y-4">
+            <div className="rounded-lg bg-gray-50 p-3 text-sm font-semibold uppercase tracking-wide text-gray-600">
+              Transformation: {exercise.instruction_type.replace(/_/g, ' ')}
+            </div>
+            {exercise.items.map((item, index) => (
+              <div key={`${item.original}-${index}`} className="rounded-lg border border-gray-200 p-4">
+                <div className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Original</div>
+                <div className="mb-3 text-lg text-gray-900">{item.original}</div>
+                {item.hint && <div className="mb-3 rounded bg-yellow-50 p-2 text-sm text-yellow-900">Hint: {item.hint}</div>}
+                <input
+                  type="text"
+                  value={rewriteAnswers[index] ?? ''}
+                  onChange={(event) => setRewriteAnswers((prev) => ({ ...prev, [index]: event.target.value }))}
+                  disabled={submitted}
+                  placeholder="Type your rewritten sentence..."
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 outline-none focus:border-blue-500"
+                />
+                {submitted && (
+                  <div className={`mt-3 text-sm ${normalize(rewriteAnswers[index] ?? '') === normalize(item.expected) ? 'text-green-700' : 'text-red-700'}`}>
+                    Expected: <span className="font-semibold">{item.expected}</span>
+                    <div className="mt-1 text-gray-600">{item.explanation}</div>
+                  </div>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => {
+                const isCorrect = exercise.items.every((item, index) => normalize(rewriteAnswers[index] ?? '') === normalize(item.expected))
+                submitResult(isCorrect)
+              }}
+              disabled={submitted || !allAnswered}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Check Rewrites
+            </button>
+          </div>
+        )
+      }
+
+      case 'register_sort': {
+        const allAssigned = exercise.items.every((_, index) => !!registerAssignments[index])
+        return (
+          <div className="space-y-4">
+            <div className="rounded-lg bg-gray-50 p-3 text-sm font-semibold uppercase tracking-wide text-gray-600">
+              Registers: {exercise.categories.join(' · ')}
+            </div>
+            {exercise.items.map((item, index) => {
+              const assignment = registerAssignments[index]
+              const isCorrect = assignment === item.correct_category
+              return (
+                <div key={index} className="rounded-lg border border-gray-200 p-4">
+                  <div className="mb-3 text-lg font-semibold text-gray-900">&ldquo;{item.expression}&rdquo;</div>
+                  <div className="flex flex-wrap gap-2">
+                    {exercise.categories.map((category) => (
+                      <button
+                        key={category}
+                        type="button"
+                        onClick={() => setRegisterAssignments((prev) => ({ ...prev, [index]: category }))}
+                        disabled={submitted}
+                        className={`rounded-lg border px-3 py-1.5 text-sm font-semibold transition-colors ${
+                          assignment === category
+                            ? 'border-blue-600 bg-blue-600 text-white'
+                            : 'border-gray-300 bg-white text-gray-700 hover:border-blue-400'
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+                  {submitted && (
+                    <div className={`mt-3 text-sm ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
+                      Correct register: <span className="font-semibold">{item.correct_category}</span>
+                      <div className="mt-1 text-gray-600">{item.explanation}</div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+            <button
+              type="button"
+              onClick={() => {
+                const isCorrect = exercise.items.every(
+                  (item, index) => registerAssignments[index] === item.correct_category
+                )
+                submitResult(isCorrect)
+              }}
+              disabled={submitted || !allAssigned}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Check Registers
+            </button>
+          </div>
+        )
+      }
+
+      case 'argumentation': {
+        const totalWords = Object.values(argumentationDrafts).reduce((acc, value) => {
+          if (!value) return acc
+          const tokens = value.trim().split(/\s+/).filter(Boolean)
+          return acc + tokens.length
+        }, 0)
+        return (
+          <div className="space-y-4">
+            <div className="rounded-lg bg-gray-50 p-3 text-sm text-gray-700">
+              <span className="font-semibold uppercase tracking-wide text-gray-600">Build your argument.</span>
+              {exercise.word_count_target ? (
+                <span className="ml-2">Target: ~{exercise.word_count_target} mots · Written: {totalWords}</span>
+              ) : (
+                <span className="ml-2">Written: {totalWords} mots</span>
+              )}
+            </div>
+            {exercise.structure.map((section, index) => (
+              <div key={index} className="rounded-lg border border-gray-200 p-4">
+                <div className="mb-1 text-sm font-semibold uppercase tracking-wide text-blue-700">{section.label}</div>
+                <div className="mb-3 text-sm text-gray-700">{section.instruction}</div>
+                {section.connector_hints?.length ? (
+                  <div className="mb-3 flex flex-wrap gap-1">
+                    {section.connector_hints.map((hint) => (
+                      <span key={hint} className="rounded-full bg-yellow-100 px-2 py-0.5 text-xs font-semibold text-yellow-900">
+                        {hint}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+                <textarea
+                  rows={3}
+                  value={argumentationDrafts[index] ?? ''}
+                  onChange={(event) => setArgumentationDrafts((prev) => ({ ...prev, [index]: event.target.value }))}
+                  disabled={submitted}
+                  placeholder="Écrivez ici…"
+                  className="w-full resize-y rounded-lg border border-blue-200 px-4 py-3 text-gray-900 outline-none focus:border-blue-500"
+                />
+                {argumentationRevealed && section.model && (
+                  <div className="mt-3 rounded-lg bg-green-50 p-3 text-sm text-green-900">
+                    <div className="font-semibold uppercase tracking-wide text-green-700 text-xs mb-1">Modèle</div>
+                    {section.model}
+                  </div>
+                )}
+              </div>
+            ))}
+            {!submitted ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setArgumentationRevealed(true)
+                  submitResult(true)
+                }}
+                disabled={!exercise.structure.every((_, index) => (argumentationDrafts[index] ?? '').trim().length > 0)}
+                className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Submit &amp; Reveal Model
+              </button>
+            ) : null}
+          </div>
+        )
+      }
+
+      case 'speaking_prompt':
+      case 'speaking':
+        return (
+          <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-5">
+            {!speakingRevealed ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setSpeakingRevealed(true)
+                  submitResult(true)
+                }}
+                className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700"
+              >
+                I said it
+              </button>
+            ) : (
+              <div className="space-y-3">
+                <div>
+                  <div className="text-sm font-semibold uppercase tracking-wide text-gray-500">Model answer</div>
+                  <div className="text-lg font-semibold text-gray-900">
+                    {exercise.type === 'speaking_prompt'
+                      ? exercise.model_answer
+                      : Array.isArray(exercise.correct_answer)
+                        ? exercise.correct_answer[0]
+                        : exercise.correct_answer}
+                  </div>
+                </div>
+                {exercise.type === 'speaking_prompt' && <div className="text-gray-700">{exercise.translation}</div>}
+                {exercise.type === 'speaking_prompt' && exercise.tip && <div className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{exercise.tip}</div>}
+              </div>
+            )}
+          </div>
+        )
     }
   }
 
-  const getExerciseIcon = (type: string) => {
-    switch (type) {
-      case 'multiple_choice': return '📝'
-      case 'fill_blank': return '✏️'
-      case 'translation': return '🌐'
-      case 'speaking': return '🗣️'
-      case 'conjugation': return '🔤'
-      case 'negation_transformation': return '🔄'
-      case 'fill_blank_negation': return '✏️'
-      case 'vocabulary_match': return '🔗'
-      case 'matching': return '🔗'
-      default: return '❓'
-    }
-  }
+  const simpleExercise = exercise.type === 'multiple_choice' || exercise.type === 'fill_blank' || exercise.type === 'translation'
 
   return (
-    <div className="bg-white rounded-xl border-2 border-gray-200 p-6 transform hover:scale-[1.01] hover:shadow-lg transition-all duration-300">
-      {/* Exercise Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-3">
-          <span className="text-2xl">✏️</span>
-          <h4 className="text-xl font-bold text-gray-800">Exercise {exerciseNumber}</h4>
-        </div>
-        <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium capitalize flex items-center space-x-1">
-          <span className="text-xs">{getExerciseIcon(exercise.type)}</span>
-          <span>{exercise.type.replace('_', ' ')}</span>
+    <div className="rounded-xl border-2 border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <h4 className="text-xl font-bold text-gray-900">Exercise {exerciseNumber}</h4>
+        <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium capitalize text-blue-800">
+          {exercise.type.replace(/_/g, ' ')}
         </span>
       </div>
 
-      {/* Question Display - Always Visible */}
-      <div className="mb-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-        <p className="text-lg font-semibold text-gray-800">{exercise.question}</p>
+      <div className="mb-6 rounded-lg border-l-4 border-blue-500 bg-blue-50 p-4">
+        <p className="text-lg font-semibold text-gray-900">{exercise.question}</p>
       </div>
 
-      {/* Exercise Content */}
-      <div className="mb-6">
-        {renderExerciseContent()}
-      </div>
+      {renderContent()}
 
-      {/* Action Buttons */}
-      <div className="flex items-center justify-between">
-        <div className="flex space-x-3">
-          {!isSubmitted && (
+      {simpleExercise && (
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          {!submitted ? (
             <button
-              onClick={handleSubmit}
-              disabled={!userAnswer.trim() && !selectedOption}
-              className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              type="button"
+              onClick={handleSimpleSubmit}
+              disabled={exercise.type === 'multiple_choice' ? !selectedOption : !textAnswer.trim()}
+              className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Submit Answer
             </button>
-          )}
-          
-          {isSubmitted && (
+          ) : (
             <button
-              onClick={handleReset}
-              className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+              type="button"
+              onClick={reset}
+              className="rounded-lg bg-blue-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-blue-700"
             >
               Try Again
             </button>
           )}
-
-          {exercise.hints && exercise.hints.length > 0 && (
+          {'hints' in exercise && exercise.hints?.length ? (
             <button
-              onClick={() => setShowHint(!showHint)}
-              className="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-lg hover:bg-yellow-200 transition-colors font-medium"
+              type="button"
+              onClick={() => setShowHint((value) => !value)}
+              className="rounded-lg bg-yellow-100 px-4 py-2 font-semibold text-yellow-900 transition-colors hover:bg-yellow-200"
             >
-              💡 Hint
+              Hint
             </button>
-          )}
-        </div>
-
-        {/* Result Indicator */}
-        {isSubmitted && (
-          <div className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
-            isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-          }`}>
-            <span className="text-xl">
-              {isCorrect ? '✅' : '❌'}
-            </span>
-            <span className="font-medium">
-              {isCorrect ? 'Correct!' : 'Incorrect'}
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Hint */}
-      {showHint && exercise.hints && (
-        <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-          <h5 className="font-semibold text-yellow-800 mb-2">💡 Hint:</h5>
-          <ul className="text-yellow-700 space-y-1">
-            {exercise.hints.map((hint, index) => (
-              <li key={index} className="text-sm">• {hint}</li>
-            ))}
-          </ul>
+          ) : null}
         </div>
       )}
 
-      {/* Explanation */}
-      {showExplanation && (
-        <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <h5 className="font-semibold text-blue-800 mb-2">📚 Explanation:</h5>
-          <p className="text-blue-700">{exercise.explanation}</p>
-        </div>
+      {!simpleExercise && submitted && exercise.type !== 'speaking_prompt' && (
+        <button
+          type="button"
+          onClick={reset}
+          className="mt-4 rounded-lg bg-blue-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-blue-700"
+        >
+          Try Again
+        </button>
       )}
+
+      {renderHints()}
+      {renderResult()}
     </div>
   )
 }

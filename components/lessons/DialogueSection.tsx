@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Dialogue } from '../../lib/lessons/lessonTypes'
-import { AudioPlayer } from './AudioPlayer'
 
 // Define the props for the DialogueSection component.
 interface DialogueSectionProps {
@@ -10,8 +9,7 @@ interface DialogueSectionProps {
 }
 
 /**
- * A component to display an interactive dialogue with audio, translations, and cultural notes.
- * It allows users to navigate through exchanges and tracks their listening progress.
+ * A component to display an interactive dialogue with translations, pronunciation, and cultural notes.
  */
 export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
   // State to track the currently focused dialogue exchange.
@@ -46,7 +44,7 @@ export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
           <div className="relative mb-4">
             <div className="w-20 h-20 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl opacity-75"></div>
-              <span className="text-4xl relative z-10 drop-shadow-sm">🗣️</span>
+              <span className="text-4xl relative z-10 drop-shadow-sm">FR</span>
             </div>
             <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center shadow-md">
               <span className="text-sm text-white">✨</span>
@@ -87,9 +85,6 @@ export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
             }`}
           >
             <div className="flex items-center space-x-3">
-              <span className={`transition-all duration-300 ${showPronunciation ? 'text-purple-100' : 'text-gray-500'}`}>
-                {showPronunciation ? '🔊' : '🔇'}
-              </span>
               <span>{showPronunciation ? 'Hide' : 'Show'} Pronunciation</span>
             </div>
             <div className={`absolute inset-0 bg-gradient-to-r from-white to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-20 ${showPronunciation ? 'opacity-10' : ''}`}></div>
@@ -114,11 +109,6 @@ export const DialogueSection = ({ dialogue }: DialogueSectionProps) => {
                   <span className="font-bold text-gray-800 text-lg">
                     {exchange.speaker}
                   </span>
-                  <AudioPlayer 
-                    text={exchange.french}
-                    showText={false}
-
-                  />
                 </div>
                 
                 <p className="text-blue-700 font-semibold text-xl mb-2">
