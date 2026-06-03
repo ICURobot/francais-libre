@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Epilogue, Noto_Serif, Public_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Epilogue, Noto_Serif, Public_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,6 +31,13 @@ const publicSans = Public_Sans({
   weight: ["300", "400", "600", "700"],
 });
 
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
   title: "FrançaisLibre",
   description: "Learn French with The Modern Academic experience.",
@@ -47,7 +54,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${epilogue.variable} ${notoSerif.variable} ${publicSans.variable} antialiased font-sans`}
+        className={`${geistSans.variable} ${geistMono.variable} ${epilogue.variable} ${notoSerif.variable} ${publicSans.variable} ${playfairDisplay.variable} antialiased font-sans`}
       >
         {children}
       </body>

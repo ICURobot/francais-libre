@@ -11,6 +11,7 @@
   --font-sans: var(--font-epilogue);
   --font-serif: var(--font-noto-serif);
   --font-mono: var(--font-geist-mono);
+  --font-playfair: var(--font-playfair-display), Georgia, serif;
   
   --color-primary: #000000;
   --color-primary-container: #0d1c32;
@@ -52,6 +53,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Audio play button equalizer bars */
+@keyframes audio-eq {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
 }
 
 /* Custom Claymorphism Animations */
