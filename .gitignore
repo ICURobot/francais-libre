@@ -41,6 +41,9 @@ yarn-error.log*
 next-env.d.ts
 supabase/functions/
 
+# generated voiceover MP3s — local backup only; Supabase is the source of truth
+/audio-backup/
+
 # local scratch / tooling output / reference material (not for version control)
 /FrenchBooks/
 /temp/

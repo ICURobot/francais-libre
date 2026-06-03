@@ -23,7 +23,7 @@ try {
 }
 
 // Direct API calls without importing services
-const ELEVENLABS_API_KEY = process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY
+const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
 const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 

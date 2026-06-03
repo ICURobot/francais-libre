@@ -56,11 +56,16 @@ export class ElevenLabsService {
   ]
 
   constructor() {
-    // For Node.js scripts, use ELEVENLABS_API_KEY
-    // For browser, use NEXT_PUBLIC_ELEVENLABS_API_KEY
-    this.apiKey = process.env.ELEVENLABS_API_KEY || process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY || ''
-    if (!this.apiKey) {
-      console.warn('ElevenLabs API key not found in environment variables')
+    // Server-side only. The key MUST NOT be exposed to the browser, so we read
+    // the non-public ELEVENLABS_API_KEY exclusively — never a NEXT_PUBLIC_ var.
+    this.apiKey = process.env.ELEVENLABS_API_KEY || ''
+    if (typeof window !== 'undefined') {
+      // Hard guard: this service generates audio via a secret key and is only
+      // meant to run in Node scripts / server code. Refuse to operate client-side.
+      this.apiKey = ''
+      console.warn('ElevenLabsService must not be used in the browser; API key withheld')
+    } else if (!this.apiKey) {
+      console.warn('ELEVENLABS_API_KEY not found in environment variables')
     }
   }
 
