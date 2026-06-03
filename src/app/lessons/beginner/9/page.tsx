@@ -1,6 +1,6 @@
 'use client'
 
-import BeginnerLessonPage from '../../../../../components/lessons/BeginnerLessonPage'
+import BeginnerLessonPage from '../../../../../components/lessons/BeginnerLessonPageRedesign'
 
 export default function Lesson9Page() {
   return (
