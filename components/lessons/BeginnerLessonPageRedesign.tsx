@@ -1,10 +1,23 @@
 'use client'
 
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import InteractiveExercise from './InteractiveExerciseRedesign'
 import AudioPlayButton from './AudioPlayButton'
 import { beginnerLessons } from '../../lib/lessons/lessonData'
+import { supabase } from '../../lib/supabase'
 import Link from 'next/link'
+
+// Normalize French text the same way the audio generator stores it
+// (strip accents + punctuation, collapse spaces, lowercase) so play buttons
+// can look up their clip by the spoken text regardless of accents/case.
+const normalizeAudioKey = (text: string): string =>
+  text
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-zA-Z0-9\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
 
 interface Props {
   lessonId: string
@@ -28,6 +41,39 @@ export default function BeginnerLessonPageRedesign({
 }: Props) {
   const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
   const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set())
+
+  // Map of normalized spoken text -> public audio URL for this lesson.
+  const [audioMap, setAudioMap] = useState<Map<string, string>>(new Map())
+
+  useEffect(() => {
+    let active = true
+    supabase
+      .from('audio_pronunciations')
+      .select('text, audio_url, created_at')
+      .eq('lesson_id', lessonId)
+      .order('created_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (!active || error || !data) return
+        // Newest row wins: rows arrive newest-first, so only set a key the
+        // first time we see it. This lets regenerated audio supersede any
+        // stale rows left over from a previous version of the lesson.
+        const map = new Map<string, string>()
+        for (const row of data) {
+          if (!row.text || !row.audio_url) continue
+          const key = normalizeAudioKey(row.text)
+          if (!map.has(key)) map.set(key, row.audio_url)
+        }
+        setAudioMap(map)
+      })
+    return () => {
+      active = false
+    }
+  }, [lessonId])
+
+  const audioFor = useCallback(
+    (text: string): string | undefined => audioMap.get(normalizeAudioKey(text)),
+    [audioMap],
+  )
 
   const handleExerciseComplete = useCallback((exerciseId: string, isCorrect: boolean) => {
     setCompletedExercises(prev => new Set([...prev, exerciseId]))
@@ -211,7 +257,7 @@ export default function BeginnerLessonPageRedesign({
                   <div key={index} className="bg-white/5 border border-white/10 p-5 rounded-xl hover:bg-white/10 transition-colors">
                     <div className="flex justify-between items-start gap-3 mb-2">
                       <div className="flex items-center gap-3">
-                        <AudioPlayButton variant="dark" label={example.french} />
+                        <AudioPlayButton variant="dark" label={example.french} src={audioFor(example.french)} />
                         <span className="font-playfair text-xl text-white">{example.french}</span>
                       </div>
                       {example.highlight && (
@@ -271,7 +317,7 @@ export default function BeginnerLessonPageRedesign({
                   </div>
                   <div className="flex-grow">
                     <div className="flex items-center gap-3 mb-1">
-                      <AudioPlayButton variant="light" label={exchange.french} />
+                      <AudioPlayButton variant="light" label={exchange.french} src={audioFor(exchange.french)} />
                       <p className="font-playfair text-xl md:text-2xl text-[#001360]">{exchange.french}</p>
                     </div>
                     <div className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-[#757684] italic">
@@ -318,7 +364,7 @@ export default function BeginnerLessonPageRedesign({
                 </div>
                 <div className="flex items-center justify-between gap-2 mb-1">
                   <h3 className="font-playfair text-2xl text-[#001360]">{word.word}</h3>
-                  <AudioPlayButton variant="light" label={word.word} />
+                  <AudioPlayButton variant="light" label={word.word} src={audioFor(word.word)} />
                 </div>
                 <p className="text-sm font-sans italic text-[#bb0021] mb-3">{word.translation}</p>
                 {word.pronunciation && (
