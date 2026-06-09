@@ -47,7 +47,7 @@ async function buildMap(lessonId: string) {
 async function main() {
   const lessons = beginnerLessons.filter((l) => {
     const n = parseInt(l.id.replace(/\D/g, ''), 10)
-    return n >= 1 && n <= 11
+    return n >= 1 && n <= 12
   })
 
   let totalMissing = 0
@@ -68,7 +68,7 @@ async function main() {
       console.log(`        MISSING (${m.kind}): "${m.text}"  -> key="${normalizeAudioKey(m.text)}"`)
     }
   }
-  console.log(`\nTotal unresolved buttons across lessons 1-11: ${totalMissing}`)
+  console.log(`\nTotal unresolved buttons across lessons 1-12: ${totalMissing}`)
   process.exit(totalMissing === 0 ? 0 : 1)
 }
 
